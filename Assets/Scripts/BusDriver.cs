@@ -6,17 +6,35 @@
 public class BusDriver : MonoBehaviour {
 
     public float speed;
-    private float busDistanceFromRoad = 0.337f;
-    
+    public float busOriginDistanceFromRoad = 0.337f;
+    public Transform busDestination;
+
     void Update()
     {
-        DriveForward();
+        // Rotate and Drive towards destination if far away from it
+        if (Vector2.Distance(new Vector2(transform.position.x, transform.position.z), new Vector2(busDestination.position.x, busDestination.position.z)) > 1)
+        {
+            RotateTowardsDestination();
+            DriveForward();
+        }
+
+        UpdateY();
     }
 
     /**
-     *  Makes the vehicle drive forward, connected to the terrain
+     *  Makes the vehicle rotate towards the destination
      */
-    void DriveForward()
+    void RotateTowardsDestination()
+    {
+        Transform originalTransform = transform;
+        transform.LookAt(busDestination);
+        //transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, transform.rotation.z);
+    }
+
+    /**
+     *  Makes the vehicle sit on the terrain
+     */
+    void UpdateY()
     {
         // Get elevation
         Ray ray = new Ray(transform.position, Vector3.down);
@@ -29,21 +47,27 @@ public class BusDriver : MonoBehaviour {
             Debug.Log("HIT: " + hitPointList[0].collider.tag + " - XYZ: " + hitPointList[0].point);
 
             // Get the raycast hit point
-            Vector3 hitPoint = hitPointList[0].point + new Vector3(0, busDistanceFromRoad, 0);
+            Vector3 hitPoint = hitPointList[0].point + new Vector3(0, busOriginDistanceFromRoad, 0);
 
             // Apply elevation
             transform.position = new Vector3(transform.position.x, hitPoint.y, transform.position.z);
 
             // Apply different angle
             transform.rotation = Quaternion.LookRotation(Vector3.Cross(transform.right, hitPointList[0].normal));
-
-            // Move forward
-            transform.Translate(Vector3.forward * speed * Time.deltaTime);
         }
         else
         {
             // Move up since bus probably clipped under the terrain
             transform.position = new Vector3(transform.position.x, transform.position.y + 5, transform.position.z);
         }
+    }
+
+    /**
+     * Drives the vehicle forward
+     */
+    void DriveForward()
+    {
+        // Move forward
+        transform.Translate(Vector3.forward * speed * Time.deltaTime);
     }
 }

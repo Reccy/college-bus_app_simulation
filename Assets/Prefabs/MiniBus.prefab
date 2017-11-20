@@ -19,6 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4407640606814378}
+  - component: {fileID: 65252908149056726}
   m_Layer: 0
   m_Name: MiniBus
   m_TagString: Untagged
@@ -389,3 +390,15 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1794442487915744}
   m_Mesh: {fileID: 4300002, guid: 7f4f24cb528cb884a874e5266f87c831, type: 3}
+--- !u!65 &65252908149056726
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1183052809366818}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.8928522, y: 0.99762154, z: 3.3677545}
+  m_Center: {x: 0, y: -0.035480857, z: 0}

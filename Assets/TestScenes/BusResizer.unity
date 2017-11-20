@@ -212,10 +212,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1183052809366818, guid: 697501c87bb91694493a95f6c3371843, type: 2}
-      propertyPath: m_Name
-      value: MiniBus
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 697501c87bb91694493a95f6c3371843, type: 2}
   m_IsPrefabParent: 0

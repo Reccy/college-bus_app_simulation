@@ -255,7 +255,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   locationProvider: {fileID: 690533337}
-  interval: 5
+  interval: 0
   url: https://bus-app-prototype-api-reccy.c9users.io/api/bus_position
 --- !u!4 &690533339 stripped
 Transform:

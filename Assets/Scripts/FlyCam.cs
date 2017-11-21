@@ -101,16 +101,16 @@ public class FlyCam : MonoBehaviour {
             if(Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
             {
                 _speed = _speed * 2;
-                gameObject.transform.Translate(_movementVector * maxSpeed);
+                gameObject.transform.Translate(_movementVector * maxSpeed * Time.deltaTime);
             }
             else if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl))
             {
                 _speed = Mathf.Min(_speed, 1f);
-                gameObject.transform.Translate(_movementVector * _speed);
+                gameObject.transform.Translate(_movementVector * _speed * Time.deltaTime);
             }
             else
             {
-                gameObject.transform.Translate(_movementVector * _speed);
+                gameObject.transform.Translate(_movementVector * _speed * Time.deltaTime);
             }
         }
         else

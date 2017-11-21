@@ -6,10 +6,16 @@
 public class FlyCam : MonoBehaviour {
 
     // Acceleration: The acceleration factor added to the speed
-    public float _acceleration;
+    public float acceleration;
+
+    // FastMultipier: How much to multiply the current speed by WHEN GOING FAST
+    public float fastMultiplier;
 
     // MaxSpeed: The maximum speed
     public float maxSpeed;
+
+    // MaxSlowSpeed: The max speed when moving slowly
+    public float maxSlowSpeed;
 
     // MouseSensitivity: Self explanatory
     public float mouseSensitivity;
@@ -92,7 +98,7 @@ public class FlyCam : MonoBehaviour {
         }
 
         // Accelerate
-        _speed += _acceleration;
+        _speed += acceleration;
         _speed = Mathf.Min(_speed, maxSpeed);
 
         // Move the FlyCam, stop the speed if the user is not moving
@@ -100,12 +106,12 @@ public class FlyCam : MonoBehaviour {
         {
             if(Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
             {
-                _speed = _speed * 2;
-                gameObject.transform.Translate(_movementVector * maxSpeed * Time.deltaTime);
+                _speed = _speed * fastMultiplier;
+                gameObject.transform.Translate(_movementVector * _speed * Time.deltaTime);
             }
             else if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl))
             {
-                _speed = Mathf.Min(_speed, 1f);
+                _speed = Mathf.Min(_speed, maxSlowSpeed);
                 gameObject.transform.Translate(_movementVector * _speed * Time.deltaTime);
             }
             else

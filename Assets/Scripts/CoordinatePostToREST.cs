@@ -33,14 +33,16 @@ public class CoordinatePostToREST : MonoBehaviour {
     {
         while (true)
         {
+            yield return new WaitForSeconds(interval);
+
             Vector2d coords = locationProvider.Location;
-            double tempX = coords.x;
-            coords.x = coords.y;
-            coords.y = tempX;
+            string latitude = coords.x.ToString();
+            string longitude = coords.y.ToString();
+            
+            string coordsForm = "{\"latitude\":\"" + latitude + "\",\"longitude\":\"" + longitude + "\"}";
 
-            string coordsFormatted = "{\"coords\":\"" + coords.ToString() + "\"}";
-
-            UnityWebRequest request = UnityWebRequest.Post(url, coordsFormatted);
+            UnityWebRequest request = UnityWebRequest.Post(url, coordsForm);
+            request.SetRequestHeader("Content-Type", "application/json");
             yield return request.Send();
 
             if (request.isNetworkError || request.isHttpError)
@@ -51,7 +53,6 @@ public class CoordinatePostToREST : MonoBehaviour {
             {
                 Debug.Log("Request Status:" + request.responseCode + " | Payload: " + coords.ToString());
             }
-            yield return new WaitForSeconds(interval);
         }
     }
 }

@@ -1,5 +1,11 @@
 ﻿using UnityEngine;
 
+// TODO: Add in road data to the map
+// TODO: Add in directions for the road on the map
+// TODO: Make it so that the bus drives to its destination, and follows the road markings
+// TODO: Add in full keyboard controls for the fly camera
+// TODO: Add in splash screen when loading the simulation
+
 /**
  *  Drives the bus to its waypoint
  */
@@ -43,9 +49,6 @@ public class BusDriver : MonoBehaviour {
 
         if (hitPointList.Length > 0)
         {
-            // Debug hit tag and xyz coordinates
-            Debug.Log("HIT: " + hitPointList[0].collider.tag + " - XYZ: " + hitPointList[0].point);
-
             // Get the raycast hit point
             Vector3 hitPoint = hitPointList[0].point + new Vector3(0, busOriginDistanceFromRoad, 0);
 

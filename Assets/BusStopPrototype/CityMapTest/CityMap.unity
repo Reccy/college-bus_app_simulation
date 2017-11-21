@@ -256,7 +256,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   locationProvider: {fileID: 690533337}
   interval: 5
-  url: https://requestb.in/17pnx8n1
+  url: https://bus-app-prototype-api-reccy.c9users.io/api/bus_position
 --- !u!4 &690533339 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4407640606814378, guid: 697501c87bb91694493a95f6c3371843,

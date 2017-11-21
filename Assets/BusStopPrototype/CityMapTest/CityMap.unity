@@ -689,10 +689,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d7ff8ed3b76a4ee5a451d64a5393e3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _west: 10
-  _north: 10
+  _west: 15
+  _north: 40
   _east: 15
-  _south: 10
+  _south: 15
 --- !u!114 &1419999641
 MonoBehaviour:
   m_ObjectHideFlags: 0

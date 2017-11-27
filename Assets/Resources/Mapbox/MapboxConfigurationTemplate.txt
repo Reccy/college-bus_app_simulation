@@ -1,0 +1,1 @@
+{"AccessToken":"ACCESS_KEY_PLACEHOLDER","MemoryCacheSize":1000,"MbTilesCacheSize":3000,"DefaultTimeout":120}

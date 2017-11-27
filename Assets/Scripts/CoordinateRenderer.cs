@@ -7,18 +7,20 @@ using UnityEngine;
  */
 public class CoordinateRenderer : MonoBehaviour {
     private TransformLocationProvider locationProvider;
-    public Text textUI;
+    private SimulationStatusController statusController;
+    public string prefix = "Coordinates";
 
     // Get the component on the game object
     void Awake()
     {
         locationProvider = GetComponent<TransformLocationProvider>();
+        statusController = FindObjectOfType<SimulationStatusController>();
     }
 
     // Print location every frame
     void Update()
     {
-        textUI.text = "Latitude: " + locationProvider.Location.x + "\nLongitude: " + locationProvider.Location.y;
+        statusController.UpdateCoordinates("Latitude: " + locationProvider.Location.x + "\nLongitude: " + locationProvider.Location.y);
     }
 
 }

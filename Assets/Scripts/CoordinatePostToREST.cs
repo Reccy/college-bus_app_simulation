@@ -1,25 +1,29 @@
 ﻿using Mapbox.Unity.Location;
 using Mapbox.Utils;
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 /**
  * Posts the coordinates to a REST API at a scheduled interval
  */
 public class CoordinatePostToREST : MonoBehaviour {
-    public TransformLocationProvider locationProvider;
+    private TransformLocationProvider locationProvider;
+    private SimulationStatusController statusController;
 
     // The interval in seconds to send the co-ordinates
     public int interval;
 
     // The URL to send the post to
     public string url;
-
+    
     // Get the component on the game object
     void Awake()
     {
         locationProvider = GetComponent<TransformLocationProvider>();
+        statusController = FindObjectOfType<SimulationStatusController>();
     }
 
     // Start the coroutine
@@ -48,10 +52,12 @@ public class CoordinatePostToREST : MonoBehaviour {
             if (request.isNetworkError || request.isHttpError)
             {
                 Debug.Log(request.error);
+                statusController.UpdateNetworkStatus(false, request.error);
             }
             else
             {
                 Debug.Log("Request Status:" + request.responseCode + " | Payload: " + coords.ToString());
+                statusController.UpdateNetworkStatus(true, request.responseCode.ToString());
             }
         }
     }

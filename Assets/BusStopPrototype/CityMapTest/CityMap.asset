@@ -15,4 +15,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c4a9e53718e99ec418d306c21a4354e3, type: 2}
   - {fileID: 11400000, guid: 2bbed1b1cbbedc4428c7e8872dd4759a, type: 2}
   - {fileID: 11400000, guid: e14f521ea0221ef4e86a31c2658e30eb, type: 2}
-  _loadingTexture: {fileID: 0}
+  _loadingTexture: {fileID: 2800000, guid: e2896a92727704803a9c422b043eae89, type: 3}

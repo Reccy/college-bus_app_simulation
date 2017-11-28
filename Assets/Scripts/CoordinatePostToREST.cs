@@ -1,10 +1,8 @@
 ﻿using Mapbox.Unity.Location;
 using Mapbox.Utils;
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
-using UnityEngine.UI;
 
 /**
  * Posts the coordinates to a REST API at a scheduled interval

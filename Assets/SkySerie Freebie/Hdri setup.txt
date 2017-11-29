@@ -1,0 +1,4 @@
+to use the skyboxs simply drag-and-drop into your scene or open the lighting tab and replace the skybox material.
+Things you might want to adjust for your scene is the intensity and the exposure.
+I also recommend going to edit>project settings>player tab and changing the color space to Linear for better light
+accuracy.

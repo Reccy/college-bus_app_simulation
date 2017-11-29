@@ -5,11 +5,35 @@
  */
 public class BusDriver : MonoBehaviour {
 
-    public float speed;
-    public float busOriginDistanceFromRoad = 0.337f;
-    public Transform busDestination;
+    /**
+     * How the bus driver will get to its destination.
+     * Debug = The user clicks to make the bus drive to its destination
+     * Route = The bus follows its route
+     */
+    public enum BusDriverMode
+    {
+        Debug,
+        Route
+    }
 
-    void Update()
+    [SerializeField]
+    private float speed;
+    public float Speed { get; set; }
+
+    [SerializeField]
+    private float busOriginDistanceFromRoad = 0.337f;
+    public float BusOriginDistanceFromRoad { get; set; }
+
+    [SerializeField]
+    private BusDriverMode currentDriverMode;
+    public BusDriverMode CurrentDriverMode { get { return currentDriverMode; } }
+
+    [SerializeField]
+    private Transform busDestination;
+    public Transform BusDestination { get; set; }
+    
+
+    private void Update()
     {
         // Rotate and Drive towards destination if far away from it
         if (Vector2.Distance(new Vector2(transform.position.x, transform.position.z), new Vector2(busDestination.position.x, busDestination.position.z)) > 1)
@@ -24,17 +48,16 @@ public class BusDriver : MonoBehaviour {
     /**
      *  Makes the vehicle rotate towards the destination
      */
-    void RotateTowardsDestination()
+    private void RotateTowardsDestination()
     {
         Transform originalTransform = transform;
         transform.LookAt(busDestination);
-        //transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, transform.rotation.z);
     }
 
     /**
      *  Makes the vehicle sit on the terrain
      */
-    void UpdateY()
+    private void UpdateY()
     {
         // Get elevation
         Ray ray = new Ray(transform.position, Vector3.down);
@@ -62,7 +85,7 @@ public class BusDriver : MonoBehaviour {
     /**
      * Drives the vehicle forward
      */
-    void DriveForward()
+    private void DriveForward()
     {
         // Move forward
         transform.Translate(Vector3.forward * speed * Time.deltaTime);

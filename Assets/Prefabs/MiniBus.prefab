@@ -20,9 +20,13 @@ GameObject:
   m_Component:
   - component: {fileID: 4407640606814378}
   - component: {fileID: 65252908149056726}
-  m_Layer: 0
+  - component: {fileID: 114146652847807538}
+  - component: {fileID: 114512754232073436}
+  - component: {fileID: 114541440554628990}
+  - component: {fileID: 114841916544143048}
+  m_Layer: 8
   m_Name: MiniBus
-  m_TagString: Untagged
+  m_TagString: Bus
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -37,9 +41,9 @@ GameObject:
   - component: {fileID: 4767536304209148}
   - component: {fileID: 33850070586125946}
   - component: {fileID: 23939780823221588}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Object022
-  m_TagString: Untagged
+  m_TagString: Bus
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -54,9 +58,9 @@ GameObject:
   - component: {fileID: 4869863213584118}
   - component: {fileID: 33848770974524398}
   - component: {fileID: 23071740108282734}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Object018
-  m_TagString: Untagged
+  m_TagString: Bus
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -71,9 +75,9 @@ GameObject:
   - component: {fileID: 4553014757570510}
   - component: {fileID: 33669982294249104}
   - component: {fileID: 23354717044498976}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Object021
-  m_TagString: Untagged
+  m_TagString: Bus
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -88,9 +92,9 @@ GameObject:
   - component: {fileID: 4631292135049240}
   - component: {fileID: 33979313109553094}
   - component: {fileID: 23792732744953884}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Object019
-  m_TagString: Untagged
+  m_TagString: Bus
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -105,9 +109,9 @@ GameObject:
   - component: {fileID: 4926246610692376}
   - component: {fileID: 33817087617753258}
   - component: {fileID: 23526552373677644}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Object020
-  m_TagString: Untagged
+  m_TagString: Bus
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -118,8 +122,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1183052809366818}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.337, z: 0}
+  m_LocalRotation: {x: 0, y: 0.73182964, z: 0, w: 0.6814877}
+  m_LocalPosition: {x: 303.82687, y: 1.3, z: -35.35608}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 4869863213584118}
@@ -129,7 +133,7 @@ Transform:
   - {fileID: 4767536304209148}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 94.08, z: 0}
 --- !u!4 &4553014757570510
 Transform:
   m_ObjectHideFlags: 1
@@ -208,7 +212,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 2af8703da5d564643bdfa00ac0b910de, type: 2}
+  - {fileID: 2100000, guid: 39cfffc7cdb08644ca972fb9d7f6b125, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -240,7 +244,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 2af8703da5d564643bdfa00ac0b910de, type: 2}
+  - {fileID: 2100000, guid: 39cfffc7cdb08644ca972fb9d7f6b125, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -272,7 +276,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 2af8703da5d564643bdfa00ac0b910de, type: 2}
+  - {fileID: 2100000, guid: 39cfffc7cdb08644ca972fb9d7f6b125, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -304,7 +308,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 2af8703da5d564643bdfa00ac0b910de, type: 2}
+  - {fileID: 2100000, guid: 39cfffc7cdb08644ca972fb9d7f6b125, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -336,7 +340,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 2af8703da5d564643bdfa00ac0b910de, type: 2}
+  - {fileID: 2100000, guid: 39cfffc7cdb08644ca972fb9d7f6b125, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -402,3 +406,56 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.8928522, y: 0.99762154, z: 3.3677545}
   m_Center: {x: 0, y: -0.035480857, z: 0}
+--- !u!114 &114146652847807538
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1183052809366818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a034c4eeb3293418aab101c1895844a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _map: {fileID: 0}
+  _targetTransform: {fileID: 4407640606814378}
+--- !u!114 &114512754232073436
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1183052809366818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6728ebf103a48224283a2b752d2617d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interval: 0
+  url: https://bus-app-prototype-api-reccy.c9users.io/api/bus_position
+--- !u!114 &114541440554628990
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1183052809366818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cb41b645b2932948b5620ee7a82e7c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefix: Bus Position
+--- !u!114 &114841916544143048
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1183052809366818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4d23460e0cda5f4da33b1f438d8f640, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 20
+  busOriginDistanceFromRoad: 0.337
+  driveMode: 0
+  busDestination: {fileID: 0}

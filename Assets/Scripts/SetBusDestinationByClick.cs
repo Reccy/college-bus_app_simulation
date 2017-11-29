@@ -4,9 +4,21 @@ using UnityEngine.EventSystems;
 /**
  *  Sets the position of this game object by click
  */
-public class SetDestinationByClick : MonoBehaviour
+public class SetBusDestinationByClick : MonoBehaviour
 {
-    void Update()
+    [SerializeField]
+    private BusDriver busDriver;
+    public BusDriver BusDriver { set; get; }
+
+    private void Update()
+    {
+        if (busDriver.CurrentDriverMode == BusDriver.BusDriverMode.Debug)
+        {
+            SetDestinationOnClick();
+        }
+    }
+
+    private void SetDestinationOnClick()
     {
         if (Input.GetMouseButton(0) && !EventSystem.current.IsPointerOverGameObject())
         {

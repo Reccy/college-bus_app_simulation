@@ -430,6 +430,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6728ebf103a48224283a2b752d2617d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debugLog: 0
   interval: 0
   url: https://bus-app-prototype-api-reccy.c9users.io/api/bus_position
 --- !u!114 &114541440554628990
@@ -455,9 +456,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4d23460e0cda5f4da33b1f438d8f640, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  map: {fileID: 0}
   speed: 20
   busOriginDistanceFromRoad: 0.337
-  currentDriverMode: 0
-  busImmediateDestination: {fileID: 0}
+  driverMode: 1
+  currentDestination: {fileID: 0}
   busRoute:
-    latLongNodes: []
+    latLongNodes:
+    - latitude: 53.347626
+      longitude: -6.241173
+    - latitude: 53.34669
+      longitude: -6.22743
+    - latitude: 53.349663
+      longitude: -6.226904
+    - latitude: 53.350594
+      longitude: -6.240787
+    - latitude: 53.347626
+      longitude: -6.241173

@@ -11,6 +11,8 @@ public class CoordinatePostToREST : MonoBehaviour {
     private TransformLocationProvider locationProvider;
     private SimulationStatusController statusController;
 
+    public bool debugLog;
+
     // The interval in seconds to send the co-ordinates
     public int interval;
 
@@ -49,12 +51,16 @@ public class CoordinatePostToREST : MonoBehaviour {
 
             if (request.isNetworkError || request.isHttpError)
             {
-                Debug.Log(request.error);
+                if (debugLog)
+                    Debug.Log(request.error);
+
                 statusController.UpdateNetworkStatus(false, request.error);
             }
             else
             {
-                Debug.Log("Request Status:" + request.responseCode + " | Payload: " + coords.ToString());
+                if (debugLog)
+                    Debug.Log("Request Status:" + request.responseCode + " | Payload: " + coords.ToString());
+
                 statusController.UpdateNetworkStatus(true, request.responseCode.ToString());
             }
         }

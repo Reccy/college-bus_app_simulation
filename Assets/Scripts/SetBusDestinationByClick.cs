@@ -12,7 +12,7 @@ public class SetBusDestinationByClick : MonoBehaviour
 
     private void Update()
     {
-        if (busDriver.CurrentDriverMode == BusDriver.BusDriverMode.Debug)
+        if (busDriver.DriverMode == BusDriver.BusDriverMode.Debug)
         {
             SetDestinationOnClick();
         }

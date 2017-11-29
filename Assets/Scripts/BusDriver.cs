@@ -1,74 +1,131 @@
-﻿using UnityEngine;
+﻿using Mapbox.Unity.Location;
+using Mapbox.Unity.Map;
+using UnityEngine;
 
 /**
  *  Drives the bus to its waypoint
  */
 public class BusDriver : MonoBehaviour {
 
-    /**
-     * How the bus driver will get to its destination.
-     * Debug = The user clicks to make the bus drive to its destination
-     * Route = The bus follows its route
-     */
+    /// <summary>
+    /// How the bus driver will get to its destination
+    /// </summary>
     public enum BusDriverMode
     {
+        /// <summary>
+        /// The user clicks to make the bus drive to its destination
+        /// </summary>
         Debug,
+        /// <summary>
+        /// The bus follows its bus route
+        /// </summary>
         Route
     }
 
+
+    [SerializeField]
+    private AbstractMap map;
+
+    /// <summary>
+    /// The map that the bus is driving on
+    /// </summary>
+    public AbstractMap Map { get { return map; } }
+
+
     [SerializeField]
     private float speed;
-    public float Speed { get; set; }
+
+    /// <summary>
+    /// The bus speed
+    /// </summary>
+    public float Speed { get { return speed; } set { speed = value; } }
+
 
     [SerializeField]
     private float busOriginDistanceFromRoad = 0.337f;
-    public float BusOriginDistanceFromRoad { get; set; }
+
+    /// <summary>
+    /// The distance from the bus's origin to the road on the Y axis
+    /// </summary>
+    public float BusOriginDistanceFromRoad { get { return busOriginDistanceFromRoad; } set { busOriginDistanceFromRoad = value; } }
+
 
     [SerializeField]
-    private BusDriverMode currentDriverMode;
-    public BusDriverMode CurrentDriverMode { get { return currentDriverMode; } }
+    private BusDriverMode driverMode;
+    
+    /// <summary>
+    /// The current driver mode of the bus
+    /// </summary>
+    public BusDriverMode DriverMode { get { return driverMode; } }
+
 
     [SerializeField]
-    private Transform busImmediateDestination;
-    public Transform BusImmediateDestination { get; set; }
+    private Transform currentDestination;
+    
+    /// <summary>
+    /// The transform that the bus is driving towards
+    /// </summary>
+    public Transform CurrentDestination { get { return currentDestination; } set { currentDestination = value; } }
+
 
     [SerializeField]
     private BusRoute busRoute;
-    
+
+    private int currentBusRouteNode = 0;
 
     private void Update()
     {
         // Rotate and Drive towards immediate destination if the bus is far away from it
-        if (GetBusDistanceFromImmediateDestination() > 1)
+        if (GetDistanceFromDestination() > 1)
         {
             RotateTowardsDestination();
             DriveForward();
         }
+        else if (DriverMode.Equals(BusDriverMode.Route))
+        {
+            // Update the current destination
+            if (currentBusRouteNode < busRoute.Size)
+            {
+                CurrentDestination.position = busRoute.LatLongNodes[currentBusRouteNode].AsUnityPosition(map);
+                Debug.Log("Set bus route index: " + currentBusRouteNode + " || Position: " + CurrentDestination.position);
+                currentBusRouteNode++;
+                Debug.Log("Updated Index: " + currentBusRouteNode);
+            }
+        }
 
-        UpdateY();
+        SnapToTerrain();
     }
 
-    /**
-     * Returns the distance from the immediate destination
-     */
-    private float GetBusDistanceFromImmediateDestination()
+    /// <summary>
+    /// Returns the distance from the current destination
+    /// </summary>
+    private float GetDistanceFromDestination()
     {
-        return Vector2.Distance(new Vector2(transform.position.x, transform.position.z), new Vector2(busImmediateDestination.position.x, busImmediateDestination.position.z));
+        return Vector2.Distance(new Vector2(transform.position.x, transform.position.z), new Vector2(currentDestination.position.x, currentDestination.position.z));
     }
 
-    /**
-     *  Makes the vehicle rotate towards the destination
-     */
+    /// <summary>
+    /// Makes the vehicle rotate towards the destination
+    /// </summary>
     private void RotateTowardsDestination()
     {
         Transform originalTransform = transform;
-        transform.LookAt(busImmediateDestination);
+        transform.LookAt(currentDestination);
     }
 
-    /**
-     *  Makes the vehicle sit on the terrain
-     */
-    private void UpdateY()
+    /// <summary>
+    /// Drives the vehicle forward by translating its transform position forward
+    /// </summary>
+    private void DriveForward()
+    {
+        // Move forward
+        transform.Translate(Vector3.forward * speed * Time.deltaTime);
+    }
+
+    /// <summary>
+    /// Makes the vehicle sit on the terrain by transforming its rotation and y transform
+    /// </summary>
+    private void SnapToTerrain()
     {
         // Get elevation
         Ray ray = new Ray(transform.position, Vector3.down);
@@ -91,14 +148,5 @@ public class BusDriver : MonoBehaviour {
             // Move up since bus probably clipped under the terrain
             transform.position = new Vector3(transform.position.x, transform.position.y + 5, transform.position.z);
         }
-    }
-
-    /**
-     * Drives the vehicle forward
-     */
-    private void DriveForward()
-    {
-        // Move forward
-        transform.Translate(Vector3.forward * speed * Time.deltaTime);
     }
 }

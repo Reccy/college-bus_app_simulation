@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using Mapbox.Unity.Utilities;
 using UnityEngine;
+using Mapbox.Unity.Map;
 
-[CreateAssetMenu(menuName = "BusStop/BusRoute"), System.Serializable]
+[System.Serializable]
 public class BusRoute {
     [SerializeField]
     private List<BusRouteNode> latLongNodes;
@@ -9,16 +11,26 @@ public class BusRoute {
     {
         get { return latLongNodes; }
     }
+
+    public int Size
+    {
+        get { return latLongNodes.Count; }
+    }
 }
 
 [System.Serializable]
 public class BusRouteNode
 {
     [SerializeField]
-    private double latitude;
-    public double Latitude { get; set; }
+    private float latitude;
+    public float Latitude { get; set; }
 
     [SerializeField]
-    private double longitude;
-    public double Longitude { get; set; }
+    private float longitude;
+    public float Longitude { get; set; }
+
+    public Vector3 AsUnityPosition(AbstractMap map)
+    {
+        return new Vector2(latitude, longitude).AsUnityPosition(map.CenterMercator, map.WorldRelativeScale);
+    }
 }

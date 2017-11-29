@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1059723575}
-  m_IndirectSpecularColor: {r: 0.098958574, g: 0.16722803, b: 0.3000045, a: 1}
+  m_IndirectSpecularColor: {r: 0.40843153, g: 0.531809, b: 0.67369205, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -770,7 +770,12 @@ Prefab:
       objectReference: {fileID: 1419999641}
     - target: {fileID: 114841916544143048, guid: 697501c87bb91694493a95f6c3371843,
         type: 2}
-      propertyPath: busImmediateDestination
+      propertyPath: map
+      value: 
+      objectReference: {fileID: 1419999641}
+    - target: {fileID: 114841916544143048, guid: 697501c87bb91694493a95f6c3371843,
+        type: 2}
+      propertyPath: currentDestination
       value: 
       objectReference: {fileID: 164293703}
     m_RemovedComponents: []

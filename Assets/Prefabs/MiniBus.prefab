@@ -457,5 +457,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 20
   busOriginDistanceFromRoad: 0.337
-  driveMode: 0
-  busDestination: {fileID: 0}
+  currentDriverMode: 0
+  busImmediateDestination: {fileID: 0}
+  busRoute:
+    latLongNodes: []

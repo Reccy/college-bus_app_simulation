@@ -29,14 +29,17 @@ public class BusDriver : MonoBehaviour {
     public BusDriverMode CurrentDriverMode { get { return currentDriverMode; } }
 
     [SerializeField]
-    private Transform busDestination;
-    public Transform BusDestination { get; set; }
+    private Transform busImmediateDestination;
+    public Transform BusImmediateDestination { get; set; }
+
+    [SerializeField]
+    private BusRoute busRoute;
     
 
     private void Update()
     {
-        // Rotate and Drive towards destination if far away from it
-        if (Vector2.Distance(new Vector2(transform.position.x, transform.position.z), new Vector2(busDestination.position.x, busDestination.position.z)) > 1)
+        // Rotate and Drive towards immediate destination if the bus is far away from it
+        if (GetBusDistanceFromImmediateDestination() > 1)
         {
             RotateTowardsDestination();
             DriveForward();
@@ -46,12 +49,20 @@ public class BusDriver : MonoBehaviour {
     }
 
     /**
+     * Returns the distance from the immediate destination
+     */
+    private float GetBusDistanceFromImmediateDestination()
+    {
+        return Vector2.Distance(new Vector2(transform.position.x, transform.position.z), new Vector2(busImmediateDestination.position.x, busImmediateDestination.position.z));
+    }
+
+    /**
      *  Makes the vehicle rotate towards the destination
      */
     private void RotateTowardsDestination()
     {
         Transform originalTransform = transform;
-        transform.LookAt(busDestination);
+        transform.LookAt(busImmediateDestination);
     }
 
     /**

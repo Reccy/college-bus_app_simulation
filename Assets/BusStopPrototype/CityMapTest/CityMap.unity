@@ -770,14 +770,9 @@ Prefab:
       objectReference: {fileID: 1419999641}
     - target: {fileID: 114841916544143048, guid: 697501c87bb91694493a95f6c3371843,
         type: 2}
-      propertyPath: busDestination
+      propertyPath: busImmediateDestination
       value: 
       objectReference: {fileID: 164293703}
-    - target: {fileID: 114841916544143048, guid: 697501c87bb91694493a95f6c3371843,
-        type: 2}
-      propertyPath: driveMode
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 697501c87bb91694493a95f6c3371843, type: 2}
   m_IsPrefabParent: 0

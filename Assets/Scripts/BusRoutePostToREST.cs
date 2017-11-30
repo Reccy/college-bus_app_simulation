@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 /// <summary>
 /// Pushes the BusRoute to the REST API. Has to be called manually
@@ -24,7 +25,7 @@ public class BusRoutePostToREST : MonoBehaviour
     private IEnumerator Post(BusRoute busRoute)
     {
         List<BusRouteNode> nodeList = busRoute.LatLongNodes;
-        string busRouteJSON = JsonConvert.SerializeObject(nodeList);
+        string busRouteJSON = JsonConvert.SerializeObject(nodeList, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() });
         Debug.Log("BusRoute Size: " + busRoute.Size + "\nJSON: " + busRouteJSON);
 
         UnityWebRequest request = UnityWebRequest.Post(url, busRouteJSON);

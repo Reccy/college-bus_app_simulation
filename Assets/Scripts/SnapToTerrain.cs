@@ -14,15 +14,27 @@ public class SnapToTerrain : MonoBehaviour
     [SerializeField]
     private float rayOriginHeight = 100f;
 
+    [SerializeField]
+    private bool snapOnUpdate = true;
+    /// <summary>
+    /// If set to true, PerformSnap() will be called in update function
+    /// </summary>
+    public bool SnapOnUpdate
+    {
+        get { return snapOnUpdate; }
+        set { snapOnUpdate = value; }
+    }
+
     private void Update()
     {
-        PerformSnap();   
+        if (snapOnUpdate)
+            PerformSnap();   
     }
 
     /// <summary>
     /// Snaps the object to terrain by casting rays below it from a high altitude and by then snapping at the collision point
     /// </summary>
-    private void PerformSnap()
+    public void PerformSnap()
     {
         Vector3 rayOrigin = new Vector3(transform.position.x, rayOriginHeight, transform.position.z);
         Vector3 rayDirection = Vector3.down * rayOriginHeight * 2;

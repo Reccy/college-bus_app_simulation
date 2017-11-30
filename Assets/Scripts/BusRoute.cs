@@ -9,6 +9,12 @@ using Mapbox.Unity;
 [System.Serializable]
 public class BusRoute {
 
+    public delegate void OnBusRoutePopulated(BusRoute thisRoute);
+    /// <summary>
+    /// Delegate is called when the Bus Route has been fully populated with BusRouteNodes.
+    /// </summary>
+    public OnBusRoutePopulated onBusRoutePopulated;
+
     private List<BusRouteNode> latLongNodes = new List<BusRouteNode>();
     public List<BusRouteNode> LatLongNodes
     {
@@ -47,20 +53,21 @@ public class BusRoute {
     /// <param name="response"></param>
     private void HandleDirectionsResponse(DirectionsResponse response)
     {
-        Debug.Log("Directions Response Code: " + response.Code);
         List<BusRouteNode> newNodes = new List<BusRouteNode>();
 
         foreach (Step step in response.Routes[0].Legs[0].Steps)
         {
             foreach (Vector2d point in step.Geometry)
             {
-                Debug.Log("Adding new point: { x: " + point.x + ", y: " + point.y + " }");
                 newNodes.Add(new BusRouteNode((float)point.x, (float)point.y));
             }
         }
 
         LatLongNodes.Clear();
         LatLongNodes.AddRange(newNodes);
+
+        if (onBusRoutePopulated != null)
+            onBusRoutePopulated(this);
     }
 }
 
@@ -81,10 +88,15 @@ public class BusRouteNode
         this.longitude = longitude;
     }
 
+    public BusRouteNode(Vector2 latLong)
+    {
+        this.latitude = latLong.x;
+        this.longitude = latLong.y;
+    }
+
     public Vector3 AsUnityPosition(AbstractMap map)
     {
         Vector3 unityPosition = new Vector2(latitude, longitude).AsUnityPosition(map.CenterMercator, map.WorldRelativeScale);
-        Debug.Log("Returning Position: { Lat: " + Latitude + ", Long: " + Longitude + " }, { X: " + unityPosition.x + ", Z: " + unityPosition.z + " }");
         return unityPosition;
     }
 }

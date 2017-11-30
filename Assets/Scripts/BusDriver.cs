@@ -5,6 +5,7 @@ using UnityEngine;
 /**
  *  Drives the bus to its waypoint
  */
+ [RequireComponent (typeof (TransformLocationProvider))]
 public class BusDriver : MonoBehaviour {
 
     /// <summary>
@@ -64,7 +65,6 @@ public class BusDriver : MonoBehaviour {
     public Transform CurrentDestination { get { return currentDestination; } set { currentDestination = value; } }
 
 
-    [SerializeField]
     private BusRoute currentBusRoute;
     /// <summary>
     /// The bus route currently assigned to the bus
@@ -73,13 +73,23 @@ public class BusDriver : MonoBehaviour {
         get { return currentBusRoute; }
         set
         {
-            Debug.Log("BUS ROUTE RESET");
             currentBusRouteNode = 0;
             currentBusRoute = value;
+
+            // If a VisualiseBusRoute component exists, then visualise the route once the bus route has been populated
+            if (GetComponent<VisualiseBusRoute>())
+            {
+                CurrentBusRoute.onBusRoutePopulated = GetComponent<VisualiseBusRoute>().SetBusRouteVisualisation;
+            }
         }
     }
 
     private int currentBusRouteNode = 0;
+
+    private void Awake()
+    {
+        CurrentBusRoute = new BusRoute();
+    }
 
     private void Update()
     {
@@ -95,9 +105,7 @@ public class BusDriver : MonoBehaviour {
             if (currentBusRouteNode < currentBusRoute.Size)
             {
                 CurrentDestination.position = currentBusRoute.LatLongNodes[currentBusRouteNode].AsUnityPosition(map);
-                Debug.Log("Set bus route index: " + currentBusRouteNode + " || Position: " + CurrentDestination.position);
                 currentBusRouteNode++;
-                Debug.Log("Updated Index: " + currentBusRouteNode);
             }
         }
     }

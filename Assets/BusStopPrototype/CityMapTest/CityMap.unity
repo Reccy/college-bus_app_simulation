@@ -166,6 +166,7 @@ MonoBehaviour:
   originDistanceFromRoad: 0.5
   alignAngleWithTerrain: 0
   rayOriginHeight: 100
+  snapOnUpdate: 1
 --- !u!1 &477120481
 GameObject:
   m_ObjectHideFlags: 0
@@ -778,11 +779,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 114146652847807538, guid: 697501c87bb91694493a95f6c3371843,
-        type: 2}
-      propertyPath: _map
-      value: 
-      objectReference: {fileID: 1419999641}
     - target: {fileID: 114841916544143048, guid: 697501c87bb91694493a95f6c3371843,
         type: 2}
       propertyPath: map
@@ -793,33 +789,21 @@ Prefab:
       propertyPath: currentDestination
       value: 
       objectReference: {fileID: 164293703}
-    - target: {fileID: 1276708529397438, guid: 697501c87bb91694493a95f6c3371843, type: 2}
-      propertyPath: m_TagString
-      value: Untagged
+    - target: {fileID: 1183052809366818, guid: 697501c87bb91694493a95f6c3371843, type: 2}
+      propertyPath: m_Name
+      value: Bus
       objectReference: {fileID: 0}
-    - target: {fileID: 1794442487915744, guid: 697501c87bb91694493a95f6c3371843, type: 2}
-      propertyPath: m_TagString
-      value: Untagged
-      objectReference: {fileID: 0}
-    - target: {fileID: 1806919140811024, guid: 697501c87bb91694493a95f6c3371843, type: 2}
-      propertyPath: m_TagString
-      value: Untagged
-      objectReference: {fileID: 0}
-    - target: {fileID: 1257739772713550, guid: 697501c87bb91694493a95f6c3371843, type: 2}
-      propertyPath: m_TagString
-      value: Untagged
-      objectReference: {fileID: 0}
-    - target: {fileID: 1597196510482908, guid: 697501c87bb91694493a95f6c3371843, type: 2}
-      propertyPath: m_TagString
-      value: Untagged
-      objectReference: {fileID: 0}
-    - target: {fileID: 114681564922751154, guid: 697501c87bb91694493a95f6c3371843,
+    - target: {fileID: 114563208524072008, guid: 697501c87bb91694493a95f6c3371843,
         type: 2}
-      propertyPath: alignAngleWithTerrain
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 65252908149056726, guid: 697501c87bb91694493a95f6c3371843, type: 2}
+      propertyPath: map
+      value: 
+      objectReference: {fileID: 1419999641}
+    - target: {fileID: 114146652847807538, guid: 697501c87bb91694493a95f6c3371843,
+        type: 2}
+      propertyPath: _map
+      value: 
+      objectReference: {fileID: 1419999641}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 697501c87bb91694493a95f6c3371843, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1416806597
@@ -912,6 +896,7 @@ GameObject:
   - component: {fileID: 1419999642}
   - component: {fileID: 1419999641}
   - component: {fileID: 1419999640}
+  - component: {fileID: 1419999643}
   m_Layer: 0
   m_Name: Map
   m_TagString: Untagged
@@ -966,6 +951,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1419999643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1419999639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47281270a34044f468f9db1579f0bfc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  note: 'Range Tile Prodiver defaults
+
+    W -> 15
+
+    N -> 40
+
+    E -> 15
+
+    S -> 15'
 --- !u!1 &1442800763
 GameObject:
   m_ObjectHideFlags: 0
@@ -1061,7 +1066,7 @@ GameObject:
   - component: {fileID: 2070561182}
   - component: {fileID: 2070561180}
   m_Layer: 2
-  m_Name: Sphere
+  m_Name: IconMesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1088,7 +1093,7 @@ MeshRenderer:
   m_GameObject: {fileID: 2070561178}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1

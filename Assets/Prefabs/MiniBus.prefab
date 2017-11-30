@@ -19,12 +19,12 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4407640606814378}
-  - component: {fileID: 65252908149056726}
   - component: {fileID: 114146652847807538}
   - component: {fileID: 114512754232073436}
   - component: {fileID: 114541440554628990}
   - component: {fileID: 114841916544143048}
   - component: {fileID: 114681564922751154}
+  - component: {fileID: 114563208524072008}
   m_Layer: 2
   m_Name: MiniBus
   m_TagString: Untagged
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 23939780823221588}
   m_Layer: 2
   m_Name: Object022
-  m_TagString: Bus
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -61,7 +61,7 @@ GameObject:
   - component: {fileID: 23071740108282734}
   m_Layer: 2
   m_Name: Object018
-  m_TagString: Bus
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -78,7 +78,7 @@ GameObject:
   - component: {fileID: 23354717044498976}
   m_Layer: 2
   m_Name: Object021
-  m_TagString: Bus
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 23792732744953884}
   m_Layer: 2
   m_Name: Object019
-  m_TagString: Bus
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -112,7 +112,7 @@ GameObject:
   - component: {fileID: 23526552373677644}
   m_Layer: 2
   m_Name: Object020
-  m_TagString: Bus
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -395,18 +395,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1794442487915744}
   m_Mesh: {fileID: 4300002, guid: 7f4f24cb528cb884a874e5266f87c831, type: 3}
---- !u!65 &65252908149056726
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1183052809366818}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 0.8928522, y: 0.99762154, z: 3.3677545}
-  m_Center: {x: 0, y: -0.035480857, z: 0}
 --- !u!114 &114146652847807538
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -446,6 +434,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefix: Bus Position
+--- !u!114 &114563208524072008
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1183052809366818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd0eff8ca10f28c4a94a9c281a392526, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  map: {fileID: 0}
+  material: {fileID: 2100000, guid: 0a6e9c8de919bff499620e5daa2744d0, type: 2}
 --- !u!114 &114681564922751154
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -458,8 +459,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   originDistanceFromRoad: 0.337
-  alignAngleWithTerrain: 0
+  alignAngleWithTerrain: 1
   rayOriginHeight: 100
+  snapOnUpdate: 1
 --- !u!114 &114841916544143048
 MonoBehaviour:
   m_ObjectHideFlags: 1

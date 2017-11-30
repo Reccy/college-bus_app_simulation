@@ -118,7 +118,8 @@ GameObject:
   m_Component:
   - component: {fileID: 164293703}
   - component: {fileID: 164293704}
-  m_Layer: 0
+  - component: {fileID: 164293705}
+  m_Layer: 2
   m_Name: BusDestination
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -132,7 +133,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 164293702}
   m_LocalRotation: {x: 0, y: 0.73182964, z: 0, w: 0.6814877}
-  m_LocalPosition: {x: 303.82687, y: 1.3, z: -35.35608}
+  m_LocalPosition: {x: 304.941, y: 1.3, z: -35.44}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2070561179}
@@ -151,6 +152,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   busDriver: {fileID: 690533341}
+--- !u!114 &164293705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 164293702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b72f01d01335fb459654de7f8f6ba7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  originDistanceFromRoad: 0.5
+  alignAngleWithTerrain: 0
+  rayOriginHeight: 100
 --- !u!1 &477120481
 GameObject:
   m_ObjectHideFlags: 0
@@ -778,7 +793,33 @@ Prefab:
       propertyPath: currentDestination
       value: 
       objectReference: {fileID: 164293703}
-    m_RemovedComponents: []
+    - target: {fileID: 1276708529397438, guid: 697501c87bb91694493a95f6c3371843, type: 2}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 1794442487915744, guid: 697501c87bb91694493a95f6c3371843, type: 2}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 1806919140811024, guid: 697501c87bb91694493a95f6c3371843, type: 2}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 1257739772713550, guid: 697501c87bb91694493a95f6c3371843, type: 2}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 1597196510482908, guid: 697501c87bb91694493a95f6c3371843, type: 2}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 114681564922751154, guid: 697501c87bb91694493a95f6c3371843,
+        type: 2}
+      propertyPath: alignAngleWithTerrain
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 65252908149056726, guid: 697501c87bb91694493a95f6c3371843, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 697501c87bb91694493a95f6c3371843, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1416806597
@@ -1018,7 +1059,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2070561179}
   - component: {fileID: 2070561182}
-  - component: {fileID: 2070561181}
   - component: {fileID: 2070561180}
   m_Layer: 2
   m_Name: Sphere
@@ -1035,7 +1075,7 @@ Transform:
   m_GameObject: {fileID: 2070561178}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.2, y: 1, z: 0.2}
+  m_LocalScale: {x: 0.2, y: 20, z: 0.2}
   m_Children: []
   m_Father: {fileID: 164293703}
   m_RootOrder: 0
@@ -1053,7 +1093,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: b92d6d9a43af3e449b3c37771cffc8c9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1072,18 +1112,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &2070561181
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2070561178}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!33 &2070561182
 MeshFilter:
   m_ObjectHideFlags: 0

@@ -25,7 +25,6 @@ public class BusDriver : MonoBehaviour {
 
     [SerializeField]
     private AbstractMap map;
-
     /// <summary>
     /// The map that the bus is driving on
     /// </summary>
@@ -34,7 +33,6 @@ public class BusDriver : MonoBehaviour {
 
     [SerializeField]
     private float speed;
-
     /// <summary>
     /// The bus speed
     /// </summary>
@@ -43,7 +41,6 @@ public class BusDriver : MonoBehaviour {
 
     [SerializeField]
     private float busOriginDistanceFromRoad = 0.337f;
-
     /// <summary>
     /// The distance from the bus's origin to the road on the Y axis
     /// </summary>
@@ -52,7 +49,7 @@ public class BusDriver : MonoBehaviour {
 
     [SerializeField]
     private BusDriverMode driverMode;
-    
+
     /// <summary>
     /// The current driver mode of the bus
     /// </summary>
@@ -61,7 +58,6 @@ public class BusDriver : MonoBehaviour {
 
     [SerializeField]
     private Transform currentDestination;
-    
     /// <summary>
     /// The transform that the bus is driving towards
     /// </summary>
@@ -69,7 +65,19 @@ public class BusDriver : MonoBehaviour {
 
 
     [SerializeField]
-    private BusRoute busRoute;
+    private BusRoute currentBusRoute;
+    /// <summary>
+    /// The bus route currently assigned to the bus
+    /// </summary>
+    public BusRoute CurrentBusRoute {
+        get { return currentBusRoute; }
+        set
+        {
+            Debug.Log("BUS ROUTE RESET");
+            currentBusRouteNode = 0;
+            currentBusRoute = value;
+        }
+    }
 
     private int currentBusRouteNode = 0;
 
@@ -84,16 +92,14 @@ public class BusDriver : MonoBehaviour {
         else if (DriverMode.Equals(BusDriverMode.Route))
         {
             // Update the current destination
-            if (currentBusRouteNode < busRoute.Size)
+            if (currentBusRouteNode < currentBusRoute.Size)
             {
-                CurrentDestination.position = busRoute.LatLongNodes[currentBusRouteNode].AsUnityPosition(map);
+                CurrentDestination.position = currentBusRoute.LatLongNodes[currentBusRouteNode].AsUnityPosition(map);
                 Debug.Log("Set bus route index: " + currentBusRouteNode + " || Position: " + CurrentDestination.position);
                 currentBusRouteNode++;
                 Debug.Log("Updated Index: " + currentBusRouteNode);
             }
         }
-
-        SnapToTerrain();
     }
 
     /// <summary>
@@ -109,7 +115,6 @@ public class BusDriver : MonoBehaviour {
     /// </summary>
     private void RotateTowardsDestination()
     {
-        Transform originalTransform = transform;
         transform.LookAt(currentDestination);
     }
 
@@ -120,33 +125,5 @@ public class BusDriver : MonoBehaviour {
     {
         // Move forward
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
-    }
-
-    /// <summary>
-    /// Makes the vehicle sit on the terrain by transforming its rotation and y transform
-    /// </summary>
-    private void SnapToTerrain()
-    {
-        // Get elevation
-        Ray ray = new Ray(transform.position, Vector3.down);
-        RaycastHit[] hitPointList = Physics.RaycastAll(ray);
-        Debug.DrawRay(ray.origin, ray.direction, Color.red);
-
-        if (hitPointList.Length > 0)
-        {
-            // Get the raycast hit point
-            Vector3 hitPoint = hitPointList[0].point + new Vector3(0, busOriginDistanceFromRoad, 0);
-
-            // Apply elevation
-            transform.position = new Vector3(transform.position.x, hitPoint.y, transform.position.z);
-
-            // Apply different angle
-            transform.rotation = Quaternion.LookRotation(Vector3.Cross(transform.right, hitPointList[0].normal));
-        }
-        else
-        {
-            // Move up since bus probably clipped under the terrain
-            transform.position = new Vector3(transform.position.x, transform.position.y + 5, transform.position.z);
-        }
     }
 }

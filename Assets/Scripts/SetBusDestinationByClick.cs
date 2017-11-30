@@ -8,17 +8,22 @@ public class SetBusDestinationByClick : MonoBehaviour
 {
     [SerializeField]
     private BusDriver busDriver;
-    public BusDriver BusDriver { set; get; }
+    public BusDriver BusDriver { get { return busDriver; } set { busDriver = value; } }
 
     private void Update()
     {
-        if (busDriver.DriverMode == BusDriver.BusDriverMode.Debug)
+        switch (BusDriver.DriverMode)
         {
-            SetDestinationOnClick();
+            case BusDriver.BusDriverMode.Debug:
+                SetCurrentDestinationOnClick();
+                break;
+            case BusDriver.BusDriverMode.Route:
+                SetRouteDestinationOnClick();
+                break;
         }
     }
 
-    private void SetDestinationOnClick()
+    private void SetCurrentDestinationOnClick()
     {
         if (Input.GetMouseButton(0) && !EventSystem.current.IsPointerOverGameObject())
         {
@@ -28,6 +33,23 @@ public class SetBusDestinationByClick : MonoBehaviour
             if (hits.Length > 0)
             {
                 transform.position = hits[0].point;
+            }
+        }
+    }
+
+    private void SetRouteDestinationOnClick()
+    {
+        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit[] hits = Physics.RaycastAll(ray);
+
+            if (hits.Length > 0)
+            {
+                // Assign the new bus route
+                BusRoute newBusRoute = new BusRoute();
+                newBusRoute.SetDirectionsToPosition(BusDriver.Map, BusDriver.transform.position, hits[0].point);
+                BusDriver.CurrentBusRoute = newBusRoute;
             }
         }
     }

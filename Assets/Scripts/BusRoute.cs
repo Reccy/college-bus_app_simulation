@@ -5,8 +5,9 @@ using Mapbox.Unity.Map;
 using Mapbox.Utils;
 using Mapbox.Directions;
 using Mapbox.Unity;
+using System;
 
-[System.Serializable]
+[Serializable]
 public class BusRoute {
 
     public delegate void OnBusRoutePopulated(BusRoute thisRoute);
@@ -71,7 +72,7 @@ public class BusRoute {
     }
 }
 
-[System.Serializable]
+[Serializable]
 public class BusRouteNode
 {
     [SerializeField]

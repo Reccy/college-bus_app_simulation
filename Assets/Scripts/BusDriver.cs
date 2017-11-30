@@ -2,9 +2,9 @@
 using Mapbox.Unity.Map;
 using UnityEngine;
 
-/**
- *  Drives the bus to its waypoint
- */
+/// <summary>
+/// Responsible for the bus's pathfinding and other functionalities
+/// </summary>
  [RequireComponent (typeof (TransformLocationProvider))]
 public class BusDriver : MonoBehaviour {
 
@@ -79,7 +79,13 @@ public class BusDriver : MonoBehaviour {
             // If a VisualiseBusRoute component exists, then visualise the route once the bus route has been populated
             if (GetComponent<VisualiseBusRoute>())
             {
-                CurrentBusRoute.onBusRoutePopulated = GetComponent<VisualiseBusRoute>().SetBusRouteVisualisation;
+                CurrentBusRoute.onBusRoutePopulated += GetComponent<VisualiseBusRoute>().SetBusRouteVisualisation;
+            }
+
+            // If a BusRoutePostToREST component exists, the send to the API once the bus route has been populated
+            if (GetComponent<BusRoutePostToREST>())
+            {
+                CurrentBusRoute.onBusRoutePopulated += GetComponent<BusRoutePostToREST>().PostBusRoute;
             }
         }
     }

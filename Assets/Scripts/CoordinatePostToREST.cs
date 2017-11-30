@@ -43,9 +43,9 @@ public class CoordinatePostToREST : MonoBehaviour {
             string latitude = coords.x.ToString();
             string longitude = coords.y.ToString();
             
-            string coordsForm = "{\"latitude\":\"" + latitude + "\",\"longitude\":\"" + longitude + "\"}";
+            string coordsJSON = "{\"latitude\":\"" + latitude + "\",\"longitude\":\"" + longitude + "\"}";
 
-            UnityWebRequest request = UnityWebRequest.Post(url, coordsForm);
+            UnityWebRequest request = UnityWebRequest.Post(url, coordsJSON);
             request.SetRequestHeader("Content-Type", "application/json");
             yield return request.Send();
 

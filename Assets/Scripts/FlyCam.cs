@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-/**
- * FlyCam allows the user to control the in-game camera like the editor camera.
- */
+/// <summary>
+/// FlyCam allows the user to control the in-game camera like the editor camera.
+/// </summary>
 public class FlyCam : MonoBehaviour {
 
     // Acceleration: The acceleration factor added to the speed
@@ -29,17 +29,17 @@ public class FlyCam : MonoBehaviour {
     // The last position of the mouse
     private Vector2 _mouseLastPosition;
 
-	/**
-     * Update checks for key inputs and delegates to movement methods.
-     */
-	private void Update () {
+    /// <summary>
+    /// Update checks for key inputs and delegates to movement methods.
+    /// </summary>
+    private void Update () {
 
         // Initialise if the FlyCam is moving to 0
         bool isMoving = false;
 
         // Create an empty movement vector
         _movementVector = new Vector3(0, 0, 0);
-
+        
         // Check user input (Left)
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
@@ -81,7 +81,7 @@ public class FlyCam : MonoBehaviour {
             isMoving = true;
             _movementVector += Vector3.down;
         }
-
+        
         // Check user input (Look)
         if (Input.GetMouseButton(1))
         {
@@ -96,8 +96,42 @@ public class FlyCam : MonoBehaviour {
             // Apply rotation
             transform.eulerAngles += (Vector3)newRotation;
         }
+        // Otherwise, check numpad rotations
+        else if (Input.GetKey(KeyCode.J) || Input.GetKey(KeyCode.I) || Input.GetKey(KeyCode.L) || Input.GetKey(KeyCode.K))
+        {
+            // Initialise rotation
+            Vector2 newRotation = Vector2.zero;
 
-        // Accelerate
+            // Set rotation inputs
+            // LOOK LEFT
+            if (Input.GetKey(KeyCode.J))
+            {
+                newRotation += Vector2.down;
+            }
+
+            // LOOK UP
+            if (Input.GetKey(KeyCode.I))
+            {
+                newRotation += Vector2.left;
+            }
+
+            // LOOK RIGHT
+            if (Input.GetKey(KeyCode.L))
+            {
+                newRotation += Vector2.up;
+            }
+
+            // LOOK DOWN
+            if (Input.GetKey(KeyCode.K))
+            {
+                newRotation += Vector2.right;
+            }
+
+            // Apply rotation
+            transform.eulerAngles += (Vector3)newRotation;
+        }
+
+        // Accelerate the camera
         _speed += acceleration;
         _speed = Mathf.Min(_speed, maxSpeed);
 

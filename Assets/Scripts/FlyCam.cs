@@ -168,9 +168,8 @@ public class FlyCam : MonoBehaviour {
 
         // Apply rotation
         Vector3 newRotation = transform.localEulerAngles + (Vector3)rotationChange;
-        if (newRotation.x > 180) newRotation.x -= 360;
 
-        if (newRotation.x < -80 || newRotation.x > 80) Debug.Log("_r -> " + newRotation.x);
+        if (newRotation.x > 180) newRotation.x -= 360;
 
         newRotation.x = Mathf.Clamp(newRotation.x, -80, 80);
         transform.rotation = Quaternion.Euler(newRotation);

@@ -1027,6 +1027,7 @@ GameObject:
   - component: {fileID: 1398427997}
   - component: {fileID: 1398427996}
   - component: {fileID: 1398427999}
+  - component: {fileID: 1398428000}
   - component: {fileID: 1398427995}
   - component: {fileID: 690533341}
   - component: {fileID: 1398427994}
@@ -1140,8 +1141,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0667a6f4f469b0747ba79f9167fc1645, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugLog: 1
+  debugLog: 0
   url: https://bus-app-prototype-api-reccy.c9users.io/api/bus_route
+--- !u!114 &1398428000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1398427992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3953828dc3c6f8d4d9acc996e6ac7e50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  debugLog: 1
+  interval: 1
+  url: https://bus-app-prototype-api-reccy.c9users.io/api/bus_driving
 --- !u!1 &1416806597
 GameObject:
   m_ObjectHideFlags: 0

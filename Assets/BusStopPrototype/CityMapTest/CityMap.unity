@@ -356,6 +356,7 @@ GameObject:
   - component: {fileID: 823741487}
   - component: {fileID: 823741486}
   - component: {fileID: 823741485}
+  - component: {fileID: 823741492}
   - component: {fileID: 823741484}
   m_Layer: 0
   m_Name: Main Camera
@@ -371,7 +372,7 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 823741483}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a034c4eeb3293418aab101c1895844a4, type: 3}
   m_Name: 
@@ -391,6 +392,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 1398427992}
   targetDistance: 5
+  minimumTargetDistance: 2
+  maximumTargetDistance: 200
   mouseSensitivity: 0.75
   scrollWheelSensitivity: 3
   keyboardSensitivity: 2
@@ -401,7 +404,7 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 823741483}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7abe4869f7d5d2a4a85a2aa08696f9eb, type: 3}
   m_Name: 
@@ -410,7 +413,7 @@ MonoBehaviour:
   fastMultiplier: 10
   maxSpeed: 50
   maxSlowSpeed: 10
-  mouseSensitivity: 0.75
+  mouseSensitivity: 10
   speed: 0
 --- !u!45 &823741487
 Skybox:
@@ -452,13 +455,24 @@ Transform:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 823741483}
-  m_LocalRotation: {x: -0.024894008, y: -0.7434453, z: -0.027715608, w: 0.66775846}
+  m_LocalRotation: {x: -0.009738037, y: -0.74388266, z: -0.0108417915, w: 0.6681513}
   m_LocalPosition: {x: 307.69, y: 1.37, z: -37.73}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -4.27, y: -96.14, z: 0}
+  m_LocalEulerAnglesHint: {x: -1.67, y: -96.14, z: 0}
+--- !u!114 &823741492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 823741483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 097e9d489d9a629499ec96ba0a243771, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &840818542
 Prefab:
   m_ObjectHideFlags: 0

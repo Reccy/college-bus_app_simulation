@@ -15,16 +15,38 @@ public class OrbitCam : MonoBehaviour
         get { return target; }
         set { target = value; }
     }
-    
+
     [SerializeField]
     private float targetDistance = 5;
     /// <summary>
-    /// The target distance between the target and the camera
+    /// The distance between the target and the camera
     /// </summary>
     public float TargetDistance
     {
         get { return targetDistance; }
         set { targetDistance = value; }
+    }
+
+    [SerializeField]
+    private float minimumTargetDistance = 2;
+    /// <summary>
+    /// The minimum distance between the target and the camera
+    /// </summary>
+    public float MinimumTargetDistance
+    {
+        get { return minimumTargetDistance; }
+        set { minimumTargetDistance = value; }
+    }
+
+    [SerializeField]
+    private float maximumTargetDistance = 200;
+    /// <summary>
+    /// The maximum distance between the target and the camera
+    /// </summary>
+    public float MaximumTargetDistance
+    {
+        get { return maximumTargetDistance; }
+        set { maximumTargetDistance = value; }
     }
 
     /// <summary>
@@ -44,11 +66,6 @@ public class OrbitCam : MonoBehaviour
     /// </summary>
     [SerializeField]
     private float keyboardSensitivity = 0.15f;
-
-    /// <summary>
-    /// The direction from the camera to the target
-    /// </summary>
-    private Vector3 directionToTarget;
     
     /// <summary>
     /// The position of the mouse in the last frame
@@ -64,12 +81,7 @@ public class OrbitCam : MonoBehaviour
     /// The y angle to orbit the object at
     /// </summary>
     float angleY = 0;
-
-    void Awake()
-    {
-        directionToTarget = transform.forward;
-    }
-
+    
     void Update()
     {
         // Get new rotation values
@@ -113,19 +125,21 @@ public class OrbitCam : MonoBehaviour
 
         // Apply scrolling
         targetDistance += (Input.GetAxis("Mouse ScrollWheel") * scrollWheelSensitivity);
-        targetDistance = Mathf.Clamp(targetDistance, 2, 100);
+        targetDistance = Mathf.Clamp(targetDistance, minimumTargetDistance, maximumTargetDistance);
 
-        // Perform rotation (SOURCE: https://forum.unity.com/threads/follow-orbit-camera.202490/ -- By user "WorldArchitect", Post #6)
+        // Perform rotation (Modified from Source: https://forum.unity.com/threads/follow-orbit-camera.202490/ -- By user "WorldArchitect", Post #6)
+        angleY = Mathf.Clamp(angleY, 4, 6);
+
         float x = targetDistance * Mathf.Cos(angleX) * Mathf.Sin(angleY);
         float z = targetDistance * Mathf.Sin(angleX) * Mathf.Sin(angleY);
         float y = targetDistance * Mathf.Cos(angleY);
         transform.position = new Vector3(x + target.transform.position.x,
                                          y + target.transform.position.y,
                                          z + target.transform.position.z);
-
+        
         // Look at the bus
         transform.LookAt(target.transform.position);
-        
+
         // Update the mouse last position
         mouseLastPosition = Input.mousePosition;
     }

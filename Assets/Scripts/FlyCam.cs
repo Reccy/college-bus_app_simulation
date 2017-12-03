@@ -123,7 +123,10 @@ public class FlyCam : MonoBehaviour {
             isMoving = true;
             movementVector += Vector3.down;
         }
-        
+
+        // Initialise rotation
+        Vector2 rotationChange = Vector2.zero;
+
         // Check user input (Look)
         if (Input.GetMouseButton(1))
         {
@@ -131,47 +134,46 @@ public class FlyCam : MonoBehaviour {
             Vector2 mouseDrag = (Vector2)Input.mousePosition - mouseLastPosition;
 
             // Get rotation and multiply by sensitivity
-            Vector2 newRotation = Vector2.zero;
-            newRotation.y = mouseDrag.x * mouseSensitivity * Time.deltaTime;
-            newRotation.x = -(mouseDrag.y) * mouseSensitivity * Time.deltaTime;
-
-            // Apply rotation
-            transform.eulerAngles += (Vector3)newRotation;
+            rotationChange.y = mouseDrag.x * mouseSensitivity * Time.deltaTime;
+            rotationChange.x = -(mouseDrag.y) * mouseSensitivity * Time.deltaTime;
         }
         // Otherwise, check numpad rotations
         else if (Input.GetKey(KeyCode.J) || Input.GetKey(KeyCode.I) || Input.GetKey(KeyCode.L) || Input.GetKey(KeyCode.K))
         {
-            // Initialise rotation
-            Vector2 newRotation = Vector2.zero;
-
             // Set rotation inputs
             // LOOK LEFT
             if (Input.GetKey(KeyCode.J))
             {
-                newRotation += Vector2.down;
+                rotationChange += Vector2.down;
             }
 
             // LOOK UP
             if (Input.GetKey(KeyCode.I))
             {
-                newRotation += Vector2.left;
+                rotationChange += Vector2.left;
             }
 
             // LOOK RIGHT
             if (Input.GetKey(KeyCode.L))
             {
-                newRotation += Vector2.up;
+                rotationChange += Vector2.up;
             }
 
             // LOOK DOWN
             if (Input.GetKey(KeyCode.K))
             {
-                newRotation += Vector2.right;
+                rotationChange += Vector2.right;
             }
-
-            // Apply rotation
-            transform.eulerAngles += (Vector3)newRotation;
         }
+
+        // Apply rotation
+        Vector3 newRotation = transform.localEulerAngles + (Vector3)rotationChange;
+        if (newRotation.x > 180) newRotation.x -= 360;
+
+        if (newRotation.x < -80 || newRotation.x > 80) Debug.Log("_r -> " + newRotation.x);
+
+        newRotation.x = Mathf.Clamp(newRotation.x, -80, 80);
+        transform.rotation = Quaternion.Euler(newRotation);
 
         // Accelerate the camera
         speed += acceleration;
@@ -183,16 +185,16 @@ public class FlyCam : MonoBehaviour {
             if(Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
             {
                 speed = speed * fastMultiplier;
-                gameObject.transform.Translate(movementVector * speed * Time.deltaTime);
+                transform.Translate(movementVector * speed * Time.deltaTime);
             }
             else if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl))
             {
                 speed = Mathf.Min(speed, maxSlowSpeed);
-                gameObject.transform.Translate(movementVector * speed * Time.deltaTime);
+                transform.Translate(movementVector * speed * Time.deltaTime);
             }
             else
             {
-                gameObject.transform.Translate(movementVector * speed * Time.deltaTime);
+                transform.Translate(movementVector * speed * Time.deltaTime);
             }
         }
         else

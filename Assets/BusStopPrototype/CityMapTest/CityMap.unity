@@ -396,6 +396,7 @@ MonoBehaviour:
   maximumTargetDistance: 200
   mouseSensitivity: 0.75
   scrollWheelSensitivity: 3
+  scrollButtonSensitivity: 10
   keyboardSensitivity: 2
 --- !u!114 &823741486
 MonoBehaviour:

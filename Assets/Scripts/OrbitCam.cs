@@ -62,11 +62,17 @@ public class OrbitCam : MonoBehaviour
     private float scrollWheelSensitivity = 3f;
 
     /// <summary>
+    /// The sensitivity of the scroll buttons
+    /// </summary>
+    [SerializeField]
+    private float scrollButtonSensitivity = 5f;
+
+    /// <summary>
     /// The sensitivity of the mouse when using the camera
     /// </summary>
     [SerializeField]
     private float keyboardSensitivity = 0.15f;
-    
+
     /// <summary>
     /// The position of the mouse in the last frame
     /// </summary>
@@ -107,7 +113,7 @@ public class OrbitCam : MonoBehaviour
             // UP
             if (Input.GetKey(KeyCode.I))
             {
-                angleY += -1 * keyboardSensitivity * Time.deltaTime;
+                angleY += 1 * keyboardSensitivity * Time.deltaTime;
             }
 
             // RIGHT
@@ -119,13 +125,24 @@ public class OrbitCam : MonoBehaviour
             // DOWN
             if (Input.GetKey(KeyCode.K))
             {
-                angleY += 1 * keyboardSensitivity * Time.deltaTime;
+                angleY += -1 * keyboardSensitivity * Time.deltaTime;
             }
         }
 
         // Apply scrolling
         targetDistance += (Input.GetAxis("Mouse ScrollWheel") * scrollWheelSensitivity);
+        
+        if (Input.GetKey(KeyCode.E))
+        {
+            targetDistance -= scrollButtonSensitivity * Time.deltaTime;
+        }
+        else if (Input.GetKey(KeyCode.Q))
+        {
+            targetDistance += scrollButtonSensitivity * Time.deltaTime;
+        }
+
         targetDistance = Mathf.Clamp(targetDistance, minimumTargetDistance, maximumTargetDistance);
+
 
         // Perform rotation (Modified from Source: https://forum.unity.com/threads/follow-orbit-camera.202490/ -- By user "WorldArchitect", Post #6)
         angleY = Mathf.Clamp(angleY, 4, 6);

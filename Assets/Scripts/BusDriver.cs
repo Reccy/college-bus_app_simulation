@@ -42,7 +42,7 @@ public class BusDriver : MonoBehaviour {
         set { speed = value; }
     }
 
-    private bool isDriving;
+    private bool isDriving = true;
     /// <summary>
     /// If the bus is driving/stopped
     /// </summary>

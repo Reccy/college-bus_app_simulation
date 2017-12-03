@@ -4,30 +4,72 @@
 /// FlyCam allows the user to control the in-game camera like the editor camera.
 /// </summary>
 public class FlyCam : MonoBehaviour {
-
-    // Acceleration: The acceleration factor added to the speed
+    
+    [SerializeField]
     public float acceleration;
+    /// <summary>
+    /// The acceleration factor added to the squad
+    /// </summary>
+    public float Acceleration
+    {
+        get { return acceleration; }
+        set { acceleration = value; }
+    }
 
-    // FastMultipier: How much to multiply the current speed by WHEN GOING FAST
-    public float fastMultiplier;
+    [SerializeField]
+    private float fastMultiplier;
+    /// <summary>
+    /// How much to multiply the current speed by, when GOING FAST
+    /// </summary>
+    public float FastMultiplier
+    {
+        get { return fastMultiplier; }
+        set { fastMultiplier = value; }
+    }
 
-    // MaxSpeed: The maximum speed
+    [SerializeField]
     public float maxSpeed;
+    /// <summary>
+    /// The maximum speed when going normally
+    /// </summary>
+    public float MaxSpeed
+    {
+        get { return maxSpeed; }
+        set { maxSpeed = value; }
+    }
 
-    // MaxSlowSpeed: The max speed when moving slowly
+    [SerializeField]
     public float maxSlowSpeed;
+    /// <summary>
+    /// The maximum speed when going slowly
+    /// </summary>
+    public float MaxSlowSpeed
+    {
+        get { return maxSlowSpeed; }
+        set { maxSlowSpeed = value; }
+    }
 
-    // MouseSensitivity: Self explanatory
-    public float mouseSensitivity;
+    /// <summary>
+    /// The sensitivity of the mouse when using the camera
+    /// </summary>
+    [SerializeField]
+    private float mouseSensitivity;
 
-    // Speed: The camera's current speed
-    private float _speed;
-
-    // MovementVector: The direction that the camera is moving
-    private Vector3 _movementVector;
-
-    // The last position of the mouse
-    private Vector2 _mouseLastPosition;
+    /// <summary>
+    /// The current speed
+    /// </summary>
+    [SerializeField]
+    private float speed;
+    
+    /// <summary>
+    /// The current movement vector of the camera
+    /// </summary>
+    private Vector3 movementVector;
+    
+    /// <summary>
+    /// The last position of the mouse
+    /// </summary>
+    private Vector2 mouseLastPosition;
 
     /// <summary>
     /// Update checks for key inputs and delegates to movement methods.
@@ -38,60 +80,60 @@ public class FlyCam : MonoBehaviour {
         bool isMoving = false;
 
         // Create an empty movement vector
-        _movementVector = new Vector3(0, 0, 0);
+        movementVector = new Vector3(0, 0, 0);
         
         // Check user input (Left)
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
             isMoving = true;
-            _movementVector += Vector3.left;
+            movementVector += Vector3.left;
         }
 
         // Check user input (Forward)
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
         {
             isMoving = true;
-            _movementVector += Vector3.forward;
+            movementVector += Vector3.forward;
         }
 
         // Check user input (Right)
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
             isMoving = true;
-            _movementVector += Vector3.right;
+            movementVector += Vector3.right;
         }
 
         // Check user input (Backward)
         if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
         {
             isMoving = true;
-            _movementVector += Vector3.back;
+            movementVector += Vector3.back;
         }
 
         // Check user input (Up)
         if (Input.GetKey(KeyCode.E) || Input.GetKey(KeyCode.PageUp))
         {
             isMoving = true;
-            _movementVector += Vector3.up;
+            movementVector += Vector3.up;
         }
 
         // Check user input (Down)
         if (Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.PageDown))
         {
             isMoving = true;
-            _movementVector += Vector3.down;
+            movementVector += Vector3.down;
         }
         
         // Check user input (Look)
         if (Input.GetMouseButton(1))
         {
             // Get the difference mouse drag
-            Vector2 mouseDrag = (Vector2)Input.mousePosition - _mouseLastPosition;
+            Vector2 mouseDrag = (Vector2)Input.mousePosition - mouseLastPosition;
 
             // Get rotation and multiply by sensitivity
             Vector2 newRotation = Vector2.zero;
-            newRotation.y = mouseDrag.x * mouseSensitivity;
-            newRotation.x = -(mouseDrag.y) * mouseSensitivity;
+            newRotation.y = mouseDrag.x * mouseSensitivity * Time.deltaTime;
+            newRotation.x = -(mouseDrag.y) * mouseSensitivity * Time.deltaTime;
 
             // Apply rotation
             transform.eulerAngles += (Vector3)newRotation;
@@ -132,33 +174,33 @@ public class FlyCam : MonoBehaviour {
         }
 
         // Accelerate the camera
-        _speed += acceleration;
-        _speed = Mathf.Min(_speed, maxSpeed);
+        speed += acceleration;
+        speed = Mathf.Min(speed, maxSpeed);
 
         // Move the FlyCam, stop the speed if the user is not moving
         if (isMoving)
         {
             if(Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
             {
-                _speed = _speed * fastMultiplier;
-                gameObject.transform.Translate(_movementVector * _speed * Time.deltaTime);
+                speed = speed * fastMultiplier;
+                gameObject.transform.Translate(movementVector * speed * Time.deltaTime);
             }
             else if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl))
             {
-                _speed = Mathf.Min(_speed, maxSlowSpeed);
-                gameObject.transform.Translate(_movementVector * _speed * Time.deltaTime);
+                speed = Mathf.Min(speed, maxSlowSpeed);
+                gameObject.transform.Translate(movementVector * speed * Time.deltaTime);
             }
             else
             {
-                gameObject.transform.Translate(_movementVector * _speed * Time.deltaTime);
+                gameObject.transform.Translate(movementVector * speed * Time.deltaTime);
             }
         }
         else
         {
-            _speed = 0;
+            speed = 0;
         }
 
         // Update the mouse last position
-        _mouseLastPosition = Input.mousePosition;
+        mouseLastPosition = Input.mousePosition;
     }
 }

@@ -1,31 +1,78 @@
 ﻿using UnityEngine;
 using Mapbox.Unity.Map;
+using System.Collections.Generic;
 
-// Copied from Mapbox example code:
-// Mapbox\Examples\Scripts\LoadingPanelController.cs
-public class UpdateUiOnMapLoaded : MonoBehaviour {
-    public MapVisualizer MapVisualizer;
-    public GameObject SetInvisible;
-    public GameObject SetVisible;
-
-    void Awake()
+namespace AaronMeaney.BusStop.UI
+{
+    /// <summary>
+    /// Swaps visible/invisible UI elements when the map is loaded.
+    /// </summary>
+    public class UpdateUiOnMapLoaded : MonoBehaviour
     {
-        SetInvisible.SetActive(true);
-        SetVisible.SetActive(false);
+        // Copied from Mapbox example code:
+        // Mapbox\Examples\Scripts\LoadingPanelController.cs
 
-        MapVisualizer.OnMapVisualizerStateChanged += (s) =>
+        [SerializeField]
+        private MapVisualizer mapVisualizer;
+        /// <summary>
+        /// The Map Visualiser to listen for the state change.
+        /// </summary>
+        public MapVisualizer MapVisualizer
         {
-            if (s == ModuleState.Finished)
-            {
-                SetInvisible.SetActive(false);
-                SetVisible.SetActive(true);
-            }
-            else if (s == ModuleState.Working)
-            {
-                SetInvisible.SetActive(true);
-                SetVisible.SetActive(false);
-            }
+            get { return mapVisualizer; }
+            set { mapVisualizer = value; }
+        }
 
-        };
+        [SerializeField]
+        private List<GameObject> setInvisible;
+        /// <summary>
+        /// The object to set invisible when the map is finished loading.
+        /// </summary>
+        public List<GameObject> SetInvisible
+        {
+            get { return setInvisible; }
+            set { setInvisible = value; }
+        }
+
+        [SerializeField]
+        private List<GameObject> setVisible;
+        /// <summary>
+        /// The object to set visible when the map is finished loading.
+        /// </summary>
+        public List<GameObject> SetVisible
+        {
+            get { return setVisible; }
+            set { setVisible = value; }
+        }
+
+        void Awake()
+        {
+            MapVisualizer.OnMapVisualizerStateChanged += (s) =>
+            {
+                if (s == ModuleState.Finished)
+                {
+                    foreach (GameObject invisible in SetInvisible) {
+                        invisible.SetActive(false);
+                    }
+
+                    foreach (GameObject visible in SetVisible)
+                    {
+                        visible.SetActive(true);
+                    }
+                }
+                else if (s == ModuleState.Working)
+                {
+                    foreach (GameObject invisible in SetInvisible)
+                    {
+                        invisible.SetActive(true);
+                    }
+                    
+                    foreach (GameObject visible in SetVisible)
+                    {
+                        visible.SetActive(false);
+                    }
+                }
+            };
+        }
     }
 }

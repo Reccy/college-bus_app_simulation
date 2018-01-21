@@ -1,18 +1,24 @@
 ﻿using UnityEngine;
 
-// Global input controller
-public class InputManager : MonoBehaviour {
-
-    public KeyCode ToggleInfoPanel;
-    public delegate void ToggleInfoPanelDelegate();
-    public ToggleInfoPanelDelegate onInfoPanelToggle;
-    
-    private void Update()
+namespace AaronMeaney.BusStop.Managers
+{
+    /// <summary>
+    /// Responsible for managing the user's input by allowing other components to subscribe to delegates.
+    /// </summary>
+    public class InputManager : MonoBehaviour
     {
-        if (Input.GetKeyDown(ToggleInfoPanel))
+        // Control to toggle the Simulation Info Panel visibility
+        public KeyCode ToggleInfoPanel;
+        public delegate void ToggleInfoPanelDelegate();
+        public ToggleInfoPanelDelegate onInfoPanelToggle;
+
+        private void Update()
         {
-            if (onInfoPanelToggle != null)
-                onInfoPanelToggle();
+            if (Input.GetKeyDown(ToggleInfoPanel))
+            {
+                if (onInfoPanelToggle != null)
+                    onInfoPanelToggle();
+            }
         }
     }
 }

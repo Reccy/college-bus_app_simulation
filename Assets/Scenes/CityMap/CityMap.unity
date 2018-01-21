@@ -655,7 +655,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debugLog: 0
-  interval: 0
+  interval: 1
   url: https://bus-app-prototype-api-reccy.c9users.io/api/bus_position
 --- !u!114 &1398427997
 MonoBehaviour:
@@ -714,7 +714,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3953828dc3c6f8d4d9acc996e6ac7e50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugLog: 1
+  debugLog: 0
   interval: 1
   url: https://bus-app-prototype-api-reccy.c9users.io/api/bus_driving
 --- !u!1 &1419999639
@@ -1066,8 +1066,7 @@ Prefab:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 114432322933680604, guid: e0a8524f343250f4aa632d575f2f800a, type: 2}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e0a8524f343250f4aa632d575f2f800a, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &2070561178

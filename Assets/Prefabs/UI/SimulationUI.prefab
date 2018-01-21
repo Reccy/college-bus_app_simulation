@@ -715,7 +715,6 @@ GameObject:
   - component: {fileID: 224795395827143760}
   - component: {fileID: 222998443095831612}
   - component: {fileID: 114354370029282830}
-  - component: {fileID: 114432322933680604}
   m_Layer: 5
   m_Name: LoadingPanel
   m_TagString: Untagged
@@ -1645,19 +1644,6 @@ MonoBehaviour:
   m_InputActionsPerSecond: 10
   m_RepeatDelay: 0.5
   m_ForceModuleActive: 0
---- !u!114 &114432322933680604
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1996906950598966}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f5e33d4a91207d43887fdae9ebd6ce7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MapVisualizer: {fileID: 11400000, guid: ff8ea66d8e9626c4393098f04e030fd7, type: 2}
-  Content: {fileID: 1996906950598966}
 --- !u!114 &114464044921037012
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2639,9 +2625,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fe9ac902a14f934ab42e7433f8d7259, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MapVisualizer: {fileID: 11400000, guid: ff8ea66d8e9626c4393098f04e030fd7, type: 2}
-  SetInvisible: {fileID: 1996906950598966}
-  SetVisible: {fileID: 1458908550029254}
+  mapVisualizer: {fileID: 11400000, guid: ff8ea66d8e9626c4393098f04e030fd7, type: 2}
+  setInvisible:
+  - {fileID: 1996906950598966}
+  setVisible:
+  - {fileID: 1924004351602772}
 --- !u!114 &114987822870637492
 MonoBehaviour:
   m_ObjectHideFlags: 1

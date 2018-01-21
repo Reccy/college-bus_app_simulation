@@ -1,95 +1,99 @@
-﻿using System;
+﻿using AaronMeaney.BusStop.Managers;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-/**
- * Handles the updates to the simulation status UI
- */
-public class SimulationStatusPanelController : MonoBehaviour {
-
-    private bool isVisible;
-
-    private string timeAttempt = "NEVER";
-    private string timeSuccess = "NEVER";
-
-    private Image simulationStatusPanel;
-
-    private Text simulationStatusTitle;
-
-    private Text networkStatusText;
-    private string networkStatusTitle = "// Network Status:";
-
-    private Text coordinatesText;
-    private string coordinatesTitle = "// Coordinates:";
-
-    private InputManager inputManager;
-
-    private void Awake()
+namespace AaronMeaney.BusStop.UI.SimulationStatusPanel
+{
+    /**
+     * Handles the updates to the simulation status UI.
+     */
+    public class SimulationStatusPanelController : MonoBehaviour
     {
-        simulationStatusPanel = GetComponent<Image>();
-        simulationStatusTitle = GetComponentsInChildren<Text>()[0];
-        networkStatusText = GetComponentsInChildren<Text>()[1];
-        coordinatesText = GetComponentsInChildren<Text>()[2];
+        private bool isVisible;
 
-        // Subscribe to Inputs
-        inputManager = FindObjectOfType<InputManager>();
-        inputManager.onInfoPanelToggle += ToggleDisplay;
-    }
+        private string timeAttempt = "NEVER";
+        private string timeSuccess = "NEVER";
 
-    private void Start()
-    {
-        Hide();
-    }
+        private Image simulationStatusPanel;
 
-    private void OnDestroy()
-    {
-        inputManager.onInfoPanelToggle += ToggleDisplay;
-    }
+        private Text simulationStatusTitle;
 
-    public void ToggleDisplay()
-    {
-        if (isVisible)
+        private Text networkStatusText;
+        private string networkStatusTitle = "// Network Status:";
+
+        private Text coordinatesText;
+        private string coordinatesTitle = "// Coordinates:";
+
+        private InputManager inputManager;
+
+        private void Awake()
+        {
+            simulationStatusPanel = GetComponent<Image>();
+            simulationStatusTitle = GetComponentsInChildren<Text>()[0];
+            networkStatusText = GetComponentsInChildren<Text>()[1];
+            coordinatesText = GetComponentsInChildren<Text>()[2];
+
+            // Subscribe to Inputs
+            inputManager = FindObjectOfType<InputManager>();
+            inputManager.onInfoPanelToggle += ToggleDisplay;
+        }
+
+        private void Start()
+        {
             Hide();
-        else
-            Show();
-    }
+        }
 
-    public void Hide()
-    {
-        isVisible = false;
-        simulationStatusPanel.enabled = false;
-        simulationStatusTitle.enabled = false;
-        networkStatusText.enabled = false;
-        coordinatesText.enabled = false;
-    }
+        private void OnDestroy()
+        {
+            inputManager.onInfoPanelToggle += ToggleDisplay;
+        }
 
-    public void Show()
-    {
-        isVisible = true;
-        simulationStatusPanel.enabled = true;
-        simulationStatusTitle.enabled = true;
-        networkStatusText.enabled = true;
-        coordinatesText.enabled = true;
-    }
+        public void ToggleDisplay()
+        {
+            if (isVisible)
+                Hide();
+            else
+                Show();
+        }
 
-    public void UpdateNetworkStatus(bool isSuccess, string result)
-    {
-        networkStatusText.text = networkStatusTitle;
+        public void Hide()
+        {
+            isVisible = false;
+            simulationStatusPanel.enabled = false;
+            simulationStatusTitle.enabled = false;
+            networkStatusText.enabled = false;
+            coordinatesText.enabled = false;
+        }
 
-        if (isSuccess)
-            timeSuccess = DateTime.Now.ToLongTimeString();
-        timeAttempt = DateTime.Now.ToLongTimeString();
+        public void Show()
+        {
+            isVisible = true;
+            simulationStatusPanel.enabled = true;
+            simulationStatusTitle.enabled = true;
+            networkStatusText.enabled = true;
+            coordinatesText.enabled = true;
+        }
 
-        networkStatusText.text  +=  "\nLast Upload Time Attempt: " + timeAttempt;
-        networkStatusText.text  +=  "\nLast Upload Time Success: " + timeSuccess;
-        networkStatusText.text  +=  "\nLast Upload Result:       " + result;
-    }
+        public void UpdateNetworkStatus(bool isSuccess, string result)
+        {
+            networkStatusText.text = networkStatusTitle;
 
-    public void UpdateCoordinates(string newText, string newTitle = "Coordinates")
-    {
-        coordinatesTitle = "// " + newTitle + ":";
-        coordinatesText.text = coordinatesTitle;
+            if (isSuccess)
+                timeSuccess = DateTime.Now.ToLongTimeString();
+            timeAttempt = DateTime.Now.ToLongTimeString();
 
-        coordinatesText.text += "\n" + newText;
+            networkStatusText.text += "\nLast Upload Time Attempt: " + timeAttempt;
+            networkStatusText.text += "\nLast Upload Time Success: " + timeSuccess;
+            networkStatusText.text += "\nLast Upload Result:       " + result;
+        }
+
+        public void UpdateCoordinates(string newText, string newTitle = "Coordinates")
+        {
+            coordinatesTitle = "// " + newTitle + ":";
+            coordinatesText.text = coordinatesTitle;
+
+            coordinatesText.text += "\n" + newText;
+        }
     }
 }

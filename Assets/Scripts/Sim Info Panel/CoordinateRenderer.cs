@@ -7,14 +7,14 @@ using UnityEngine;
  */
 public class CoordinateRenderer : MonoBehaviour {
     private TransformLocationProvider locationProvider;
-    private SimulationStatusController statusController;
+    private SimulationStatusPanelController statusController;
     public string prefix = "Coordinates";
 
     // Get the component on the game object
     void Awake()
     {
         locationProvider = GetComponent<TransformLocationProvider>();
-        statusController = FindObjectOfType<SimulationStatusController>();
+        statusController = FindObjectOfType<SimulationStatusPanelController>();
     }
 
     // Print location every frame

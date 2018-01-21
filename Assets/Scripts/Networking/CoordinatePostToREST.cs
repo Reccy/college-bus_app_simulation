@@ -9,7 +9,7 @@ using UnityEngine.Networking;
  */
 public class CoordinatePostToREST : MonoBehaviour {
     private TransformLocationProvider locationProvider;
-    private SimulationStatusController statusController;
+    private SimulationStatusPanelController statusController;
 
     public bool debugLog;
 
@@ -23,7 +23,7 @@ public class CoordinatePostToREST : MonoBehaviour {
     void Awake()
     {
         locationProvider = GetComponent<TransformLocationProvider>();
-        statusController = FindObjectOfType<SimulationStatusController>();
+        statusController = FindObjectOfType<SimulationStatusPanelController>();
     }
 
     // Start the coroutine

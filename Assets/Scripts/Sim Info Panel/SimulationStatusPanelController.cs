@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 /**
  * Handles the updates to the simulation status UI
  */
-public class SimulationStatusController : MonoBehaviour {
+public class SimulationStatusPanelController : MonoBehaviour {
 
     private bool isVisible;
 
@@ -24,28 +22,36 @@ public class SimulationStatusController : MonoBehaviour {
     private Text coordinatesText;
     private string coordinatesTitle = "// Coordinates:";
 
-    void Awake()
+    private InputManager inputManager;
+
+    private void Awake()
     {
         simulationStatusPanel = GetComponent<Image>();
         simulationStatusTitle = GetComponentsInChildren<Text>()[0];
         networkStatusText = GetComponentsInChildren<Text>()[1];
         coordinatesText = GetComponentsInChildren<Text>()[2];
+
+        // Subscribe to Inputs
+        inputManager = FindObjectOfType<InputManager>();
+        inputManager.onInfoPanelToggle += ToggleDisplay;
     }
 
-    void Start()
+    private void Start()
     {
         Hide();
     }
 
-    void Update()
+    private void OnDestroy()
     {
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            if (isVisible)
-                Hide();
-            else
-                Show();
-        }
+        inputManager.onInfoPanelToggle += ToggleDisplay;
+    }
+
+    public void ToggleDisplay()
+    {
+        if (isVisible)
+            Hide();
+        else
+            Show();
     }
 
     public void Hide()

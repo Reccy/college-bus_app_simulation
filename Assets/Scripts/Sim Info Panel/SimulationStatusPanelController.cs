@@ -1,4 +1,5 @@
-﻿using AaronMeaney.BusStop.Managers;
+﻿using AaronMeaney.InputManagement;
+using AaronMeaney.BusStop.InputManagement;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
@@ -25,7 +26,7 @@ namespace AaronMeaney.BusStop.UI.SimulationStatusPanel
         private Text coordinatesText;
         private string coordinatesTitle = "// Coordinates:";
 
-        private InputManager inputManager;
+        private InputManager _inputManager;
 
         private void Awake()
         {
@@ -33,10 +34,11 @@ namespace AaronMeaney.BusStop.UI.SimulationStatusPanel
             simulationStatusTitle = GetComponentsInChildren<Text>()[0];
             networkStatusText = GetComponentsInChildren<Text>()[1];
             coordinatesText = GetComponentsInChildren<Text>()[2];
+            
+            _inputManager = FindObjectOfType<InputManager>();
 
-            // Subscribe to Inputs
-            inputManager = FindObjectOfType<InputManager>();
-            inputManager.onToggleInfoPanel += ToggleDisplay;
+            // Subscribe to Input Actions
+            _inputManager.GetAction<ToggleSimulationInfoAction>().onActionPerformed += ToggleSimulationInfo;
         }
 
         private void Start()
@@ -46,10 +48,11 @@ namespace AaronMeaney.BusStop.UI.SimulationStatusPanel
 
         private void OnDestroy()
         {
-            inputManager.onToggleInfoPanel += ToggleDisplay;
+            // Unsubscribe from Input Actions
+            _inputManager.GetAction<ToggleSimulationInfoAction>().onActionPerformed -= ToggleSimulationInfo;
         }
 
-        public void ToggleDisplay()
+        public void ToggleSimulationInfo()
         {
             if (isVisible)
                 Hide();

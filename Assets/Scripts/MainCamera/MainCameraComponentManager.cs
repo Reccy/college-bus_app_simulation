@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using AaronMeaney.InputManagement;
+using AaronMeaney.BusStop.InputManagement;
+using UnityEngine;
 
 namespace AaronMeaney.BusStop.MainCamera
 {
@@ -27,6 +29,8 @@ namespace AaronMeaney.BusStop.MainCamera
         private FlyCam flyCam;
         private CameraMode cameraMode;
 
+        private InputManager _inputManager;
+
         private void Awake()
         {
             orbitCam = GetComponent<OrbitCam>();
@@ -34,15 +38,16 @@ namespace AaronMeaney.BusStop.MainCamera
 
             cameraMode = CameraMode.FlyCam;
             SetActiveCamera(cameraMode);
+
+            _inputManager = FindObjectOfType<InputManager>();
+
+            // Subscribe to Input Actions
+            _inputManager.GetAction<CycleCameraModeAction>().onActionPerformed += CycleCameraMode;
         }
 
-        private void Update()
+        private void OnDestroy()
         {
-            if (Input.GetKeyDown(KeyCode.O))
-            {
-                CycleCameraMode();
-                SetActiveCamera(cameraMode);
-            }
+            _inputManager.GetAction<CycleCameraModeAction>().onActionPerformed -= CycleCameraMode;
         }
 
         /// <summary>
@@ -56,6 +61,8 @@ namespace AaronMeaney.BusStop.MainCamera
 
             if ((int)cameraMode >= enumSize)
                 cameraMode = 0;
+
+            SetActiveCamera(cameraMode);
         }
 
         /// <summary>

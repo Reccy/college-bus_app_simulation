@@ -64,6 +64,7 @@ namespace AaronMeaney.BusStop.MainCamera
         /// <param name="mode"></param>
         private void SetActiveCamera(CameraMode mode)
         {
+            // TODO: Make Camera Types poll this manager instead of the manager changing the "enabled" status of each camera mode.
             switch (cameraMode)
             {
                 case CameraMode.FlyCam:

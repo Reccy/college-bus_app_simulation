@@ -36,7 +36,7 @@ namespace AaronMeaney.BusStop.UI.SimulationStatusPanel
 
             // Subscribe to Inputs
             inputManager = FindObjectOfType<InputManager>();
-            inputManager.onInfoPanelToggle += ToggleDisplay;
+            inputManager.onToggleInfoPanel += ToggleDisplay;
         }
 
         private void Start()
@@ -46,7 +46,7 @@ namespace AaronMeaney.BusStop.UI.SimulationStatusPanel
 
         private void OnDestroy()
         {
-            inputManager.onInfoPanelToggle += ToggleDisplay;
+            inputManager.onToggleInfoPanel += ToggleDisplay;
         }
 
         public void ToggleDisplay()

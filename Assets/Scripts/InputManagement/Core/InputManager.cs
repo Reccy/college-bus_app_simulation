@@ -62,7 +62,7 @@ namespace AaronMeaney.InputManagement
         /// </summary>
         /// <typeparam name="T">The InputAction to check.</typeparam>
         /// <returns>Returns true if the bound key to the action is pressed down.</returns>
-        public bool GetKeyDown<T>()
+        public bool IsActionDown<T>()
         {
             // Find any keybindings belonging to the action
             foreach (KeyBinding keyBinding in KeyBindings)
@@ -86,7 +86,7 @@ namespace AaronMeaney.InputManagement
         /// </summary>
         /// <typeparam name="T">The InputAction to check.</typeparam>
         /// <returns>Returns true if the bound key to the action is being held.</returns>
-        public bool GetKey<T>()
+        public bool IsActionPressed<T>()
         {
             // Find any keybindings belonging to the action
             foreach (KeyBinding keyBinding in KeyBindings)
@@ -110,7 +110,7 @@ namespace AaronMeaney.InputManagement
         /// </summary>
         /// <typeparam name="T">The InputAction to check.</typeparam>
         /// <returns>Returns true if the bound key to the action is released on this frame.</returns>
-        public bool GetKeyUp<T>()
+        public bool IsActionUp<T>()
         {
             // Find any keybindings belonging to the action
             foreach (KeyBinding keyBinding in KeyBindings)

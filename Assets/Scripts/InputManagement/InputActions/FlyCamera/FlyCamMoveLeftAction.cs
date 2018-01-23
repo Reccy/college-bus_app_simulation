@@ -2,5 +2,5 @@
 
 namespace AaronMeaney.BusStop.InputManagement
 {
-    public class OrbitAnticlockwise : InputAction { }
+    public class FlyCamMoveLeftAction : InputAction { }
 }

@@ -21,7 +21,23 @@ GameObject:
   - component: {fileID: 4238406435866430}
   - component: {fileID: 114610643321402750}
   m_Layer: 0
-  m_Name: OrbitAnticlockwise
+  m_Name: OrbitCameraAnticlockwise
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1201451936237990
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4374704824631234}
+  - component: {fileID: 114900445001045230}
+  m_Layer: 0
+  m_Name: FlyCamMoveDownAction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37,7 +53,23 @@ GameObject:
   - component: {fileID: 4012682659970774}
   - component: {fileID: 114031916902294120}
   m_Layer: 0
-  m_Name: ZoomOut
+  m_Name: OrbitZoomOutAction
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1219875925722382
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4928776760221530}
+  - component: {fileID: 114604541563720696}
+  m_Layer: 0
+  m_Name: FlyCamMoveUpAction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -53,7 +85,7 @@ GameObject:
   - component: {fileID: 4612871172847146}
   - component: {fileID: 114607356748996538}
   m_Layer: 0
-  m_Name: ZoomIn
+  m_Name: OrbitZoomInAction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,6 +106,38 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1366610410035534
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4484959203848290}
+  - component: {fileID: 114468685367981386}
+  m_Layer: 0
+  m_Name: FlyCamSpeedUpAction
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1387662635253454
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4272372478233112}
+  - component: {fileID: 114153146688934734}
+  m_Layer: 0
+  m_Name: FlyCamMoveBackwardAction
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1414365607031186
 GameObject:
   m_ObjectHideFlags: 1
@@ -84,7 +148,23 @@ GameObject:
   - component: {fileID: 4432301436278014}
   - component: {fileID: 114675591328972176}
   m_Layer: 0
-  m_Name: OrbitUp
+  m_Name: OrbitCameraUpAction
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1479057126763612
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4945002763664912}
+  - component: {fileID: 114540316431967110}
+  m_Layer: 0
+  m_Name: FlyCamMoveLeftAction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -116,7 +196,7 @@ GameObject:
   - component: {fileID: 4907162232521998}
   - component: {fileID: 114790304244875816}
   m_Layer: 0
-  m_Name: OrbitClockwise
+  m_Name: OrbitCameraClockwiseAction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -132,7 +212,23 @@ GameObject:
   - component: {fileID: 4923542628882458}
   - component: {fileID: 114899701376494908}
   m_Layer: 0
-  m_Name: OrbitDown
+  m_Name: OrbitCameraDownAction
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1744503844373234
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4053793493010380}
+  - component: {fileID: 114901711912219190}
+  m_Layer: 0
+  m_Name: FlyCamSlowDownAction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -170,6 +266,53 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1925330790582310
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4145045855774082}
+  - component: {fileID: 114365115183876384}
+  m_Layer: 0
+  m_Name: FlyCamMoveRightAction
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1935995233185278
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4937079000497924}
+  - component: {fileID: 114746121382696554}
+  m_Layer: 0
+  m_Name: FlyCamMoveForwardAction
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1973938734856522
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4896866042357996}
+  m_Layer: 0
+  m_Name: FlyCamera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1983686046396730
 GameObject:
   m_ObjectHideFlags: 1
@@ -199,6 +342,19 @@ Transform:
   m_Father: {fileID: 4135700871917988}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4053793493010380
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1744503844373234}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4896866042357996}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4135700871917988
 Transform:
   m_ObjectHideFlags: 1
@@ -217,6 +373,19 @@ Transform:
   - {fileID: 4012682659970774}
   m_Father: {fileID: 4230109165346144}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4145045855774082
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1925330790582310}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4896866042357996}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4228696936576226
 Transform:
@@ -243,6 +412,7 @@ Transform:
   m_Children:
   - {fileID: 4602818529612254}
   - {fileID: 4135700871917988}
+  - {fileID: 4896866042357996}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -258,6 +428,32 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4135700871917988}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4272372478233112
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1387662635253454}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4896866042357996}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4374704824631234
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1201451936237990}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4896866042357996}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4426918971239314
 Transform:
@@ -284,6 +480,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4135700871917988}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4484959203848290
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1366610410035534}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4896866042357996}
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4602818529612254
 Transform:
@@ -313,6 +522,27 @@ Transform:
   m_Father: {fileID: 4135700871917988}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4896866042357996
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1973938734856522}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4928776760221530}
+  - {fileID: 4374704824631234}
+  - {fileID: 4945002763664912}
+  - {fileID: 4145045855774082}
+  - {fileID: 4937079000497924}
+  - {fileID: 4272372478233112}
+  - {fileID: 4484959203848290}
+  - {fileID: 4053793493010380}
+  m_Father: {fileID: 4230109165346144}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4907162232521998
 Transform:
   m_ObjectHideFlags: 1
@@ -339,6 +569,45 @@ Transform:
   m_Father: {fileID: 4135700871917988}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4928776760221530
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1219875925722382}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4896866042357996}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4937079000497924
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1935995233185278}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4896866042357996}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4945002763664912
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1479057126763612}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4896866042357996}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &114031916902294120
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -348,6 +617,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d3dedfd5f6d3bbf48a40915602260836, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114153146688934734
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1387662635253454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a02227173cfcaef4abacb952fe42c4e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114337348295577788
@@ -362,30 +642,146 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   keyBindings:
-  - boundKey: 111
+  - name: General - Cycle Camera Mode
+    boundKey: 111
     keyPress: 0
     boundAction: {fileID: 114607012389069720}
-  - boundKey: 104
+  - name: General - Toggle Sim Info
+    boundKey: 104
     keyPress: 0
     boundAction: {fileID: 114762158672063442}
-  - boundKey: 108
+  - name: Orbit Cam - Anticlockwise Orbit
+    boundKey: 108
     keyPress: 1
     boundAction: {fileID: 114610643321402750}
-  - boundKey: 106
+  - name: Orbit Cam - Clockwise Orbit
+    boundKey: 106
     keyPress: 1
     boundAction: {fileID: 114790304244875816}
-  - boundKey: 105
+  - name: Orbit Cam - Up Orbit
+    boundKey: 105
     keyPress: 1
     boundAction: {fileID: 114675591328972176}
-  - boundKey: 107
+  - name: Orbit Cam - Down Orbit
+    boundKey: 107
     keyPress: 1
     boundAction: {fileID: 114899701376494908}
-  - boundKey: 101
+  - name: Orbit Cam - Zoom In
+    boundKey: 101
     keyPress: 1
     boundAction: {fileID: 114607356748996538}
-  - boundKey: 113
+  - name: Orbit Cam - Zoom Out
+    boundKey: 113
     keyPress: 1
     boundAction: {fileID: 114031916902294120}
+  - name: Fly Cam - Move Up - Primary
+    boundKey: 101
+    keyPress: 1
+    boundAction: {fileID: 114604541563720696}
+  - name: Fly Cam - Move Up - Secondary
+    boundKey: 280
+    keyPress: 1
+    boundAction: {fileID: 114604541563720696}
+  - name: Fly Cam - Move Down - Primary
+    boundKey: 113
+    keyPress: 1
+    boundAction: {fileID: 114900445001045230}
+  - name: Fly Cam - Move Down - Secondary
+    boundKey: 281
+    keyPress: 1
+    boundAction: {fileID: 114900445001045230}
+  - name: Fly Cam - Move Left - Primary
+    boundKey: 97
+    keyPress: 1
+    boundAction: {fileID: 114540316431967110}
+  - name: Fly Cam - Move Left - Secondary
+    boundKey: 276
+    keyPress: 1
+    boundAction: {fileID: 114540316431967110}
+  - name: Fly Cam - Move Right - Primary
+    boundKey: 100
+    keyPress: 1
+    boundAction: {fileID: 114365115183876384}
+  - name: Fly Cam - Move Right - Secondary
+    boundKey: 275
+    keyPress: 1
+    boundAction: {fileID: 114365115183876384}
+  - name: Fly Cam - Move Forward - Primary
+    boundKey: 119
+    keyPress: 1
+    boundAction: {fileID: 114746121382696554}
+  - name: Fly Cam - Move Forward - Secondary
+    boundKey: 273
+    keyPress: 1
+    boundAction: {fileID: 114746121382696554}
+  - name: Fly Cam - Move Backward - Primary
+    boundKey: 115
+    keyPress: 1
+    boundAction: {fileID: 114153146688934734}
+  - name: Fly Cam - Move Backward - Secondary
+    boundKey: 274
+    keyPress: 1
+    boundAction: {fileID: 114153146688934734}
+  - name: Fly Cam - Speed Up - Primary
+    boundKey: 304
+    keyPress: 1
+    boundAction: {fileID: 114468685367981386}
+  - name: Fly Cam - Speed Up - Secondary
+    boundKey: 303
+    keyPress: 1
+    boundAction: {fileID: 114468685367981386}
+  - name: Fly Cam - Slow Down - Primary
+    boundKey: 306
+    keyPress: 1
+    boundAction: {fileID: 114901711912219190}
+  - name: Fly Cam - Slow Down - Secondary
+    boundKey: 305
+    keyPress: 1
+    boundAction: {fileID: 114901711912219190}
+--- !u!114 &114365115183876384
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1925330790582310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45d60163948fb243a7c687a852722f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114468685367981386
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1366610410035534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1700f07bbcac9b4e9877f289d6811b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114540316431967110
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1479057126763612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47dcdca49a56aba46ac2fab44be356d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114604541563720696
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1219875925722382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a61abef2077034418eeddb12435f813, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114607012389069720
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -430,6 +826,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8857275669d69d47979751f2578f9ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114746121382696554
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1935995233185278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa0b8bbc32326f4469d67472a68bbc3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114762158672063442
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -472,5 +879,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 850f3d592b6a2af48b5362338a06425b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114900445001045230
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1201451936237990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b1cb8c884dd73541aa53ced3781403c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114901711912219190
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1744503844373234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b2a82f47568d26499c397ae2e9a77cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

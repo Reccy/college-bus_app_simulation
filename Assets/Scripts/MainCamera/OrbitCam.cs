@@ -115,22 +115,22 @@ namespace AaronMeaney.BusStop.MainCamera
             }
             else
             {
-                if (_inputManager.GetKey<OrbitClockwise>())
+                if (_inputManager.IsActionPressed<OrbitCameraClockwiseAction>())
                 {
                     angleX += -1 * keyboardSensitivity * Time.deltaTime;
                 }
                 
-                if (_inputManager.GetKey<OrbitUp>())
+                if (_inputManager.IsActionPressed<OrbitCameraUpAction>())
                 {
                     angleY += 1 * keyboardSensitivity * Time.deltaTime;
                 }
                 
-                if (_inputManager.GetKey<OrbitAnticlockwise>())
+                if (_inputManager.IsActionPressed<OrbitCameraAnticlockwiseAction>())
                 {
                     angleX += 1 * keyboardSensitivity * Time.deltaTime;
                 }
                 
-                if (_inputManager.GetKey<OrbitDown>())
+                if (_inputManager.IsActionPressed<OrbitCameraDownAction>())
                 {
                     angleY += -1 * keyboardSensitivity * Time.deltaTime;
                 }
@@ -139,11 +139,11 @@ namespace AaronMeaney.BusStop.MainCamera
             // Apply scrolling
             targetDistance += (Input.GetAxis("Mouse ScrollWheel") * scrollWheelSensitivity);
 
-            if (_inputManager.GetKey<ZoomIn>())
+            if (_inputManager.IsActionPressed<OrbitZoomInAction>())
             {
                 targetDistance -= scrollButtonSensitivity * Time.deltaTime;
             }
-            else if (_inputManager.GetKey<ZoomOut>())
+            else if (_inputManager.IsActionPressed<OrbitZoomOutAction>())
             {
                 targetDistance += scrollButtonSensitivity * Time.deltaTime;
             }

@@ -2,5 +2,5 @@
 
 namespace AaronMeaney.BusStop.InputManagement
 {
-    public class OrbitUp : InputAction { }
+    public class OrbitCameraUpAction : InputAction { }
 }

@@ -10,6 +10,12 @@ namespace AaronMeaney.InputManagement
     public class KeyBinding
     {
         /// <summary>
+        /// Name of the KeyBinding.
+        /// No functional use, used for organising entries in the Inspector.
+        /// </summary>
+        public string name;
+
+        /// <summary>
         /// The type of input action that the BoundKey should perform.
         /// </summary>
         public enum KeyPressType {

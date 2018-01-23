@@ -2,5 +2,5 @@
 
 namespace AaronMeaney.BusStop.InputManagement
 {
-    public class ZoomOut : InputAction { }
+    public class FlyCamMoveRightAction : InputAction { }
 }

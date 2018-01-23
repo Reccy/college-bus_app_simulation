@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using AaronMeaney.InputManagement;
+using AaronMeaney.BusStop.InputManagement;
+using UnityEngine;
 
 namespace AaronMeaney.BusStop.MainCamera
 {
@@ -7,6 +9,8 @@ namespace AaronMeaney.BusStop.MainCamera
     /// </summary>
     public class FlyCam : MonoBehaviour
     {
+        private InputManager _inputManager;
+
         [SerializeField]
         public float acceleration;
         /// <summary>
@@ -72,56 +76,55 @@ namespace AaronMeaney.BusStop.MainCamera
         /// The last position of the mouse.
         /// </summary>
         private Vector2 mouseLastPosition;
+        
+        private void Awake()
+        {
+            _inputManager = FindObjectOfType<InputManager>();
+        }
 
         /// <summary>
         /// Update checks for key inputs and delegates to movement methods.
         /// </summary>
         private void Update()
         {
-
             // Initialise if the FlyCam is moving to 0
             bool isMoving = false;
 
             // Create an empty movement vector
             movementVector = new Vector3(0, 0, 0);
-
-            // Check user input (Left)
-            if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+            
+            // Check user inputs
+            if (_inputManager.IsActionPressed<FlyCamMoveLeftAction>())
             {
                 isMoving = true;
                 movementVector += Vector3.left;
             }
-
-            // Check user input (Forward)
-            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
+            
+            if (_inputManager.IsActionPressed<FlyCamMoveForwardAction>())
             {
                 isMoving = true;
                 movementVector += Vector3.forward;
             }
-
-            // Check user input (Right)
-            if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+            
+            if (_inputManager.IsActionPressed<FlyCamMoveRightAction>())
             {
                 isMoving = true;
                 movementVector += Vector3.right;
             }
-
-            // Check user input (Backward)
-            if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
+            
+            if (_inputManager.IsActionPressed<FlyCamMoveBackwardAction>())
             {
                 isMoving = true;
                 movementVector += Vector3.back;
             }
-
-            // Check user input (Up)
-            if (Input.GetKey(KeyCode.E) || Input.GetKey(KeyCode.PageUp))
+            
+            if (_inputManager.IsActionPressed<FlyCamMoveUpAction>())
             {
                 isMoving = true;
                 movementVector += Vector3.up;
             }
-
-            // Check user input (Down)
-            if (Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.PageDown))
+            
+            if (_inputManager.IsActionPressed<FlyCamMoveDownAction>())
             {
                 isMoving = true;
                 movementVector += Vector3.down;
@@ -141,29 +144,25 @@ namespace AaronMeaney.BusStop.MainCamera
                 rotationChange.x = -(mouseDrag.y) * mouseSensitivity * Time.deltaTime;
             }
             // Otherwise, check numpad rotations
-            else if (Input.GetKey(KeyCode.J) || Input.GetKey(KeyCode.I) || Input.GetKey(KeyCode.L) || Input.GetKey(KeyCode.K))
+            else
             {
-                // Set rotation inputs
-                // LOOK LEFT
-                if (Input.GetKey(KeyCode.J))
+                // Check rotation inputs
+                if (_inputManager.IsActionPressed<FlyCamLookLeftAction>())
                 {
                     rotationChange += Vector2.down;
                 }
-
-                // LOOK UP
-                if (Input.GetKey(KeyCode.I))
+                
+                if (_inputManager.IsActionPressed<FlyCamLookUpAction>())
                 {
                     rotationChange += Vector2.left;
                 }
-
-                // LOOK RIGHT
-                if (Input.GetKey(KeyCode.L))
+                
+                if (_inputManager.IsActionPressed<FlyCamLookRightAction>())
                 {
                     rotationChange += Vector2.up;
                 }
-
-                // LOOK DOWN
-                if (Input.GetKey(KeyCode.K))
+                
+                if (_inputManager.IsActionPressed<FlyCamLookDownAction>())
                 {
                     rotationChange += Vector2.right;
                 }
@@ -184,12 +183,12 @@ namespace AaronMeaney.BusStop.MainCamera
             // Move the FlyCam, stop the speed if the user is not moving
             if (isMoving)
             {
-                if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
+                if (_inputManager.IsActionPressed<FlyCamSpeedUpAction>())
                 {
                     speed = speed * fastMultiplier;
                     transform.Translate(movementVector * speed * Time.deltaTime);
                 }
-                else if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl))
+                else if (_inputManager.IsActionPressed<FlyCamSlowDownAction>())
                 {
                     speed = Mathf.Min(speed, maxSlowSpeed);
                     transform.Translate(movementVector * speed * Time.deltaTime);

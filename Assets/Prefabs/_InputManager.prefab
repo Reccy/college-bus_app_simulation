@@ -27,6 +27,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1160126748817206
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4722786023328302}
+  - component: {fileID: 114167680597547198}
+  m_Layer: 0
+  m_Name: FlyCamLookUpAction
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1201451936237990
 GameObject:
   m_ObjectHideFlags: 1
@@ -70,6 +86,22 @@ GameObject:
   - component: {fileID: 114604541563720696}
   m_Layer: 0
   m_Name: FlyCamMoveUpAction
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1232638237756244
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4078968868282066}
+  - component: {fileID: 114934674434149164}
+  m_Layer: 0
+  m_Name: FlyCamLookDownAction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -234,6 +266,38 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1746943811752388
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4665577945661730}
+  - component: {fileID: 114407896831690390}
+  m_Layer: 0
+  m_Name: FlyCamLookLeftAction
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1880530366250746
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4272357446738350}
+  - component: {fileID: 114625613342945806}
+  m_Layer: 0
+  m_Name: FlyCamLookRightAction
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1905626546741296
 GameObject:
   m_ObjectHideFlags: 0
@@ -245,7 +309,7 @@ GameObject:
   - component: {fileID: 114337348295577788}
   - component: {fileID: 114787260010004444}
   m_Layer: 0
-  m_Name: _SimManager
+  m_Name: _InputManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -355,6 +419,19 @@ Transform:
   m_Father: {fileID: 4896866042357996}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4078968868282066
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1232638237756244}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4896866042357996}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4135700871917988
 Transform:
   m_ObjectHideFlags: 1
@@ -428,6 +505,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4135700871917988}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4272357446738350
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1880530366250746}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4896866042357996}
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4272372478233112
 Transform:
@@ -522,6 +612,32 @@ Transform:
   m_Father: {fileID: 4135700871917988}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4665577945661730
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1746943811752388}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4896866042357996}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4722786023328302
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1160126748817206}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4896866042357996}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4896866042357996
 Transform:
   m_ObjectHideFlags: 1
@@ -540,6 +656,10 @@ Transform:
   - {fileID: 4272372478233112}
   - {fileID: 4484959203848290}
   - {fileID: 4053793493010380}
+  - {fileID: 4722786023328302}
+  - {fileID: 4078968868282066}
+  - {fileID: 4665577945661730}
+  - {fileID: 4272357446738350}
   m_Father: {fileID: 4230109165346144}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -628,6 +748,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a02227173cfcaef4abacb952fe42c4e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114167680597547198
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1160126748817206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dce3bb12143876046a41fd692174e37a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114337348295577788
@@ -738,6 +869,22 @@ MonoBehaviour:
     boundKey: 305
     keyPress: 1
     boundAction: {fileID: 114901711912219190}
+  - name: Fly Cam - Look Up
+    boundKey: 105
+    keyPress: 1
+    boundAction: {fileID: 114167680597547198}
+  - name: Fly Cam - Look Down
+    boundKey: 107
+    keyPress: 1
+    boundAction: {fileID: 114934674434149164}
+  - name: Fly Cam - Look Left
+    boundKey: 106
+    keyPress: 1
+    boundAction: {fileID: 114407896831690390}
+  - name: Fly Cam - Look Right
+    boundKey: 108
+    keyPress: 1
+    boundAction: {fileID: 114625613342945806}
 --- !u!114 &114365115183876384
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -747,6 +894,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d45d60163948fb243a7c687a852722f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114407896831690390
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1746943811752388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df491a74a63f8d84f905518ff158fc8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114468685367981386
@@ -813,6 +971,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 43b626ff7d39e8449b4f98571f2dcd63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114625613342945806
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1880530366250746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec2d88380bc41a149924215363305734, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114675591328972176
@@ -901,5 +1070,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0b2a82f47568d26499c397ae2e9a77cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114934674434149164
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1232638237756244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f8cc04c87a9e984284c6c804b641e40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

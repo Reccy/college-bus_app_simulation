@@ -58,6 +58,78 @@ namespace AaronMeaney.InputManagement
         }
 
         /// <summary>
+        /// Returns true if the bound key to the action is pressed down.
+        /// </summary>
+        /// <typeparam name="T">The InputAction to check.</typeparam>
+        /// <returns>Returns true if the bound key to the action is pressed down.</returns>
+        public bool GetKeyDown<T>()
+        {
+            // Find any keybindings belonging to the action
+            foreach (KeyBinding keyBinding in KeyBindings)
+            {
+                // Check if the bound key is pressed if the bound action matches generic T
+                if (typeof(T).Equals(keyBinding.BoundAction.GetType()))
+                {
+                    // Return true if a key binding is pressed down
+                    if (Input.GetKeyDown(keyBinding.BoundKey))
+                        return true;
+                    // Don't return false if not pressed as there may be multiple keys bound to an action
+                }
+            }
+
+            // Return false if no keys were pressed
+            return false;
+        }
+
+        /// <summary>
+        /// Returns true if the bound key to the action is being held.
+        /// </summary>
+        /// <typeparam name="T">The InputAction to check.</typeparam>
+        /// <returns>Returns true if the bound key to the action is being held.</returns>
+        public bool GetKey<T>()
+        {
+            // Find any keybindings belonging to the action
+            foreach (KeyBinding keyBinding in KeyBindings)
+            {
+                // Check if the bound key is pressed if the bound action matches generic T
+                if (typeof(T).Equals(keyBinding.BoundAction.GetType()))
+                {
+                    // Return true if a key binding is pressed
+                    if (Input.GetKey(keyBinding.BoundKey))
+                        return true;
+                    // Don't return false if not pressed as there may be multiple keys bound to an action
+                }
+            }
+
+            // Return false if no keys were pressed
+            return false;
+        }
+
+        /// <summary>
+        /// Returns true if the bound key to the action is released on this frame.
+        /// </summary>
+        /// <typeparam name="T">The InputAction to check.</typeparam>
+        /// <returns>Returns true if the bound key to the action is released on this frame.</returns>
+        public bool GetKeyUp<T>()
+        {
+            // Find any keybindings belonging to the action
+            foreach (KeyBinding keyBinding in KeyBindings)
+            {
+                // Check if the bound key is released if the bound action matches generic T
+                if (typeof(T).Equals(keyBinding.BoundAction.GetType()))
+                {
+                    // Return true if a key binding is released
+                    if (Input.GetKeyUp(keyBinding.BoundKey))
+                        return true;
+                    // Don't return false if not released as there may be multiple keys bound to an action
+                }
+            }
+
+            // Return false if keys were not released
+            return false;
+        }
+
+        /// <summary>
         /// Returns the concrete instance of the InputAction.
         /// </summary>
         /// <typeparam name="T">The type of the concrete InputAction that's expected.</typeparam>
@@ -66,11 +138,8 @@ namespace AaronMeaney.InputManagement
         {
             foreach (KeyBinding keyBinding in KeyBindings)
             {
-                Debug.Log("CHECKING " + keyBinding.BoundAction.GetType() + " AGAINST " + typeof(T));
-
                 if (typeof(T).Equals(keyBinding.BoundAction.GetType()))
                 {
-                    Debug.Log("MATCH!");
                     return keyBinding.BoundAction;
                 }
             }

@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using AaronMeaney.InputManagement;
+using AaronMeaney.BusStop.InputManagement;
+using UnityEngine;
 
 namespace AaronMeaney.BusStop.MainCamera
 {
@@ -7,6 +9,8 @@ namespace AaronMeaney.BusStop.MainCamera
     /// </summary>
     public class OrbitCam : MonoBehaviour
     {
+        private InputManager _inputManager;
+
         [SerializeField]
         private GameObject target;
         /// <summary>
@@ -90,6 +94,11 @@ namespace AaronMeaney.BusStop.MainCamera
         /// </summary>
         float angleY = 0;
 
+        private void Awake()
+        {
+            _inputManager = FindObjectOfType<InputManager>();
+        }
+
         void Update()
         {
             // Get new rotation values
@@ -104,28 +113,24 @@ namespace AaronMeaney.BusStop.MainCamera
                 angleX += -mouseDrag.x * mouseSensitivity * Time.deltaTime;
                 angleY += mouseDrag.y * mouseSensitivity * Time.deltaTime * -1;
             }
-            else if (Input.GetKey(KeyCode.J) || Input.GetKey(KeyCode.I) || Input.GetKey(KeyCode.L) || Input.GetKey(KeyCode.K))
+            else
             {
-                // LEFT
-                if (Input.GetKey(KeyCode.J))
+                if (_inputManager.GetKey<OrbitClockwise>())
                 {
                     angleX += -1 * keyboardSensitivity * Time.deltaTime;
                 }
-
-                // UP
-                if (Input.GetKey(KeyCode.I))
+                
+                if (_inputManager.GetKey<OrbitUp>())
                 {
                     angleY += 1 * keyboardSensitivity * Time.deltaTime;
                 }
-
-                // RIGHT
-                if (Input.GetKey(KeyCode.L))
+                
+                if (_inputManager.GetKey<OrbitAnticlockwise>())
                 {
                     angleX += 1 * keyboardSensitivity * Time.deltaTime;
                 }
-
-                // DOWN
-                if (Input.GetKey(KeyCode.K))
+                
+                if (_inputManager.GetKey<OrbitDown>())
                 {
                     angleY += -1 * keyboardSensitivity * Time.deltaTime;
                 }
@@ -134,11 +139,11 @@ namespace AaronMeaney.BusStop.MainCamera
             // Apply scrolling
             targetDistance += (Input.GetAxis("Mouse ScrollWheel") * scrollWheelSensitivity);
 
-            if (Input.GetKey(KeyCode.E))
+            if (_inputManager.GetKey<ZoomIn>())
             {
                 targetDistance -= scrollButtonSensitivity * Time.deltaTime;
             }
-            else if (Input.GetKey(KeyCode.Q))
+            else if (_inputManager.GetKey<ZoomOut>())
             {
                 targetDistance += scrollButtonSensitivity * Time.deltaTime;
             }

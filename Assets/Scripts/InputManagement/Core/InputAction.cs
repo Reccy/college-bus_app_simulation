@@ -20,7 +20,7 @@ namespace AaronMeaney.InputManagement
         /// <summary>
         /// Method used to perform the action of this class.
         /// </summary>
-        public void performAction()
+        public void PerformAction()
         {
             if (onActionPerformed != null)
                 onActionPerformed();

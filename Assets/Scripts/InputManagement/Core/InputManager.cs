@@ -30,9 +30,27 @@ namespace AaronMeaney.InputManagement
                     break;
 
                 // If the bound key is pressed, execute the bound action
-                if (Input.GetKey(keyBinding.BoundKey))
-                {
-                    keyBinding.BoundAction.performAction();
+                switch (keyBinding.KeyPress) {
+                    case KeyBinding.KeyPressType.KEY_DOWN:
+                        if (Input.GetKeyDown(keyBinding.BoundKey))
+                        {
+                            keyBinding.BoundAction.PerformAction();
+                        }
+                        break;
+
+                    case KeyBinding.KeyPressType.KEY_HOLD:
+                        if (Input.GetKey(keyBinding.BoundKey))
+                        {
+                            keyBinding.BoundAction.PerformAction();
+                        }
+                        break;
+
+                    case KeyBinding.KeyPressType.KEY_UP:
+                        if (Input.GetKeyUp(keyBinding.BoundKey))
+                        {
+                            keyBinding.BoundAction.PerformAction();
+                        }
+                        break;
                 }
             }
 

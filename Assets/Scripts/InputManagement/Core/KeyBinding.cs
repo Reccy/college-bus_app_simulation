@@ -9,6 +9,24 @@ namespace AaronMeaney.InputManagement
     [System.Serializable]
     public class KeyBinding
     {
+        /// <summary>
+        /// The type of input action that the BoundKey should perform.
+        /// </summary>
+        public enum KeyPressType {
+            /// <summary>
+            /// The key is pressed down initially. Lasts for one frame.
+            /// </summary>
+            KEY_DOWN,
+            /// <summary>
+            /// The key is being held down. Can last for many frames.
+            /// </summary>
+            KEY_HOLD,
+            /// <summary>
+            /// The key is unpressed. Lasts for one frame.
+            /// </summary>
+            KEY_UP
+        };
+
         [SerializeField]
         private KeyCode boundKey;
         /// <summary>
@@ -17,6 +35,16 @@ namespace AaronMeaney.InputManagement
         public KeyCode BoundKey
         {
             get { return boundKey; }
+        }
+
+        [SerializeField]
+        private KeyPressType keyPress;
+        /// <summary>
+        /// The type of input action that the BoundKey should perform.
+        /// </summary>
+        public KeyPressType KeyPress
+        {
+            get { return keyPress; }
         }
 
         [SerializeField]

@@ -27,7 +27,7 @@ namespace AaronMeaney.BusStop.Core
             set { snapOnUpdate = value; }
         }
 
-        private void Update()
+        private void LateUpdate()
         {
             if (snapOnUpdate)
                 PerformSnap();

@@ -467,6 +467,18 @@ Prefab:
       propertyPath: busDriver
       value: 
       objectReference: {fileID: 690533341}
+    - target: {fileID: 4224491527935526, guid: dde720af1cbb5d74a92bd823a2138415, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4224491527935526, guid: dde720af1cbb5d74a92bd823a2138415, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4224491527935526, guid: dde720af1cbb5d74a92bd823a2138415, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 0.3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dde720af1cbb5d74a92bd823a2138415, type: 2}
   m_IsPrefabParent: 0

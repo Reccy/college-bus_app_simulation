@@ -32,6 +32,17 @@ namespace AaronMeaney.BusStop.Core
             get { return latLongNodes.Count; }
         }
 
+        private bool isReady = false;
+        /// <summary>
+        /// True if the Bus Route is ready to be driven along.
+        /// False if not ready, e.g. missing nodes.
+        /// </summary>
+        public bool IsReady
+        {
+            get { return isReady; }
+            set { isReady = value; }
+        }
+
         Directions directions;
 
         /// <summary>
@@ -42,6 +53,8 @@ namespace AaronMeaney.BusStop.Core
         /// <param name="toPosition">The world space position to navigate to.</param>
         public void SetDirectionsToPosition(AbstractMap map, Vector3 fromPosition, Vector3 toPosition)
         {
+            isReady = false;
+
             // Get the geo positions from the world Vector3 positions
             Vector2d fromGeoPosition = fromPosition.GetGeoPosition(map.CenterMercator, map.WorldRelativeScale);
             Vector2d toGeoPosition = toPosition.GetGeoPosition(map.CenterMercator, map.WorldRelativeScale);
@@ -71,6 +84,8 @@ namespace AaronMeaney.BusStop.Core
 
             LatLongNodes.Clear();
             LatLongNodes.AddRange(newNodes);
+
+            isReady = true;
 
             if (onBusRoutePopulated != null)
                 onBusRoutePopulated(this);

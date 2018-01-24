@@ -100,7 +100,9 @@ namespace AaronMeaney.BusStop.Core
             {
                 currentBusRouteNode = 0;
                 currentBusRoute = value;
-                
+                CurrentDestination.position = transform.position;
+                GetComponent<BusRouteVisualiser>().ClearVisualisation();
+
                 if (GetComponent<BusRouteVisualiser>())
                 {
                     CurrentBusRoute.onBusRoutePopulated += GetComponent<BusRouteVisualiser>().SetBusRouteVisualisation;
@@ -139,6 +141,35 @@ namespace AaronMeaney.BusStop.Core
                     CurrentDestination.position = currentBusRoute.LatLongNodes[currentBusRouteNode].AsUnityPosition(map);
                     currentBusRouteNode++;
                 }
+            }
+        }
+
+        /// <summary>
+        /// Drives in a straight line to the final destination.
+        /// </summary>
+        private void DriveDebugMode()
+        {
+            if (isDriving && GetDistanceFromDestination() > 1)
+            {
+                RotateTowardsDestination();
+                DriveForward();
+            }
+        }
+
+        /// <summary>
+        /// Drives along a route to the final destination.
+        /// </summary>
+        private void DriveRouteMode()
+        {
+            if (isDriving && GetDistanceFromDestination() > 1 && CurrentBusRoute.IsReady)
+            {
+                RotateTowardsDestination();
+                DriveForward();
+            }
+            else if (currentBusRouteNode < currentBusRoute.Size)
+            {
+                CurrentDestination.position = currentBusRoute.LatLongNodes[currentBusRouteNode].AsUnityPosition(map);
+                currentBusRouteNode++;
             }
         }
 

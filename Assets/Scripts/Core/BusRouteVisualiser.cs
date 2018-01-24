@@ -36,11 +36,7 @@ namespace AaronMeaney.BusStop.Core
             List<BusRouteNode> nodes = newRoute.LatLongNodes;
 
             // Clear the old nodes
-            foreach (GameObject oldNode in instantiatedNodes)
-            {
-                Destroy(oldNode.gameObject);
-            }
-            instantiatedNodes.Clear();
+            ClearNodes();
 
             // Create the new nodes
             for (int i = 0; i < nodes.Count; i++)
@@ -55,6 +51,27 @@ namespace AaronMeaney.BusStop.Core
             {
                 visualisation.SetPosition(i, instantiatedNodes[i].transform.position);
             }
+        }
+
+        /// <summary>
+        /// Clears the nodes in the visualisation
+        /// </summary>
+        public void ClearNodes()
+        {
+            foreach (GameObject oldNode in instantiatedNodes)
+            {
+                Destroy(oldNode.gameObject);
+            }
+            instantiatedNodes.Clear();
+        }
+
+        /// <summary>
+        /// Clears the nodes in the visualisation and removes the ndoes from the LineRenderer.
+        /// </summary>
+        public void ClearVisualisation()
+        {
+            ClearNodes();
+            visualisation.positionCount = 0;
         }
 
         /// <summary>

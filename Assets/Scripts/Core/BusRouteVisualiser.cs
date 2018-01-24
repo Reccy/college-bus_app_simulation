@@ -58,6 +58,10 @@ namespace AaronMeaney.BusStop.Core
         /// </summary>
         public void ClearNodes()
         {
+            // Check if instantiated nodes are null since this can be called before Awake()
+            if (instantiatedNodes == null)
+                return;
+
             foreach (GameObject oldNode in instantiatedNodes)
             {
                 Destroy(oldNode.gameObject);
@@ -70,6 +74,10 @@ namespace AaronMeaney.BusStop.Core
         /// </summary>
         public void ClearVisualisation()
         {
+            // Check if visualisation is null since this can be called before Awake()
+            if (visualisation == null)
+                return;
+
             ClearNodes();
             visualisation.positionCount = 0;
         }

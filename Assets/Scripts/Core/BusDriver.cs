@@ -108,9 +108,9 @@ namespace AaronMeaney.BusStop.Core
                     CurrentBusRoute.onBusRoutePopulated += GetComponent<BusRouteVisualiser>().SetBusRouteVisualisation;
                 }
                 
-                if (GetComponent<BusRoutePostToREST>())
+                if (GetComponent<PostBusRoute>())
                 {
-                    CurrentBusRoute.onBusRoutePopulated += GetComponent<BusRoutePostToREST>().PostBusRoute;
+                    CurrentBusRoute.onBusRoutePopulated += GetComponent<PostBusRoute>().PerformPost;
                 }
             }
         }

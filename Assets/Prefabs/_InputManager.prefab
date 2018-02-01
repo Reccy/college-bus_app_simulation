@@ -307,6 +307,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4230109165346144}
   - component: {fileID: 114337348295577788}
+  - component: {fileID: 114436670528701050}
   - component: {fileID: 114787260010004444}
   m_Layer: 0
   m_Name: _InputManager
@@ -907,6 +908,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df491a74a63f8d84f905518ff158fc8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114436670528701050
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1905626546741296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c86e0c9a26181a748b1a69833bdb6c92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  configurations:
+  - {fileID: 11400000, guid: 2636848eb21ebb54ebd370c5143b3525, type: 2}
+  - {fileID: 11400000, guid: 855223866a170124c8b2f397078485d6, type: 2}
+  selectedConfigurationIndex: 0
+  selectedConfiguration: {fileID: 11400000, guid: 2636848eb21ebb54ebd370c5143b3525,
+    type: 2}
 --- !u!114 &114468685367981386
 MonoBehaviour:
   m_ObjectHideFlags: 1

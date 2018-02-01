@@ -5,12 +5,12 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace AaronMeaney.BusStop.API
+namespace AaronMeaney.BusStop.API.Action
 {
     /// <summary>
     /// Posts the coordinates to a REST API at a scheduled interval
     /// </summary>
-    public class CoordinatePostToREST : MonoBehaviour
+    public class PostCoordinates : MonoBehaviour
     {
         private TransformLocationProvider locationProvider;
         private SimulationStatusPanelController statusController;

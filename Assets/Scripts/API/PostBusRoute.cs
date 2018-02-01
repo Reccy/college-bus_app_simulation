@@ -6,12 +6,12 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using AaronMeaney.BusStop.Core;
 
-namespace AaronMeaney.BusStop.API
+namespace AaronMeaney.BusStop.API.Action
 {
     /// <summary>
     /// Pushes the Bus Route data to the REST API. Has to be called manually.
     /// </summary>
-    public class BusRoutePostToREST : MonoBehaviour
+    public class PostBusRoute : MonoBehaviour
     {
         [SerializeField]
         private bool debugLog;
@@ -39,7 +39,7 @@ namespace AaronMeaney.BusStop.API
         /// Sends the bus route data the the REST API.
         /// </summary>
         /// <param name="busRoute">The bus route to send</param>
-        public void PostBusRoute(BusRoute busRoute)
+        public void PerformPost(BusRoute busRoute)
         {
             StartCoroutine(Post(busRoute));
         }

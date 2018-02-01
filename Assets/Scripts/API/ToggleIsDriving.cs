@@ -4,13 +4,13 @@ using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace AaronMeaney.BusStop.API
+namespace AaronMeaney.BusStop.API.Action
 {
     /// <summary>
     /// Polls the REST API to check if the bus should be driving or not.
     /// </summary>
     [RequireComponent(typeof(BusDriver))]
-    public class ToggleIsDrivingFromREST : MonoBehaviour
+    public class ToggleIsDriving : MonoBehaviour
     {
         /// <summary>
         /// Reference to the bus driver component.

@@ -6,8 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/BusStopPrototype/PreLoad.unity
+    path: Assets/Scenes/PreLoad/PreLoad.unity
     guid: a0ee2612c7b606e4f9b3c8488a037997
   - enabled: 1
-    path: Assets/BusStopPrototype/CityMapTest/CityMap.unity
+    path: Assets/Scenes/CityMap/CityMap.unity
     guid: 9a8c1299737e7e14184c86ce54291443

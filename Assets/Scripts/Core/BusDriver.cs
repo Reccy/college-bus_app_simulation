@@ -1,4 +1,4 @@
-﻿using AaronMeaney.BusStop.API;
+﻿using AaronMeaney.BusStop.API.Action;
 using Mapbox.Unity.Location;
 using Mapbox.Unity.Map;
 using UnityEngine;

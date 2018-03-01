@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33612637741078310}
   - component: {fileID: 136707316413076490}
   - component: {fileID: 23147400519759710}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: TempModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4569877908404862}
   - component: {fileID: 114779668574620384}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: BusPassenger
   m_TagString: Untagged
   m_Icon: {fileID: 0}

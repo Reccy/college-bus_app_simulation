@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Bus
+  - Map
   layers:
   - Default
   - TransparentFX

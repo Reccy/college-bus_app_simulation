@@ -20,7 +20,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4966198217310362}
   - component: {fileID: 114463629401658480}
-  m_Layer: 0
+  - component: {fileID: 114854944811886252}
+  m_Layer: 2
   m_Name: BusStop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +39,7 @@ GameObject:
   - component: {fileID: 33714985700153218}
   - component: {fileID: 65844758913584696}
   - component: {fileID: 23831069210990244}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: TempModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -136,4 +137,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36cb7de58e72cbd438b41dccd74d434f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  identifier: 
+  busStopData:
+    identifier: DEFAULT100
+    latitude: 0
+    longitude: 0
+--- !u!114 &114854944811886252
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1171217187660194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b72f01d01335fb459654de7f8f6ba7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  originDistanceFromRoad: 0.5
+  alignAngleWithTerrain: 0
+  rayOriginHeight: 100
+  snapOnUpdate: 0

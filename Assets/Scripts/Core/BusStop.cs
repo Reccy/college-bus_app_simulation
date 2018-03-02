@@ -6,7 +6,7 @@ using UnityEngine;
 namespace AaronMeaney.BusStop.Core
 {
     /// <summary>
-    /// Handles Bus Stop functionality.
+    /// Handles <see cref="BusStop"/> functionality. See <see cref="BusStopData"/> for data that runs the functionality.
     /// </summary>
     [System.Serializable]
     [RequireComponent(typeof(SnapToTerrain))]
@@ -17,14 +17,14 @@ namespace AaronMeaney.BusStop.Core
         [SerializeField]
         private BusStopData busStopData;
         /// <summary>
-        /// The Bus Stop's data
+        /// Data used to drive the functionality of the <see cref="BusStop"/>
         /// </summary>
         public BusStopData BusStopData {
             get { return busStopData; }
         }
 
         /// <summary>
-        /// Sets the Bus Stop's data and places it in the map
+        /// Sets the <see cref="BusStopData"/> and places an instance of the <see cref="BusStop"/> in the simulation
         /// </summary>
         public void Initialize(BusStopData busStopData, AbstractMap simAbstractMap)
         {
@@ -41,7 +41,7 @@ namespace AaronMeaney.BusStop.Core
         }
 
         /// <summary>
-        /// Updates the position based on the latitude and longitude of the Bus Stop Data
+        /// Updates the position based on the latitude and longitude of the <see cref="BusStopData"/>
         /// </summary>
         public void UpdatePosition()
         {

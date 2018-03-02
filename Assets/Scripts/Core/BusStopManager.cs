@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 namespace AaronMeaney.BusStop.Core
 {
     /// <summary>
-    /// Responsible for keeping track of all bus stops in the simulation.
-    /// Instantiates Bus Stops on Awake.
+    /// Responsible for keeping track of all <see cref="BusStop"/>s in the simulation.
+    /// Instantiates the <see cref="BusStop"/>s on Awake.
     /// </summary>
     public class BusStopManager : MonoBehaviour
     {
@@ -24,7 +24,7 @@ namespace AaronMeaney.BusStop.Core
         [SerializeField]
         private List<BusStopData> busStopsData;
         /// <summary>
-        /// List of all the Bus Stops in the simulation
+        /// List of all the <see cref="BusStop"/>s to be added to the simulation
         /// </summary>
         public List<BusStopData> BusStopsData
         {
@@ -37,7 +37,7 @@ namespace AaronMeaney.BusStop.Core
         }
 
         /// <summary>
-        /// Handles Bus Stop Manager logic when the active scene changes
+        /// Handles <see cref="BusStopManager"/> logic when the active scene changes
         /// </summary>
         /// <param name="previousScene">The scene that was unloaded</param>
         /// <param name="currentScene">The scene that was just loaded</param>
@@ -61,7 +61,7 @@ namespace AaronMeaney.BusStop.Core
         }
 
         /// <summary>
-        /// Instantiates and places all of the Bus Stops into the map
+        /// Instantiates and places all of the <see cref="BusStop"/>s into the map
         /// </summary>
         private void InstantiateBusStops()
         {
@@ -73,7 +73,7 @@ namespace AaronMeaney.BusStop.Core
         }
 
         /// <summary>
-        /// Ensures that each Bus Stop's data is valid
+        /// Ensures that each <see cref="BusStop"/>'s data is valid
         /// </summary>
         private void ValidateBusStops()
         {
@@ -93,7 +93,6 @@ namespace AaronMeaney.BusStop.Core
 
         private void OnValidate()
         {
-            // Check that each Bus Stop ID is unique
             ValidateBusStops();
         }
     }

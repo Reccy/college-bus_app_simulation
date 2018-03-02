@@ -31,10 +31,8 @@ namespace AaronMeaney.BusStop.Core
             this.busStopData = busStopData;
             this.simAbstractMap = simAbstractMap;
 
-            // Set GameObject name and position
+            // Set GameObject name
             name = "Bus Stop " + busStopData.Identifier;
-            transform.position = busStopData.coordinateLocation.AsUnityPosition(simAbstractMap);
-
             UpdatePosition();
 
             Debug.Log("Initialized -> " + busStopData.Identifier);
@@ -55,7 +53,7 @@ namespace AaronMeaney.BusStop.Core
     }
 
     /// <summary>
-    /// Contains Bus Stop data.
+    /// Contains the data for the <see cref="BusStop"/>.
     /// </summary>
     [System.Serializable]
     public class BusStopData
@@ -63,7 +61,7 @@ namespace AaronMeaney.BusStop.Core
         [SerializeField]
         private string identifier = "DEFAULT";
         /// <summary>
-        /// The unique identifier of the Bus Stop.
+        /// The unique identifier of the <see cref="BusStop"/>
         /// </summary>
         public string Identifier
         {

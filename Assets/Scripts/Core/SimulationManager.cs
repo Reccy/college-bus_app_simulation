@@ -6,10 +6,9 @@ using UnityEngine.SceneManagement;
 namespace AaronMeaney.BusStop.Core
 {
     /// <summary>
-    /// Responsible for keeping track of all <see cref="BusStop"/>s in the simulation.
-    /// Instantiates the <see cref="BusStop"/>s on Awake.
+    /// Responsible for keeping track of the simulation.
     /// </summary>
-    public class BusStopManager : MonoBehaviour
+    public class SimulationManager : MonoBehaviour
     {
         private AbstractMap map;
 
@@ -21,14 +20,28 @@ namespace AaronMeaney.BusStop.Core
         [SerializeField]
         private GameObject busStopPrefab;
 
+        [NotNull]
+        [SerializeField]
+        private GameObject routeWaypointPrefab;
+
         [SerializeField]
         private List<BusStopData> busStopsData;
         /// <summary>
-        /// List of all the <see cref="BusStop"/>s to be added to the simulation
+        /// List of all the <see cref="BusStopData"/> to be added to the simulation
         /// </summary>
         public List<BusStopData> BusStopsData
         {
             get { return busStopsData; }
+        }
+        
+        [SerializeField]
+        private List<RouteWaypointData> routeWaypointsData;
+        /// <summary>
+        /// List of all the <see cref="RouteWaypointData"/> to be addeed to the simulation
+        /// </summary>
+        public List<RouteWaypointData> RouteWayPointsData
+        {
+            get { return routeWaypointsData; }
         }
 
         private void Awake()
@@ -37,7 +50,7 @@ namespace AaronMeaney.BusStop.Core
         }
 
         /// <summary>
-        /// Handles <see cref="BusStopManager"/> logic when the active scene changes
+        /// Handles <see cref="SimulationManager"/> logic when the active scene changes
         /// </summary>
         /// <param name="previousScene">The scene that was unloaded</param>
         /// <param name="currentScene">The scene that was just loaded</param>
@@ -55,6 +68,7 @@ namespace AaronMeaney.BusStop.Core
                     if (s == ModuleState.Finished)
                     {
                         InstantiateBusStops();
+                        InstantiateRouteWaypoints();
                     }
                 };
             }
@@ -69,6 +83,18 @@ namespace AaronMeaney.BusStop.Core
             {
                 GameObject newBusStop = Instantiate<GameObject>(busStopPrefab, Vector3.zero, Quaternion.identity);
                 newBusStop.GetComponent<BusStop>().Initialize(data, map);
+            }
+        }
+
+        /// <summary>
+        /// Instantiates and places all of the <see cref="RouteWaypoint"/>s into the map
+        /// </summary>
+        private void InstantiateRouteWaypoints()
+        {
+            foreach (RouteWaypointData data in routeWaypointsData)
+            {
+                GameObject newRouteWaypoint = Instantiate<GameObject>(routeWaypointPrefab, Vector3.zero, Quaternion.identity);
+                newRouteWaypoint.GetComponent<RouteWaypoint>().Initialize(data, map);
             }
         }
 

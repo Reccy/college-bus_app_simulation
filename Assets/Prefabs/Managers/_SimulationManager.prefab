@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 114589023597935144}
   - component: {fileID: 114541910184278178}
   m_Layer: 0
-  m_Name: _BusStopManager
+  m_Name: _SimulationManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -66,6 +66,8 @@ MonoBehaviour:
   mapVisualiser: {fileID: 11400000, guid: ff8ea66d8e9626c4393098f04e030fd7, type: 2}
   busStopPrefab: {fileID: 1171217187660194, guid: 48aacb84dcd22bd48b3b10950e778bf2,
     type: 2}
+  routeWaypointPrefab: {fileID: 1428807745551140, guid: ffa51107274ffa74eb70ee7db93a133b,
+    type: 2}
   busStopsData:
   - identifier: X150
     coordinateLocation:
@@ -74,4 +76,13 @@ MonoBehaviour:
   - identifier: X155
     coordinateLocation:
       latitude: 53.3506
+      longitude: -6.248452
+  routeWaypointsData:
+  - hasTrafficLights: 0
+    coordinateLocation:
+      latitude: 53.34902
+      longitude: -6.24032
+  - hasTrafficLights: 0
+    coordinateLocation:
+      latitude: 53.3505
       longitude: -6.248452

@@ -33,7 +33,7 @@ namespace AaronMeaney.BusStop.Core
 
             // Set GameObject name and position
             name = "Bus Stop " + busStopData.Identifier;
-            transform.position = busStopData.AsUnityPosition(simAbstractMap);
+            transform.position = busStopData.coordinateLocation.AsUnityPosition(simAbstractMap);
 
             UpdatePosition();
 
@@ -46,7 +46,7 @@ namespace AaronMeaney.BusStop.Core
         public void UpdatePosition()
         {
             Debug.Log("Updating position of " + name);
-            transform.position = busStopData.AsUnityPosition(simAbstractMap);
+            transform.position = busStopData.coordinateLocation.AsUnityPosition(simAbstractMap);
 
             // Snap position to terrain
             Debug.Log("Snapping " + name + " to terrain");
@@ -61,7 +61,7 @@ namespace AaronMeaney.BusStop.Core
     public class BusStopData
     {
         [SerializeField]
-        private string identifier = "DEFAULT100";
+        private string identifier = "DEFAULT";
         /// <summary>
         /// The unique identifier of the Bus Stop.
         /// </summary>
@@ -69,25 +69,11 @@ namespace AaronMeaney.BusStop.Core
         {
             get { return identifier; }
         }
-
-        [SerializeField]
-        private float latitude;
-        public float Latitude { get { return latitude; } }
-
-        [SerializeField]
-        private float longitude;
-        public float Longitude { get { return longitude; } }
-
+        
         /// <summary>
-        /// The Bus Stop location as a Unity world position.
+        /// The coordinates of the bus stop
         /// </summary>
-        /// <param name="map">The map to reference the latitude/longitude against to translate it to Unity world coordinated.</param>
-        /// <returns>Position of the node in the world.</returns>
-        public Vector3 AsUnityPosition(AbstractMap map)
-        {
-            Vector3 unityPosition = new Vector2(latitude, longitude).AsUnityPosition(map.CenterMercator, map.WorldRelativeScale);
-            Debug.Log("LAT: " + latitude + ", LON: " + longitude + ", POS: " + unityPosition.ToString());
-            return unityPosition;
-        }
+        [SerializeField]
+        public CoordinateLocation coordinateLocation;
     }
 }

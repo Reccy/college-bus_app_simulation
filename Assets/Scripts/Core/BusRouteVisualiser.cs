@@ -33,7 +33,7 @@ namespace AaronMeaney.BusStop.Core
         /// <param name="newRoute">The new route to display</param>
         public void SetBusRouteVisualisation(BusRoute newRoute)
         {
-            List<BusRouteNode> nodes = newRoute.LatLongNodes;
+            List<CoordinateLocation> nodes = newRoute.LatLongNodes;
 
             // Clear the old nodes
             ClearNodes();

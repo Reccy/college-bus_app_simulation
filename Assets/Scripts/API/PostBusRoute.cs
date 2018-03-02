@@ -50,7 +50,7 @@ namespace AaronMeaney.BusStop.API.Action
         /// <param name="busRoute">The bus route to send</param>
         private IEnumerator Post(BusRoute busRoute)
         {
-            List<BusRouteNode> nodeList = busRoute.LatLongNodes;
+            List<CoordinateLocation> nodeList = busRoute.LatLongNodes;
             string busRouteJSON = JsonConvert.SerializeObject(nodeList, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() });
             if (DebugLog)
                 Debug.Log("BusRoute Size: " + busRoute.Size + "\nJSON: " + busRouteJSON);

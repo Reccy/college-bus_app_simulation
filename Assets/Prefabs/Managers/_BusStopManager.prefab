@@ -68,8 +68,10 @@ MonoBehaviour:
     type: 2}
   busStopsData:
   - identifier: X150
-    latitude: 53.347626
-    longitude: -6.241167
+    coordinateLocation:
+      latitude: 53.349026
+      longitude: -6.24032
   - identifier: X155
-    latitude: 53.34678
-    longitude: -6.227391
+    coordinateLocation:
+      latitude: 53.3506
+      longitude: -6.248452

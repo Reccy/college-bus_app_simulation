@@ -5,10 +5,10 @@ using UnityEngine;
 namespace AaronMeaney.BusStop.Core
 {
     /// <summary>
-    /// Represents the latitude, longitude and Unity world position of a bus route node.
+    /// Represents the latitude, longitude and Unity world position.
     /// </summary>
     [System.Serializable]
-    public class BusRouteNode
+    public class CoordinateLocation
     {
         [SerializeField]
         private float latitude;
@@ -17,14 +17,14 @@ namespace AaronMeaney.BusStop.Core
         [SerializeField]
         private float longitude;
         public float Longitude { get { return longitude; } }
-
-        public BusRouteNode(float latitude, float longitude)
+        
+        public CoordinateLocation(float latitude, float longitude)
         {
             this.latitude = latitude;
             this.longitude = longitude;
         }
 
-        public BusRouteNode(Vector2 latLong)
+        public CoordinateLocation(Vector2 latLong)
         {
             this.latitude = latLong.x;
             this.longitude = latLong.y;

@@ -21,8 +21,8 @@ namespace AaronMeaney.BusStop.Core
         /// </summary>
         public OnBusRoutePopulated onBusRoutePopulated;
 
-        private List<BusRouteNode> latLongNodes = new List<BusRouteNode>();
-        public List<BusRouteNode> LatLongNodes
+        private List<CoordinateLocation> latLongNodes = new List<CoordinateLocation>();
+        public List<CoordinateLocation> LatLongNodes
         {
             get { return latLongNodes; }
         }
@@ -72,13 +72,13 @@ namespace AaronMeaney.BusStop.Core
         /// <param name="response"></param>
         private void HandleDirectionsResponse(DirectionsResponse response)
         {
-            List<BusRouteNode> newNodes = new List<BusRouteNode>();
+            List<CoordinateLocation> newNodes = new List<CoordinateLocation>();
 
             foreach (Step step in response.Routes[0].Legs[0].Steps)
             {
                 foreach (Vector2d point in step.Geometry)
                 {
-                    newNodes.Add(new BusRouteNode((float)point.x, (float)point.y));
+                    newNodes.Add(new CoordinateLocation((float)point.x, (float)point.y));
                 }
             }
 

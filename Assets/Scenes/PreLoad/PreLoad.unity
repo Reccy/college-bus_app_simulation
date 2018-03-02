@@ -501,26 +501,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 114589023597935144, guid: e0b059be238fd344ab31790eb056f84e,
-        type: 2}
-      propertyPath: busStopsData.Array.data[0].latitude
-      value: 53.347626
-      objectReference: {fileID: 0}
-    - target: {fileID: 114589023597935144, guid: e0b059be238fd344ab31790eb056f84e,
-        type: 2}
-      propertyPath: busStopsData.Array.data[0].longitude
-      value: -6.241167
-      objectReference: {fileID: 0}
-    - target: {fileID: 114589023597935144, guid: e0b059be238fd344ab31790eb056f84e,
-        type: 2}
-      propertyPath: busStopsData.Array.data[1].latitude
-      value: 53.34678
-      objectReference: {fileID: 0}
-    - target: {fileID: 114589023597935144, guid: e0b059be238fd344ab31790eb056f84e,
-        type: 2}
-      propertyPath: busStopsData.Array.data[1].longitude
-      value: -6.227391
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e0b059be238fd344ab31790eb056f84e, type: 2}
   m_IsPrefabParent: 0

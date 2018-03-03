@@ -10,31 +10,31 @@ using System;
 namespace AaronMeaney.BusStop.Core
 {
     /// <summary>
-    /// Represents the bus route as latitude/longitude nodes.
+    /// Represents the <see cref="BusPathfinder"/> as a list of <see cref="CoordinateLocation"/>s.
     /// </summary>
     [Serializable]
-    public class BusRoute
+    public class BusPathfinder
     {
-        public delegate void OnBusRoutePopulated(BusRoute thisRoute);
+        public delegate void OnBusPathPopulated(BusPathfinder thisPath);
         /// <summary>
-        /// Delegate is called when the Bus Route has been fully populated with BusRouteNodes.
+        /// Delegate is called when the <see cref="BusPathfinder"/> has been fully populated with <see cref="CoordinateLocation"/>.
         /// </summary>
-        public OnBusRoutePopulated onBusRoutePopulated;
+        public OnBusPathPopulated onBusPathPopulated;
 
-        private List<CoordinateLocation> latLongNodes = new List<CoordinateLocation>();
-        public List<CoordinateLocation> LatLongNodes
+        private List<CoordinateLocation> coordinateLocations = new List<CoordinateLocation>();
+        public List<CoordinateLocation> CoordinateLocations
         {
-            get { return latLongNodes; }
+            get { return coordinateLocations; }
         }
 
         public int Size
         {
-            get { return latLongNodes.Count; }
+            get { return coordinateLocations.Count; }
         }
 
         private bool isReady = false;
         /// <summary>
-        /// True if the Bus Route is ready to be driven along.
+        /// True if <see cref="BusPathfinder"/> is ready to be driven along.
         /// False if not ready, e.g. missing nodes.
         /// </summary>
         public bool IsReady
@@ -46,7 +46,7 @@ namespace AaronMeaney.BusStop.Core
         Directions directions;
 
         /// <summary>
-        /// Replaces the bus route with direction nodes from Mapbox.
+        /// Replaces the <see cref="BusPathfinder"/> nodes with <see cref="Directions"/>.
         /// The position is translated to coordinates and then the directions are generated.
         /// </summary>
         /// <param name="fromPosition">The world space position to begin navigating from.</param>
@@ -67,9 +67,8 @@ namespace AaronMeaney.BusStop.Core
         }
 
         /// <summary>
-        /// Handles the response called from SetDirectionsToPosition by populating the LatLongNodes
+        /// Handles the response called from <see cref="SetDirectionsToPosition(AbstractMap, Vector3, Vector3)"/> by populating the <see cref="CoordinateLocation"/>
         /// </summary>
-        /// <param name="response"></param>
         private void HandleDirectionsResponse(DirectionsResponse response)
         {
             List<CoordinateLocation> newNodes = new List<CoordinateLocation>();
@@ -82,13 +81,13 @@ namespace AaronMeaney.BusStop.Core
                 }
             }
 
-            LatLongNodes.Clear();
-            LatLongNodes.AddRange(newNodes);
+            CoordinateLocations.Clear();
+            CoordinateLocations.AddRange(newNodes);
 
             isReady = true;
 
-            if (onBusRoutePopulated != null)
-                onBusRoutePopulated(this);
+            if (onBusPathPopulated != null)
+                onBusPathPopulated(this);
         }
     }
 }

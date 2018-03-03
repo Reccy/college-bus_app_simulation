@@ -89,11 +89,11 @@ namespace AaronMeaney.BusStop.Core
             set { currentDestination = value; }
         }
 
-        private BusRoute currentBusRoute;
+        private BusPathfinder currentBusRoute;
         /// <summary>
         /// The bus route currently assigned to the bus.
         /// </summary>
-        public BusRoute CurrentBusRoute
+        public BusPathfinder CurrentBusRoute
         {
             get { return currentBusRoute; }
             set
@@ -101,16 +101,16 @@ namespace AaronMeaney.BusStop.Core
                 currentBusRouteNode = 0;
                 currentBusRoute = value;
                 CurrentDestination.position = transform.position;
-                GetComponent<BusRouteVisualiser>().ClearVisualisation();
+                GetComponent<BusPathfinderVisualiser>().ClearVisualisation();
 
-                if (GetComponent<BusRouteVisualiser>())
+                if (GetComponent<BusPathfinderVisualiser>())
                 {
-                    CurrentBusRoute.onBusRoutePopulated += GetComponent<BusRouteVisualiser>().SetBusRouteVisualisation;
+                    CurrentBusRoute.onBusPathPopulated += GetComponent<BusPathfinderVisualiser>().SetBusPathVisualisation;
                 }
                 
                 if (GetComponent<PostBusRoute>())
                 {
-                    CurrentBusRoute.onBusRoutePopulated += GetComponent<PostBusRoute>().PerformPost;
+                    CurrentBusRoute.onBusPathPopulated += GetComponent<PostBusRoute>().PerformPost;
                 }
             }
         }
@@ -119,7 +119,7 @@ namespace AaronMeaney.BusStop.Core
 
         private void Awake()
         {
-            CurrentBusRoute = new BusRoute();
+            CurrentBusRoute = new BusPathfinder();
         }
 
         private void Update()
@@ -138,7 +138,7 @@ namespace AaronMeaney.BusStop.Core
                 // Update the current destination if the mode is set to Route
                 if (currentBusRouteNode < currentBusRoute.Size)
                 {
-                    CurrentDestination.position = currentBusRoute.LatLongNodes[currentBusRouteNode].AsUnityPosition(map);
+                    CurrentDestination.position = currentBusRoute.CoordinateLocations[currentBusRouteNode].AsUnityPosition(map);
                     currentBusRouteNode++;
                 }
             }
@@ -168,7 +168,7 @@ namespace AaronMeaney.BusStop.Core
             }
             else if (currentBusRouteNode < currentBusRoute.Size)
             {
-                CurrentDestination.position = currentBusRoute.LatLongNodes[currentBusRouteNode].AsUnityPosition(map);
+                CurrentDestination.position = currentBusRoute.CoordinateLocations[currentBusRouteNode].AsUnityPosition(map);
                 currentBusRouteNode++;
             }
         }

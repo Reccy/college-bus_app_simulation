@@ -58,7 +58,7 @@ namespace AaronMeaney.BusStop.Core
                 if (hits.Length > 0)
                 {
                     // Assign the new bus route
-                    BusRoute newBusRoute = new BusRoute();
+                    BusPathfinder newBusRoute = new BusPathfinder();
                     newBusRoute.SetDirectionsToPosition(BusDriver.Map, BusDriver.transform.position, hits[0].point);
                     BusDriver.CurrentBusRoute = newBusRoute;
                 }

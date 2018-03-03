@@ -5,10 +5,10 @@ using UnityEngine;
 namespace AaronMeaney.BusStop.Core
 {
     /// <summary>
-    /// Visualises the bus route as a line renderer on the map
+    /// Visualises the <see cref="BusPathfinder"/> as a <see cref="LineRenderer"/> on the map
     /// </summary>
     [RequireComponent(typeof(BusDriver))]
-    public class BusRouteVisualiser : MonoBehaviour
+    public class BusPathfinderVisualiser : MonoBehaviour
     {
         [SerializeField]
         private AbstractMap map;
@@ -28,12 +28,12 @@ namespace AaronMeaney.BusStop.Core
         }
 
         /// <summary>
-        /// Sets the new bus route to be displayed on the map using the attached LineRenderer component
+        /// Sets the new <see cref="BusPathfinder"/> to be displayed on the map using the attached <see cref="LineRenderer"/> component
         /// </summary>
-        /// <param name="newRoute">The new route to display</param>
-        public void SetBusRouteVisualisation(BusRoute newRoute)
+        /// <param name="newPath">The new <see cref="BusPathfinder"/> to visualise</param>
+        public void SetBusPathVisualisation(BusPathfinder newPath)
         {
-            List<CoordinateLocation> nodes = newRoute.LatLongNodes;
+            List<CoordinateLocation> nodes = newPath.CoordinateLocations;
 
             // Clear the old nodes
             ClearNodes();
@@ -42,7 +42,7 @@ namespace AaronMeaney.BusStop.Core
             for (int i = 0; i < nodes.Count; i++)
             {
                 Vector3 nodePosition = nodes[i].AsUnityPosition(map);
-                instantiatedNodes.Add(CreateBusRouteNodeGameObject("TestRoute", i, nodePosition));
+                instantiatedNodes.Add(CreateBusPathNodeGameObject("TestRoute", i, nodePosition));
             }
 
             // Generate mesh
@@ -70,7 +70,7 @@ namespace AaronMeaney.BusStop.Core
         }
 
         /// <summary>
-        /// Clears the nodes in the visualisation and removes the ndoes from the LineRenderer.
+        /// Clears the nodes in the visualisation and removes them from the <see cref="LineRenderer"/>.
         /// </summary>
         public void ClearVisualisation()
         {
@@ -83,28 +83,28 @@ namespace AaronMeaney.BusStop.Core
         }
 
         /// <summary>
-        /// Creates a new bus route node
+        /// Creates a new <see cref="BusPathfinder"/> node
         /// </summary>
-        /// <param name="routeName">The name of the bus route</param>
-        /// <param name="nodeIndex">The node index as part of the bus route</param>
-        /// <param name="position">The position to place the bus route node</param>
-        /// <returns>The bus route node</returns>
-        private GameObject CreateBusRouteNodeGameObject(string routeName, int nodeIndex, Vector3 position)
+        /// <param name="pathName">The name of the <see cref="BusPathfinder"/> path</param>
+        /// <param name="nodeIndex">The node index as part of the <see cref="BusPathfinder"/> path</param>
+        /// <param name="position">The position to place the <see cref="BusPathfinder"/> path node</param>
+        /// <returns>The <see cref="BusPathfinder"/> node</returns>
+        private GameObject CreateBusPathNodeGameObject(string pathName, int nodeIndex, Vector3 position)
         {
             // Create the node
-            GameObject busRouteNode = new GameObject();
-            busRouteNode.name = routeName + "_" + nodeIndex;
+            GameObject busPathNode = new GameObject();
+            busPathNode.name = pathName + "_" + nodeIndex;
 
             // Set the node position
-            busRouteNode.transform.position = position;
+            busPathNode.transform.position = position;
 
             // Snap the node to the terrain
-            SnapToTerrain snapToTerrain = busRouteNode.AddComponent<SnapToTerrain>();
+            SnapToTerrain snapToTerrain = busPathNode.AddComponent<SnapToTerrain>();
             snapToTerrain.SnapOnUpdate = false;
             snapToTerrain.PerformSnap();
 
             // Return the node
-            return busRouteNode;
+            return busPathNode;
         }
     }
 }

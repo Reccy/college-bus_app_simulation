@@ -3,7 +3,7 @@
 namespace AaronMeaney.BusStop.Core
 {
     /// <summary>
-    /// Represents a waypoint along a <see cref="BusRoute"/>
+    /// Represents a waypoint along a <see cref="BusPathfinder"/>
     /// </summary>
     public class RouteWaypoint : MonoBehaviour
     {

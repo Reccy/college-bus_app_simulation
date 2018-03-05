@@ -7,7 +7,6 @@ namespace AaronMeaney.BusStop.Core
     /// <summary>
     /// Visualises the <see cref="BusPathfinder"/> as a <see cref="LineRenderer"/> on the map
     /// </summary>
-    [RequireComponent(typeof(BusDriver))]
     public class BusPathfinderVisualiser : MonoBehaviour
     {
         [SerializeField]

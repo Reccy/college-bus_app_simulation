@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4446080505690742}
   - component: {fileID: 114867456524390420}
+  - component: {fileID: 114892522704863692}
   m_Layer: 0
   m_Name: 'Bus Route '
   m_TagString: Untagged
@@ -52,6 +53,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   routeId: 
-  gizmoColor: {r: 1, g: 0, b: 0, a: 0}
-  gizmoEnabled: 1
   routeWaypoints: []
+  gizmoColor: {r: 0, g: 0.04827571, b: 1, a: 1}
+  gizmoEnabled: 1
+--- !u!114 &114892522704863692
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1863562967672478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd0eff8ca10f28c4a94a9c281a392526, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  map: {fileID: 0}
+  material: {fileID: 0}

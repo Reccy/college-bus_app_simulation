@@ -10,6 +10,7 @@ namespace AaronMeaney.BusStop.Core
     /// Represents the list of <see cref="RouteWaypoint"/>s in a <see cref="BusRoute"/>.
     /// Does NOT contain any timetable/time slot data.
     /// </summary>
+    [RequireComponent(typeof(BusPathfinder), typeof(BusPathfinderVisualiser))]
     public class BusRoute : MonoBehaviour
     {
         [SerializeField]
@@ -18,14 +19,6 @@ namespace AaronMeaney.BusStop.Core
         /// The ID of this Route
         /// </summary>
         public string RouteId { get { return routeId; } }
-
-        [SerializeField]
-        [HideInInspector]
-        private Color gizmoColor;
-
-        [SerializeField]
-        [HideInInspector]
-        private bool gizmoEnabled;
         
         [SerializeField]
         [HideInInspector]
@@ -34,23 +27,61 @@ namespace AaronMeaney.BusStop.Core
         /// The list of <see cref="RouteWaypoint"/>s in the <see cref="BusRoute"/> 
         /// </summary>
         public List<RouteWaypoint> RouteWaypoints { get { return routeWaypoints; } }
-        
+
+        private BusPathfinder pathfinder;
+        private BusPathfinderVisualiser pathVisualiser;
+
+        private void Awake()
+        {
+            pathfinder = GetComponent<BusPathfinder>();
+            pathVisualiser = GetComponent<BusPathfinderVisualiser>();
+        }
+
+        /// <summary>
+        /// Generates the map route from the <see cref="BusPathfinder"/> and shows it on the <see cref="BusPathfinderVisualiser"/>"/>
+        /// </summary>
+        public void GenerateMapRoute()
+        {
+            //pathfinder.SetDirectionsToPosition();
+        }
+
+        #region Gizmos
+        [SerializeField]
+        [HideInInspector]
+        private Color gizmoColor;
+
+        [SerializeField]
+        [HideInInspector]
+        private bool gizmoEnabled;
+
         private void OnDrawGizmos()
         {
             if (gizmoEnabled)
             {
-                Gizmos.color = gizmoColor;
+                DrawGizmos();
+            }
+        }
 
-                for (int i = 1; i < routeWaypoints.Count; i++)
+        private void OnDrawGizmosSelected()
+        {
+            DrawGizmos();
+        }
+
+        private void DrawGizmos()
+        {
+            // Show arrows between Route Waypoints
+            Gizmos.color = gizmoColor;
+
+            for (int i = 1; i < routeWaypoints.Count; i++)
+            {
+                if (routeWaypoints[i - 1] != null && routeWaypoints[i] != null)
                 {
-                    if (routeWaypoints[i - 1] != null && routeWaypoints[i] != null)
-                    {
-                        Vector3 dir = routeWaypoints[i].transform.position - routeWaypoints[i - 1].transform.position;
-                        DrawArrow.ForGizmo(routeWaypoints[i - 1].transform.position, dir, Gizmos.color, 0.4f, arrowPosition: 0.5f);
-                    }
+                    Vector3 dir = routeWaypoints[i].transform.position - routeWaypoints[i - 1].transform.position;
+                    DrawArrow.ForGizmo(routeWaypoints[i - 1].transform.position, dir, Gizmos.color, 0.4f, arrowPosition: 0.5f);
                 }
             }
         }
+        #endregion
 
         private void OnValidate()
         {
@@ -94,6 +125,15 @@ namespace AaronMeaney.BusStop.Core
                 _gizmoColor.colorValue = EditorGUILayout.ColorField("Gizmo Color", _gizmoColor.colorValue);
             }
 
+            // Show the map route as Gizmos
+            if (Application.isPlaying)
+            {
+                if (GUILayout.Button("Get Map Route"))
+                {
+                    Debug.Log("arse");
+                }
+            }
+            
             serializedObject.ApplyModifiedProperties();
         }
     }

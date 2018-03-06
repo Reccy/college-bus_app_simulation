@@ -13,8 +13,10 @@ namespace AaronMeaney.BusStop.Core
     public class RouteWaypoint : MonoBehaviour
     {
         private SnapToTerrain snapToTerrain;
-        private PlaceAtCoordinates placeAtCoordinates;
         private AbstractMap map;
+
+        private PlaceAtCoordinates placeAtCoordinates;
+        public PlaceAtCoordinates PlactAtCoordinates { get { return placeAtCoordinates; } }
 
         /// <summary>
         /// The <see cref="BusStop"/> belonging to this <see cref="RouteWaypoint"/>

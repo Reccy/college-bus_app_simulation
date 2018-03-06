@@ -23,9 +23,13 @@ namespace AaronMeaney.BusStop.Core
         [SerializeField]
         [HideInInspector]
         private CoordinateLocation coordinateLocation;
+        public CoordinateLocation CoordinateLocation {
+            get { return coordinateLocation; }
+            set { coordinateLocation = value; }
+        }
 
         [SerializeField]
-        private bool executeOnAwake;
+        public bool executeOnAwake;
         
         private void Awake()
         {

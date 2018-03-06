@@ -12,6 +12,9 @@ public static class DrawArrow
 
     public static void ForGizmo(Vector3 pos, Vector3 direction, Color color, float arrowHeadLength = 0.25f, float arrowHeadAngle = 20.0f, float arrowPosition = 0.5f)
     {
+        if (direction == Vector3.zero)
+            return;
+
         Gizmos.color = color;
         Gizmos.DrawRay(pos, direction);
         DrawArrowEnd(true, pos, direction, color, arrowHeadLength, arrowHeadAngle, arrowPosition);

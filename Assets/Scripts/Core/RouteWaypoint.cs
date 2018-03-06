@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Mapbox.Unity.Map;
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
@@ -7,14 +8,44 @@ namespace AaronMeaney.BusStop.Core
     /// <summary>
     /// Represents a waypoint along a <see cref="BusPathfinder"/>
     /// </summary>
-    [ExecuteInEditMode] // For GameObject naming
+    [ExecuteInEditMode] // For Editor Validation
+    [RequireComponent(typeof(SnapToTerrain), typeof(PlaceAtCoordinates))]
     public class RouteWaypoint : MonoBehaviour
     {
+        private SnapToTerrain snapToTerrain;
+        private PlaceAtCoordinates placeAtCoordinates;
+        private AbstractMap map;
+
         /// <summary>
         /// The <see cref="BusStop"/> belonging to this <see cref="RouteWaypoint"/>
         /// </summary>
         public BusStop LinkedBusStop
         { get { return GetComponentInChildren<BusStop>(); } }
+
+        private void Awake()
+        {
+            snapToTerrain = GetComponent<SnapToTerrain>();
+            placeAtCoordinates = GetComponent<PlaceAtCoordinates>();
+            map = FindObjectOfType<AbstractMap>();
+            
+            map.MapVisualizer.OnMapVisualizerStateChanged += OnMapVisualizerStateChanged;
+        }
+
+        /// <summary>
+        /// Handles what to do when the <see cref="MapVisualizer"/> state changes
+        /// </summary>
+        /// <param name="state">The new <see cref="ModuleState"/></param>
+        private void OnMapVisualizerStateChanged(ModuleState state)
+        {
+            if (state == ModuleState.Finished)
+            {
+                Debug.Log("Placing at coordinates");
+                placeAtCoordinates.Execute();
+
+                Debug.Log("Performing snap");
+                snapToTerrain.PerformSnap();
+            }
+        }
 
         #region Editor Validation
 

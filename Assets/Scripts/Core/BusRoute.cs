@@ -10,7 +10,6 @@ namespace AaronMeaney.BusStop.Core
     /// Represents the list of <see cref="RouteWaypoint"/>s in a <see cref="BusRoute"/>.
     /// Does NOT contain any timetable/time slot data.
     /// </summary>
-    [RequireComponent(typeof(BusPathfinder), typeof(BusPathfinderVisualiser))]
     public class BusRoute : MonoBehaviour
     {
         [SerializeField]
@@ -27,24 +26,7 @@ namespace AaronMeaney.BusStop.Core
         /// The list of <see cref="RouteWaypoint"/>s in the <see cref="BusRoute"/> 
         /// </summary>
         public List<RouteWaypoint> RouteWaypoints { get { return routeWaypoints; } }
-
-        private BusPathfinder pathfinder;
-        private BusPathfinderVisualiser pathVisualiser;
-
-        private void Awake()
-        {
-            pathfinder = GetComponent<BusPathfinder>();
-            pathVisualiser = GetComponent<BusPathfinderVisualiser>();
-        }
-
-        /// <summary>
-        /// Generates the map route from the <see cref="BusPathfinder"/> and shows it on the <see cref="BusPathfinderVisualiser"/>"/>
-        /// </summary>
-        public void GenerateMapRoute()
-        {
-            //pathfinder.SetDirectionsToPosition();
-        }
-
+        
         #region Gizmos
         [SerializeField]
         [HideInInspector]

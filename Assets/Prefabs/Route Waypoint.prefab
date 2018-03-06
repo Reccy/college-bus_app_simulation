@@ -38,6 +38,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4508051252351958}
   - component: {fileID: 114733385145044834}
+  - component: {fileID: 114788828128342416}
+  - component: {fileID: 114991950405857318}
   m_Layer: 2
   m_Name: Route Waypoint
   m_TagString: Untagged
@@ -64,8 +66,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1928123344870766}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.466, y: 0, z: -16.133}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 13.319498, y: 6.6670046, z: 1.6470933}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4504525223376296}
@@ -136,3 +138,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52826f3e529c1ed4c87b8c1e4d7878b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114788828128342416
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1928123344870766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0498af2bf865a44983e0b7b1fc82ed8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  map: {fileID: 0}
+  coordinateLocation:
+    latitude: 53.346764
+    longitude: -6.227695
+  executeOnAwake: 0
+--- !u!114 &114991950405857318
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1928123344870766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b72f01d01335fb459654de7f8f6ba7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  originDistanceFromRoad: 0.15
+  alignAngleWithTerrain: 0
+  rayOriginHeight: 100
+  snapOnUpdate: 0

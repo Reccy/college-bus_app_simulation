@@ -2,6 +2,7 @@
 using System;
 using UnityEditor;
 using UnityEngine;
+using EditorGUITable;
 
 namespace AaronMeaney.BusStop.Core
 {
@@ -49,8 +50,16 @@ namespace AaronMeaney.BusStop.Core
         /// <summary>
         /// The <see cref="BusServices"/>s running on this <see cref="BusTimetable"/>.
         /// </summary>
-        public List<BusService> BusServices { get { return busServices; } }
+        public List<BusService> BusServices {
+            get
+            {
+                if (busServices == null)
+                    busServices = new List<BusService>();
 
+                return busServices;
+            }
+        }
+        
         #region Service Days
 
         [SerializeField]
@@ -179,6 +188,186 @@ namespace AaronMeaney.BusStop.Core
             _sundayService.boolValue = EditorGUILayout.Toggle("Runs on Sunday", _sundayService.boolValue);
 
             serializedObject.ApplyModifiedProperties();
+        }
+    }
+
+    [ExecuteInEditMode]
+    public class BusTimetableEditorWindow : EditorWindow
+    {
+        #region Configuration
+        private BusTimetable timetable = null;
+
+        private BusService selectedService = null;
+
+        GUITableState state;
+        
+        [MenuItem("Window/Bus Stop Timetable Editor")]
+        public static void Init()
+        {
+            GetWindow<BusTimetableEditorWindow>();
+        }
+
+        private void OnSelectionChange()
+        {
+            foreach (GameObject obj in Selection.gameObjects)
+            {
+                if (obj.GetComponent<BusTimetable>())
+                {
+                    timetable = obj.GetComponent<BusTimetable>();
+                    break;
+                }
+            }
+
+            GetWindow<BusTimetableEditorWindow>().Repaint();
+        }
+        #endregion
+
+        Vector2 scrollPos = Vector2.zero;
+        private void OnGUI()
+        {
+            // Title setup
+            titleContent.image = AssetDatabase.LoadAssetAtPath<Texture>("Assets/Sprites/bus_icon.png");
+            titleContent.text = "Timetable";
+
+            // Don't render rest of the UI if no timetable is selected
+            if (timetable == null)
+            {
+                EditorGUILayout.LabelField("No Timetable Selected", EditorStyles.largeLabel);
+                return;
+            }
+
+
+            // START
+            scrollPos = EditorGUILayout.BeginScrollView(scrollPos, true, true);
+            #region Timetable Header
+
+            // Show the name of the selected timetable
+            EditorGUILayout.LabelField(timetable.name, EditorStyles.largeLabel);
+            
+            // Show what days the timetable runs on
+            string daysRunning = "";
+
+            foreach(DayOfWeek day in Enum.GetValues(typeof(DayOfWeek)))
+            {
+                if (timetable.RunningOnDay(day))
+                {
+                    if (daysRunning != "")
+                        daysRunning += ", ";
+
+                    daysRunning += day.ToString();
+                }
+            }
+
+            if (daysRunning == "")
+            {
+                daysRunning = "Not running on any days.";
+            }
+            else
+            {
+                daysRunning = "Service Days: " + daysRunning;
+            }
+
+            EditorGUILayout.LabelField(daysRunning);
+            EditorGUILayout.Space();
+            EditorGUILayout.Space();
+            EditorGUILayout.Space();
+            #endregion
+
+            #region Timetable Body
+            List<BusService> companyServices = timetable.BusServices;
+            List<BusRoute> companyRoutes = timetable.ParentBusCompany.BusRoutes;
+            List<BusRoute> servicedRoutes = new List<BusRoute>();
+            List<BusStop> servicedStops = new List<BusStop>();
+
+            // Get list of bus routes being serviced by each bus service
+            foreach (BusService service in companyServices)
+            {
+                if (service.ServicedBusRoute != null && !servicedRoutes.Contains(service.ServicedBusRoute))
+                {
+                    servicedRoutes.Add(service.ServicedBusRoute);
+                }
+            }
+
+            // Get list of bus stops being serviced by each route
+            foreach (BusRoute route in servicedRoutes)
+            {
+                foreach (BusStop stop in route.BusStops)
+                {
+                    if (!servicedStops.Contains(stop))
+                    {
+                        servicedStops.Add(stop);
+                    }
+                }
+            }
+
+            // Test render bus stops
+            EditorGUILayout.BeginHorizontal(GUILayout.ExpandWidth(false), GUILayout.ExpandHeight(false));
+            {
+                // Render serviced Bus Stops
+                EditorGUILayout.BeginVertical();
+                {
+                    EditorGUILayout.LabelField("Bus Stops", EditorStyles.boldLabel);
+
+                    if (servicedStops.Count == 0)
+                        EditorGUILayout.LabelField("None");
+
+                    for (int i = 0; i < servicedStops.Count; i++)
+                    {
+                        EditorGUILayout.LabelField(servicedStops[i].BusStopId);
+                    }
+                }
+                EditorGUILayout.EndVertical();
+
+                // Render each Bus Service
+                foreach (BusService service in companyServices)
+                {
+                    EditorGUILayout.BeginVertical();
+                    {
+                        // Selected Bus Route for Service
+                        List<string> companyRoutesAsStrings = new List<string> { "None" };
+
+                        // Need to populate the string list and set the selected index to persist selected bus route
+                        int selectedBusRouteIndex = 0;
+                        for (int routeIndex = 0; routeIndex < companyRoutes.Count; routeIndex++)
+                        {
+                            BusRoute route = companyRoutes[routeIndex];
+
+                            companyRoutesAsStrings.Add(route.RouteId);
+                            if (route == service.ServicedBusRoute)
+                            {
+                                selectedBusRouteIndex = routeIndex + 1;
+                            }
+                        }
+
+                        // Selection Popup
+                        selectedBusRouteIndex = (EditorGUILayout.Popup(selectedBusRouteIndex, companyRoutesAsStrings.ToArray(), GUILayout.Width(60)) - 1);
+
+                        // Apply selection
+                        if (selectedBusRouteIndex == -1)
+                        {
+                            service.ServicedBusRoute = null;
+                        }
+                        else
+                        {
+                            service.ServicedBusRoute = companyRoutes[selectedBusRouteIndex];
+                        }
+                    }
+                    EditorGUILayout.EndVertical();
+                }
+                
+                // Render "Add Service" button
+                if(GUILayout.Button("Add Service", GUILayout.Width(100)))
+                {
+                    BusService newService = new BusService(timetable);
+                    companyServices.Add(newService);
+                }
+                GUILayout.FlexibleSpace();
+            }
+            EditorGUILayout.EndHorizontal();
+            #endregion
+            
+            // END
+            EditorGUILayout.EndScrollView();
         }
     }
 }

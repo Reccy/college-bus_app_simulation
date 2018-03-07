@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace AaronMeaney.BusStop.Core
 {
     /// <summary>
     /// Represents a <see cref="BusStop"/> timeslot in a <see cref="BusService"/>
     /// </summary>
+    [System.Serializable]
     public class BusTimeSlot
     {
+        [SerializeField]
         private BusService parentBusService;
         /// <summary>
         /// The <see cref="BusService"/> that owns this <see cref="BusTimeSlot"/>
@@ -23,6 +22,7 @@ namespace AaronMeaney.BusStop.Core
         /// </summary>
         public BusStop ScheduledBusStop;
 
+        [SerializeField]
         private int scheduledHour;
         /// <summary>
         /// The hour when the bus should be at the <see cref="BusStop"/>
@@ -32,7 +32,6 @@ namespace AaronMeaney.BusStop.Core
             get { return scheduledHour; }
             set
             {
-                BusStop s = ParentBusService.ParentBusTimetable.ParentBusCompany.BusRoutes[0].RouteWaypoints[0].LinkedBusStop;
                 if (value < 0 || value > 23)
                 {
                     Debug.LogError("Scheduled Hour must be between 0 and 23 inclusive. Actual value was " + value);
@@ -43,6 +42,7 @@ namespace AaronMeaney.BusStop.Core
             }
         }
 
+        [SerializeField]
         private int scheduledMinute;
         /// <summary>
         /// The minute when the bus should be at the <see cref="BusStop"/>

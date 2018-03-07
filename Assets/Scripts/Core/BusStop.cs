@@ -36,4 +36,25 @@ namespace AaronMeaney.BusStop.Core
             RouteWaypoint.ValidateAllWaypoints();
         }
     }
+
+    [CustomEditor(typeof(BusStop))]
+    public class BusStopEditor : Editor
+    {
+        private BusStop busStop;
+
+        public override void OnInspectorGUI()
+        {
+            base.DrawDefaultInspector();
+
+            busStop = (BusStop)target;
+
+            if (busStop.LinkedRouteWaypoint)
+            {
+                if (GUILayout.Button("Select Waypoint"))
+                {
+                    Selection.activeGameObject = busStop.LinkedRouteWaypoint.gameObject;
+                }
+            }
+        }
+    }
 }

@@ -9,6 +9,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: be5191e91e4383041ba1288e14fedf9a, type: 3}
-  m_Name: BusStopAPIConfiguration_Local
+  m_Name: Local_APIConfig
   m_EditorClassIdentifier: 
   baseUrl: www.busapp.com/api/public/

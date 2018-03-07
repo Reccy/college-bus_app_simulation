@@ -17,12 +17,38 @@ namespace AaronMeaney.BusStop.Core
 
         private PlaceAtCoordinates placeAtCoordinates;
         public PlaceAtCoordinates PlactAtCoordinates { get { return placeAtCoordinates; } }
+        
+        public GameObject busStopPrefab = null;
 
         /// <summary>
         /// The <see cref="BusStop"/> belonging to this <see cref="RouteWaypoint"/>
         /// </summary>
         public BusStop LinkedBusStop
         { get { return GetComponentInChildren<BusStop>(); } }
+
+        /// <summary>
+        /// Adds a <see cref="BusStop"/> object to this <see cref="RouteWaypoint"/>.
+        /// Only works in edit mode.
+        /// </summary>
+        public void CreateBusStop()
+        {
+            if (Application.isEditor && !Application.isPlaying)
+            {
+                if (busStopPrefab == null)
+                {
+                    Debug.LogError("Bus Stop Prefab is null. Can't create Bus Stop!", this);
+                    return;
+                }
+
+                GameObject newBusStop = (GameObject)PrefabUtility.InstantiatePrefab(busStopPrefab);
+                newBusStop.transform.parent = transform;
+                newBusStop.transform.position = transform.position;
+            }
+            else
+            {
+                Debug.LogError("Bus Stops can only be created in Unity Engine Edit Mode!", this);
+            }
+        }
 
         private void Awake()
         {
@@ -152,14 +178,46 @@ namespace AaronMeaney.BusStop.Core
     [CustomEditor(typeof(RouteWaypoint))]
     public class RouteWaypointEditor : Editor
     {
-        void OnEnable()
+        private RouteWaypoint routeWaypoint;
+
+        private void OnEnable()
         {
             RouteWaypoint.ValidateAllWaypoints();
         }
         
-        void OnDisable()
+        private void OnDisable()
         {
             RouteWaypoint.ValidateAllWaypoints();
+        }
+
+        public override void OnInspectorGUI()
+        {
+            routeWaypoint = ((RouteWaypoint)target);
+
+            // Default script field
+            GUI.enabled = false;
+            EditorGUILayout.ObjectField("Script:", MonoScript.FromMonoBehaviour((RouteWaypoint)target), typeof(RouteWaypoint), false);
+            GUI.enabled = true;
+
+            // Bus Stop Creation
+            if (routeWaypoint.LinkedBusStop)
+            {
+                EditorGUI.BeginDisabledGroup(true);
+                EditorGUILayout.TextField("Linked Bus Stop", routeWaypoint.LinkedBusStop.BusStopId);
+                EditorGUI.EndDisabledGroup();
+
+                if (GUILayout.Button("Select Bus Stop"))
+                {
+                    Selection.activeGameObject = routeWaypoint.LinkedBusStop.gameObject;
+                }
+            }
+            else
+            {
+                if (GUILayout.Button("Create Bus Stop"))
+                {
+                    routeWaypoint.CreateBusStop();
+                };
+            }
         }
     }
 }

@@ -138,6 +138,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52826f3e529c1ed4c87b8c1e4d7878b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  busStopPrefab: {fileID: 1462088307315816, guid: be7c083f6c332d44e8025bf973291bee,
+    type: 2}
 --- !u!114 &114788828128342416
 MonoBehaviour:
   m_ObjectHideFlags: 1

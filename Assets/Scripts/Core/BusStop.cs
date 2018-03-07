@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using UnityEditor;
+using UnityEngine;
 
 namespace AaronMeaney.BusStop.Core
 {
@@ -21,15 +22,18 @@ namespace AaronMeaney.BusStop.Core
         {
             get { return GetComponentInParent<RouteWaypoint>(); }
         }
-
-        private void OnDrawGizmosSelected()
+        
+        private void OnDrawGizmos()
         {
-            Gizmos.color = Color.yellow;
+            Handles.Label(transform.position, name);
+        }
 
-            if (LinkedRouteWaypoint)
-            {
-                Gizmos.DrawLine(transform.position, LinkedRouteWaypoint.transform.position);
-            }
+        private void OnValidate()
+        {
+            name = BusStopId + "_BusStop";
+
+            // Validate waypoints to update BusStopId names in Waypoint
+            RouteWaypoint.ValidateAllWaypoints();
         }
     }
 }

@@ -30,7 +30,10 @@ namespace AaronMeaney.BusStop.Core
             placeAtCoordinates = GetComponent<PlaceAtCoordinates>();
             map = FindObjectOfType<AbstractMap>();
             
-            map.MapVisualizer.OnMapVisualizerStateChanged += OnMapVisualizerStateChanged;
+            if (Application.isPlaying)
+            {
+                map.MapVisualizer.OnMapVisualizerStateChanged += OnMapVisualizerStateChanged;
+            }
         }
 
         /// <summary>
@@ -69,11 +72,19 @@ namespace AaronMeaney.BusStop.Core
         }
 
         /// <summary>
-        /// Sets the <see cref="RouteWaypoint"/> name to "RouteWaypoint_" and the result of <see cref="GetInstanceNumber"/>
+        /// Sets the <see cref="RouteWaypoint"/> name to "RouteWaypoint_" and the result of <see cref="GetInstanceNumber"/>.
+        /// If there is a <see cref="LinkedBusStop"/>, then its set to the <see cref="BusStop"/> name.
         /// </summary>
         private void UpdateUniqueName()
         {
-            name = "RouteWaypoint_" + GetInstanceNumber();
+            if (LinkedBusStop != null)
+            {
+                name = LinkedBusStop.BusStopId + "_Waypoint";
+            }
+            else
+            {
+                name = "RouteWaypoint_" + GetInstanceNumber();
+            }
         }
 
         /// <summary>

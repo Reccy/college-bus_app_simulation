@@ -105,6 +105,52 @@ namespace AaronMeaney.BusStop.Core
             pathWaypoints.AddRange(pathfinder.CoordinateLocations);
         }
 
+        /// <summary>
+        /// Sorts the <see cref="BusStop"/>s in the list of <see cref="BusRoute"/>s by using Topological Sort.
+        /// </summary>
+        /// <param name="busRoutes">List of <see cref="BusRoute"/>s to sort</param>
+        /// <returns>An ordered topological list of <see cref="BusStop"/>s from each <see cref="BusRoute"/></returns>
+        public static List<BusStop> TopologicalSortRoutes(List<BusRoute> busRoutes)
+        {
+            List<BusStop> sortedBusStops = new List<BusStop>();
+            Dictionary<BusRoute, List<BusStopGraphNode>> singleRouteBusStops = new Dictionary<BusRoute, List<BusStopGraphNode>>();
+            List<BusStopGraphNode> routeGraph = new List<BusStopGraphNode>();
+
+            // Create individual LinkedLists for each route
+            foreach (BusRoute route in busRoutes)
+            {
+                singleRouteBusStops[route] = new List<BusStopGraphNode>();
+
+                for (int busStopIndex = route.BusStops.Count - 1; busStopIndex >= 0; busStopIndex--)
+                {
+                    BusStopGraphNode newNode = new BusStopGraphNode(route.BusStops[busStopIndex]);
+                    
+                    if (busStopIndex + 1 < route.BusStops.Count)
+                    {
+                        newNode.NextBusStops.Add(singleRouteBusStops[route][busStopIndex + 1]);
+                    }
+
+                    singleRouteBusStops[route].Add(newNode);
+                }
+            }
+
+            foreach (KeyValuePair<BusRoute, List<BusStopGraphNode>> entry in singleRouteBusStops)
+            {
+                BusStopGraphNode currentNode = entry.Value[0];
+
+                while (currentNode.NextBusStops.Count != 0)
+                {
+                    Debug.Log(entry.Key + " --> " + currentNode.BusStop.BusStopId + " --> " + currentNode.NextBusStops[0].BusStop.BusStopId);
+                    currentNode = currentNode.NextBusStops[0];
+                }
+            }
+
+            // Combine LinkedLists into a single graph
+            
+
+            return sortedBusStops;
+        }
+
         #region Gizmos
         [SerializeField]
         [HideInInspector]

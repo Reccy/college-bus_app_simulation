@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 namespace AaronMeaney.BusStop.Core
@@ -34,6 +35,28 @@ namespace AaronMeaney.BusStop.Core
 
             // Validate waypoints to update BusStopId names in Waypoint
             RouteWaypoint.ValidateAllWaypoints();
+        }
+    }
+
+    /// <summary>
+    /// A data representation of a <see cref="BusStop"/> in a graph.
+    /// </summary>
+    public class BusStopGraphNode
+    {
+        /// <summary>
+        /// The current <see cref="BusStop"/>
+        /// </summary>
+        public BusStop BusStop;
+
+        /// <summary>
+        /// List of <see cref="BusStop"/>s that this <see cref="BusStopGraphNode"/> connects to.
+        /// </summary>
+        public List<BusStopGraphNode> NextBusStops;
+
+        public BusStopGraphNode(BusStop busStop)
+        {
+            BusStop = busStop;
+            NextBusStops = new List<BusStopGraphNode>();
         }
     }
 

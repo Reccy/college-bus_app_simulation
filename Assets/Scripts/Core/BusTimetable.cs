@@ -9,6 +9,7 @@ namespace AaronMeaney.BusStop.Core
     /// <summary>
     /// Represents a standard <see cref="BusTimetable"/>, containing multiple <see cref="BusRoute"/>s with added scheduling data.
     /// </summary>
+    [System.Serializable]
     public class BusTimetable : MonoBehaviour
     {
         /// <summary>
@@ -288,17 +289,9 @@ namespace AaronMeaney.BusStop.Core
                 }
             }
 
-            // Get list of bus stops being serviced by each route
-            foreach (BusRoute route in servicedRoutes)
-            {
-                foreach (BusStop stop in route.BusStops)
-                {
-                    if (!servicedStops.Contains(stop))
-                    {
-                        servicedStops.Add(stop);
-                    }
-                }
-            }
+            // Get list of bus stops being serviced by each route.
+            // Sort routes using a topological sort
+            //servicedStops = BusRoute.TopologicalSortRoutes(servicedRoutes);
 
             // Test render bus stops
             EditorGUILayout.BeginHorizontal(GUILayout.ExpandWidth(false), GUILayout.ExpandHeight(false));

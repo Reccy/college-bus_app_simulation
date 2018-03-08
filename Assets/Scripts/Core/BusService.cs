@@ -9,7 +9,6 @@ namespace AaronMeaney.BusStop.Core
     [System.Serializable]
     public class BusService
     {
-        [SerializeField]
         private BusTimetable busTimetable;
         /// <summary>
         /// The <see cref="BusTimetable"/> that owns this <see cref="BusService"/>

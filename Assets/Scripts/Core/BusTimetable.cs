@@ -291,7 +291,7 @@ namespace AaronMeaney.BusStop.Core
 
             // Get list of bus stops being serviced by each route.
             // Sort routes using a topological sort
-            //servicedStops = BusRoute.TopologicalSortRoutes(servicedRoutes);
+            servicedStops = BusRoute.TopologicalSortRoutes(servicedRoutes);
 
             // Test render bus stops
             EditorGUILayout.BeginHorizontal(GUILayout.ExpandWidth(false), GUILayout.ExpandHeight(false));

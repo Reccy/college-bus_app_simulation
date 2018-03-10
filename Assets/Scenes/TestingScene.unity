@@ -261,7 +261,7 @@ Prefab:
     - target: {fileID: 114867456524390420, guid: 0edfd68289409bc409a92c0296e50719,
         type: 2}
       propertyPath: routeWaypoints.Array.size
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4446080505690742, guid: 0edfd68289409bc409a92c0296e50719, type: 2}
       propertyPath: m_LocalPosition.x
@@ -348,7 +348,7 @@ Prefab:
         type: 2}
       propertyPath: routeWaypoints.Array.data[3]
       value: 
-      objectReference: {fileID: 307166842}
+      objectReference: {fileID: 0}
     - target: {fileID: 114867456524390420, guid: 0edfd68289409bc409a92c0296e50719,
         type: 2}
       propertyPath: routeWaypoints.Array.data[4]
@@ -953,7 +953,7 @@ Prefab:
     - target: {fileID: 114867456524390420, guid: 0edfd68289409bc409a92c0296e50719,
         type: 2}
       propertyPath: routeWaypoints.Array.size
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4446080505690742, guid: 0edfd68289409bc409a92c0296e50719, type: 2}
       propertyPath: m_LocalPosition.x
@@ -1388,7 +1388,7 @@ Prefab:
     - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
         type: 2}
       propertyPath: busServices.Array.size
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
         type: 2}

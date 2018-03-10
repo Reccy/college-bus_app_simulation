@@ -36,7 +36,7 @@ GameObject:
   - component: {fileID: 4670579128099660}
   - component: {fileID: 114286242443130876}
   m_Layer: 0
-  m_Name: ' Bus Company'
+  m_Name: Bus Company
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

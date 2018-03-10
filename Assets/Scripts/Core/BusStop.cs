@@ -38,28 +38,6 @@ namespace AaronMeaney.BusStop.Core
         }
     }
 
-    /// <summary>
-    /// A data representation of a <see cref="BusStop"/> in a graph.
-    /// </summary>
-    public class BusStopGraphNode
-    {
-        /// <summary>
-        /// The current <see cref="BusStop"/>
-        /// </summary>
-        public BusStop BusStop;
-
-        /// <summary>
-        /// List of <see cref="BusStop"/>s that this <see cref="BusStopGraphNode"/> connects to.
-        /// </summary>
-        public List<BusStopGraphNode> NextBusStops;
-
-        public BusStopGraphNode(BusStop busStop)
-        {
-            BusStop = busStop;
-            NextBusStops = new List<BusStopGraphNode>();
-        }
-    }
-
     [CustomEditor(typeof(BusStop))]
     public class BusStopEditor : Editor
     {

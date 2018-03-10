@@ -105,51 +105,104 @@ namespace AaronMeaney.BusStop.Core
             pathWaypoints.AddRange(pathfinder.CoordinateLocations);
         }
 
+        #region Topological Sort
         /// <summary>
         /// Sorts the <see cref="BusStop"/>s in the list of <see cref="BusRoute"/>s by using Topological Sort.
+        /// Adapted from Wikipedia: https://en.wikipedia.org/wiki/Topological_sorting#Depth-first_search
         /// </summary>
         /// <param name="busRoutes">List of <see cref="BusRoute"/>s to sort</param>
         /// <returns>An ordered topological list of <see cref="BusStop"/>s from each <see cref="BusRoute"/></returns>
         public static List<BusStop> TopologicalSortRoutes(List<BusRoute> busRoutes)
         {
+            // Sorted bus stops to return at end of method
             List<BusStop> sortedBusStops = new List<BusStop>();
-            Dictionary<BusRoute, List<BusStopGraphNode>> singleRouteBusStops = new Dictionary<BusRoute, List<BusStopGraphNode>>();
-            List<BusStopGraphNode> routeGraph = new List<BusStopGraphNode>();
 
-            // Create individual LinkedLists for each route
+            // Dict of Bus Stop edges for graph
+            Dictionary<BusStop, List<BusStop>> busStopEdges = new Dictionary<BusStop, List<BusStop>>();
+
+            // List of unvisited Bus Stops for the sort
+            List<BusStop> unvisitedBusStops = new List<BusStop>();
+            
+            // Create Graph of Bus Stops
             foreach (BusRoute route in busRoutes)
             {
-                singleRouteBusStops[route] = new List<BusStopGraphNode>();
-
-                for (int busStopIndex = route.BusStops.Count - 1; busStopIndex >= 0; busStopIndex--)
+                // Create Vertex for each pair of Bus Stops
+                for (int busStopIndex = 1; busStopIndex < route.BusStops.Count; busStopIndex++)
                 {
-                    BusStopGraphNode newNode = new BusStopGraphNode(route.BusStops[busStopIndex]);
+                    BusStop stop = route.BusStops[busStopIndex - 1];
+                    BusStop nextStop = route.BusStops[busStopIndex];
                     
-                    if (busStopIndex + 1 < route.BusStops.Count)
+                    // Add Vertex if it doesn't already exist
+                    if (!busStopEdges.ContainsKey(stop))
+                        busStopEdges[stop] = new List<BusStop>();
+
+                    // Add next stop to Vertex if it doesn't already exist
+                    if (!busStopEdges[stop].Contains(nextStop))
+                        busStopEdges[stop].Add(nextStop);
+
+                    // Add stops list of unvisited Bus Stops for Topological Sort
+                    if (!unvisitedBusStops.Contains(stop))
                     {
-                        newNode.NextBusStops.Add(singleRouteBusStops[route][busStopIndex + 1]);
+                        unvisitedBusStops.Add(stop);
                     }
 
-                    singleRouteBusStops[route].Add(newNode);
+                    if (!unvisitedBusStops.Contains(nextStop))
+                    {
+                        unvisitedBusStops.Add(nextStop);
+                    }
                 }
             }
 
-            foreach (KeyValuePair<BusRoute, List<BusStopGraphNode>> entry in singleRouteBusStops)
+            // Perform Topological Sort
+            List<BusStop> beingVisitedBusStops = new List<BusStop>();
+
+            while (unvisitedBusStops.Count != 0)
             {
-                BusStopGraphNode currentNode = entry.Value[0];
-
-                while (currentNode.NextBusStops.Count != 0)
-                {
-                    Debug.Log(entry.Key + " --> " + currentNode.BusStop.BusStopId + " --> " + currentNode.NextBusStops[0].BusStop.BusStopId);
-                    currentNode = currentNode.NextBusStops[0];
-                }
+                BusStop selectedStop = unvisitedBusStops[0];
+                
+                Visit(selectedStop, unvisitedBusStops, busStopEdges, sortedBusStops, beingVisitedBusStops);
             }
 
-            // Combine LinkedLists into a single graph
-            
-
+            sortedBusStops.Reverse();
             return sortedBusStops;
         }
+
+        /// <summary>
+        /// Visit helper method for <see cref="TopologicalSortRoutes(List{BusRoute})"/>
+        /// Adapted from Wikipedia: https://en.wikipedia.org/wiki/Topological_sorting#Depth-first_search
+        /// </summary>
+        private static void Visit(BusStop busStop,
+            List<BusStop> unvisitedBusStops,
+            Dictionary<BusStop, List<BusStop>> busStopEdges,
+            List<BusStop> sortedBusStops,
+            List<BusStop> beingVisitedBusStops)
+        {
+            if (sortedBusStops.Contains(busStop))
+            {
+                return;
+            }
+
+            if (beingVisitedBusStops.Contains(busStop))
+            {
+                Debug.LogError("Cycle detected in DAG at: " + busStop.BusStopId);
+                unvisitedBusStops.Remove(busStop);
+                return;
+            }
+
+            beingVisitedBusStops.Add(busStop);
+            
+            if (busStopEdges.ContainsKey(busStop))
+            {
+                foreach (BusStop stop in busStopEdges[busStop])
+                {
+                    Visit(stop, unvisitedBusStops, busStopEdges, sortedBusStops, beingVisitedBusStops);
+                }
+            }
+            
+            unvisitedBusStops.Remove(busStop);
+            sortedBusStops.Add(busStop);
+        }
+        #endregion
 
         #region Gizmos
         [SerializeField]

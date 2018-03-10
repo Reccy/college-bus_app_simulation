@@ -1,77 +1,61 @@
-﻿using Mapbox.Unity.Map;
-using Mapbox.Unity.Utilities;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 namespace AaronMeaney.BusStop.Core
 {
     /// <summary>
-    /// Handles <see cref="BusStop"/> functionality. See <see cref="BusStopData"/> for data that runs the functionality.
+    /// Represents a <see cref="BusStop"/> on the side of the road
     /// </summary>
-    [System.Serializable]
-    [RequireComponent(typeof(SnapToTerrain))]
     public class BusStop : MonoBehaviour
     {
-        private AbstractMap simAbstractMap;
-
         [SerializeField]
-        private BusStopData busStopData;
+        private string busStopId;
         /// <summary>
-        /// Data used to drive the functionality of the <see cref="BusStop"/>
+        /// The ID of the <see cref="BusStop"/>. Must be unique.
         /// </summary>
-        public BusStopData BusStopData {
-            get { return busStopData; }
+        public string BusStopId { get { return busStopId; } }
+        
+        /// <summary>
+        /// The <see cref="RouteWaypoint"/> belonging to this <see cref="BusStop"/>
+        /// </summary>
+        public RouteWaypoint LinkedRouteWaypoint
+        {
+            get { return GetComponentInParent<RouteWaypoint>(); }
+        }
+        
+        private void OnDrawGizmos()
+        {
+            Handles.Label(transform.position, name);
         }
 
-        /// <summary>
-        /// Sets the <see cref="BusStopData"/> and places an instance of the <see cref="BusStop"/> in the simulation
-        /// </summary>
-        public void Initialize(BusStopData busStopData, AbstractMap simAbstractMap)
+        private void OnValidate()
         {
-            this.busStopData = busStopData;
-            this.simAbstractMap = simAbstractMap;
+            name = BusStopId + "_BusStop";
 
-            // Set GameObject name
-            name = "Bus Stop " + busStopData.Identifier;
-            UpdatePosition();
-
-            Debug.Log("Initialized -> " + busStopData.Identifier);
-        }
-
-        /// <summary>
-        /// Updates the position based on the latitude and longitude of the <see cref="BusStopData"/>
-        /// </summary>
-        public void UpdatePosition()
-        {
-            Debug.Log("Updating position of " + name);
-            transform.position = busStopData.coordinateLocation.AsUnityPosition(simAbstractMap);
-
-            // Snap position to terrain
-            Debug.Log("Snapping " + name + " to terrain");
-            GetComponent<SnapToTerrain>().PerformSnap();
+            // Validate waypoints to update BusStopId names in Waypoint
+            RouteWaypoint.ValidateAllWaypoints();
         }
     }
 
-    /// <summary>
-    /// Contains the data for the <see cref="BusStop"/>.
-    /// </summary>
-    [System.Serializable]
-    public class BusStopData
+    [CustomEditor(typeof(BusStop))]
+    public class BusStopEditor : Editor
     {
-        [SerializeField]
-        private string identifier = "DEFAULT";
-        /// <summary>
-        /// The unique identifier of the <see cref="BusStop"/>
-        /// </summary>
-        public string Identifier
+        private BusStop busStop;
+
+        public override void OnInspectorGUI()
         {
-            get { return identifier; }
+            base.DrawDefaultInspector();
+
+            busStop = (BusStop)target;
+
+            if (busStop.LinkedRouteWaypoint)
+            {
+                if (GUILayout.Button("Select Waypoint"))
+                {
+                    Selection.activeGameObject = busStop.LinkedRouteWaypoint.gameObject;
+                }
+            }
         }
-        
-        /// <summary>
-        /// The coordinates of the bus stop
-        /// </summary>
-        [SerializeField]
-        public CoordinateLocation coordinateLocation;
     }
 }

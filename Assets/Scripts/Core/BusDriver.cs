@@ -21,9 +21,9 @@ namespace AaronMeaney.BusStop.Core
             /// </summary>
             Debug,
             /// <summary>
-            /// The bus follows its bus route.
+            /// The bus follows its set path.
             /// </summary>
-            Route
+            Path
         }
 
         [SerializeField]
@@ -89,37 +89,37 @@ namespace AaronMeaney.BusStop.Core
             set { currentDestination = value; }
         }
 
-        private BusRoute currentBusRoute;
+        private BusPathfinder currentBusPath;
         /// <summary>
-        /// The bus route currently assigned to the bus.
+        /// The path currently assigned to the bus.
         /// </summary>
-        public BusRoute CurrentBusRoute
+        public BusPathfinder CurrentBusPath
         {
-            get { return currentBusRoute; }
+            get { return currentBusPath; }
             set
             {
-                currentBusRouteNode = 0;
-                currentBusRoute = value;
+                currentBusPathNode = 0;
+                currentBusPath = value;
                 CurrentDestination.position = transform.position;
-                GetComponent<BusRouteVisualiser>().ClearVisualisation();
+                GetComponent<BusPathfinderVisualiser>().ClearVisualisation();
 
-                if (GetComponent<BusRouteVisualiser>())
+                if (GetComponent<BusPathfinderVisualiser>())
                 {
-                    CurrentBusRoute.onBusRoutePopulated += GetComponent<BusRouteVisualiser>().SetBusRouteVisualisation;
+                    CurrentBusPath.onBusPathPopulated += GetComponent<BusPathfinderVisualiser>().SetBusPathVisualisation;
                 }
                 
                 if (GetComponent<PostBusRoute>())
                 {
-                    CurrentBusRoute.onBusRoutePopulated += GetComponent<PostBusRoute>().PerformPost;
+                    CurrentBusPath.onBusPathPopulated += GetComponent<PostBusRoute>().PerformPost;
                 }
             }
         }
 
-        private int currentBusRouteNode = 0;
+        private int currentBusPathNode = 0;
 
         private void Awake()
         {
-            CurrentBusRoute = new BusRoute();
+            CurrentBusPath = new BusPathfinder();
         }
 
         private void Update()
@@ -133,13 +133,13 @@ namespace AaronMeaney.BusStop.Core
                     DriveForward();
                 }
             }
-            else if (DriverMode.Equals(BusDriverMode.Route))
+            else if (DriverMode.Equals(BusDriverMode.Path))
             {
-                // Update the current destination if the mode is set to Route
-                if (currentBusRouteNode < currentBusRoute.Size)
+                // Update the current destination if the mode is set to path
+                if (currentBusPathNode < currentBusPath.Size)
                 {
-                    CurrentDestination.position = currentBusRoute.LatLongNodes[currentBusRouteNode].AsUnityPosition(map);
-                    currentBusRouteNode++;
+                    CurrentDestination.position = currentBusPath.CoordinateLocations[currentBusPathNode].AsUnityPosition(map);
+                    currentBusPathNode++;
                 }
             }
         }
@@ -157,19 +157,19 @@ namespace AaronMeaney.BusStop.Core
         }
 
         /// <summary>
-        /// Drives along a route to the final destination.
+        /// Drives along a path to the final destination.
         /// </summary>
-        private void DriveRouteMode()
+        private void DrivePathMode()
         {
-            if (isDriving && GetDistanceFromDestination() > 1 && CurrentBusRoute.IsReady)
+            if (isDriving && GetDistanceFromDestination() > 1 && CurrentBusPath.IsReady)
             {
                 RotateTowardsDestination();
                 DriveForward();
             }
-            else if (currentBusRouteNode < currentBusRoute.Size)
+            else if (currentBusPathNode < currentBusPath.Size)
             {
-                CurrentDestination.position = currentBusRoute.LatLongNodes[currentBusRouteNode].AsUnityPosition(map);
-                currentBusRouteNode++;
+                CurrentDestination.position = currentBusPath.CoordinateLocations[currentBusPathNode].AsUnityPosition(map);
+                currentBusPathNode++;
             }
         }
 

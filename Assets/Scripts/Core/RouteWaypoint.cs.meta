@@ -1,11 +1,13 @@
 fileFormatVersion: 2
-guid: 838449d373461f44ca20c0e0374789da
-timeCreated: 1520012232
+guid: 52826f3e529c1ed4c87b8c1e4d7878b4
+timeCreated: 1520529905
 licenseType: Free
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - busStopPrefab: {fileID: 1462088307315816, guid: be7c083f6c332d44e8025bf973291bee,
+      type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

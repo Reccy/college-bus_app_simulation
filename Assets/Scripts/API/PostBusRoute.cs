@@ -39,7 +39,7 @@ namespace AaronMeaney.BusStop.API.Action
         /// Sends the bus route data the the REST API.
         /// </summary>
         /// <param name="busRoute">The bus route to send</param>
-        public void PerformPost(BusRoute busRoute)
+        public void PerformPost(BusPathfinder busRoute)
         {
             StartCoroutine(Post(busRoute));
         }
@@ -48,9 +48,9 @@ namespace AaronMeaney.BusStop.API.Action
         /// Sends the bus route data the the REST API. Asynchronous method.
         /// </summary>
         /// <param name="busRoute">The bus route to send</param>
-        private IEnumerator Post(BusRoute busRoute)
+        private IEnumerator Post(BusPathfinder busRoute)
         {
-            List<CoordinateLocation> nodeList = busRoute.LatLongNodes;
+            List<CoordinateLocation> nodeList = busRoute.CoordinateLocations;
             string busRouteJSON = JsonConvert.SerializeObject(nodeList, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() });
             if (DebugLog)
                 Debug.Log("BusRoute Size: " + busRoute.Size + "\nJSON: " + busRouteJSON);

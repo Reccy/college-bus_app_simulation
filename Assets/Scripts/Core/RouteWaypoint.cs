@@ -1,68 +1,223 @@
-﻿using System;
-using Mapbox.Unity.Map;
+﻿using Mapbox.Unity.Map;
+using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 namespace AaronMeaney.BusStop.Core
 {
     /// <summary>
-    /// Represents a waypoint for each leg in the journey of a <see cref="BusRoute"/>
+    /// Represents a waypoint along a <see cref="BusPathfinder"/>
     /// </summary>
-    [System.Serializable]
-    [RequireComponent(typeof(SnapToTerrain))]
+    [ExecuteInEditMode] // For Editor Validation
+    [RequireComponent(typeof(SnapToTerrain), typeof(PlaceAtCoordinates))]
     public class RouteWaypoint : MonoBehaviour
     {
-        private AbstractMap simAbstractMap;
+        private SnapToTerrain snapToTerrain;
+        private AbstractMap map;
 
-        public RouteWaypointData routeWaypointData;
+        private PlaceAtCoordinates placeAtCoordinates;
+        public PlaceAtCoordinates PlactAtCoordinates { get { return placeAtCoordinates; } }
+        
+        public GameObject busStopPrefab = null;
 
         /// <summary>
-        /// Sets the <see cref="RouteWaypointData"/> and places an instance of the <see cref="RouteWaypoint"/> in the simulation
+        /// The <see cref="BusStop"/> belonging to this <see cref="RouteWaypoint"/>
         /// </summary>
-        internal void Initialize(RouteWaypointData routeWaypointData, AbstractMap simAbstractMap)
+        public BusStop LinkedBusStop
+        { get { return GetComponentInChildren<BusStop>(); } }
+
+        /// <summary>
+        /// Adds a <see cref="BusStop"/> object to this <see cref="RouteWaypoint"/>.
+        /// Only works in edit mode.
+        /// </summary>
+        public void CreateBusStop()
         {
-            this.simAbstractMap = simAbstractMap;
-            this.routeWaypointData = routeWaypointData;
+            if (Application.isEditor && !Application.isPlaying)
+            {
+                if (busStopPrefab == null)
+                {
+                    Debug.LogError("Bus Stop Prefab is null. Can't create Bus Stop!", this);
+                    return;
+                }
 
-            name = "Route Waypoint (" + routeWaypointData.coordinateLocation.AsUnityPosition(simAbstractMap).ToString() + ")";
-            transform.position = routeWaypointData.coordinateLocation.AsUnityPosition(simAbstractMap);
+                GameObject newBusStop = (GameObject)PrefabUtility.InstantiatePrefab(busStopPrefab);
+                newBusStop.transform.parent = transform;
+                newBusStop.transform.position = transform.position;
+            }
+            else
+            {
+                Debug.LogError("Bus Stops can only be created in Unity Engine Edit Mode!", this);
+            }
+        }
 
-            UpdatePosition();
+        private void Awake()
+        {
+            snapToTerrain = GetComponent<SnapToTerrain>();
+            placeAtCoordinates = GetComponent<PlaceAtCoordinates>();
+            map = FindObjectOfType<AbstractMap>();
+            
+            if (Application.isPlaying)
+            {
+                map.MapVisualizer.OnMapVisualizerStateChanged += OnMapVisualizerStateChanged;
+            }
         }
 
         /// <summary>
-        /// Updates the position based on the latitude and longitude of the <see cref="BusStopData"/>
+        /// Handles what to do when the <see cref="MapVisualizer"/> state changes
         /// </summary>
-        public void UpdatePosition()
+        /// <param name="state">The new <see cref="ModuleState"/></param>
+        private void OnMapVisualizerStateChanged(ModuleState state)
         {
-            Debug.Log("Updating position of " + name);
-            transform.position = routeWaypointData.coordinateLocation.AsUnityPosition(simAbstractMap);
+            if (state == ModuleState.Finished)
+            {
+                Debug.Log("Placing at coordinates");
+                placeAtCoordinates.Execute();
 
-            // Snap position to terrain
-            Debug.Log("Snapping " + name + " to terrain");
-            GetComponent<SnapToTerrain>().PerformSnap();
+                Debug.Log("Performing snap");
+                snapToTerrain.PerformSnap();
+            }
         }
+
+        #region Editor Validation
+
+        private void OnTransformParentChanged()
+        {
+            ValidateAllWaypoints();
+        }
+
+        /// <summary>
+        /// Calls <see cref="UpdateUniqueName"/> for all instances of <see cref="RouteWaypoint"/> and ensures that they are in a "Routes" game object in the hierarchy.
+        /// </summary>
+        protected internal static void ValidateAllWaypoints()
+        {
+            foreach (RouteWaypoint routeWaypoint in GameObject.FindObjectsOfType<RouteWaypoint>())
+            {
+                routeWaypoint.UpdateUniqueName();
+                routeWaypoint.ValidateHierarchyPosition();
+            }
+        }
+
+        /// <summary>
+        /// Sets the <see cref="RouteWaypoint"/> name to "RouteWaypoint_" and the result of <see cref="GetInstanceNumber"/>.
+        /// If there is a <see cref="LinkedBusStop"/>, then its set to the <see cref="BusStop"/> name.
+        /// </summary>
+        private void UpdateUniqueName()
+        {
+            if (LinkedBusStop != null)
+            {
+                name = LinkedBusStop.BusStopId + "_Waypoint";
+            }
+            else
+            {
+                name = "RouteWaypoint_" + GetInstanceNumber();
+            }
+        }
+
+        /// <summary>
+        /// Ensures that this object's parent is the RouteWaypointContainer.
+        /// If it doesn't exist, it creates it and then makes it the parent.
+        /// </summary>
+        private void ValidateHierarchyPosition()
+        {
+            GameObject container = GameObject.Find("RouteWaypointContainer");
+
+            if (container != null)
+            {
+                transform.parent = container.transform;
+            }
+            else
+            {
+                container = Instantiate<GameObject>(new GameObject(), Vector3.zero, Quaternion.identity);
+                container.name = "RouteWaypointContainer";
+                transform.parent = container.transform;
+            }
+        }
+        
+        /// <summary>
+        /// Returns an number representing what order this object was instantiated at starting from the first instance to the newest instance.
+        /// </summary>
+        /// <returns>Number representing the order this object was instantiated at.</returns>
+        private int GetInstanceNumber()
+        {
+            int instanceNumber = 0;
+            List<RouteWaypoint> routeWaypoints = new List<RouteWaypoint>(FindObjectsOfType<RouteWaypoint>());
+            routeWaypoints.Reverse(); // Reverse so that the newest instance is not '1' and is the actual count of 'instances + 1'
+            foreach (RouteWaypoint routeWaypoint in routeWaypoints)
+            {
+                instanceNumber++;
+                if (routeWaypoint.Equals(this))
+                {
+                    return instanceNumber;
+                }
+            }
+            
+            throw new MissingReferenceException();
+        }
+        
+        #endregion
+
+        #region Gizmos
+
+        private void OnDrawGizmos()
+        {
+            // Draw line to Bus Stop
+            Gizmos.color = Color.yellow;
+
+            if (LinkedBusStop)
+            {
+                Gizmos.DrawLine(transform.position, LinkedBusStop.transform.position);
+            }
+            
+            // Display name of node
+            Handles.Label(transform.position, name);
+        }
+
+        #endregion
     }
 
-    /// <summary>
-    /// Contains data used to drive the functionality of <see cref="RouteWaypoint"/>
-    /// </summary>
-    [System.Serializable]
-    public class RouteWaypointData
+    [CustomEditor(typeof(RouteWaypoint))]
+    public class RouteWaypointEditor : Editor
     {
-        [SerializeField]
-        private bool hasTrafficLights;
-        /// <summary>
-        /// If the waypoint has traffic lights, the bus will have to stop for some time at this waypoint.
-        /// </summary>
-        public bool HasTrafficLights
+        private RouteWaypoint routeWaypoint;
+
+        private void OnEnable()
         {
-            get { return hasTrafficLights; }
+            RouteWaypoint.ValidateAllWaypoints();
+        }
+        
+        private void OnDisable()
+        {
+            RouteWaypoint.ValidateAllWaypoints();
         }
 
-        /// <summary>
-        /// The coordinates of the route waypoint
-        /// </summary>
-        [SerializeField]
-        public CoordinateLocation coordinateLocation;
+        public override void OnInspectorGUI()
+        {
+            routeWaypoint = ((RouteWaypoint)target);
+
+            // Default script field
+            GUI.enabled = false;
+            EditorGUILayout.ObjectField("Script:", MonoScript.FromMonoBehaviour((RouteWaypoint)target), typeof(RouteWaypoint), false);
+            GUI.enabled = true;
+
+            // Bus Stop Creation
+            if (routeWaypoint.LinkedBusStop)
+            {
+                EditorGUI.BeginDisabledGroup(true);
+                EditorGUILayout.TextField("Linked Bus Stop", routeWaypoint.LinkedBusStop.BusStopId);
+                EditorGUI.EndDisabledGroup();
+
+                if (GUILayout.Button("Select Bus Stop"))
+                {
+                    Selection.activeGameObject = routeWaypoint.LinkedBusStop.gameObject;
+                }
+            }
+            else
+            {
+                if (GUILayout.Button("Create Bus Stop"))
+                {
+                    routeWaypoint.CreateBusStop();
+                };
+            }
+        }
     }
 }

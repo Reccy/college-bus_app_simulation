@@ -194,9 +194,11 @@ namespace AaronMeaney.BusStop.Core
 
     /// <summary>
     /// Editor Window for <see cref="BusTimetable"/>.
-    /// Some of the worst code I've ever written.
+    /// Honestly some of the worst code I've ever written.
     /// Unity's Serialization is a trash fire.
     /// Forgive me.
+    /// 
+    /// P.S. don't edit this method post pull-request.
     /// </summary>
     [ExecuteInEditMode]
     public class BusTimetableEditorWindow : EditorWindow
@@ -304,6 +306,11 @@ namespace AaronMeaney.BusStop.Core
                 {
                     EditorGUILayout.LabelField("Bus Stops", EditorStyles.boldLabel, GUILayout.Height(18));
 
+                    if (ConfigMode == BusTimetableConfigMode.EDIT)
+                    {
+                        EditorGUILayout.LabelField("", GUILayout.Height(25));
+                    }
+
                     if (servicedStops.Count == 0)
                         EditorGUILayout.LabelField("None");
 
@@ -316,8 +323,12 @@ namespace AaronMeaney.BusStop.Core
 
                 // Render each Bus Service
                 BusService busServiceToDelete = null;
+                int[] swapService = { -1, -1 };
+                int serviceIndex = -1;
                 foreach (BusService service in companyServices)
                 {
+                    serviceIndex++;
+
                     EditorGUILayout.BeginVertical(GUILayout.ExpandWidth(false));
                     {
                         // Selected Bus Route for Service
@@ -366,11 +377,37 @@ namespace AaronMeaney.BusStop.Core
                         {
                             if (GUILayout.Button("☒ " + companyRoutesAsStrings[selectedBusRouteIndex], GUILayout.Width(60)))
                             {
-                                Debug.Log("Deleting " + companyRoutesAsStrings[selectedBusRouteIndex] + " service");
-
                                 // Schedule this service for deletion
                                 busServiceToDelete = service;
                             }
+                        }
+
+                        // Move left/right mode
+                        if (ConfigMode == BusTimetableConfigMode.EDIT)
+                        {
+                            EditorGUI.BeginDisabledGroup(true);
+                            GUILayout.Button(companyRoutesAsStrings[selectedBusRouteIndex], GUILayout.Width(60));
+                            EditorGUI.EndDisabledGroup();
+
+                            EditorGUILayout.BeginHorizontal(GUILayout.Width(60));
+
+                            EditorGUI.BeginDisabledGroup(serviceIndex == 0);
+                            if (GUILayout.Button("<", GUILayout.Width(28)))
+                            {
+                                swapService[0] = serviceIndex - 1;
+                                swapService[1] = serviceIndex;
+                            }
+                            EditorGUI.EndDisabledGroup();
+
+                            EditorGUI.BeginDisabledGroup(serviceIndex == companyServices.Count - 1);
+                            if (GUILayout.Button(">", GUILayout.Width(28)))
+                            {
+                                swapService[0] = serviceIndex;
+                                swapService[1] = serviceIndex + 1;
+                            }
+                            EditorGUI.EndDisabledGroup();
+
+                            EditorGUILayout.EndHorizontal();
                         }
 
                         if (service.ServicedBusRoute != null)
@@ -449,6 +486,17 @@ namespace AaronMeaney.BusStop.Core
                     EditorGUILayout.Space();
                 }
 
+                // Swap Services if scheduled
+                if (swapService[0] >= 0 && swapService[1] >= 0)
+                {
+                    BusService tempService = companyServices[swapService[0]];
+                    companyServices[swapService[0]] = companyServices[swapService[1]];
+                    companyServices[swapService[1]] = tempService;
+                    EditorUtility.SetDirty(timetable);
+                    EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
+                }
+
+                // Delete Service if scheduled
                 if (busServiceToDelete != null)
                 {
                     companyServices.Remove(busServiceToDelete);

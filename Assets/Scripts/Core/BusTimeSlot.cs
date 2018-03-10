@@ -8,7 +8,6 @@ namespace AaronMeaney.BusStop.Core
     [System.Serializable]
     public class BusTimeSlot
     {
-        [SerializeField]
         private BusService parentBusService;
         /// <summary>
         /// The <see cref="BusService"/> that owns this <see cref="BusTimeSlot"/>

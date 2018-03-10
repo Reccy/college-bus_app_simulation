@@ -290,23 +290,22 @@ namespace AaronMeaney.BusStop.Core
             }
 
             // Get list of bus stops being serviced by each route.
-            // Sort routes using a topological sort
-            servicedStops = BusRoute.TopologicalSortRoutes(servicedRoutes);
+            servicedStops = BusRoute.TopologicalSort(servicedRoutes);
 
-            // Test render bus stops
+            // Render bus stops
             EditorGUILayout.BeginHorizontal(GUILayout.ExpandWidth(false), GUILayout.ExpandHeight(false));
             {
                 // Render serviced Bus Stops
                 EditorGUILayout.BeginVertical();
                 {
-                    EditorGUILayout.LabelField("Bus Stops", EditorStyles.boldLabel);
+                    EditorGUILayout.LabelField("Bus Stops", EditorStyles.boldLabel, GUILayout.Height(18));
 
                     if (servicedStops.Count == 0)
                         EditorGUILayout.LabelField("None");
 
                     for (int i = 0; i < servicedStops.Count; i++)
                     {
-                        EditorGUILayout.LabelField(servicedStops[i].BusStopId);
+                        EditorGUILayout.LabelField(servicedStops[i].BusStopId, GUILayout.Height(18));
                     }
                 }
                 EditorGUILayout.EndVertical();
@@ -314,7 +313,7 @@ namespace AaronMeaney.BusStop.Core
                 // Render each Bus Service
                 foreach (BusService service in companyServices)
                 {
-                    EditorGUILayout.BeginVertical();
+                    EditorGUILayout.BeginVertical(GUILayout.ExpandWidth(false));
                     {
                         // Selected Bus Route for Service
                         List<string> companyRoutesAsStrings = new List<string> { "None" };
@@ -344,16 +343,54 @@ namespace AaronMeaney.BusStop.Core
                         {
                             service.ServicedBusRoute = companyRoutes[selectedBusRouteIndex];
                         }
+
+                        if (service.ServicedBusRoute != null)
+                        {
+                            // Label Test
+                            foreach (BusStop stop in servicedStops)
+                            {
+                                EditorGUILayout.BeginHorizontal(GUILayout.Width(60));
+                                if (service.ServicedBusRoute.BusStops.Contains(stop))
+                                {
+                                    EditorGUILayout.IntField(0, GUILayout.Width(28));
+                                    EditorGUILayout.IntField(0, GUILayout.Width(28));
+                                }
+                                else
+                                {
+                                    EditorGUI.BeginDisabledGroup(true);
+                                    EditorGUILayout.TextField("      Ø", GUILayout.Width(60));
+                                    EditorGUI.EndDisabledGroup();
+                                }
+                                EditorGUILayout.EndHorizontal();
+                            }
+                        }
                     }
                     EditorGUILayout.EndVertical();
+                    EditorGUILayout.Space();
                 }
-                
+
+                EditorGUILayout.BeginVertical();
                 // Render "Add Service" button
                 if(GUILayout.Button("Add Service", GUILayout.Width(100)))
                 {
                     BusService newService = new BusService(timetable);
                     companyServices.Add(newService);
                 }
+
+                // Render "Edit Mode" button
+                if (GUILayout.Button("Edit Mode", GUILayout.Width(100)))
+                {
+                    Debug.Log("Not implemented yet.");
+                }
+
+                // Render "Remove Mode" button
+                if (GUILayout.Button("Remove Mode", GUILayout.Width(100)))
+                {
+                    Debug.Log("Not implemented yet.");
+                }
+
+                EditorGUILayout.EndVertical();
+
                 GUILayout.FlexibleSpace();
             }
             EditorGUILayout.EndHorizontal();

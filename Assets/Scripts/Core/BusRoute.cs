@@ -112,7 +112,7 @@ namespace AaronMeaney.BusStop.Core
         /// </summary>
         /// <param name="busRoutes">List of <see cref="BusRoute"/>s to sort</param>
         /// <returns>An ordered topological list of <see cref="BusStop"/>s from each <see cref="BusRoute"/></returns>
-        public static List<BusStop> TopologicalSortRoutes(List<BusRoute> busRoutes)
+        public static List<BusStop> TopologicalSort(List<BusRoute> busRoutes)
         {
             // Sorted bus stops to return at end of method
             List<BusStop> sortedBusStops = new List<BusStop>();
@@ -168,7 +168,7 @@ namespace AaronMeaney.BusStop.Core
         }
 
         /// <summary>
-        /// Visit helper method for <see cref="TopologicalSortRoutes(List{BusRoute})"/>
+        /// Visit helper method for <see cref="TopologicalSort(List{BusRoute})"/>
         /// Adapted from Wikipedia: https://en.wikipedia.org/wiki/Topological_sorting#Depth-first_search
         /// </summary>
         private static void Visit(BusStop busStop,

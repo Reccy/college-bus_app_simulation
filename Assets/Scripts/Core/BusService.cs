@@ -30,7 +30,15 @@ namespace AaronMeaney.BusStop.Core
         /// <summary>
         /// The list of <see cref="BusTimeSlot"/>s that define the schedule of this <see cref="BusService"/>.
         /// </summary>
-        public List<BusTimeSlot> TimeSlots { get { return timeSlots; } }
+        public List<BusTimeSlot> TimeSlots {
+            get
+            {
+                if (timeSlots == null)
+                    timeSlots = new List<BusTimeSlot>();
+
+                return timeSlots;
+            }
+        }
 
         public BusService(BusTimetable busTimetable)
         {

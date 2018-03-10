@@ -2,7 +2,7 @@
 using System;
 using UnityEditor;
 using UnityEngine;
-using EditorGUITable;
+using UnityEditor.SceneManagement;
 
 namespace AaronMeaney.BusStop.Core
 {
@@ -192,15 +192,19 @@ namespace AaronMeaney.BusStop.Core
         }
     }
 
+    /// <summary>
+    /// Editor Window for <see cref="BusTimetable"/>.
+    /// Some of the worst code I've ever written.
+    /// Unity's Serialization is a trash fire.
+    /// Forgive me.
+    /// </summary>
     [ExecuteInEditMode]
     public class BusTimetableEditorWindow : EditorWindow
     {
         #region Configuration
         private BusTimetable timetable = null;
-
-        private BusService selectedService = null;
-
-        GUITableState state;
+        private enum BusTimetableConfigMode { NORMAL, EDIT, REMOVE }
+        private BusTimetableConfigMode ConfigMode = BusTimetableConfigMode.NORMAL;
         
         [MenuItem("Window/Bus Stop Timetable Editor")]
         public static void Init()
@@ -236,7 +240,6 @@ namespace AaronMeaney.BusStop.Core
                 EditorGUILayout.LabelField("No Timetable Selected", EditorStyles.largeLabel);
                 return;
             }
-
 
             // START
             scrollPos = EditorGUILayout.BeginScrollView(scrollPos, true, true);
@@ -275,6 +278,7 @@ namespace AaronMeaney.BusStop.Core
             #endregion
 
             #region Timetable Body
+            SerializedObject _timetable = new SerializedObject(timetable);
             List<BusService> companyServices = timetable.BusServices;
             List<BusRoute> companyRoutes = timetable.ParentBusCompany.BusRoutes;
             List<BusRoute> servicedRoutes = new List<BusRoute>();
@@ -311,6 +315,7 @@ namespace AaronMeaney.BusStop.Core
                 EditorGUILayout.EndVertical();
 
                 // Render each Bus Service
+                BusService busServiceToDelete = null;
                 foreach (BusService service in companyServices)
                 {
                     EditorGUILayout.BeginVertical(GUILayout.ExpandWidth(false));
@@ -331,29 +336,104 @@ namespace AaronMeaney.BusStop.Core
                             }
                         }
 
-                        // Selection Popup
-                        selectedBusRouteIndex = (EditorGUILayout.Popup(selectedBusRouteIndex, companyRoutesAsStrings.ToArray(), GUILayout.Width(60)) - 1);
+                        // Route Dropdown Selection
+                        if (ConfigMode == BusTimetableConfigMode.NORMAL)
+                        {
+                            // Selection Popup
+                            int originalSelectedBusRouteIndex = selectedBusRouteIndex;
+                            selectedBusRouteIndex = (EditorGUILayout.Popup(selectedBusRouteIndex, companyRoutesAsStrings.ToArray(), GUILayout.Width(60)) - 1);
 
-                        // Apply selection
-                        if (selectedBusRouteIndex == -1)
-                        {
-                            service.ServicedBusRoute = null;
+                            if ((originalSelectedBusRouteIndex - 1) != selectedBusRouteIndex)
+                            {
+                                Debug.Log("OG: " + originalSelectedBusRouteIndex + " != " + selectedBusRouteIndex);
+                                EditorUtility.SetDirty(timetable);
+                                EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
+                            }
+
+                            // Apply selection
+                            if (selectedBusRouteIndex == -1)
+                            {
+                                service.ServicedBusRoute = null;
+                            }
+                            else
+                            {
+                                service.ServicedBusRoute = companyRoutes[selectedBusRouteIndex];
+                            }
                         }
-                        else
+                        
+                        // Delete Service Button
+                        if (ConfigMode == BusTimetableConfigMode.REMOVE)
                         {
-                            service.ServicedBusRoute = companyRoutes[selectedBusRouteIndex];
+                            if (GUILayout.Button("☒ " + companyRoutesAsStrings[selectedBusRouteIndex], GUILayout.Width(60)))
+                            {
+                                Debug.Log("Deleting " + companyRoutesAsStrings[selectedBusRouteIndex] + " service");
+
+                                // Schedule this service for deletion
+                                busServiceToDelete = service;
+                            }
                         }
 
                         if (service.ServicedBusRoute != null)
                         {
-                            // Label Test
-                            foreach (BusStop stop in servicedStops)
+                            // Time Slots
+                            for (int stopIndex = 0; stopIndex < servicedStops.Count; stopIndex++)
                             {
                                 EditorGUILayout.BeginHorizontal(GUILayout.Width(60));
+
+                                BusStop stop = servicedStops[stopIndex];
+
                                 if (service.ServicedBusRoute.BusStops.Contains(stop))
                                 {
-                                    EditorGUILayout.IntField(0, GUILayout.Width(28));
-                                    EditorGUILayout.IntField(0, GUILayout.Width(28));
+                                    // Create a new Time Slot if it doesn't exist
+                                    bool hasTimeSlot = false;
+
+                                    foreach (BusTimeSlot slot in service.TimeSlots)
+                                    {
+                                        if (slot.ScheduledBusStop == stop)
+                                        {
+                                            hasTimeSlot = true;
+                                            break;
+                                        }
+                                    }
+
+                                    if (!hasTimeSlot)
+                                    {
+                                        BusTimeSlot slot = new BusTimeSlot();
+                                        slot.ScheduledBusStop = stop;
+                                        service.TimeSlots.Add(slot);
+                                    }
+
+                                    BusTimeSlot timeSlot = null;
+                                    
+                                    foreach (BusTimeSlot slot in service.TimeSlots)
+                                    {
+                                        if (slot.ScheduledBusStop == stop)
+                                            timeSlot = slot;
+                                    }
+
+                                    if (timeSlot == null)
+                                    {
+                                        Debug.LogError("Something awful happened and you really fucked up this time Aaron.");
+                                        return;
+                                    }
+
+                                    // Set Scheduled Stop if not already set
+                                    if (timeSlot.ScheduledBusStop != stop)
+                                    {
+                                        timeSlot.ScheduledBusStop = stop;
+                                    }
+
+                                    // Get Time Slot for each bus stop in this serviced route
+                                    int originalScheduledHour = timeSlot.ScheduledHour;
+                                    int originalScheduledMinute = timeSlot.ScheduledMinute;
+                                    timeSlot.ScheduledHour = EditorGUILayout.IntField(timeSlot.ScheduledHour, GUILayout.Width(28));
+                                    timeSlot.ScheduledMinute = EditorGUILayout.IntField(timeSlot.ScheduledMinute, GUILayout.Width(28));
+
+                                    if (originalScheduledHour != timeSlot.ScheduledHour || originalScheduledMinute != timeSlot.ScheduledMinute)
+                                    {
+                                        EditorUtility.SetDirty(timetable);
+                                        EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
+                                    }
                                 }
                                 else
                                 {
@@ -369,24 +449,46 @@ namespace AaronMeaney.BusStop.Core
                     EditorGUILayout.Space();
                 }
 
+                if (busServiceToDelete != null)
+                {
+                    companyServices.Remove(busServiceToDelete);
+                    EditorUtility.SetDirty(timetable);
+                    EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
+                }
+
                 EditorGUILayout.BeginVertical();
-                // Render "Add Service" button
-                if(GUILayout.Button("Add Service", GUILayout.Width(100)))
-                {
-                    BusService newService = new BusService(timetable);
-                    companyServices.Add(newService);
-                }
 
-                // Render "Edit Mode" button
-                if (GUILayout.Button("Edit Mode", GUILayout.Width(100)))
+                if (ConfigMode == BusTimetableConfigMode.NORMAL)
                 {
-                    Debug.Log("Not implemented yet.");
-                }
+                    // Render "Add Service" button
+                    if (GUILayout.Button("Add Service", GUILayout.Width(100)))
+                    {
+                        BusService newService = new BusService(timetable);
+                        companyServices.Add(newService);
 
-                // Render "Remove Mode" button
-                if (GUILayout.Button("Remove Mode", GUILayout.Width(100)))
+                        EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
+                        EditorUtility.SetDirty(timetable);
+                    }
+
+                    // Render "Edit Mode" button
+                    if (GUILayout.Button("Edit Mode", GUILayout.Width(100)))
+                    {
+                        ConfigMode = BusTimetableConfigMode.EDIT;
+                    }
+
+                    // Render "Remove Mode" button
+                    if (GUILayout.Button("Remove Mode", GUILayout.Width(100)))
+                    {
+                        ConfigMode = BusTimetableConfigMode.REMOVE;
+                    }
+                }
+                else
                 {
-                    Debug.Log("Not implemented yet.");
+                    // Render "Normal Mode" button
+                    if (GUILayout.Button("Done", GUILayout.Width(100)))
+                    {
+                        ConfigMode = BusTimetableConfigMode.NORMAL;
+                    }
                 }
 
                 EditorGUILayout.EndVertical();

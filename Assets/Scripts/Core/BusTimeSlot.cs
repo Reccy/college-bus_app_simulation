@@ -8,18 +8,15 @@ namespace AaronMeaney.BusStop.Core
     [System.Serializable]
     public class BusTimeSlot
     {
-        private BusService parentBusService;
-        /// <summary>
-        /// The <see cref="BusService"/> that owns this <see cref="BusTimeSlot"/>
-        /// </summary>
-        public BusService ParentBusService { get { return parentBusService; } }
-
         [SerializeField]
         private BusStop scheduledBusStop;
         /// <summary>
         /// The <see cref="BusStop"/> that the bus will stop at on this <see cref="BusTimeSlot"/>
         /// </summary>
-        public BusStop ScheduledBusStop;
+        public BusStop ScheduledBusStop {
+            get { return scheduledBusStop; }
+            set { scheduledBusStop = value; }
+        }
 
         [SerializeField]
         private int scheduledHour;

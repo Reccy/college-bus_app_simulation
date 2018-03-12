@@ -216,6 +216,13 @@ namespace AaronMeaney.BusStop.Core
 
         private void OnSelectionChange()
         {
+            UpdateTimetable();
+
+            GetWindow<BusTimetableEditorWindow>().Repaint();
+        }
+
+        private void UpdateTimetable()
+        {
             foreach (GameObject obj in Selection.gameObjects)
             {
                 if (obj.GetComponent<BusTimetable>())
@@ -224,14 +231,23 @@ namespace AaronMeaney.BusStop.Core
                     break;
                 }
             }
+        }
 
-            GetWindow<BusTimetableEditorWindow>().Repaint();
+        private void MarkTimetableAsDirty()
+        {
+            if (!Application.isPlaying)
+            {
+                EditorUtility.SetDirty(timetable);
+                EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
+            }
         }
         #endregion
 
         Vector2 scrollPos = Vector2.zero;
         private void OnGUI()
         {
+            UpdateTimetable();
+
             // Title setup
             titleContent.image = AssetDatabase.LoadAssetAtPath<Texture>("Assets/Sprites/bus_icon.png");
             titleContent.text = "Timetable";
@@ -356,9 +372,7 @@ namespace AaronMeaney.BusStop.Core
 
                             if ((originalSelectedBusRouteIndex - 1) != selectedBusRouteIndex)
                             {
-                                Debug.Log("OG: " + originalSelectedBusRouteIndex + " != " + selectedBusRouteIndex);
-                                EditorUtility.SetDirty(timetable);
-                                EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
+                                MarkTimetableAsDirty();
                             }
 
                             // Apply selection
@@ -468,8 +482,7 @@ namespace AaronMeaney.BusStop.Core
 
                                     if (originalScheduledHour != timeSlot.ScheduledHour || originalScheduledMinute != timeSlot.ScheduledMinute)
                                     {
-                                        EditorUtility.SetDirty(timetable);
-                                        EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
+                                        MarkTimetableAsDirty();
                                     }
                                 }
                                 else
@@ -492,16 +505,16 @@ namespace AaronMeaney.BusStop.Core
                     BusService tempService = companyServices[swapService[0]];
                     companyServices[swapService[0]] = companyServices[swapService[1]];
                     companyServices[swapService[1]] = tempService;
-                    EditorUtility.SetDirty(timetable);
-                    EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
+
+                    MarkTimetableAsDirty();
                 }
 
                 // Delete Service if scheduled
                 if (busServiceToDelete != null)
                 {
                     companyServices.Remove(busServiceToDelete);
-                    EditorUtility.SetDirty(timetable);
-                    EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
+
+                    MarkTimetableAsDirty();
                 }
 
                 EditorGUILayout.BeginVertical();
@@ -514,8 +527,7 @@ namespace AaronMeaney.BusStop.Core
                         BusService newService = new BusService(timetable);
                         companyServices.Add(newService);
 
-                        EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
-                        EditorUtility.SetDirty(timetable);
+                        MarkTimetableAsDirty();
                     }
 
                     // Render "Edit Mode" button

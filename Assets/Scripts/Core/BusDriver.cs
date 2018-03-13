@@ -7,10 +7,13 @@ namespace AaronMeaney.BusStop.Core
 {
     /// <summary>
     /// Responsible for the bus's pathfinding and movement.
+    /// Does not contain <see cref="Bus"/> configuration date.
     /// </summary>
     [RequireComponent(typeof(TransformLocationProvider))]
     public class BusDriver : MonoBehaviour
     {
+        #region Class Variables
+
         /// <summary>
         /// Mode changes how the bus will get to its destination.
         /// </summary>
@@ -47,6 +50,7 @@ namespace AaronMeaney.BusStop.Core
             set { speed = value; }
         }
 
+        // TODO: Remove isDriving when implementing hailing
         private bool isDriving = true;
         /// <summary>
         /// If the bus is driving/stopped.
@@ -116,6 +120,8 @@ namespace AaronMeaney.BusStop.Core
         }
 
         private int currentBusPathNode = 0;
+
+        #endregion
 
         private void Awake()
         {

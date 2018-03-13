@@ -33,6 +33,62 @@ namespace AaronMeaney.BusStop.Core
         /// </summary>
         public List<BusRoute> BusRoutes { get { return new List<BusRoute>(GetComponentsInChildren<BusRoute>()); } }
 
+        /// <summary>
+        /// List of <see cref="Bus"/> <see cref="GameObject"/>s that are ready to be taken from the depot.
+        /// </summary>
+        private List<GameObject> bussesInDepot = new List<GameObject>();
+
+        /// <summary>
+        /// List of <see cref="Bus"/> <see cref="GameObject"/>s that are currently out of the depot.
+        /// </summary>
+        private List<GameObject> bussesOnRoad = new List<GameObject>();
+
+        /// <summary>
+        /// Deploys an instance of a <see cref="Bus"/> <see cref="GameObject"/> from the depot to a specific <see cref="BusService"/>
+        /// </summary>
+        /// <param name="service">The <see cref="BusService"/> to assign the bus to
+        public void DeployBus(BusService service)
+        {
+            if (bussesInDepot.Count == 0)
+            {
+                Debug.Log("The " + CompanyName + " Company depot is empty.");
+                return;
+            }
+
+            GameObject bus = bussesInDepot[0];
+            bussesOnRoad.Add(bus);
+            bussesInDepot.Remove(bus);
+
+            bus.GetComponent<Bus>().StartService(service);
+        }
+
+        /// <summary>
+        /// Returns an instance of a <see cref="Bus"/> <see cref="GameObject"/> to the depot
+        /// </summary>
+        public void ReturnBus()
+        {
+            if (bussesInDepot.Count == 0)
+            {
+                Debug.Log("The " + CompanyName + " Company has no busses in service.");
+                return;
+            }
+
+            GameObject bus = bussesOnRoad[0];
+            bussesInDepot.Add(bus);
+            bussesOnRoad.Remove(bus);
+
+            bus.GetComponent<Bus>().EndService();
+        }
+
+        public void Awake()
+        {
+            // Populate the bus pool
+            foreach (Bus bus in GetComponentsInChildren<Bus>())
+            {
+                bussesOnRoad.Add(bus.gameObject);
+            }
+        }
+
         private void OnValidate()
         {
             BusTimetable.ValidateAllBusTimetables();

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 namespace AaronMeaney.BusStop.Core
@@ -33,15 +34,39 @@ namespace AaronMeaney.BusStop.Core
         /// </summary>
         public List<BusRoute> BusRoutes { get { return new List<BusRoute>(GetComponentsInChildren<BusRoute>()); } }
 
-        /// <summary>
-        /// List of <see cref="Bus"/> <see cref="GameObject"/>s that are ready to be taken from the depot.
-        /// </summary>
-        private List<GameObject> bussesInDepot = new List<GameObject>();
+        public List<Bus> Busses
+        {
+            get
+            {
+                List<Bus> busses = new List<Bus>();
 
+                foreach (Bus bus in bussesInDepot)
+                {
+                    busses.Add(bus);
+                }
+
+                foreach (Bus bus in bussesOnRoad)
+                {
+                    busses.Add(bus);
+                }
+
+                busses.Sort((x, y) => x.name.CompareTo(y.name));
+
+                return busses;
+            }
+        }
+        
+        private List<Bus> bussesInDepot = new List<Bus>();
         /// <summary>
-        /// List of <see cref="Bus"/> <see cref="GameObject"/>s that are currently out of the depot.
+        /// List of <see cref="Bus"/> that are ready to be taken from the depot.
         /// </summary>
-        private List<GameObject> bussesOnRoad = new List<GameObject>();
+        public List<Bus> BussesInDepot { get { return bussesInDepot; } }
+        
+        private List<Bus> bussesOnRoad = new List<Bus>();
+        /// <summary>
+        /// List of <see cref="Bus"/> that are currently out of the depot.
+        /// </summary>
+        public List<Bus> BussesOnRoad { get { return bussesOnRoad; } }
 
         /// <summary>
         /// Deploys an instance of a <see cref="Bus"/> <see cref="GameObject"/> from the depot to a specific <see cref="BusService"/>
@@ -55,7 +80,7 @@ namespace AaronMeaney.BusStop.Core
                 return;
             }
 
-            GameObject bus = bussesInDepot[0];
+            Bus bus = bussesInDepot[0];
             bussesOnRoad.Add(bus);
             bussesInDepot.Remove(bus);
 
@@ -73,19 +98,20 @@ namespace AaronMeaney.BusStop.Core
                 return;
             }
 
-            GameObject bus = bussesOnRoad[0];
+            Bus bus = bussesOnRoad[0];
             bussesInDepot.Add(bus);
             bussesOnRoad.Remove(bus);
 
             bus.GetComponent<Bus>().EndService();
         }
 
-        public void Awake()
+        private void Awake()
         {
             // Populate the bus pool
-            foreach (Bus bus in GetComponentsInChildren<Bus>())
+            foreach (Bus bus in transform.Find("Bus Pool").GetComponentsInChildren<Bus>())
             {
-                bussesOnRoad.Add(bus.gameObject);
+                bussesInDepot.Add(bus);
+                bus.gameObject.SetActive(false);
             }
         }
 
@@ -93,6 +119,92 @@ namespace AaronMeaney.BusStop.Core
         {
             BusTimetable.ValidateAllBusTimetables();
             name = companyName + " Bus Company";
+        }
+    }
+
+    [CustomEditor(typeof(BusCompany))]
+    public class BusCompanyEditor : Editor
+    {
+        int selectedBusIndex;
+        Bus selectedBus;
+        BusCompany company;
+
+        public override void OnInspectorGUI()
+        {
+            base.OnInspectorGUI();
+            
+            if (Application.isPlaying)
+            {
+                company = ((BusCompany)target);
+
+                EditorGUILayout.Space();
+                BusSelectionPopup();
+                BusDepotButtons();
+            }
+        }
+
+        /// <summary>
+        /// Popup to allow user to select the Bus
+        /// </summary>
+        private void BusSelectionPopup()
+        {
+            EditorGUILayout.LabelField("Select Bus", EditorStyles.boldLabel);
+
+            if (selectedBusIndex >= GetCompanyBussesAsStrings().Count)
+            {
+                selectedBusIndex = 0;
+            }
+
+            selectedBusIndex = EditorGUILayout.Popup(selectedBusIndex, GetCompanyBussesAsStrings().ToArray());
+            selectedBus = company.Busses[selectedBusIndex];
+        }
+
+        /// <summary>
+        /// Buttons and handles for the Bus Depot
+        /// </summary>
+        private void BusDepotButtons()
+        {
+            if (company.BussesInDepot.Contains(selectedBus))
+            {
+                if (GUILayout.Button("Start Random Service"))
+                {
+                    BusTimetable randomTimetable = company.BusTimetables[Random.Range(0, company.BusTimetables.Count - 1)];
+                    BusService randomService = randomTimetable.BusServices[Random.Range(0, randomTimetable.BusServices.Count - 1)];
+
+                    selectedBus.StartService(randomService);
+                }
+            }
+            else if (company.BussesOnRoad.Contains(selectedBus))
+            {
+                if (GUILayout.Button("End Service"))
+                {
+                    selectedBus.EndService();
+                }
+            }
+            else
+            {
+                Debug.LogError("Invalid Bus Selected in " + company.name + " depot: " + selectedBusIndex);
+
+                selectedBusIndex = 0;
+                selectedBus = null;
+            }
+        }
+
+        private List<string> GetCompanyBussesAsStrings()
+        {
+            List<string> busNames = new List<string>();
+
+            foreach (Bus bus in ((BusCompany)target).Busses)
+            {
+                busNames.Add(bus.name);
+            }
+
+            if (busNames.Count == 0)
+            {
+                return new List<string> { "None" };
+            }
+
+            return busNames;
         }
     }
 }

@@ -9,8 +9,19 @@ namespace AaronMeaney.BusStop.Core
     /// </summary>
     public class BusPathfinderVisualiser : MonoBehaviour
     {
-        [SerializeField]
-        private AbstractMap map;
+        private AbstractMap map = null;
+        public AbstractMap Map
+        {
+            get
+            {
+                if (map == null)
+                {
+                    map = FindObjectOfType<AbstractMap>();
+                }
+
+                return map;
+            }
+        }
 
         public Material material;
         
@@ -40,7 +51,7 @@ namespace AaronMeaney.BusStop.Core
             // Create the new nodes
             for (int i = 0; i < nodes.Count; i++)
             {
-                Vector3 nodePosition = nodes[i].AsUnityPosition(map);
+                Vector3 nodePosition = nodes[i].AsUnityPosition(Map);
                 instantiatedNodes.Add(CreateBusPathNodeGameObject("TestRoute", i, nodePosition));
             }
 

@@ -476,7 +476,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd0eff8ca10f28c4a94a9c281a392526, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  map: {fileID: 0}
   material: {fileID: 2100000, guid: 0a6e9c8de919bff499620e5daa2744d0, type: 2}
 --- !u!114 &114377855431887174
 MonoBehaviour:
@@ -489,7 +488,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a034c4eeb3293418aab101c1895844a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _map: {fileID: 0}
   _targetTransform: {fileID: 4760384610737866}
 --- !u!114 &114398371718841894
 MonoBehaviour:
@@ -516,11 +514,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4d23460e0cda5f4da33b1f438d8f640, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  map: {fileID: 0}
   speed: 20
   busOriginDistanceFromRoad: 0.337
   driverMode: 1
-  currentDestination: {fileID: 0}
+  currentDestination: {x: 0, y: 0, z: 0}
 --- !u!114 &114597836549510644
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -557,7 +554,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b72f01d01335fb459654de7f8f6ba7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  originDistanceFromRoad: 0.337
+  originDistanceFromRoad: 0.7
   alignAngleWithTerrain: 1
   rayOriginHeight: 100
   snapOnUpdate: 1

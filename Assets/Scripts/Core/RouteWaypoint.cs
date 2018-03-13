@@ -70,10 +70,8 @@ namespace AaronMeaney.BusStop.Core
         {
             if (state == ModuleState.Finished)
             {
-                Debug.Log("Placing at coordinates");
                 placeAtCoordinates.Execute();
-
-                Debug.Log("Performing snap");
+                
                 snapToTerrain.PerformSnap();
             }
         }

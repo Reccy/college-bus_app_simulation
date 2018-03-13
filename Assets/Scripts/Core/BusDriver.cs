@@ -28,15 +28,22 @@ namespace AaronMeaney.BusStop.Core
             /// </summary>
             Path
         }
-
-        [SerializeField]
-        private AbstractMap map;
+        
+        private AbstractMap map = null;
         /// <summary>
         /// The map that the bus is driving on.
         /// </summary>
         public AbstractMap Map
         {
-            get { return map; }
+            get
+            {
+                if (map == null)
+                {
+                    map = FindObjectOfType<AbstractMap>();
+                }
+
+                return map;
+            }
         }
 
         [SerializeField]
@@ -60,18 +67,7 @@ namespace AaronMeaney.BusStop.Core
             get { return isDriving; }
             set { isDriving = value; }
         }
-
-        [SerializeField]
-        private float busOriginDistanceFromRoad = 0.337f;
-        /// <summary>
-        /// The distance from the bus's origin to the road on the Y axis.
-        /// </summary>
-        public float BusOriginDistanceFromRoad
-        {
-            get { return busOriginDistanceFromRoad; }
-            set { busOriginDistanceFromRoad = value; }
-        }
-
+        
         [SerializeField]
         private BusDriverMode driverMode;
         /// <summary>
@@ -83,11 +79,11 @@ namespace AaronMeaney.BusStop.Core
         }
 
         [SerializeField]
-        private Transform currentDestination;
+        private Vector3 currentDestination;
         /// <summary>
-        /// The transform that the bus is driving towards.
+        /// The location that the bus is driving towards.
         /// </summary>
-        public Transform CurrentDestination
+        public Vector3 CurrentDestination
         {
             get { return currentDestination; }
             set { currentDestination = value; }
@@ -104,7 +100,7 @@ namespace AaronMeaney.BusStop.Core
             {
                 currentBusPathNode = 0;
                 currentBusPath = value;
-                CurrentDestination.position = transform.position;
+                CurrentDestination = transform.position;
                 GetComponent<BusPathfinderVisualiser>().ClearVisualisation();
 
                 if (GetComponent<BusPathfinderVisualiser>())
@@ -120,10 +116,12 @@ namespace AaronMeaney.BusStop.Core
         }
 
         private int currentBusPathNode = 0;
-
         #endregion
-
-        private void Awake()
+        
+        /// <summary>
+        /// Start() instead of Awake() since <see cref="BusCompany"/> will set <see cref="GameObject.SetActive(false)"/> on Awake
+        /// </summary>
+        private void Start()
         {
             CurrentBusPath = new BusPathfinder();
         }
@@ -144,7 +142,7 @@ namespace AaronMeaney.BusStop.Core
                 // Update the current destination if the mode is set to path
                 if (currentBusPathNode < currentBusPath.Size)
                 {
-                    CurrentDestination.position = currentBusPath.CoordinateLocations[currentBusPathNode].AsUnityPosition(map);
+                    CurrentDestination = currentBusPath.CoordinateLocations[currentBusPathNode].AsUnityPosition(map);
                     currentBusPathNode++;
                 }
             }
@@ -174,7 +172,7 @@ namespace AaronMeaney.BusStop.Core
             }
             else if (currentBusPathNode < currentBusPath.Size)
             {
-                CurrentDestination.position = currentBusPath.CoordinateLocations[currentBusPathNode].AsUnityPosition(map);
+                CurrentDestination = currentBusPath.CoordinateLocations[currentBusPathNode].AsUnityPosition(map);
                 currentBusPathNode++;
             }
         }
@@ -184,7 +182,7 @@ namespace AaronMeaney.BusStop.Core
         /// </summary>
         private float GetDistanceFromDestination()
         {
-            return Vector2.Distance(new Vector2(transform.position.x, transform.position.z), new Vector2(currentDestination.position.x, currentDestination.position.z));
+            return Vector2.Distance(new Vector2(transform.position.x, transform.position.z), new Vector2(currentDestination.x, currentDestination.z));
         }
 
         /// <summary>

@@ -101,15 +101,22 @@ namespace AaronMeaney.BusStop.Core
         {
             get { return GetComponent<TransformLocationProvider>().Location.y; }
         }
-
-        // TODO: Implement StartService and EndService
-
+        
         /// <summary>
         /// Assigns the <see cref="CurrentService"/> and puts this <see cref="Bus"/> in service.
         /// </summary>
         /// <param name="service"></param>
         public void StartService(BusService service)
         {
+            if (!Company.BussesOnRoad.Contains(this))
+            {
+                Company.BussesOnRoad.Add(this);
+                Company.BussesInDepot.Remove(this);
+            }
+
+            currentService = service;
+            nextStop = service.TimeSlots[0].ScheduledBusStop;
+            transform.position = nextStop.transform.position;
             gameObject.SetActive(true);
         }
 
@@ -118,6 +125,15 @@ namespace AaronMeaney.BusStop.Core
         /// </summary>
         public void EndService()
         {
+            if (!Company.BussesInDepot.Contains(this))
+            {
+                Company.BussesInDepot.Add(this);
+                Company.BussesOnRoad.Remove(this);
+            }
+
+            currentService = null;
+            nextStop = null;
+            transform.position = Vector3.zero;
             gameObject.SetActive(false);
         }
         

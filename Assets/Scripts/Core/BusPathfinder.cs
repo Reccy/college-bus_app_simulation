@@ -21,28 +21,43 @@ namespace AaronMeaney.BusStop.Core
         /// </summary>
         public OnBusPathPopulated onBusPathPopulated;
 
+        public enum PathfinderState { Ready, Processing, Idle };
+        private PathfinderState state = PathfinderState.Idle;
+        /// <summary>
+        /// The <see cref="PathfinderState"/> of this <see cref="BusPathfinder"/>
+        /// </summary>
+        public PathfinderState State
+        {
+            get { return State; }
+        }
+
         private List<CoordinateLocation> coordinateLocations = new List<CoordinateLocation>();
+        /// <summary>
+        /// <see cref="List{T}"/> of <see cref="CoordinateLocation"/>s in the Path
+        /// </summary>
         public List<CoordinateLocation> CoordinateLocations
         {
             get { return coordinateLocations; }
         }
 
+        /// <summary>
+        /// Size of <see cref="CoordinateLocations"/>
+        /// </summary>
         public int Size
         {
             get { return coordinateLocations.Count; }
         }
 
-        private bool isReady = false;
         /// <summary>
-        /// True if <see cref="BusPathfinder"/> is ready to be driven along.
-        /// False if not ready, e.g. missing nodes.
+        /// <see cref="List{T}"/> of <see cref="CoordinateLocation"/>s that will replace <see cref="CoordinateLocations"/>
         /// </summary>
-        public bool IsReady
-        {
-            get { return isReady; }
-            set { isReady = value; }
-        }
+        private List<CoordinateLocation> newNodes = new List<CoordinateLocation>();
 
+        /// <summary>
+        /// Queue of queries for the Mapbox API
+        /// </summary>
+        private Queue<DirectionResource> queryQueue = new Queue<DirectionResource>();
+        
         Directions directions;
 
         /// <summary>
@@ -67,13 +82,29 @@ namespace AaronMeaney.BusStop.Core
         /// <param name="positions">Array of positions to navigate through.</param>
         public void SetDirectionsToPosition(AbstractMap map, Vector2d[] positions)
         {
-            isReady = false;
-            
-            // Query the Mapbox Directions API, the response is handled by the HandleDirectionsResponse method
             directions = MapboxAccess.Instance.Directions;
-            DirectionResource directionResource = new DirectionResource(positions, RoutingProfile.Driving);
-            directionResource.Steps = true;
-            directions.Query(directionResource, HandleDirectionsResponse);
+
+            newNodes = new List<CoordinateLocation>();
+            
+            for (int i = 0; i < positions.Length; i += 24)
+            {
+                Vector2d[] positionFragment = new List<Vector2d>(positions).GetRange(i, Math.Min(positions.Length - i, 25)).ToArray();
+                
+                DirectionResource directionResource = new DirectionResource(positionFragment, RoutingProfile.Driving);
+                directionResource.Steps = true;
+                queryQueue.Enqueue(directionResource);
+            }
+
+            PerformQuery();
+        }
+
+        /// <summary>
+        /// Performs a Query from the <see cref="queryQueue"/>
+        /// </summary>
+        private void PerformQuery()
+        {
+            state = PathfinderState.Processing;
+            directions.Query(queryQueue.Dequeue(), HandleDirectionsResponse);
         }
 
         /// <summary>
@@ -81,19 +112,9 @@ namespace AaronMeaney.BusStop.Core
         /// </summary>
         private void HandleDirectionsResponse(DirectionsResponse response)
         {
-            List<CoordinateLocation> newNodes = new List<CoordinateLocation>();
+            Debug.Log("Handling Response... ");
             
-            // Welcome to nesting hell
-            //  <Please>
-            //      <Enjoy>
-            //          <Your>
-            //              <Stay>
-            //              <Stay/>
-            //          <Your/>
-            //      <Enjoy/>
-            //  <Please/>
-            //
-            // Seriously though, this just gets all the points returned from the Mapbox API
+            // Gets all the points returned from the Mapbox API
             foreach (Route route in response.Routes)
             {
                 foreach (Leg leg in route.Legs)
@@ -107,14 +128,21 @@ namespace AaronMeaney.BusStop.Core
                     }
                 }
             }
+            
+            if (queryQueue.Count > 0)
+            {
+                PerformQuery();
+            }
+            else
+            {
+                state = PathfinderState.Ready;
 
-            CoordinateLocations.Clear();
-            CoordinateLocations.AddRange(newNodes);
+                CoordinateLocations.Clear();
+                CoordinateLocations.AddRange(newNodes);
 
-            isReady = true;
-
-            if (onBusPathPopulated != null)
-                onBusPathPopulated(this);
+                if (onBusPathPopulated != null)
+                    onBusPathPopulated(this);
+            }
         }
     }
 }

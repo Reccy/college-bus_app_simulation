@@ -165,7 +165,7 @@ namespace AaronMeaney.BusStop.Core
         /// </summary>
         private void DrivePathMode()
         {
-            if (isDriving && GetDistanceFromDestination() > 1 && CurrentBusPath.IsReady)
+            if (isDriving && GetDistanceFromDestination() > 1 && CurrentBusPath.State == BusPathfinder.PathfinderState.Ready)
             {
                 RotateTowardsDestination();
                 DriveForward();

@@ -120,9 +120,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4760384610737866}
   - component: {fileID: 114377855431887174}
-  - component: {fileID: 114313186391945304}
-  - component: {fileID: 114753147437180312}
-  - component: {fileID: 114398371718841894}
   - component: {fileID: 114597836549510644}
   - component: {fileID: 114252378888094790}
   - component: {fileID: 114535080601757340}
@@ -451,20 +448,6 @@ MonoBehaviour:
   registrationNumber: 
   busModel: 
   Status: 0
---- !u!114 &114313186391945304
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1953854151932788}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6728ebf103a48224283a2b752d2617d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debugLog: 0
-  interval: 1
-  url: https://bus-app-prototype-api-reccy.c9users.io/api/bus_position
 --- !u!114 &114373655694590828
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -489,20 +472,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetTransform: {fileID: 4760384610737866}
---- !u!114 &114398371718841894
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1953854151932788}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3953828dc3c6f8d4d9acc996e6ac7e50, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debugLog: 0
-  interval: 1
-  url: https://bus-app-prototype-api-reccy.c9users.io/api/bus_driving
 --- !u!114 &114535080601757340
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -515,7 +484,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 20
-  busOriginDistanceFromRoad: 0.337
   driverMode: 1
   currentDestination: {x: 0, y: 0, z: 0}
 --- !u!114 &114597836549510644
@@ -530,19 +498,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefix: Bus Position
---- !u!114 &114753147437180312
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1953854151932788}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0667a6f4f469b0747ba79f9167fc1645, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debugLog: 0
-  url: https://bus-app-prototype-api-reccy.c9users.io/api/bus_route
 --- !u!114 &114983907589990156
 MonoBehaviour:
   m_ObjectHideFlags: 1

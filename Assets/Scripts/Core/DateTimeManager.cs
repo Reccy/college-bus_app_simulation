@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using UnityEditor;
 
 namespace AaronMeaney.BusStop.Core
 {
@@ -36,23 +37,51 @@ namespace AaronMeaney.BusStop.Core
         {
             CurrentDateTime = DateTime.Now;
         }
-
-        /// <summary>
-        /// Adds the deltaTime to the current time, keeping it up to date.
-        /// </summary>
-        public void AdvanceTimeByDeltaTime()
-        {
-            CurrentDateTime = CurrentDateTime.AddSeconds(Time.deltaTime);
-        }
-
-        private void Awake()
+        
+        private void Update()
         {
             SetToNow();
         }
+    }
 
-        private void Update()
+    [CustomEditor(typeof(DateTimeManager))]
+    public class DateTimeManagerEditor : Editor
+    {
+        private DateTimeManager dateTimeManager;
+        private string currentTime;
+        private string currentDay;
+
+        void OnEnable()
         {
-            AdvanceTimeByDeltaTime();
+            dateTimeManager = ((DateTimeManager)target);
+            EditorApplication.update += Update;
+        }
+
+        void OnDisable()
+        {
+            EditorApplication.update -= Update;
+        }
+
+        void Update()
+        {
+            currentDay = dateTimeManager.CurrentDateTime.DayOfWeek.ToString();
+            currentTime = dateTimeManager.CurrentDateTime.ToLongTimeString();
+            Repaint();
+        }
+        
+        public override void OnInspectorGUI()
+        {
+            base.OnInspectorGUI();
+
+            DateTimeField();
+        }
+        
+        private void DateTimeField()
+        {
+            EditorGUI.BeginDisabledGroup(true);
+            EditorGUILayout.LabelField("Current Day", dateTimeManager.CurrentDateTime.DayOfWeek.ToString());
+            EditorGUILayout.LabelField("Current Time", dateTimeManager.CurrentDateTime.ToLongTimeString());
+            EditorGUI.EndDisabledGroup();
         }
     }
 }

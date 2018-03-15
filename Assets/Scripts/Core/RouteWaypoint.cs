@@ -103,7 +103,7 @@ namespace AaronMeaney.BusStop.Core
         {
             if (LinkedBusStop != null)
             {
-                name = LinkedBusStop.BusStopId + "_Waypoint";
+                name = LinkedBusStop.BusStopIdInternal + "_Waypoint";
             }
             else
             {
@@ -201,7 +201,7 @@ namespace AaronMeaney.BusStop.Core
             if (routeWaypoint.LinkedBusStop)
             {
                 EditorGUI.BeginDisabledGroup(true);
-                EditorGUILayout.TextField("Linked Bus Stop", routeWaypoint.LinkedBusStop.BusStopId);
+                EditorGUILayout.TextField("Linked Bus Stop", routeWaypoint.LinkedBusStop.BusStopIdInternal);
                 EditorGUI.EndDisabledGroup();
 
                 if (GUILayout.Button("Select Bus Stop"))

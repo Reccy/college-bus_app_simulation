@@ -332,7 +332,7 @@ namespace AaronMeaney.BusStop.Core
 
                     for (int i = 0; i < servicedStops.Count; i++)
                     {
-                        EditorGUILayout.LabelField(servicedStops[i].BusStopId, GUILayout.Height(18));
+                        EditorGUILayout.LabelField(servicedStops[i].BusStopIdInternal, GUILayout.Height(18));
                     }
                 }
                 EditorGUILayout.EndVertical();
@@ -356,7 +356,7 @@ namespace AaronMeaney.BusStop.Core
                         {
                             BusRoute route = companyRoutes[routeIndex];
 
-                            companyRoutesAsStrings.Add(route.RouteId);
+                            companyRoutesAsStrings.Add(route.RouteIdInternal);
                             if (route == service.ServicedBusRoute)
                             {
                                 selectedBusRouteIndex = routeIndex + 1;

@@ -23,9 +23,16 @@ namespace AaronMeaney.BusStop.Core
         [SerializeField]
         private string routeId;
         /// <summary>
-        /// The ID of this Route
+        /// The ID of this Route as displayed to the end user.
         /// </summary>
         public string RouteId { get { return routeId; } }
+
+        [SerializeField]
+        private string routeIdInternal;
+        /// <summary>
+        /// The ID of this Route for use in the Unity Engine only.
+        /// </summary>
+        public string RouteIdInternal { get { return routeIdInternal; } }
         
         [SerializeField]
         [HideInInspector]
@@ -184,7 +191,7 @@ namespace AaronMeaney.BusStop.Core
 
             if (beingVisitedBusStops.Contains(busStop))
             {
-                Debug.LogError("Cycle detected in DAG at: " + busStop.BusStopId);
+                Debug.LogError("Cycle detected in DAG at: " + busStop.BusStopIdInternal);
                 unvisitedBusStops.Remove(busStop);
                 return;
             }
@@ -260,7 +267,7 @@ namespace AaronMeaney.BusStop.Core
 
         private void OnValidate()
         {
-            name = "Bus Route " + RouteId;
+            name = "Bus Route " + RouteIdInternal;
         }
     }
 

@@ -1,4 +1,5 @@
 ﻿using Mapbox.Unity.Map;
+using System;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -30,6 +31,17 @@ namespace AaronMeaney.BusStop.Core
 
         [SerializeField]
         public bool executeOnAwake;
+
+        private bool finishedPlacement = false;
+        /// <summary>
+        /// If the <see cref="Execute"/> method has yet been called on this instance
+        /// </summary>
+        public bool FinishedPlacement { get { return finishedPlacement; } }
+
+        /// <summary>
+        /// Called when <see cref="Execute"/> is finished
+        /// </summary>
+        public Action OnPlacementFinished;
         
         private void Awake()
         {
@@ -51,6 +63,10 @@ namespace AaronMeaney.BusStop.Core
             };
 
             transform.position = coordinateLocation.AsUnityPosition(map);
+
+            finishedPlacement = true;
+
+            OnPlacementFinished();
         }
 
     }

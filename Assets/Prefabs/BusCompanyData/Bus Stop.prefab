@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4557664339333248}
   - component: {fileID: 114222259136696880}
   m_Layer: 2
-  m_Name: _BusStop
+  m_Name: Bus Stop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -137,3 +137,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   busStopId: 
+  busStopIdInternal: 

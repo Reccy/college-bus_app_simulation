@@ -155,12 +155,17 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1462088307315816, guid: be7c083f6c332d44e8025bf973291bee, type: 2}
       propertyPath: m_Name
-      value: Eden Quay_BusStop
+      value: s_Eden Quay_BusStop
       objectReference: {fileID: 0}
     - target: {fileID: 114222259136696880, guid: be7c083f6c332d44e8025bf973291bee,
         type: 2}
       propertyPath: busStopId
       value: Eden Quay
+      objectReference: {fileID: 0}
+    - target: {fileID: 114222259136696880, guid: be7c083f6c332d44e8025bf973291bee,
+        type: 2}
+      propertyPath: busStopIdInternal
+      value: s_Eden Quay
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: be7c083f6c332d44e8025bf973291bee, type: 2}
@@ -171,6 +176,27 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 15127055}
   m_Script: {fileID: 11500000, guid: aec2306c18093fa4ea103945cc03ad7c, type: 3}
+--- !u!1 &15127057 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1462088307315816, guid: be7c083f6c332d44e8025bf973291bee,
+    type: 2}
+  m_PrefabInternal: {fileID: 15127055}
+--- !u!114 &15127058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 15127057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0498af2bf865a44983e0b7b1fc82ed8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  map: {fileID: 0}
+  coordinateLocation:
+    latitude: 53.348064
+    longitude: -6.256007
+  executeOnAwake: 0
 --- !u!1001 &19159507
 Prefab:
   m_ObjectHideFlags: 0
@@ -212,7 +238,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1928123344870766, guid: 6d9f4b88307d3d34194a029b11d67286, type: 2}
       propertyPath: m_Name
-      value: The Gallops_Waypoint
+      value: s_TheGallops_Waypoint
       objectReference: {fileID: 0}
     - target: {fileID: 114788828128342416, guid: 6d9f4b88307d3d34194a029b11d67286,
         type: 2}
@@ -279,7 +305,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1928123344870766, guid: 6d9f4b88307d3d34194a029b11d67286, type: 2}
       propertyPath: m_Name
-      value: Applewood Estate_Waypoint
+      value: s_Applewood Estate_Waypoint
       objectReference: {fileID: 0}
     - target: {fileID: 114788828128342416, guid: 6d9f4b88307d3d34194a029b11d67286,
         type: 2}
@@ -346,12 +372,17 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1462088307315816, guid: be7c083f6c332d44e8025bf973291bee, type: 2}
       propertyPath: m_Name
-      value: Ballintrane_BusStop
+      value: s_Ballintrane_BusStop
       objectReference: {fileID: 0}
     - target: {fileID: 114222259136696880, guid: be7c083f6c332d44e8025bf973291bee,
         type: 2}
       propertyPath: busStopId
       value: Ballintrane
+      objectReference: {fileID: 0}
+    - target: {fileID: 114222259136696880, guid: be7c083f6c332d44e8025bf973291bee,
+        type: 2}
+      propertyPath: busStopIdInternal
+      value: s_Ballintrane
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: be7c083f6c332d44e8025bf973291bee, type: 2}
@@ -362,6 +393,27 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 141450717}
   m_Script: {fileID: 11500000, guid: aec2306c18093fa4ea103945cc03ad7c, type: 3}
+--- !u!1 &141450719 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1462088307315816, guid: be7c083f6c332d44e8025bf973291bee,
+    type: 2}
+  m_PrefabInternal: {fileID: 141450717}
+--- !u!114 &141450720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 141450719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0498af2bf865a44983e0b7b1fc82ed8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  map: {fileID: 0}
+  coordinateLocation:
+    latitude: 53.45257
+    longitude: -6.227291
+  executeOnAwake: 0
 --- !u!1001 &147647602
 Prefab:
   m_ObjectHideFlags: 0
@@ -403,7 +455,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1928123344870766, guid: 6d9f4b88307d3d34194a029b11d67286, type: 2}
       propertyPath: m_Name
-      value: Sean O'Casey Bridge_Waypoint
+      value: s_Sean O'Casey Bridge_Waypoint
       objectReference: {fileID: 0}
     - target: {fileID: 114788828128342416, guid: 6d9f4b88307d3d34194a029b11d67286,
         type: 2}
@@ -470,7 +522,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1928123344870766, guid: 6d9f4b88307d3d34194a029b11d67286, type: 2}
       propertyPath: m_Name
-      value: Dublin Road (Penneys)_Waypoint
+      value: s_Dublin Road (Penneys)_Waypoint
       objectReference: {fileID: 0}
     - target: {fileID: 114788828128342416, guid: 6d9f4b88307d3d34194a029b11d67286,
         type: 2}
@@ -537,12 +589,17 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1462088307315816, guid: be7c083f6c332d44e8025bf973291bee, type: 2}
       propertyPath: m_Name
-      value: Jugback Lane_BusStop
+      value: s_Jugback Lane_BusStop
       objectReference: {fileID: 0}
     - target: {fileID: 114222259136696880, guid: be7c083f6c332d44e8025bf973291bee,
         type: 2}
       propertyPath: busStopId
       value: Jugback Lane
+      objectReference: {fileID: 0}
+    - target: {fileID: 114222259136696880, guid: be7c083f6c332d44e8025bf973291bee,
+        type: 2}
+      propertyPath: busStopIdInternal
+      value: s_Jugback Lane
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: be7c083f6c332d44e8025bf973291bee, type: 2}
@@ -553,6 +610,27 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 204253278}
   m_Script: {fileID: 11500000, guid: aec2306c18093fa4ea103945cc03ad7c, type: 3}
+--- !u!1 &204253280 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1462088307315816, guid: be7c083f6c332d44e8025bf973291bee,
+    type: 2}
+  m_PrefabInternal: {fileID: 204253278}
+--- !u!114 &204253281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 204253280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0498af2bf865a44983e0b7b1fc82ed8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  map: {fileID: 0}
+  coordinateLocation:
+    latitude: 53.468685
+    longitude: -6.228037
+  executeOnAwake: 0
 --- !u!1001 &221048941
 Prefab:
   m_ObjectHideFlags: 0
@@ -594,12 +672,17 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1462088307315816, guid: be7c083f6c332d44e8025bf973291bee, type: 2}
       propertyPath: m_Name
-      value: Sean O'Casey Bridge_BusStop
+      value: s_Sean O'Casey Bridge_BusStop
       objectReference: {fileID: 0}
     - target: {fileID: 114222259136696880, guid: be7c083f6c332d44e8025bf973291bee,
         type: 2}
       propertyPath: busStopId
       value: Sean O'Casey Bridge
+      objectReference: {fileID: 0}
+    - target: {fileID: 114222259136696880, guid: be7c083f6c332d44e8025bf973291bee,
+        type: 2}
+      propertyPath: busStopIdInternal
+      value: s_Sean O'Casey Bridge
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: be7c083f6c332d44e8025bf973291bee, type: 2}
@@ -610,6 +693,27 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 221048941}
   m_Script: {fileID: 11500000, guid: aec2306c18093fa4ea103945cc03ad7c, type: 3}
+--- !u!1 &221048943 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1462088307315816, guid: be7c083f6c332d44e8025bf973291bee,
+    type: 2}
+  m_PrefabInternal: {fileID: 221048941}
+--- !u!114 &221048944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 221048943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0498af2bf865a44983e0b7b1fc82ed8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  map: {fileID: 0}
+  coordinateLocation:
+    latitude: 53.34793
+    longitude: -6.247047
+  executeOnAwake: 0
 --- !u!1001 &225360685
 Prefab:
   m_ObjectHideFlags: 0
@@ -651,7 +755,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1928123344870766, guid: 6d9f4b88307d3d34194a029b11d67286, type: 2}
       propertyPath: m_Name
-      value: Airside Road_Waypoint
+      value: s_Airside Road_Waypoint
       objectReference: {fileID: 0}
     - target: {fileID: 114788828128342416, guid: 6d9f4b88307d3d34194a029b11d67286,
         type: 2}
@@ -718,7 +822,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1928123344870766, guid: 6d9f4b88307d3d34194a029b11d67286, type: 2}
       propertyPath: m_Name
-      value: Boroimhe Maples_Waypoint
+      value: s_Boroimhe Maples_Waypoint
       objectReference: {fileID: 0}
     - target: {fileID: 114788828128342416, guid: 6d9f4b88307d3d34194a029b11d67286,
         type: 2}
@@ -785,12 +889,17 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1462088307315816, guid: be7c083f6c332d44e8025bf973291bee, type: 2}
       propertyPath: m_Name
-      value: St Colmcille's GAA_BusStop
+      value: s_St Colmcille's GAA_BusStop
       objectReference: {fileID: 0}
     - target: {fileID: 114222259136696880, guid: be7c083f6c332d44e8025bf973291bee,
         type: 2}
       propertyPath: busStopId
       value: St Colmcille's GAA
+      objectReference: {fileID: 0}
+    - target: {fileID: 114222259136696880, guid: be7c083f6c332d44e8025bf973291bee,
+        type: 2}
+      propertyPath: busStopIdInternal
+      value: s_St Colmcille's GAA
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: be7c083f6c332d44e8025bf973291bee, type: 2}
@@ -801,6 +910,27 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 359778363}
   m_Script: {fileID: 11500000, guid: aec2306c18093fa4ea103945cc03ad7c, type: 3}
+--- !u!1 &359778365 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1462088307315816, guid: be7c083f6c332d44e8025bf973291bee,
+    type: 2}
+  m_PrefabInternal: {fileID: 359778363}
+--- !u!114 &359778366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 359778365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0498af2bf865a44983e0b7b1fc82ed8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  map: {fileID: 0}
+  coordinateLocation:
+    latitude: 53.46825
+    longitude: -6.220548
+  executeOnAwake: 0
 --- !u!1001 &408551816
 Prefab:
   m_ObjectHideFlags: 0
@@ -842,12 +972,17 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1462088307315816, guid: be7c083f6c332d44e8025bf973291bee, type: 2}
       propertyPath: m_Name
-      value: Cianlea_BusStop
+      value: s_Cianlea_BusStop
       objectReference: {fileID: 0}
     - target: {fileID: 114222259136696880, guid: be7c083f6c332d44e8025bf973291bee,
         type: 2}
       propertyPath: busStopId
       value: Cianlea
+      objectReference: {fileID: 0}
+    - target: {fileID: 114222259136696880, guid: be7c083f6c332d44e8025bf973291bee,
+        type: 2}
+      propertyPath: busStopIdInternal
+      value: s_Cianlea
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: be7c083f6c332d44e8025bf973291bee, type: 2}
@@ -858,6 +993,27 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 408551816}
   m_Script: {fileID: 11500000, guid: aec2306c18093fa4ea103945cc03ad7c, type: 3}
+--- !u!1 &408551818 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1462088307315816, guid: be7c083f6c332d44e8025bf973291bee,
+    type: 2}
+  m_PrefabInternal: {fileID: 408551816}
+--- !u!114 &408551819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 408551818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0498af2bf865a44983e0b7b1fc82ed8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  map: {fileID: 0}
+  coordinateLocation:
+    latitude: 53.46572
+    longitude: -6.239805
+  executeOnAwake: 0
 --- !u!1001 &414072972
 Prefab:
   m_ObjectHideFlags: 0
@@ -899,7 +1055,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1928123344870766, guid: 6d9f4b88307d3d34194a029b11d67286, type: 2}
       propertyPath: m_Name
-      value: Ballintrane_Waypoint
+      value: s_Ballintrane_Waypoint
       objectReference: {fileID: 0}
     - target: {fileID: 114788828128342416, guid: 6d9f4b88307d3d34194a029b11d67286,
         type: 2}
@@ -966,7 +1122,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1928123344870766, guid: 6d9f4b88307d3d34194a029b11d67286, type: 2}
       propertyPath: m_Name
-      value: Holywell Distributor Road_Waypoint
+      value: s_Holywell Distributor Road_Waypoint
       objectReference: {fileID: 0}
     - target: {fileID: 114788828128342416, guid: 6d9f4b88307d3d34194a029b11d67286,
         type: 2}
@@ -1033,12 +1189,17 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1462088307315816, guid: be7c083f6c332d44e8025bf973291bee, type: 2}
       propertyPath: m_Name
-      value: The Gallops_BusStop
+      value: s_TheGallops_BusStop
       objectReference: {fileID: 0}
     - target: {fileID: 114222259136696880, guid: be7c083f6c332d44e8025bf973291bee,
         type: 2}
       propertyPath: busStopId
       value: The Gallops
+      objectReference: {fileID: 0}
+    - target: {fileID: 114222259136696880, guid: be7c083f6c332d44e8025bf973291bee,
+        type: 2}
+      propertyPath: busStopIdInternal
+      value: s_TheGallops
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: be7c083f6c332d44e8025bf973291bee, type: 2}
@@ -1049,6 +1210,27 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 442219281}
   m_Script: {fileID: 11500000, guid: aec2306c18093fa4ea103945cc03ad7c, type: 3}
+--- !u!1 &442219283 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1462088307315816, guid: be7c083f6c332d44e8025bf973291bee,
+    type: 2}
+  m_PrefabInternal: {fileID: 442219281}
+--- !u!114 &442219284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 442219283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0498af2bf865a44983e0b7b1fc82ed8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  map: {fileID: 0}
+  coordinateLocation:
+    latitude: 53.462536
+    longitude: -6.239904
+  executeOnAwake: 0
 --- !u!1001 &461601582
 Prefab:
   m_ObjectHideFlags: 0
@@ -1090,7 +1272,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1928123344870766, guid: 6d9f4b88307d3d34194a029b11d67286, type: 2}
       propertyPath: m_Name
-      value: Highfields_Waypoint
+      value: s_Highfields_Waypoint
       objectReference: {fileID: 0}
     - target: {fileID: 114788828128342416, guid: 6d9f4b88307d3d34194a029b11d67286,
         type: 2}
@@ -1157,7 +1339,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1928123344870766, guid: 6d9f4b88307d3d34194a029b11d67286, type: 2}
       propertyPath: m_Name
-      value: M1 Drinan_Waypoint
+      value: s_M1 Drinan_Waypoint
       objectReference: {fileID: 0}
     - target: {fileID: 114788828128342416, guid: 6d9f4b88307d3d34194a029b11d67286,
         type: 2}
@@ -1224,7 +1406,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1928123344870766, guid: 6d9f4b88307d3d34194a029b11d67286, type: 2}
       propertyPath: m_Name
-      value: Swords Manor_Waypoint
+      value: s_Swords Manor_Waypoint
       objectReference: {fileID: 0}
     - target: {fileID: 114788828128342416, guid: 6d9f4b88307d3d34194a029b11d67286,
         type: 2}
@@ -1291,12 +1473,17 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1462088307315816, guid: be7c083f6c332d44e8025bf973291bee, type: 2}
       propertyPath: m_Name
-      value: Swords Bypass_BusStop
+      value: s_Swords Bypass_BusStop
       objectReference: {fileID: 0}
     - target: {fileID: 114222259136696880, guid: be7c083f6c332d44e8025bf973291bee,
         type: 2}
       propertyPath: busStopId
       value: Swords Bypass
+      objectReference: {fileID: 0}
+    - target: {fileID: 114222259136696880, guid: be7c083f6c332d44e8025bf973291bee,
+        type: 2}
+      propertyPath: busStopIdInternal
+      value: s_Swords Bypass
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: be7c083f6c332d44e8025bf973291bee, type: 2}
@@ -1307,6 +1494,27 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 526212270}
   m_Script: {fileID: 11500000, guid: aec2306c18093fa4ea103945cc03ad7c, type: 3}
+--- !u!1 &526212272 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1462088307315816, guid: be7c083f6c332d44e8025bf973291bee,
+    type: 2}
+  m_PrefabInternal: {fileID: 526212270}
+--- !u!114 &526212273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 526212272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0498af2bf865a44983e0b7b1fc82ed8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  map: {fileID: 0}
+  coordinateLocation:
+    latitude: 53.456932
+    longitude: -6.212439
+  executeOnAwake: 0
 --- !u!1001 &537461246
 Prefab:
   m_ObjectHideFlags: 0
@@ -1348,12 +1556,17 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1462088307315816, guid: be7c083f6c332d44e8025bf973291bee, type: 2}
       propertyPath: m_Name
-      value: Abbeyvale_BusStop
+      value: s_Abbeyvale_BusStop
       objectReference: {fileID: 0}
     - target: {fileID: 114222259136696880, guid: be7c083f6c332d44e8025bf973291bee,
         type: 2}
       propertyPath: busStopId
       value: Abbeyvale
+      objectReference: {fileID: 0}
+    - target: {fileID: 114222259136696880, guid: be7c083f6c332d44e8025bf973291bee,
+        type: 2}
+      propertyPath: busStopIdInternal
+      value: s_Abbeyvale
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: be7c083f6c332d44e8025bf973291bee, type: 2}
@@ -1364,6 +1577,27 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 537461246}
   m_Script: {fileID: 11500000, guid: aec2306c18093fa4ea103945cc03ad7c, type: 3}
+--- !u!1 &537461248 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1462088307315816, guid: be7c083f6c332d44e8025bf973291bee,
+    type: 2}
+  m_PrefabInternal: {fileID: 537461246}
+--- !u!114 &537461249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 537461248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0498af2bf865a44983e0b7b1fc82ed8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  map: {fileID: 0}
+  coordinateLocation:
+    latitude: 53.4596
+    longitude: -6.251219
+  executeOnAwake: 0
 --- !u!1001 &594927200
 Prefab:
   m_ObjectHideFlags: 0
@@ -1405,7 +1639,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1928123344870766, guid: 6d9f4b88307d3d34194a029b11d67286, type: 2}
       propertyPath: m_Name
-      value: Jugback Lane_Waypoint
+      value: s_Jugback Lane_Waypoint
       objectReference: {fileID: 0}
     - target: {fileID: 114788828128342416, guid: 6d9f4b88307d3d34194a029b11d67286,
         type: 2}
@@ -1472,12 +1706,17 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1462088307315816, guid: be7c083f6c332d44e8025bf973291bee, type: 2}
       propertyPath: m_Name
-      value: Malahide Roundabout_BusStop
+      value: s_Malahide Roundabout_BusStop
       objectReference: {fileID: 0}
     - target: {fileID: 114222259136696880, guid: be7c083f6c332d44e8025bf973291bee,
         type: 2}
       propertyPath: busStopId
       value: Malahide Roundabout
+      objectReference: {fileID: 0}
+    - target: {fileID: 114222259136696880, guid: be7c083f6c332d44e8025bf973291bee,
+        type: 2}
+      propertyPath: busStopIdInternal
+      value: s_Malahide Roundabout
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: be7c083f6c332d44e8025bf973291bee, type: 2}
@@ -1488,6 +1727,27 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 596213835}
   m_Script: {fileID: 11500000, guid: aec2306c18093fa4ea103945cc03ad7c, type: 3}
+--- !u!1 &596213837 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1462088307315816, guid: be7c083f6c332d44e8025bf973291bee,
+    type: 2}
+  m_PrefabInternal: {fileID: 596213835}
+--- !u!114 &596213838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 596213837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0498af2bf865a44983e0b7b1fc82ed8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  map: {fileID: 0}
+  coordinateLocation:
+    latitude: 53.4542
+    longitude: -6.215707
+  executeOnAwake: 0
 --- !u!1001 &612428939
 Prefab:
   m_ObjectHideFlags: 0
@@ -1529,7 +1789,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1928123344870766, guid: 6d9f4b88307d3d34194a029b11d67286, type: 2}
       propertyPath: m_Name
-      value: Abbeyvale_Waypoint
+      value: s_Abbeyvale_Waypoint
       objectReference: {fileID: 0}
     - target: {fileID: 114788828128342416, guid: 6d9f4b88307d3d34194a029b11d67286,
         type: 2}
@@ -1677,7 +1937,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1928123344870766, guid: 6d9f4b88307d3d34194a029b11d67286, type: 2}
       propertyPath: m_Name
-      value: Lios Cian_Waypoint
+      value: s_Lios Cian_Waypoint
       objectReference: {fileID: 0}
     - target: {fileID: 114788828128342416, guid: 6d9f4b88307d3d34194a029b11d67286,
         type: 2}
@@ -1744,7 +2004,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1928123344870766, guid: 6d9f4b88307d3d34194a029b11d67286, type: 2}
       propertyPath: m_Name
-      value: Swords Bypass_Waypoint
+      value: s_Swords Bypass_Waypoint
       objectReference: {fileID: 0}
     - target: {fileID: 114788828128342416, guid: 6d9f4b88307d3d34194a029b11d67286,
         type: 2}
@@ -1811,7 +2071,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1928123344870766, guid: 6d9f4b88307d3d34194a029b11d67286, type: 2}
       propertyPath: m_Name
-      value: Pavilions Shopping Centre_Waypoint
+      value: s_Pavilions Shopping Centre_Waypoint
       objectReference: {fileID: 0}
     - target: {fileID: 114788828128342416, guid: 6d9f4b88307d3d34194a029b11d67286,
         type: 2}
@@ -1878,12 +2138,17 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1462088307315816, guid: be7c083f6c332d44e8025bf973291bee, type: 2}
       propertyPath: m_Name
-      value: Valley View_BusStop
+      value: s_Valley View_BusStop
       objectReference: {fileID: 0}
     - target: {fileID: 114222259136696880, guid: be7c083f6c332d44e8025bf973291bee,
         type: 2}
       propertyPath: busStopId
       value: Valley View
+      objectReference: {fileID: 0}
+    - target: {fileID: 114222259136696880, guid: be7c083f6c332d44e8025bf973291bee,
+        type: 2}
+      propertyPath: busStopIdInternal
+      value: s_Valley View
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: be7c083f6c332d44e8025bf973291bee, type: 2}
@@ -1894,6 +2159,27 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 750913461}
   m_Script: {fileID: 11500000, guid: aec2306c18093fa4ea103945cc03ad7c, type: 3}
+--- !u!1 &750913463 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1462088307315816, guid: be7c083f6c332d44e8025bf973291bee,
+    type: 2}
+  m_PrefabInternal: {fileID: 750913461}
+--- !u!114 &750913464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 750913463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0498af2bf865a44983e0b7b1fc82ed8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  map: {fileID: 0}
+  coordinateLocation:
+    latitude: 53.460663
+    longitude: -6.241331
+  executeOnAwake: 0
 --- !u!1001 &757089218
 Prefab:
   m_ObjectHideFlags: 0
@@ -1935,7 +2221,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1928123344870766, guid: 6d9f4b88307d3d34194a029b11d67286, type: 2}
       propertyPath: m_Name
-      value: Seatown Road_Waypoint
+      value: s_Seatown Road_Waypoint
       objectReference: {fileID: 0}
     - target: {fileID: 114788828128342416, guid: 6d9f4b88307d3d34194a029b11d67286,
         type: 2}
@@ -2135,7 +2421,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1928123344870766, guid: 6d9f4b88307d3d34194a029b11d67286, type: 2}
       propertyPath: m_Name
-      value: Eden Quay_Waypoint
+      value: s_Eden Quay_Waypoint
       objectReference: {fileID: 0}
     - target: {fileID: 114788828128342416, guid: 6d9f4b88307d3d34194a029b11d67286,
         type: 2}
@@ -2202,12 +2488,17 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1462088307315816, guid: be7c083f6c332d44e8025bf973291bee, type: 2}
       propertyPath: m_Name
-      value: Applewood Estate_BusStop
+      value: s_Applewood Estate_BusStop
       objectReference: {fileID: 0}
     - target: {fileID: 114222259136696880, guid: be7c083f6c332d44e8025bf973291bee,
         type: 2}
       propertyPath: busStopId
       value: Applewood Estate
+      objectReference: {fileID: 0}
+    - target: {fileID: 114222259136696880, guid: be7c083f6c332d44e8025bf973291bee,
+        type: 2}
+      propertyPath: busStopIdInternal
+      value: s_Applewood Estate
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: be7c083f6c332d44e8025bf973291bee, type: 2}
@@ -2218,6 +2509,27 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 945748517}
   m_Script: {fileID: 11500000, guid: aec2306c18093fa4ea103945cc03ad7c, type: 3}
+--- !u!1 &945748519 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1462088307315816, guid: be7c083f6c332d44e8025bf973291bee,
+    type: 2}
+  m_PrefabInternal: {fileID: 945748517}
+--- !u!114 &945748520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 945748519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0498af2bf865a44983e0b7b1fc82ed8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  map: {fileID: 0}
+  coordinateLocation:
+    latitude: 53.4694
+    longitude: -6.230856
+  executeOnAwake: 0
 --- !u!1001 &976212144
 Prefab:
   m_ObjectHideFlags: 0
@@ -2259,17 +2571,17 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1928123344870766, guid: 6d9f4b88307d3d34194a029b11d67286, type: 2}
       propertyPath: m_Name
-      value: East Wall Road_Waypoint
+      value: s_East Wall Road_Waypoint
       objectReference: {fileID: 0}
     - target: {fileID: 114788828128342416, guid: 6d9f4b88307d3d34194a029b11d67286,
         type: 2}
       propertyPath: coordinateLocation.latitude
-      value: 53.35081
+      value: 53.35079
       objectReference: {fileID: 0}
     - target: {fileID: 114788828128342416, guid: 6d9f4b88307d3d34194a029b11d67286,
         type: 2}
       propertyPath: coordinateLocation.longitude
-      value: -6.226062
+      value: -6.225979
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6d9f4b88307d3d34194a029b11d67286, type: 2}
@@ -2326,7 +2638,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1928123344870766, guid: 6d9f4b88307d3d34194a029b11d67286, type: 2}
       propertyPath: m_Name
-      value: St Colmcille's GAA_Waypoint
+      value: s_St Colmcille's GAA_Waypoint
       objectReference: {fileID: 0}
     - target: {fileID: 114788828128342416, guid: 6d9f4b88307d3d34194a029b11d67286,
         type: 2}
@@ -2393,12 +2705,17 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1462088307315816, guid: be7c083f6c332d44e8025bf973291bee, type: 2}
       propertyPath: m_Name
-      value: Airside Central_BusStop
+      value: s_Airside Central_BusStop
       objectReference: {fileID: 0}
     - target: {fileID: 114222259136696880, guid: be7c083f6c332d44e8025bf973291bee,
         type: 2}
       propertyPath: busStopId
       value: Airside Central
+      objectReference: {fileID: 0}
+    - target: {fileID: 114222259136696880, guid: be7c083f6c332d44e8025bf973291bee,
+        type: 2}
+      propertyPath: busStopIdInternal
+      value: s_Airside Central
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: be7c083f6c332d44e8025bf973291bee, type: 2}
@@ -2409,6 +2726,27 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 998824062}
   m_Script: {fileID: 11500000, guid: aec2306c18093fa4ea103945cc03ad7c, type: 3}
+--- !u!1 &998824064 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1462088307315816, guid: be7c083f6c332d44e8025bf973291bee,
+    type: 2}
+  m_PrefabInternal: {fileID: 998824062}
+--- !u!114 &998824065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 998824064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0498af2bf865a44983e0b7b1fc82ed8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  map: {fileID: 0}
+  coordinateLocation:
+    latitude: 53.445976
+    longitude: -6.224308
+  executeOnAwake: 0
 --- !u!20 &1007483613
 Camera:
   m_ObjectHideFlags: 0
@@ -2487,12 +2825,17 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1462088307315816, guid: be7c083f6c332d44e8025bf973291bee, type: 2}
       propertyPath: m_Name
-      value: Convention Center_BusStop
+      value: s_Convention Center_BusStop
       objectReference: {fileID: 0}
     - target: {fileID: 114222259136696880, guid: be7c083f6c332d44e8025bf973291bee,
         type: 2}
       propertyPath: busStopId
       value: Convention Center
+      objectReference: {fileID: 0}
+    - target: {fileID: 114222259136696880, guid: be7c083f6c332d44e8025bf973291bee,
+        type: 2}
+      propertyPath: busStopIdInternal
+      value: s_Convention Center
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: be7c083f6c332d44e8025bf973291bee, type: 2}
@@ -2503,6 +2846,27 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1040986574}
   m_Script: {fileID: 11500000, guid: aec2306c18093fa4ea103945cc03ad7c, type: 3}
+--- !u!1 &1040986576 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1462088307315816, guid: be7c083f6c332d44e8025bf973291bee,
+    type: 2}
+  m_PrefabInternal: {fileID: 1040986574}
+--- !u!114 &1040986577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1040986576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0498af2bf865a44983e0b7b1fc82ed8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  map: {fileID: 0}
+  coordinateLocation:
+    latitude: 53.347477
+    longitude: -6.239849
+  executeOnAwake: 0
 --- !u!1001 &1045345723
 Prefab:
   m_ObjectHideFlags: 0
@@ -2544,7 +2908,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1928123344870766, guid: 6d9f4b88307d3d34194a029b11d67286, type: 2}
       propertyPath: m_Name
-      value: Boroimhe Laurels_Waypoint
+      value: s_Boroimhe Laurels_Waypoint
       objectReference: {fileID: 0}
     - target: {fileID: 114788828128342416, guid: 6d9f4b88307d3d34194a029b11d67286,
         type: 2}
@@ -2676,7 +3040,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1928123344870766, guid: 6d9f4b88307d3d34194a029b11d67286, type: 2}
       propertyPath: m_Name
-      value: Convention Center_Waypoint
+      value: s_Convention Center_Waypoint
       objectReference: {fileID: 0}
     - target: {fileID: 114788828128342416, guid: 6d9f4b88307d3d34194a029b11d67286,
         type: 2}
@@ -2743,12 +3107,17 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1462088307315816, guid: be7c083f6c332d44e8025bf973291bee, type: 2}
       propertyPath: m_Name
-      value: Boroimhe Laurels_BusStop
+      value: s_Boroimhe Laurels_BusStop
       objectReference: {fileID: 0}
     - target: {fileID: 114222259136696880, guid: be7c083f6c332d44e8025bf973291bee,
         type: 2}
       propertyPath: busStopId
       value: Boroimhe Laurels
+      objectReference: {fileID: 0}
+    - target: {fileID: 114222259136696880, guid: be7c083f6c332d44e8025bf973291bee,
+        type: 2}
+      propertyPath: busStopIdInternal
+      value: s_Boroimhe Laurels
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: be7c083f6c332d44e8025bf973291bee, type: 2}
@@ -2759,6 +3128,27 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1174522245}
   m_Script: {fileID: 11500000, guid: aec2306c18093fa4ea103945cc03ad7c, type: 3}
+--- !u!1 &1174522247 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1462088307315816, guid: be7c083f6c332d44e8025bf973291bee,
+    type: 2}
+  m_PrefabInternal: {fileID: 1174522245}
+--- !u!114 &1174522248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1174522247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0498af2bf865a44983e0b7b1fc82ed8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  map: {fileID: 0}
+  coordinateLocation:
+    latitude: 53.445805
+    longitude: -6.235582
+  executeOnAwake: 0
 --- !u!1001 &1180979543
 Prefab:
   m_ObjectHideFlags: 0
@@ -2800,12 +3190,17 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1462088307315816, guid: be7c083f6c332d44e8025bf973291bee, type: 2}
       propertyPath: m_Name
-      value: Seatown Road_BusStop
+      value: s_Seatown Road_BusStop
       objectReference: {fileID: 0}
     - target: {fileID: 114222259136696880, guid: be7c083f6c332d44e8025bf973291bee,
         type: 2}
       propertyPath: busStopId
       value: Seatown Road
+      objectReference: {fileID: 0}
+    - target: {fileID: 114222259136696880, guid: be7c083f6c332d44e8025bf973291bee,
+        type: 2}
+      propertyPath: busStopIdInternal
+      value: s_Seatown Road
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: be7c083f6c332d44e8025bf973291bee, type: 2}
@@ -2816,6 +3211,27 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1180979543}
   m_Script: {fileID: 11500000, guid: aec2306c18093fa4ea103945cc03ad7c, type: 3}
+--- !u!1 &1180979545 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1462088307315816, guid: be7c083f6c332d44e8025bf973291bee,
+    type: 2}
+  m_PrefabInternal: {fileID: 1180979543}
+--- !u!114 &1180979546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1180979545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0498af2bf865a44983e0b7b1fc82ed8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  map: {fileID: 0}
+  coordinateLocation:
+    latitude: 53.46222
+    longitude: -6.213282
+  executeOnAwake: 0
 --- !u!1001 &1202304254
 Prefab:
   m_ObjectHideFlags: 0
@@ -2857,12 +3273,17 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1462088307315816, guid: be7c083f6c332d44e8025bf973291bee, type: 2}
       propertyPath: m_Name
-      value: M1 Drinan_BusStop
+      value: s_M1 Drinan_BusStop
       objectReference: {fileID: 0}
     - target: {fileID: 114222259136696880, guid: be7c083f6c332d44e8025bf973291bee,
         type: 2}
       propertyPath: busStopId
       value: M1 Drinan
+      objectReference: {fileID: 0}
+    - target: {fileID: 114222259136696880, guid: be7c083f6c332d44e8025bf973291bee,
+        type: 2}
+      propertyPath: busStopIdInternal
+      value: s_M1 Drinan
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: be7c083f6c332d44e8025bf973291bee, type: 2}
@@ -2873,6 +3294,27 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1202304254}
   m_Script: {fileID: 11500000, guid: aec2306c18093fa4ea103945cc03ad7c, type: 3}
+--- !u!1 &1202304256 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1462088307315816, guid: be7c083f6c332d44e8025bf973291bee,
+    type: 2}
+  m_PrefabInternal: {fileID: 1202304254}
+--- !u!114 &1202304257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1202304256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0498af2bf865a44983e0b7b1fc82ed8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  map: {fileID: 0}
+  coordinateLocation:
+    latitude: 53.443447
+    longitude: -6.209268
+  executeOnAwake: 0
 --- !u!1001 &1233409388
 Prefab:
   m_ObjectHideFlags: 0
@@ -2914,7 +3356,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1928123344870766, guid: 6d9f4b88307d3d34194a029b11d67286, type: 2}
       propertyPath: m_Name
-      value: Malahide Roundabout_Waypoint
+      value: s_Malahide Roundabout_Waypoint
       objectReference: {fileID: 0}
     - target: {fileID: 114788828128342416, guid: 6d9f4b88307d3d34194a029b11d67286,
         type: 2}
@@ -3053,7 +3495,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1928123344870766, guid: 6d9f4b88307d3d34194a029b11d67286, type: 2}
       propertyPath: m_Name
-      value: Valley View_Waypoint
+      value: s_Valley View_Waypoint
       objectReference: {fileID: 0}
     - target: {fileID: 114788828128342416, guid: 6d9f4b88307d3d34194a029b11d67286,
         type: 2}
@@ -3120,12 +3562,17 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1462088307315816, guid: be7c083f6c332d44e8025bf973291bee, type: 2}
       propertyPath: m_Name
-      value: Highfields_BusStop
+      value: s_Highfields_BusStop
       objectReference: {fileID: 0}
     - target: {fileID: 114222259136696880, guid: be7c083f6c332d44e8025bf973291bee,
         type: 2}
       propertyPath: busStopId
       value: Highfields
+      objectReference: {fileID: 0}
+    - target: {fileID: 114222259136696880, guid: be7c083f6c332d44e8025bf973291bee,
+        type: 2}
+      propertyPath: busStopIdInternal
+      value: s_Highfields
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: be7c083f6c332d44e8025bf973291bee, type: 2}
@@ -3136,6 +3583,27 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1345056765}
   m_Script: {fileID: 11500000, guid: aec2306c18093fa4ea103945cc03ad7c, type: 3}
+--- !u!1 &1345056767 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1462088307315816, guid: be7c083f6c332d44e8025bf973291bee,
+    type: 2}
+  m_PrefabInternal: {fileID: 1345056765}
+--- !u!114 &1345056768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1345056767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0498af2bf865a44983e0b7b1fc82ed8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  map: {fileID: 0}
+  coordinateLocation:
+    latitude: 53.45433
+    longitude: -6.22441
+  executeOnAwake: 0
 --- !u!1 &1398427992 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1953854151932788, guid: 38983f424eff3d944bb10e5004dc0d1f,
@@ -3267,12 +3735,17 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1462088307315816, guid: be7c083f6c332d44e8025bf973291bee, type: 2}
       propertyPath: m_Name
-      value: East Wall Road_BusStop
+      value: s_East Wall Road_BusStop
       objectReference: {fileID: 0}
     - target: {fileID: 114222259136696880, guid: be7c083f6c332d44e8025bf973291bee,
         type: 2}
       propertyPath: busStopId
       value: East Wall Road
+      objectReference: {fileID: 0}
+    - target: {fileID: 114222259136696880, guid: be7c083f6c332d44e8025bf973291bee,
+        type: 2}
+      propertyPath: busStopIdInternal
+      value: s_East Wall Road
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: be7c083f6c332d44e8025bf973291bee, type: 2}
@@ -3283,6 +3756,27 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1441732867}
   m_Script: {fileID: 11500000, guid: aec2306c18093fa4ea103945cc03ad7c, type: 3}
+--- !u!1 &1441732869 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1462088307315816, guid: be7c083f6c332d44e8025bf973291bee,
+    type: 2}
+  m_PrefabInternal: {fileID: 1441732867}
+--- !u!114 &1441732870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1441732869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0498af2bf865a44983e0b7b1fc82ed8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  map: {fileID: 0}
+  coordinateLocation:
+    latitude: 53.350796
+    longitude: -6.226013
+  executeOnAwake: 0
 --- !u!1001 &1483592420
 Prefab:
   m_ObjectHideFlags: 0
@@ -3324,12 +3818,17 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1462088307315816, guid: be7c083f6c332d44e8025bf973291bee, type: 2}
       propertyPath: m_Name
-      value: West Seatown_BusStop
+      value: s_West Seatown_BusStop
       objectReference: {fileID: 0}
     - target: {fileID: 114222259136696880, guid: be7c083f6c332d44e8025bf973291bee,
         type: 2}
       propertyPath: busStopId
       value: West Seatown
+      objectReference: {fileID: 0}
+    - target: {fileID: 114222259136696880, guid: be7c083f6c332d44e8025bf973291bee,
+        type: 2}
+      propertyPath: busStopIdInternal
+      value: s_West Seatown
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: be7c083f6c332d44e8025bf973291bee, type: 2}
@@ -3340,6 +3839,27 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1483592420}
   m_Script: {fileID: 11500000, guid: aec2306c18093fa4ea103945cc03ad7c, type: 3}
+--- !u!1 &1483592422 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1462088307315816, guid: be7c083f6c332d44e8025bf973291bee,
+    type: 2}
+  m_PrefabInternal: {fileID: 1483592420}
+--- !u!114 &1483592423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1483592422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0498af2bf865a44983e0b7b1fc82ed8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  map: {fileID: 0}
+  coordinateLocation:
+    latitude: 53.465008
+    longitude: -6.217361
+  executeOnAwake: 0
 --- !u!1001 &1546240492
 Prefab:
   m_ObjectHideFlags: 0
@@ -3381,12 +3901,17 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1462088307315816, guid: be7c083f6c332d44e8025bf973291bee, type: 2}
       propertyPath: m_Name
-      value: Holywell Distributor Road_BusStop
+      value: s_Holywell Distributor Road_BusStop
       objectReference: {fileID: 0}
     - target: {fileID: 114222259136696880, guid: be7c083f6c332d44e8025bf973291bee,
         type: 2}
       propertyPath: busStopId
       value: Holywell Distributor Road
+      objectReference: {fileID: 0}
+    - target: {fileID: 114222259136696880, guid: be7c083f6c332d44e8025bf973291bee,
+        type: 2}
+      propertyPath: busStopIdInternal
+      value: s_Holywell Distributor Road
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: be7c083f6c332d44e8025bf973291bee, type: 2}
@@ -3397,6 +3922,27 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1546240492}
   m_Script: {fileID: 11500000, guid: aec2306c18093fa4ea103945cc03ad7c, type: 3}
+--- !u!1 &1546240494 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1462088307315816, guid: be7c083f6c332d44e8025bf973291bee,
+    type: 2}
+  m_PrefabInternal: {fileID: 1546240492}
+--- !u!114 &1546240495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1546240494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0498af2bf865a44983e0b7b1fc82ed8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  map: {fileID: 0}
+  coordinateLocation:
+    latitude: 53.443623
+    longitude: -6.211154
+  executeOnAwake: 0
 --- !u!1001 &1605490040
 Prefab:
   m_ObjectHideFlags: 0
@@ -3539,7 +4085,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1928123344870766, guid: 6d9f4b88307d3d34194a029b11d67286, type: 2}
       propertyPath: m_Name
-      value: Airside Central_Waypoint
+      value: s_Airside Central_Waypoint
       objectReference: {fileID: 0}
     - target: {fileID: 114788828128342416, guid: 6d9f4b88307d3d34194a029b11d67286,
         type: 2}
@@ -3606,12 +4152,17 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1462088307315816, guid: be7c083f6c332d44e8025bf973291bee, type: 2}
       propertyPath: m_Name
-      value: Dublin Road (Penneys)_BusStop
+      value: s_Dublin Road (Penneys)_BusStop
       objectReference: {fileID: 0}
     - target: {fileID: 114222259136696880, guid: be7c083f6c332d44e8025bf973291bee,
         type: 2}
       propertyPath: busStopId
       value: Dublin Road (Penneys)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114222259136696880, guid: be7c083f6c332d44e8025bf973291bee,
+        type: 2}
+      propertyPath: busStopIdInternal
+      value: s_Dublin Road (Penneys)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: be7c083f6c332d44e8025bf973291bee, type: 2}
@@ -3622,6 +4173,27 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1643732278}
   m_Script: {fileID: 11500000, guid: aec2306c18093fa4ea103945cc03ad7c, type: 3}
+--- !u!1 &1643732280 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1462088307315816, guid: be7c083f6c332d44e8025bf973291bee,
+    type: 2}
+  m_PrefabInternal: {fileID: 1643732278}
+--- !u!114 &1643732281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1643732280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0498af2bf865a44983e0b7b1fc82ed8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  map: {fileID: 0}
+  coordinateLocation:
+    latitude: 53.45588
+    longitude: -6.221728
+  executeOnAwake: 0
 --- !u!1001 &1664471333
 Prefab:
   m_ObjectHideFlags: 0
@@ -3663,7 +4235,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1928123344870766, guid: 6d9f4b88307d3d34194a029b11d67286, type: 2}
       propertyPath: m_Name
-      value: Laurelton_Waypoint
+      value: s_Laurelton_Waypoint
       objectReference: {fileID: 0}
     - target: {fileID: 114788828128342416, guid: 6d9f4b88307d3d34194a029b11d67286,
         type: 2}
@@ -3730,7 +4302,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1928123344870766, guid: 6d9f4b88307d3d34194a029b11d67286, type: 2}
       propertyPath: m_Name
-      value: Cianlea_Waypoint
+      value: s_Cianlea_Waypoint
       objectReference: {fileID: 0}
     - target: {fileID: 114788828128342416, guid: 6d9f4b88307d3d34194a029b11d67286,
         type: 2}
@@ -3797,12 +4369,17 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1462088307315816, guid: be7c083f6c332d44e8025bf973291bee, type: 2}
       propertyPath: m_Name
-      value: Lios Cian_BusStop
+      value: s_Lios Cian_BusStop
       objectReference: {fileID: 0}
     - target: {fileID: 114222259136696880, guid: be7c083f6c332d44e8025bf973291bee,
         type: 2}
       propertyPath: busStopId
       value: Lios Cian
+      objectReference: {fileID: 0}
+    - target: {fileID: 114222259136696880, guid: be7c083f6c332d44e8025bf973291bee,
+        type: 2}
+      propertyPath: busStopIdInternal
+      value: s_Lios Cian
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: be7c083f6c332d44e8025bf973291bee, type: 2}
@@ -3813,6 +4390,27 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1715561195}
   m_Script: {fileID: 11500000, guid: aec2306c18093fa4ea103945cc03ad7c, type: 3}
+--- !u!1 &1715561197 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1462088307315816, guid: be7c083f6c332d44e8025bf973291bee,
+    type: 2}
+  m_PrefabInternal: {fileID: 1715561195}
+--- !u!114 &1715561198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1715561197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0498af2bf865a44983e0b7b1fc82ed8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  map: {fileID: 0}
+  coordinateLocation:
+    latitude: 53.463943
+    longitude: -6.239501
+  executeOnAwake: 0
 --- !u!1001 &1849594972
 Prefab:
   m_ObjectHideFlags: 0
@@ -3854,12 +4452,17 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1462088307315816, guid: be7c083f6c332d44e8025bf973291bee, type: 2}
       propertyPath: m_Name
-      value: Laurelton_BusStop
+      value: s_Laurelton_BusStop
       objectReference: {fileID: 0}
     - target: {fileID: 114222259136696880, guid: be7c083f6c332d44e8025bf973291bee,
         type: 2}
       propertyPath: busStopId
       value: Laurelton
+      objectReference: {fileID: 0}
+    - target: {fileID: 114222259136696880, guid: be7c083f6c332d44e8025bf973291bee,
+        type: 2}
+      propertyPath: busStopIdInternal
+      value: s_Laurelton
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: be7c083f6c332d44e8025bf973291bee, type: 2}
@@ -3870,6 +4473,27 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1849594972}
   m_Script: {fileID: 11500000, guid: aec2306c18093fa4ea103945cc03ad7c, type: 3}
+--- !u!1 &1849594974 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1462088307315816, guid: be7c083f6c332d44e8025bf973291bee,
+    type: 2}
+  m_PrefabInternal: {fileID: 1849594972}
+--- !u!114 &1849594975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1849594974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0498af2bf865a44983e0b7b1fc82ed8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  map: {fileID: 0}
+  coordinateLocation:
+    latitude: 53.46825
+    longitude: -6.236823
+  executeOnAwake: 0
 --- !u!1001 &1870196220
 Prefab:
   m_ObjectHideFlags: 0
@@ -3916,7 +4540,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1863562967672478, guid: 0edfd68289409bc409a92c0296e50719, type: 2}
       propertyPath: m_Name
-      value: Bus Route 500
+      value: Bus Route s_500
       objectReference: {fileID: 0}
     - target: {fileID: 114867456524390420, guid: 0edfd68289409bc409a92c0296e50719,
         type: 2}
@@ -4083,6 +4707,11 @@ Prefab:
       propertyPath: gizmoEnabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114867456524390420, guid: 0edfd68289409bc409a92c0296e50719,
+        type: 2}
+      propertyPath: routeIdInternal
+      value: s_500
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0edfd68289409bc409a92c0296e50719, type: 2}
   m_IsPrefabParent: 0
@@ -4175,12 +4804,17 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1462088307315816, guid: be7c083f6c332d44e8025bf973291bee, type: 2}
       propertyPath: m_Name
-      value: Swords Manor_BusStop
+      value: s_Swords Manor_BusStop
       objectReference: {fileID: 0}
     - target: {fileID: 114222259136696880, guid: be7c083f6c332d44e8025bf973291bee,
         type: 2}
       propertyPath: busStopId
       value: Swords Manor
+      objectReference: {fileID: 0}
+    - target: {fileID: 114222259136696880, guid: be7c083f6c332d44e8025bf973291bee,
+        type: 2}
+      propertyPath: busStopIdInternal
+      value: s_Swords Manor
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: be7c083f6c332d44e8025bf973291bee, type: 2}
@@ -4191,6 +4825,27 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1892114553}
   m_Script: {fileID: 11500000, guid: aec2306c18093fa4ea103945cc03ad7c, type: 3}
+--- !u!1 &1892114555 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1462088307315816, guid: be7c083f6c332d44e8025bf973291bee,
+    type: 2}
+  m_PrefabInternal: {fileID: 1892114553}
+--- !u!114 &1892114556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1892114555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0498af2bf865a44983e0b7b1fc82ed8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  map: {fileID: 0}
+  coordinateLocation:
+    latitude: 53.459957
+    longitude: -6.245145
+  executeOnAwake: 0
 --- !u!1001 &1893255638
 Prefab:
   m_ObjectHideFlags: 0
@@ -4232,12 +4887,17 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1462088307315816, guid: be7c083f6c332d44e8025bf973291bee, type: 2}
       propertyPath: m_Name
-      value: Boroimhe Maples_BusStop
+      value: s_Boroimhe Maples_BusStop
       objectReference: {fileID: 0}
     - target: {fileID: 114222259136696880, guid: be7c083f6c332d44e8025bf973291bee,
         type: 2}
       propertyPath: busStopId
       value: Boroimhe Maples
+      objectReference: {fileID: 0}
+    - target: {fileID: 114222259136696880, guid: be7c083f6c332d44e8025bf973291bee,
+        type: 2}
+      propertyPath: busStopIdInternal
+      value: s_Boroimhe Maples
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: be7c083f6c332d44e8025bf973291bee, type: 2}
@@ -4248,6 +4908,27 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1893255638}
   m_Script: {fileID: 11500000, guid: aec2306c18093fa4ea103945cc03ad7c, type: 3}
+--- !u!1 &1893255640 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1462088307315816, guid: be7c083f6c332d44e8025bf973291bee,
+    type: 2}
+  m_PrefabInternal: {fileID: 1893255638}
+--- !u!114 &1893255641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1893255640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0498af2bf865a44983e0b7b1fc82ed8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  map: {fileID: 0}
+  coordinateLocation:
+    latitude: 53.44464
+    longitude: -6.231097
+  executeOnAwake: 0
 --- !u!1001 &1912328634
 Prefab:
   m_ObjectHideFlags: 0
@@ -4289,7 +4970,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1928123344870766, guid: 6d9f4b88307d3d34194a029b11d67286, type: 2}
       propertyPath: m_Name
-      value: West Seatown_Waypoint
+      value: s_West Seatown_Waypoint
       objectReference: {fileID: 0}
     - target: {fileID: 114788828128342416, guid: 6d9f4b88307d3d34194a029b11d67286,
         type: 2}
@@ -4356,12 +5037,17 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1462088307315816, guid: be7c083f6c332d44e8025bf973291bee, type: 2}
       propertyPath: m_Name
-      value: Airside Road_BusStop
+      value: s_Airside Road_BusStop
       objectReference: {fileID: 0}
     - target: {fileID: 114222259136696880, guid: be7c083f6c332d44e8025bf973291bee,
         type: 2}
       propertyPath: busStopId
       value: Airside Road
+      objectReference: {fileID: 0}
+    - target: {fileID: 114222259136696880, guid: be7c083f6c332d44e8025bf973291bee,
+        type: 2}
+      propertyPath: busStopIdInternal
+      value: s_Airside Road
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: be7c083f6c332d44e8025bf973291bee, type: 2}
@@ -4372,6 +5058,27 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1941240353}
   m_Script: {fileID: 11500000, guid: aec2306c18093fa4ea103945cc03ad7c, type: 3}
+--- !u!1 &1941240355 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1462088307315816, guid: be7c083f6c332d44e8025bf973291bee,
+    type: 2}
+  m_PrefabInternal: {fileID: 1941240353}
+--- !u!114 &1941240356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1941240355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0498af2bf865a44983e0b7b1fc82ed8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  map: {fileID: 0}
+  coordinateLocation:
+    latitude: 53.44497
+    longitude: -6.227185
+  executeOnAwake: 0
 --- !u!1001 &1974757245
 Prefab:
   m_ObjectHideFlags: 0
@@ -4413,12 +5120,17 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1462088307315816, guid: be7c083f6c332d44e8025bf973291bee, type: 2}
       propertyPath: m_Name
-      value: Pavilions Shopping Centre_BusStop
+      value: s_Pavilions Shopping Centre_BusStop
       objectReference: {fileID: 0}
     - target: {fileID: 114222259136696880, guid: be7c083f6c332d44e8025bf973291bee,
         type: 2}
       propertyPath: busStopId
       value: Pavilions Shopping Centre
+      objectReference: {fileID: 0}
+    - target: {fileID: 114222259136696880, guid: be7c083f6c332d44e8025bf973291bee,
+        type: 2}
+      propertyPath: busStopIdInternal
+      value: s_Pavilions Shopping Centre
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: be7c083f6c332d44e8025bf973291bee, type: 2}
@@ -4429,6 +5141,27 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1974757245}
   m_Script: {fileID: 11500000, guid: aec2306c18093fa4ea103945cc03ad7c, type: 3}
+--- !u!1 &1974757247 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1462088307315816, guid: be7c083f6c332d44e8025bf973291bee,
+    type: 2}
+  m_PrefabInternal: {fileID: 1974757245}
+--- !u!114 &1974757248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1974757247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0498af2bf865a44983e0b7b1fc82ed8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  map: {fileID: 0}
+  coordinateLocation:
+    latitude: 53.454857
+    longitude: -6.218401
+  executeOnAwake: 0
 --- !u!1 &2047505592
 GameObject:
   m_ObjectHideFlags: 0
@@ -4505,6 +5238,11 @@ Prefab:
     - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
         type: 2}
       propertyPath: busServices.Array.data[1].timeSlots.Array.size
+      value: 28
+      objectReference: {fileID: 0}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.size
       value: 28
       objectReference: {fileID: 0}
     - target: {fileID: 4831212379119494, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7, type: 2}
@@ -5417,6 +6155,426 @@ Prefab:
         type: 2}
       propertyPath: busServices.Array.data[1].timeSlots.Array.data[27].scheduledMinute
       value: 49
+      objectReference: {fileID: 0}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].servicedBusRoute
+      value: 
+      objectReference: {fileID: 1870196221}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[0].scheduledBusStop
+      value: 
+      objectReference: {fileID: 537461247}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[1].scheduledBusStop
+      value: 
+      objectReference: {fileID: 1892114554}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[2].scheduledBusStop
+      value: 
+      objectReference: {fileID: 750913462}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[3].scheduledBusStop
+      value: 
+      objectReference: {fileID: 442219282}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[4].scheduledBusStop
+      value: 
+      objectReference: {fileID: 1715561196}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[5].scheduledBusStop
+      value: 
+      objectReference: {fileID: 408551817}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[6].scheduledBusStop
+      value: 
+      objectReference: {fileID: 1849594973}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[7].scheduledBusStop
+      value: 
+      objectReference: {fileID: 945748518}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[8].scheduledBusStop
+      value: 
+      objectReference: {fileID: 204253279}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[9].scheduledBusStop
+      value: 
+      objectReference: {fileID: 359778364}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[10].scheduledBusStop
+      value: 
+      objectReference: {fileID: 1483592421}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[11].scheduledBusStop
+      value: 
+      objectReference: {fileID: 1180979544}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[12].scheduledBusStop
+      value: 
+      objectReference: {fileID: 526212271}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[13].scheduledBusStop
+      value: 
+      objectReference: {fileID: 596213836}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[14].scheduledBusStop
+      value: 
+      objectReference: {fileID: 1974757246}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[15].scheduledBusStop
+      value: 
+      objectReference: {fileID: 1643732279}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[16].scheduledBusStop
+      value: 
+      objectReference: {fileID: 1345056766}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[17].scheduledBusStop
+      value: 
+      objectReference: {fileID: 141450718}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[18].scheduledBusStop
+      value: 
+      objectReference: {fileID: 1174522246}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[19].scheduledBusStop
+      value: 
+      objectReference: {fileID: 1893255639}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[20].scheduledBusStop
+      value: 
+      objectReference: {fileID: 1941240354}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[21].scheduledBusStop
+      value: 
+      objectReference: {fileID: 998824063}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[22].scheduledBusStop
+      value: 
+      objectReference: {fileID: 1546240493}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[23].scheduledBusStop
+      value: 
+      objectReference: {fileID: 1202304255}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[24].scheduledBusStop
+      value: 
+      objectReference: {fileID: 1441732868}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[25].scheduledBusStop
+      value: 
+      objectReference: {fileID: 1040986575}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[26].scheduledBusStop
+      value: 
+      objectReference: {fileID: 221048942}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[27].scheduledBusStop
+      value: 
+      objectReference: {fileID: 15127056}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[0].scheduledHour
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[1].scheduledHour
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[1].scheduledMinute
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[2].scheduledHour
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[2].scheduledMinute
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[3].scheduledHour
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[3].scheduledMinute
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[4].scheduledHour
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[4].scheduledMinute
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[5].scheduledHour
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[5].scheduledMinute
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[6].scheduledHour
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[6].scheduledMinute
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[7].scheduledHour
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[7].scheduledMinute
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[8].scheduledHour
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[8].scheduledMinute
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[9].scheduledHour
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[9].scheduledMinute
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[10].scheduledHour
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[10].scheduledMinute
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[11].scheduledHour
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[11].scheduledMinute
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[12].scheduledHour
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[12].scheduledMinute
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[13].scheduledHour
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[13].scheduledMinute
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[14].scheduledHour
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[14].scheduledMinute
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[15].scheduledHour
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[15].scheduledMinute
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[16].scheduledHour
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[16].scheduledMinute
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[17].scheduledHour
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[17].scheduledMinute
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[18].scheduledHour
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[18].scheduledMinute
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[19].scheduledHour
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[19].scheduledMinute
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[20].scheduledHour
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[20].scheduledMinute
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[21].scheduledHour
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[21].scheduledMinute
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[22].scheduledHour
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[22].scheduledMinute
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[23].scheduledHour
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[23].scheduledMinute
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[24].scheduledHour
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[24].scheduledMinute
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[25].scheduledHour
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[25].scheduledMinute
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[26].scheduledHour
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[26].scheduledMinute
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[27].scheduledHour
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
+        type: 2}
+      propertyPath: busServices.Array.data[2].timeSlots.Array.data[27].scheduledMinute
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7, type: 2}

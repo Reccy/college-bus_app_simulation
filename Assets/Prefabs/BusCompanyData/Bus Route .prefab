@@ -54,6 +54,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   map: {fileID: 0}
   routeId: 
+  routeIdInternal: 
   routeWaypoints: []
   gizmoColor: {r: 0, g: 0.04827571, b: 1, a: 1}
   gizmoEnabled: 1

@@ -1,16 +1,25 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System;
+﻿using System;
 using UnityEngine;
 using UnityEditor;
 
-namespace AaronMeaney.BusStop.Core
+namespace AaronMeaney.BusStop.Scheduling
 {
     /// <summary>
     /// Responsible for maintaining the current date/time in the simulation
     /// </summary>
     public class DateTimeManager : MonoBehaviour
     {
+        public enum DateTimeMode { Realtime, Simulated };
+        private DateTimeMode mode;
+        /// <summary>
+        /// If the 
+        /// </summary>
+        public DateTimeMode Mode
+        {
+            get { return mode; }
+            set { mode = value; }
+        }
+
         /// <summary>
         /// The DateTime determined by the user/simulation.
         /// </summary>
@@ -30,17 +39,33 @@ namespace AaronMeaney.BusStop.Core
             }
         }
         
+        private void Update()
+        {
+            switch (Mode)
+            {
+                case DateTimeMode.Realtime:
+                    SetToNow();
+                    break;
+                case DateTimeMode.Simulated:
+                    AdvanceTime();
+                    break;
+            }
+        }
+
         /// <summary>
-        /// Sets the current date time to now.
+        /// Sets <see cref="CurrentDateTime"/> to now.
         /// </summary>
-        public void SetToNow()
+        private void SetToNow()
         {
             CurrentDateTime = DateTime.Now;
         }
-        
-        private void Update()
+
+        /// <summary>
+        /// Advanced <see cref="CurrentDateTime"/> by <see cref="Time.deltaTime"/>
+        /// </summary>
+        private void AdvanceTime()
         {
-            SetToNow();
+            throw new NotImplementedException();
         }
     }
 

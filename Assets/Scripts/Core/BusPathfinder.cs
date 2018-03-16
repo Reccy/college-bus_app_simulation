@@ -112,8 +112,6 @@ namespace AaronMeaney.BusStop.Core
         /// </summary>
         private void HandleDirectionsResponse(DirectionsResponse response)
         {
-            Debug.Log("Handling Response... ");
-            
             // Gets all the points returned from the Mapbox API
             foreach (Route route in response.Routes)
             {

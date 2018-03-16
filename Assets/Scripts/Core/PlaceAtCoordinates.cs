@@ -66,7 +66,8 @@ namespace AaronMeaney.BusStop.Core
 
             finishedPlacement = true;
 
-            OnPlacementFinished();
+            if (OnPlacementFinished != null)
+                OnPlacementFinished();
         }
 
     }

@@ -9,11 +9,30 @@ namespace AaronMeaney.BusStop.Core
     [System.Serializable]
     public class BusService
     {
-        private BusTimetable busTimetable;
+        private BusTimetable busTimetable = null;
         /// <summary>
         /// The <see cref="BusTimetable"/> that owns this <see cref="BusService"/>
         /// </summary>
-        public BusTimetable ParentBusTimetable { get { return busTimetable; } }
+        public BusTimetable ParentBusTimetable {
+            get
+            {
+                if (busTimetable == null)
+                {
+                    List<BusTimetable> possibleTimetables = ServicedBusRoute.gameObject.transform.parent.GetComponentInParent<BusCompany>().BusTimetables;
+
+                    foreach (BusTimetable timetable in possibleTimetables)
+                    {
+                        if (timetable.BusServices.Contains(this))
+                        {
+                            busTimetable = timetable;
+                            return busTimetable;
+                        }
+                    }
+                }
+                
+                return busTimetable;
+            }
+        }
         
         [SerializeField]
         private BusRoute servicedBusRoute = null;

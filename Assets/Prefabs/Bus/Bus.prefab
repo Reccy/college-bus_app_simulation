@@ -124,7 +124,6 @@ GameObject:
   - component: {fileID: 114252378888094790}
   - component: {fileID: 114535080601757340}
   - component: {fileID: 114983907589990156}
-  - component: {fileID: 114373655694590828}
   m_Layer: 2
   m_Name: Bus
   m_TagString: Untagged
@@ -448,18 +447,6 @@ MonoBehaviour:
   registrationNumber: 
   busModel: 
   Status: 0
---- !u!114 &114373655694590828
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1953854151932788}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd0eff8ca10f28c4a94a9c281a392526, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  material: {fileID: 2100000, guid: 0a6e9c8de919bff499620e5daa2744d0, type: 2}
 --- !u!114 &114377855431887174
 MonoBehaviour:
   m_ObjectHideFlags: 1

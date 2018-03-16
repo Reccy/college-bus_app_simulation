@@ -3,6 +3,7 @@ using System;
 using UnityEditor;
 using UnityEngine;
 using UnityEditor.SceneManagement;
+using AaronMeaney.BusStop.Scheduling;
 
 namespace AaronMeaney.BusStop.Core
 {
@@ -12,6 +13,9 @@ namespace AaronMeaney.BusStop.Core
     [System.Serializable]
     public class BusTimetable : MonoBehaviour
     {
+        private ScheduleTaskRunner taskRunner;
+        private DateTimeManager dateTimeManager;
+
         /// <summary>
         /// The <see cref="BusCompany"/> that this <see cref="BusTimetable"/> belongs to.
         /// </summary>
@@ -60,7 +64,28 @@ namespace AaronMeaney.BusStop.Core
                 return busServices;
             }
         }
-        
+
+        /// <summary>
+        /// Sets up references for <see cref="BusTimeSlot"/>s since they can't call <see cref="Awake"/>
+        /// </summary>
+        private void InitializeTimeSlots()
+        {
+            foreach (BusService service in BusServices)
+            {
+                foreach (BusTimeSlot slot in service.TimeSlots)
+                {
+                    slot.Initialize(service, dateTimeManager, taskRunner);
+                }
+            }
+        }
+
+        private void Awake()
+        {
+            taskRunner = FindObjectOfType<ScheduleTaskRunner>();
+            dateTimeManager = FindObjectOfType<DateTimeManager>();
+            InitializeTimeSlots();
+        }
+
         #region Service Days
 
         [SerializeField]
@@ -104,6 +129,52 @@ namespace AaronMeaney.BusStop.Core
                     return sundayService;
             }
             throw new ArgumentException();
+        }
+
+        /// <summary>
+        /// Returns a list of <see cref="DayOfWeek"/> that the <see cref="BusTimetable"/> is servicing on.
+        /// </summary>
+        /// <returns></returns>
+        public List<DayOfWeek> DaysRunning()
+        {
+            List<DayOfWeek> list = new List<DayOfWeek>();
+
+            if (RunningOnDay(DayOfWeek.Monday))
+            {
+                list.Add(DayOfWeek.Monday);
+            }
+
+            if (RunningOnDay(DayOfWeek.Tuesday))
+            {
+                list.Add(DayOfWeek.Tuesday);
+            }
+
+            if (RunningOnDay(DayOfWeek.Wednesday))
+            {
+                list.Add(DayOfWeek.Wednesday);
+            }
+
+            if (RunningOnDay(DayOfWeek.Thursday))
+            {
+                list.Add(DayOfWeek.Thursday);
+            }
+
+            if (RunningOnDay(DayOfWeek.Friday))
+            {
+                list.Add(DayOfWeek.Friday);
+            }
+
+            if (RunningOnDay(DayOfWeek.Saturday))
+            {
+                list.Add(DayOfWeek.Saturday);
+            }
+
+            if (RunningOnDay(DayOfWeek.Sunday))
+            {
+                list.Add(DayOfWeek.Sunday);
+            }
+
+            return list;
         }
 
         #endregion

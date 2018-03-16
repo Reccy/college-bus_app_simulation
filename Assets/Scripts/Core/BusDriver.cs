@@ -101,17 +101,6 @@ namespace AaronMeaney.BusStop.Core
                 currentBusPathNode = 0;
                 currentBusPath = value;
                 CurrentDestination = transform.position;
-                GetComponent<BusPathfinderVisualiser>().ClearVisualisation();
-
-                if (GetComponent<BusPathfinderVisualiser>())
-                {
-                    CurrentBusPath.onBusPathPopulated += GetComponent<BusPathfinderVisualiser>().SetBusPathVisualisation;
-                }
-                
-                if (GetComponent<PostBusRoute>())
-                {
-                    CurrentBusPath.onBusPathPopulated += GetComponent<PostBusRoute>().PerformPost;
-                }
             }
         }
 

@@ -72,19 +72,23 @@ namespace AaronMeaney.BusStop.Core
         /// Deploys an instance of a <see cref="Bus"/> <see cref="GameObject"/> from the depot to a specific <see cref="BusService"/>
         /// </summary>
         /// <param name="service">The <see cref="BusService"/> to assign the bus to
-        public void DeployBus(BusService service)
+        public Bus DeployBus(BusService service)
         {
             if (bussesInDepot.Count == 0)
             {
                 Debug.Log("The " + CompanyName + " Company depot is empty.");
-                return;
+                return null;
             }
 
             Bus bus = bussesInDepot[0];
             bussesOnRoad.Add(bus);
             bussesInDepot.Remove(bus);
-
+            
+            Debug.Log("Deploying Bus " + bus.RegistrationNumber + " to Route: " + service.ServicedBusRoute.RouteIdInternal);
+            
             bus.GetComponent<Bus>().StartService(service);
+
+            return bus;
         }
 
         /// <summary>

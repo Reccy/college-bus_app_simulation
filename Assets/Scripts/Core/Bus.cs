@@ -76,16 +76,24 @@ namespace AaronMeaney.BusStop.Core
                 return CurrentService.ServicedBusRoute;
             }
         }
+        
+        private BusTimeSlot currentTimeSlot = null;
+        /// <summary>
+        /// The current <see cref="BusTimeSlot"/> that the <see cref="Bus"/> is servicing
+        /// </summary>
+        public BusTimeSlot CurrentTimeSlot
+        {
+            get { return currentTimeSlot; }
+        }
 
-        private BusStop nextStop = null;
         /// <summary>
         /// The current destination <see cref="BusStop"/> in the <see cref="CurrentRoute"/>
         /// </summary>
         public BusStop NextStop
         {
-            get { return nextStop; }
+            get { return CurrentTimeSlot.ScheduledBusStop; }
         }
-        
+
         /// <summary>
         /// The <see cref="Latitude"/> of the <see cref="Bus"/>
         /// </summary>
@@ -105,7 +113,6 @@ namespace AaronMeaney.BusStop.Core
         /// <summary>
         /// Assigns the <see cref="CurrentService"/> and puts this <see cref="Bus"/> in service.
         /// </summary>
-        /// <param name="service"></param>
         public void StartService(BusService service)
         {
             if (!Company.BussesOnRoad.Contains(this))
@@ -115,9 +122,14 @@ namespace AaronMeaney.BusStop.Core
             }
 
             currentService = service;
-            nextStop = service.TimeSlots[0].ScheduledBusStop;
-            transform.position = nextStop.transform.position;
+            
+            Debug.Log("0th Time Slot is " + service.TimeSlots[0].ScheduledBusStop.BusStopIdInternal);
+
+            currentTimeSlot = service.TimeSlots[0];
+            transform.position = NextStop.LinkedRouteWaypoint.transform.position;
             gameObject.SetActive(true);
+
+            Debug.Log(RegistrationNumber + " entered service for route " + CurrentRoute.RouteIdInternal);
         }
 
         /// <summary>
@@ -132,7 +144,6 @@ namespace AaronMeaney.BusStop.Core
             }
 
             currentService = null;
-            nextStop = null;
             transform.position = Vector3.zero;
             gameObject.SetActive(false);
         }

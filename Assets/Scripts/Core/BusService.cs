@@ -59,9 +59,98 @@ namespace AaronMeaney.BusStop.Core
             }
         }
 
+        private Bus servicingBus = null;
+        /// <summary>
+        /// The <see cref="Bus"/> that is servicing this <see cref="BusService"/>
+        /// </summary>
+        public Bus ServicingBus { get { return servicingBus; } }
+        
         public BusService(BusTimetable busTimetable)
         {
             this.busTimetable = busTimetable;
+        }
+
+        private BusTimeSlot scheduledTimeSlot = null;
+        /// <summary>
+        /// The <see cref="BusTimeSlot"/> that should be in service at the current time.
+        /// </summary>
+        public BusTimeSlot ScheduledTimeSlot
+        {
+            get { return scheduledTimeSlot; }
+            set
+            {
+                scheduledTimeSlot = value;
+
+                if (!IsInService())
+                {
+                    servicingBus = ParentBusTimetable.ParentBusCompany.DeployBus(this);
+                }
+            }
+        }
+        
+        /// <summary>
+        /// The <see cref="BusTimeSlot"/> that is currently being serviced.
+        /// </summary>
+        public BusTimeSlot CurrentTimeSlot
+        {
+            get
+            {
+                if (ServicingBus == null)
+                    return null;
+
+                return ServicingBus.CurrentTimeSlot;
+            }
+        }
+        
+        public enum Schedule { NotInService, BehindSchedule, OnSchedule, AheadOfSchedule }
+        /// <summary>
+        /// Represents if the <see cref="BusService"/> is in service and if it's behind, ahead or on schedule.
+        /// </summary>
+        public Schedule ScheduleState
+        {
+            get
+            {
+                if (ScheduledTimeSlot == null || CurrentTimeSlot == null)
+                {
+                    return Schedule.NotInService;
+                }
+
+                int scheduledTimeSlotIndex = TimeSlots.IndexOf(scheduledTimeSlot);
+                int currentTimeSlotIndex = TimeSlots.IndexOf(CurrentTimeSlot);
+
+                if (scheduledTimeSlotIndex < currentTimeSlotIndex)
+                {
+                    return Schedule.AheadOfSchedule;
+                }
+                else if (scheduledTimeSlot == CurrentTimeSlot)
+                {
+                    return Schedule.OnSchedule;
+                }
+                else
+                {
+                    return Schedule.BehindSchedule;
+                }
+            }
+        }
+
+        public bool IsInService()
+        {
+            return ScheduleState != Schedule.NotInService;
+        }
+
+        public bool IsBehindSchedule()
+        {
+            return ScheduleState == Schedule.BehindSchedule;
+        }
+
+        public bool IsOnSchedule()
+        {
+            return ScheduleState == Schedule.OnSchedule;
+        }
+
+        public bool IsAheadOfSchedule()
+        {
+            return ScheduleState == Schedule.AheadOfSchedule;
         }
     }
 }

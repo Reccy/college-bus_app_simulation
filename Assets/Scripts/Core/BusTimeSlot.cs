@@ -107,8 +107,21 @@ namespace AaronMeaney.BusStop.Core
             }
 
             // Create Scheduled Task
-            ScheduledTask task = new ScheduledTask(() => { Debug.Log("Triggered Time Slot for Stop " + ScheduledBusStop.BusStopIdInternal + " at " + scheduledDateTime.ToShortTimeString()); }, scheduledDateTime);
+            ScheduledTask task = new ScheduledTask(ActivateTimeSlot, scheduledDateTime);
             taskRunner.AddTask(task);
+        }
+
+        /// <summary>
+        /// Sets the <see cref="BusService.ScheduledTimeSlot"/> to this one.
+        /// Calls <see cref="ScheduleTimeSlot"/> to setup the next schedule for this <see cref="TimeSlot"/>
+        /// </summary>
+        private void ActivateTimeSlot()
+        {
+            Debug.Log("Time Slot Activated - " + scheduledHour + ":" + scheduledMinute + " => " + Service.ServicedBusRoute.name);
+
+            Service.ScheduledTimeSlot = this;
+
+            ScheduleTimeSlot();
         }
     }
 }

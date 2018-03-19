@@ -4,6 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEditor.SceneManagement;
 using AaronMeaney.BusStop.Scheduling;
+using Mapbox.Unity.Map;
 
 namespace AaronMeaney.BusStop.Core
 {
@@ -15,6 +16,18 @@ namespace AaronMeaney.BusStop.Core
     {
         private ScheduleTaskRunner taskRunner;
         private DateTimeManager dateTimeManager;
+
+        private AbstractMapVisualizer mapVisualizer = null;
+        public AbstractMapVisualizer MapVisualizer
+        {
+            get
+            {
+                if (mapVisualizer == null)
+                    mapVisualizer = FindObjectOfType<AbstractMap>().MapVisualizer;
+
+                return mapVisualizer;
+            }
+        }
 
         /// <summary>
         /// The <see cref="BusCompany"/> that this <see cref="BusTimetable"/> belongs to.
@@ -83,7 +96,15 @@ namespace AaronMeaney.BusStop.Core
         {
             taskRunner = FindObjectOfType<ScheduleTaskRunner>();
             dateTimeManager = FindObjectOfType<DateTimeManager>();
-            InitializeTimeSlots();
+
+            // Initialize Time Slots when the Map is finished loading
+            MapVisualizer.OnMapVisualizerStateChanged += (s) =>
+            {
+                if (s == ModuleState.Finished)
+                {
+                    InitializeTimeSlots();
+                }
+            };
         }
 
         #region Service Days

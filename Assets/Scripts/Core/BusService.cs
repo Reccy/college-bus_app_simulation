@@ -97,9 +97,6 @@ namespace AaronMeaney.BusStop.Core
                 // Start / Deploy a bus to this Service if it is not already in service and it's not the last Time Slot
                 if (!IsInService() && TimeSlots.IndexOf(scheduledTimeSlot) < TimeSlots.Count - 1)
                 {
-                    Debug.Log(ServicedBusRoute.RouteIdInternal + " is starting to be serviced...");
-                    Debug.Log("The first stop is " + ServicedBusRoute.BusStops[0]);
-                    Debug.Log("The first time slot's bus is " + TimeSlots[0].ScheduledBusStop);
                     servicingBus = ParentBusTimetable.ParentBusCompany.DeployBus(this);
                 }
             }

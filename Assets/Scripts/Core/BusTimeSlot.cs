@@ -14,7 +14,8 @@ namespace AaronMeaney.BusStop.Core
         private bool isInitialized = false;
         private ScheduleTaskRunner taskRunner = null;
         private DateTimeManager dateTimeManager = null;
-
+        
+        [NonSerialized]
         private BusService service = null;
         /// <summary>
         /// The <see cref="BusService"/> that is the parent to this <see cref="BusTimeSlot"/>

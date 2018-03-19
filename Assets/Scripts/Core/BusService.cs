@@ -55,6 +55,19 @@ namespace AaronMeaney.BusStop.Core
                 if (timeSlots == null)
                     timeSlots = new List<BusTimeSlot>();
 
+                if (Application.isPlaying && ServicedBusRoute != null)
+                {
+                    // Runtime cleanup
+                    // Ensure that each TimeSlot belongs to the ServicedBusRoute
+                    for (int timeSlotIndex = 0; timeSlotIndex < timeSlots.Count; timeSlotIndex ++)
+                    {
+                        if (!ServicedBusRoute.BusStops.Contains(timeSlots[timeSlotIndex].ScheduledBusStop))
+                        {
+                            timeSlots.Remove(timeSlots[timeSlotIndex]);
+                        }
+                    }
+                }
+
                 return timeSlots;
             }
         }
@@ -83,6 +96,9 @@ namespace AaronMeaney.BusStop.Core
 
                 if (!IsInService())
                 {
+                    Debug.Log(ServicedBusRoute.RouteIdInternal + " is starting to be serviced...");
+                    Debug.Log("The first stop is " + ServicedBusRoute.BusStops[0]);
+                    Debug.Log("The first time slot's bus is " + TimeSlots[0].ScheduledBusStop);
                     servicingBus = ParentBusTimetable.ParentBusCompany.DeployBus(this);
                 }
             }

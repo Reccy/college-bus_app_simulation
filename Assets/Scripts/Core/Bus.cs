@@ -122,10 +122,8 @@ namespace AaronMeaney.BusStop.Core
             }
 
             currentService = service;
-            
-            Debug.Log("0th Time Slot is " + service.TimeSlots[0].ScheduledBusStop.BusStopIdInternal);
+            currentTimeSlot = service.ScheduledTimeSlot;
 
-            currentTimeSlot = service.TimeSlots[0];
             transform.position = NextStop.LinkedRouteWaypoint.transform.position;
             gameObject.SetActive(true);
 

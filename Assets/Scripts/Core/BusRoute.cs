@@ -68,6 +68,11 @@ namespace AaronMeaney.BusStop.Core
         /// </summary>
         private List<CoordinateLocation> pathWaypoints;
 
+        /// <summary>
+        /// Used to determine the closest <see cref="CoordinateLocation"/> in <see cref="pathWaypoints"/> to a <see cref="RouteWaypoint"/> in <see cref="routeWaypoints"/>.
+        /// </summary>
+        private Dictionary<CoordinateLocation, RouteWaypoint> pathWaypointToBusWaypointDictionary;
+        
         private void OnEnable()
         {
             pathWaypoints = new List<CoordinateLocation>();
@@ -110,6 +115,31 @@ namespace AaronMeaney.BusStop.Core
             pathWaypoints.Clear();
 
             pathWaypoints.AddRange(pathfinder.CoordinateLocations);
+
+            // Populate pathWaypointToBusWaypointDictionary
+            pathWaypointToBusWaypointDictionary = new Dictionary<CoordinateLocation, RouteWaypoint>();
+
+            foreach (RouteWaypoint routeWaypoint in RouteWaypoints)
+            {
+                Vector3 routeWaypointPosition = routeWaypoint.transform.position;
+                CoordinateLocation closestPathWaypoint = null;
+                float currentClosestDistance = float.MaxValue;
+
+                // Get current closest path waypoint for the routeWaypoint
+                foreach (CoordinateLocation pathWaypoint in pathWaypoints)
+                {
+                    Vector3 pathWaypointPosition = pathWaypoint.AsUnityPosition(map);
+                    float currentDistance = Vector3.Distance(routeWaypointPosition, pathWaypointPosition);
+
+                    if (currentDistance < currentClosestDistance)
+                    {
+                        closestPathWaypoint = pathWaypoint;
+                        currentClosestDistance = currentDistance;
+                    }
+                }
+
+                pathWaypointToBusWaypointDictionary.Add(closestPathWaypoint, routeWaypoint);
+            }
         }
 
         #region Topological Sort
@@ -260,6 +290,20 @@ namespace AaronMeaney.BusStop.Core
                     Vector3 dir = pathWaypoints[i].AsUnityPosition(map) - pathWaypoints[i - 1].AsUnityPosition(map);
                     Gizmos.DrawWireSphere(pathWaypoints[i - 1].AsUnityPosition(map), 0.2f);
                     DrawArrow.ForGizmo(pathWaypoints[i - 1].AsUnityPosition(map), dir, Gizmos.color, 0.4f, arrowPosition: 0.5f);
+                }
+            }
+
+            // Show links between path waypoint and bus waypoints
+            Gizmos.color = Color.green;
+
+            if (pathWaypointToBusWaypointDictionary != null)
+            {
+                foreach (KeyValuePair<CoordinateLocation, RouteWaypoint> pair in pathWaypointToBusWaypointDictionary)
+                {
+                    Vector3 fromPosition = pair.Key.AsUnityPosition(map);
+                    Vector3 toPosition = pathWaypointToBusWaypointDictionary[pair.Key].transform.position;
+
+                    Gizmos.DrawLine(fromPosition, toPosition);
                 }
             }
         }

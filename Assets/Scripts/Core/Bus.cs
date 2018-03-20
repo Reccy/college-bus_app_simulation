@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using Mapbox.Unity.Location;
 using UnityEditor;
+using Mapbox.Unity.Map;
 
 namespace AaronMeaney.BusStop.Core
 {
@@ -9,7 +10,7 @@ namespace AaronMeaney.BusStop.Core
     /// This data will be sent back to the API.
     /// </summary>
     [System.Serializable]
-    [RequireComponent(typeof(BusDriver), typeof(TransformLocationProvider))]
+    [RequireComponent(typeof(TransformLocationProvider))]
     public class Bus : MonoBehaviour
     {
         // Miscellaneous Information
@@ -48,7 +49,19 @@ namespace AaronMeaney.BusStop.Core
         }
 
         // Runtime data
-        public enum BusStatus { InService, OffService, BrokenDown }
+        private AbstractMap map = null;
+        private AbstractMap Map
+        {
+            get
+            {
+                if (map == null)
+                    map = FindObjectOfType<AbstractMap>();
+
+                return map;
+            }
+        }
+        
+        public enum BusStatus { InService, OffService, FinishedRoute, BrokenDown }
         /// <summary>
         /// Represents if the <see cref="Bus"/> is in service, off service, broken down, etc
         /// </summary>
@@ -77,22 +90,49 @@ namespace AaronMeaney.BusStop.Core
             }
         }
         
-        private BusTimeSlot currentTimeSlot = null;
+        private BusTimeSlot servicingTimeSlot = null;
         /// <summary>
         /// The current <see cref="BusTimeSlot"/> that the <see cref="Bus"/> is servicing
         /// </summary>
-        public BusTimeSlot CurrentTimeSlot
+        public BusTimeSlot ServicingTimeSlot
         {
-            get { return currentTimeSlot; }
+            get { return servicingTimeSlot; }
         }
 
         /// <summary>
-        /// The current destination <see cref="BusStop"/> in the <see cref="CurrentRoute"/>
+        /// The currently serviced <see cref="BusStop"/> in the <see cref="CurrentRoute"/>
+        /// </summary>
+        public BusStop CurrentStop
+        {
+            get { return ServicingTimeSlot.ScheduledBusStop; }
+        }
+
+        /// <summary>
+        /// The next <see cref="BusStop"/> to be serviced in the <see cref="CurrentRoute"/>
         /// </summary>
         public BusStop NextStop
         {
-            get { return CurrentTimeSlot.ScheduledBusStop; }
+            get
+            {
+                int currentStopIndex = CurrentRoute.BusStops.IndexOf(CurrentStop);
+                int nextStopIndex = currentStopIndex + 1;
+
+                if (nextStopIndex >= CurrentRoute.BusStops.Count)
+                    return null;
+
+                return CurrentRoute.BusStops[nextStopIndex];
+            }
         }
+
+        /// <summary>
+        /// The current <see cref="CoordinateLocation"/> to drive directly towards
+        /// </summary>
+        private CoordinateLocation currentDestination = null;
+
+        /// <summary>
+        /// The index of the current <see cref="BusRoute.PathWaypoints"/> that is being followed.
+        /// </summary>
+        private int currentPathWaypointIndex = 0;
 
         /// <summary>
         /// The <see cref="Latitude"/> of the <see cref="Bus"/>
@@ -121,12 +161,23 @@ namespace AaronMeaney.BusStop.Core
                 Company.BussesInDepot.Remove(this);
             }
 
+            // Assign the bus to the service
             currentService = service;
-            currentTimeSlot = service.ScheduledTimeSlot;
 
-            transform.position = NextStop.LinkedRouteWaypoint.transform.position;
+            // Set the time slot that the bus is servicing
+            servicingTimeSlot = service.ScheduledTimeSlot;
+
+            // Set the current destination to the serviced time slot stop
+            currentDestination = CurrentRoute.GetCoordinateLocationFromBusStop(CurrentStop);
+            transform.position = currentDestination.AsUnityPosition(Map);
+
+            // Get the index of the current path waypoint
+            currentPathWaypointIndex = CurrentRoute.PathWaypoints.IndexOf(currentDestination);
+
+            Status = BusStatus.InService;
+
             gameObject.SetActive(true);
-
+            
             Debug.Log(RegistrationNumber + " entered service for route " + CurrentRoute.RouteIdInternal);
         }
 
@@ -144,8 +195,50 @@ namespace AaronMeaney.BusStop.Core
             currentService = null;
             transform.position = Vector3.zero;
             gameObject.SetActive(false);
+
+            Status = BusStatus.OffService;
         }
-        
+
+        private void Update()
+        {
+            if (Status == BusStatus.InService)
+            {
+                DriveTowardsDestination();
+            }
+        }
+
+        /// <summary>
+        /// Drives the <see cref="Bus"/> towards the <see cref="currentDestination"/>
+        /// </summary>
+        private void DriveTowardsDestination()
+        {
+            // Get the distance between the bus and the destination (Exclude Y axis)
+            Vector3 destinationPosition = currentDestination.AsUnityPosition(Map);
+            destinationPosition = new Vector3(destinationPosition.x, transform.position.y, destinationPosition.z);
+
+            float destinationDistance = Vector3.Distance(transform.position, destinationPosition);
+
+            // Drive towards the destination
+            transform.LookAt(destinationPosition);
+            transform.Translate(Vector3.forward * 5 * Time.deltaTime);
+            
+            Debug.Log("Current Destination: " + destinationPosition + " --> Current Distance " + destinationDistance);
+
+            // Once the bus reaches the destination, go to the next stop if it exists. Otherwise set the bus status to have finished the service.
+            if (destinationDistance < 0.1f)
+            {
+                if (NextStop != null)
+                {
+                    currentPathWaypointIndex += 1;
+                    currentDestination = CurrentRoute.PathWaypoints[currentPathWaypointIndex];
+                }
+                else
+                {
+                    Status = BusStatus.FinishedRoute;
+                }
+            }
+        }
+
         /// <summary>
         /// Sets the name of the <see cref="GameObject"/>
         /// </summary>

@@ -388,7 +388,6 @@ namespace AaronMeaney.BusStop.Core
             #endregion
 
             #region Timetable Body
-            SerializedObject _timetable = new SerializedObject(timetable);
             List<BusService> companyServices = timetable.BusServices;
             List<BusRoute> companyRoutes = timetable.ParentBusCompany.BusRoutes;
             List<BusRoute> servicedRoutes = new List<BusRoute>();

@@ -84,11 +84,15 @@ namespace AaronMeaney.BusStop.Core
             bussesOnRoad.Add(bus);
             bussesInDepot.Remove(bus);
 
+            // Deploy the bus to the service once the route is generated
+            service.ServicedBusRoute.OnBusPathReady += () =>
+            {
+                Debug.Log("Deploying Bus " + bus.RegistrationNumber + " to Route: " + service.ServicedBusRoute.RouteIdInternal);
+                bus.GetComponent<Bus>().StartService(service);
+            };
+
             service.ServicedBusRoute.SetPathWaypoints();
             
-            Debug.Log("Deploying Bus " + bus.RegistrationNumber + " to Route: " + service.ServicedBusRoute.RouteIdInternal);
-            bus.GetComponent<Bus>().StartService(service);
-
             return bus;
         }
 

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using AaronMeaney.BusStop.Scheduling;
+using System;
 using UnityEditor;
 using UnityEngine;
 
@@ -46,6 +47,20 @@ namespace AaronMeaney.BusStop.Core
 
             // Set the coordinates
             SetCoordinatePositionWhenReady();
+        }
+        
+        /// <summary>
+        /// Allows passengers to embark/disembark the <see cref="Bus"/> that is servicing this stop.
+        /// </summary>
+        /// <param name="bus">The <see cref="Bus"/> that is waiting at / servicing this stop.</param>
+        public void ServiceStop(Bus bus)
+        {
+            bus.Status = Bus.BusStatus.WaitingAtStop;
+
+            // Temp wait a minute at each bus stop
+            DateTime t = DateTime.Now.AddSeconds(10);
+
+            FindObjectOfType<ScheduleTaskRunner>().AddTask(new ScheduledTask(bus.FinishWaitingAtStop,t));
         }
 
         /// <summary>

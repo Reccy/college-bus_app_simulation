@@ -112,7 +112,7 @@ namespace AaronMeaney.BusStop.Core
                 if (ServicingBus == null)
                     return null;
 
-                return ServicingBus.ServicingTimeSlot;
+                return ServicingBus.CurrentTimeSlot;
             }
         }
         

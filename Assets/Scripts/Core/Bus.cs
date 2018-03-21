@@ -2,6 +2,7 @@
 using Mapbox.Unity.Location;
 using UnityEditor;
 using Mapbox.Unity.Map;
+using System;
 
 namespace AaronMeaney.BusStop.Core
 {
@@ -61,9 +62,9 @@ namespace AaronMeaney.BusStop.Core
             }
         }
         
-        public enum BusStatus { InService, OffService, FinishedRoute, BrokenDown }
+        public enum BusStatus { WaitingAtStop, Driving, OffService, BrokenDown }
         /// <summary>
-        /// Represents if the <see cref="Bus"/> is in service, off service, broken down, etc
+        /// Represents the <see cref="Bus"/> status / state
         /// </summary>
         public BusStatus Status;
 
@@ -90,13 +91,27 @@ namespace AaronMeaney.BusStop.Core
             }
         }
         
-        private BusTimeSlot servicingTimeSlot = null;
+        private BusTimeSlot currentTimeSlot = null;
         /// <summary>
         /// The current <see cref="BusTimeSlot"/> that the <see cref="Bus"/> is servicing
         /// </summary>
-        public BusTimeSlot ServicingTimeSlot
+        public BusTimeSlot CurrentTimeSlot
         {
-            get { return servicingTimeSlot; }
+            get { return currentTimeSlot; }
+        }
+
+        public BusTimeSlot NextTimeSlot
+        {
+            get
+            {
+                int currentTimeSlotIndex = CurrentService.TimeSlots.IndexOf(CurrentTimeSlot);
+                int nextTimeSlotIndex = currentTimeSlotIndex + 1;
+
+                if (nextTimeSlotIndex >= CurrentService.TimeSlots.Count)
+                    return null;
+
+                return CurrentService.TimeSlots[nextTimeSlotIndex];
+            }
         }
 
         /// <summary>
@@ -104,7 +119,7 @@ namespace AaronMeaney.BusStop.Core
         /// </summary>
         public BusStop CurrentStop
         {
-            get { return ServicingTimeSlot.ScheduledBusStop; }
+            get { return CurrentTimeSlot.ScheduledBusStop; }
         }
 
         /// <summary>
@@ -165,7 +180,7 @@ namespace AaronMeaney.BusStop.Core
             currentService = service;
 
             // Set the time slot that the bus is servicing
-            servicingTimeSlot = service.ScheduledTimeSlot;
+            currentTimeSlot = service.ScheduledTimeSlot;
 
             // Set the current destination to the serviced time slot stop
             currentDestination = CurrentRoute.GetCoordinateLocationFromBusStop(CurrentStop);
@@ -173,9 +188,9 @@ namespace AaronMeaney.BusStop.Core
 
             // Get the index of the current path waypoint
             currentPathWaypointIndex = CurrentRoute.PathWaypoints.IndexOf(currentDestination);
-
-            Status = BusStatus.InService;
-
+            
+            CurrentStop.ServiceStop(this);
+            
             gameObject.SetActive(true);
             
             Debug.Log(RegistrationNumber + " entered service for route " + CurrentRoute.RouteIdInternal);
@@ -201,9 +216,11 @@ namespace AaronMeaney.BusStop.Core
 
         private void Update()
         {
-            if (Status == BusStatus.InService)
+            switch (Status)
             {
-                DriveTowardsDestination();
+                case BusStatus.Driving:
+                    DriveTowardsDestination();
+                    break;
             }
         }
 
@@ -222,21 +239,30 @@ namespace AaronMeaney.BusStop.Core
             transform.LookAt(destinationPosition);
             transform.Translate(Vector3.forward * 5 * Time.deltaTime);
             
-            Debug.Log("Current Destination: " + destinationPosition + " --> Current Distance " + destinationDistance);
-
-            // Once the bus reaches the destination, go to the next stop if it exists. Otherwise set the bus status to have finished the service.
+            // Logic for when the bus reaches the destination
             if (destinationDistance < 0.1f)
             {
-                if (NextStop != null)
+                // If the destination reached is the currently serviced bus stop, then service it.
+                if (currentDestination == CurrentRoute.GetCoordinateLocationFromBusStop(CurrentStop))
                 {
-                    currentPathWaypointIndex += 1;
-                    currentDestination = CurrentRoute.PathWaypoints[currentPathWaypointIndex];
+                    CurrentStop.ServiceStop(this);
+                    return;
                 }
-                else
-                {
-                    Status = BusStatus.FinishedRoute;
-                }
+
+                // Go the next destination
+                currentPathWaypointIndex += 1;
+                currentDestination = CurrentRoute.PathWaypoints[currentPathWaypointIndex];
             }
+        }
+
+        public void FinishWaitingAtStop()
+        {
+            Debug.Log("Finished waiting at " + CurrentStop);
+
+            Status = BusStatus.Driving;
+
+            // Service the next time slot
+            currentTimeSlot = NextTimeSlot;
         }
 
         /// <summary>

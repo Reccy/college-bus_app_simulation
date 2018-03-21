@@ -571,6 +571,16 @@ namespace AaronMeaney.BusStop.Core
                                     timeSlot.ScheduledHour = EditorGUILayout.IntField(timeSlot.ScheduledHour, GUILayout.Width(28));
                                     timeSlot.ScheduledMinute = EditorGUILayout.IntField(timeSlot.ScheduledMinute, GUILayout.Width(28));
 
+                                    if (timeSlot.ScheduledHour.ToString().ToCharArray().Length > 2)
+                                    {
+
+                                    }
+
+                                    if (timeSlot.ScheduledMinute.ToString().ToCharArray().Length > 2)
+                                    {
+
+                                    }
+
                                     if (originalScheduledHour != timeSlot.ScheduledHour || originalScheduledMinute != timeSlot.ScheduledMinute)
                                     {
                                         MarkTimetableAsDirty();

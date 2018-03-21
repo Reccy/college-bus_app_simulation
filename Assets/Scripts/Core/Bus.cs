@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
-using Mapbox.Unity.Location;
 using UnityEditor;
+using Mapbox.Unity.Location;
 using Mapbox.Unity.Map;
-using System;
 
 namespace AaronMeaney.BusStop.Core
 {
@@ -61,7 +60,7 @@ namespace AaronMeaney.BusStop.Core
                 return map;
             }
         }
-        
+
         public enum BusStatus { WaitingAtStop, Driving, OffService, BrokenDown }
         /// <summary>
         /// Represents the <see cref="Bus"/> status / state
@@ -90,7 +89,7 @@ namespace AaronMeaney.BusStop.Core
                 return CurrentService.ServicedBusRoute;
             }
         }
-        
+
         private BusTimeSlot currentTimeSlot = null;
         /// <summary>
         /// The current <see cref="BusTimeSlot"/> that the <see cref="Bus"/> is servicing
@@ -148,6 +147,24 @@ namespace AaronMeaney.BusStop.Core
         /// The index of the current <see cref="BusRoute.PathWaypoints"/> that is being followed.
         /// </summary>
         private int currentPathWaypointIndex = 0;
+        
+        private bool isStopping = false;
+        /// <summary>
+        /// If the <see cref="Bus"/> is prepared to stop at the next <see cref="BusStop"/>
+        /// </summary>
+        public bool IsStopping { get { return isStopping; } }
+
+        /// <summary>
+        /// Stops the <see cref="Bus"/> at the <see cref="CurrentStop"/>
+        /// </summary>
+        public void PrepareToStop()
+        {
+            if (Status == BusStatus.Driving)
+            {
+                Debug.Log("Preparing to stop at: " + CurrentStop);
+                isStopping = true;
+            }
+        }
 
         /// <summary>
         /// The <see cref="Latitude"/> of the <see cref="Bus"/>
@@ -156,7 +173,7 @@ namespace AaronMeaney.BusStop.Core
         {
             get { return GetComponent<TransformLocationProvider>().Location.x; }
         }
-        
+
         /// <summary>
         /// The <see cref="Longitude"/> of the <see cref="Bus"/>
         /// </summary>
@@ -164,7 +181,7 @@ namespace AaronMeaney.BusStop.Core
         {
             get { return GetComponent<TransformLocationProvider>().Location.y; }
         }
-        
+
         /// <summary>
         /// Assigns the <see cref="CurrentService"/> and puts this <see cref="Bus"/> in service.
         /// </summary>
@@ -188,11 +205,12 @@ namespace AaronMeaney.BusStop.Core
 
             // Get the index of the current path waypoint
             currentPathWaypointIndex = CurrentRoute.PathWaypoints.IndexOf(currentDestination);
-            
+
+            // Service the first stop that the Bus is assigned to
             CurrentStop.ServiceStop(this);
-            
+
             gameObject.SetActive(true);
-            
+
             Debug.Log(RegistrationNumber + " entered service for route " + CurrentRoute.RouteIdInternal);
         }
 
@@ -237,16 +255,21 @@ namespace AaronMeaney.BusStop.Core
 
             // Drive towards the destination
             transform.LookAt(destinationPosition);
-            transform.Translate(Vector3.forward * 5 * Time.deltaTime);
-            
+            transform.position = Vector3.MoveTowards(transform.position, destinationPosition, 15 * Time.deltaTime);
+
             // Logic for when the bus reaches the destination
             if (destinationDistance < 0.1f)
             {
-                // If the destination reached is the currently serviced bus stop, then service it.
-                if (currentDestination == CurrentRoute.GetCoordinateLocationFromBusStop(CurrentStop))
+                bool isNextStop = currentDestination == CurrentRoute.GetCoordinateLocationFromBusStop(CurrentStop);
+                
+                if (isNextStop && isStopping)
                 {
                     CurrentStop.ServiceStop(this);
                     return;
+                }
+                else if (isNextStop)
+                {
+                    currentTimeSlot = NextTimeSlot;
                 }
 
                 // Go the next destination
@@ -255,6 +278,9 @@ namespace AaronMeaney.BusStop.Core
             }
         }
 
+        /// <summary>
+        /// Called by the <see cref="BusStop"/> when the passengers have finished embarking and disembarking.
+        /// </summary>
         public void FinishWaitingAtStop()
         {
             Debug.Log("Finished waiting at " + CurrentStop);
@@ -263,6 +289,14 @@ namespace AaronMeaney.BusStop.Core
 
             // Service the next time slot
             currentTimeSlot = NextTimeSlot;
+
+            isStopping = false;
+
+            // If this is the final stop, make sure the bus stops there
+            if (CurrentRoute.BusStops.IndexOf(CurrentStop) == CurrentRoute.BusStops.Count - 1)
+            {
+                isStopping = true;
+            }
         }
 
         /// <summary>
@@ -283,7 +317,7 @@ namespace AaronMeaney.BusStop.Core
             }
 
             busName += " Bus - " + RegistrationNumber;
-            
+
             name = busName;
         }
 
@@ -291,6 +325,31 @@ namespace AaronMeaney.BusStop.Core
         private void OnDrawGizmosSelected()
         {
             ValidateBusName();
+        }
+    }
+
+    [CustomEditor(typeof(Bus))]
+    public class BusEditor : Editor
+    {
+        private Bus bus;
+
+        public override void OnInspectorGUI()
+        {
+            base.DrawDefaultInspector();
+
+            bus = ((Bus)target);
+
+            if (Application.isPlaying)
+            {
+                EditorGUI.BeginDisabledGroup((bus.IsStopping && bus.Status == Bus.BusStatus.Driving) || bus.Status == Bus.BusStatus.WaitingAtStop);
+
+                if (GUILayout.Button("Hail Bus"))
+                {
+                    bus.PrepareToStop();
+                }
+
+                EditorGUI.EndDisabledGroup();
+            }
         }
     }
 }

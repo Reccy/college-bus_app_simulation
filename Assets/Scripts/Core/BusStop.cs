@@ -60,7 +60,14 @@ namespace AaronMeaney.BusStop.Core
             // Temp wait a minute at each bus stop
             DateTime t = DateTime.Now.AddSeconds(10);
 
-            FindObjectOfType<ScheduleTaskRunner>().AddTask(new ScheduledTask(bus.FinishWaitingAtStop,t));
+            if (bus.CurrentRoute.IsFinalStop(bus.CurrentStop))
+            {
+                FindObjectOfType<ScheduleTaskRunner>().AddTask(new ScheduledTask(bus.EndService, t));
+            }
+            else
+            {
+                FindObjectOfType<ScheduleTaskRunner>().AddTask(new ScheduledTask(bus.FinishWaitingAtStop, t));
+            }
         }
 
         /// <summary>

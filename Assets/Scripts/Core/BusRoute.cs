@@ -68,6 +68,16 @@ namespace AaronMeaney.BusStop.Core
                 return stops;
             }
         }
+
+        /// <summary>
+        /// If the <see cref="BusStop"/> is the last stop in the <see cref="BusStops"/> list.
+        /// </summary>
+        /// <param name="busStop">The <see cref="BusStop"/> to check.</param>
+        /// <returns><see cref="true"/> if the <see cref="busStop"/> is the final stop, otherwise returns <see cref="false"/>.</returns>
+        public bool IsFinalStop(BusStop busStop)
+        {
+            return BusStops[BusStops.Count - 1] == busStop;
+        }
         
         private List<CoordinateLocation> pathWaypoints;
         /// <summary>

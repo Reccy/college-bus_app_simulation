@@ -97,6 +97,16 @@ namespace AaronMeaney.BusStop.Core
         public BusTimeSlot CurrentTimeSlot
         {
             get { return currentTimeSlot; }
+            set
+            {
+                currentTimeSlot = value;
+
+                // If this is the final stop, make sure the bus stops there
+                if (CurrentRoute.IsFinalStop(CurrentStop))
+                {
+                    isStopping = true;
+                }
+            }
         }
 
         public BusTimeSlot NextTimeSlot
@@ -197,7 +207,7 @@ namespace AaronMeaney.BusStop.Core
             currentService = service;
 
             // Set the time slot that the bus is servicing
-            currentTimeSlot = service.ScheduledTimeSlot;
+            CurrentTimeSlot = service.ScheduledTimeSlot;
 
             // Set the current destination to the serviced time slot stop
             currentDestination = CurrentRoute.GetCoordinateLocationFromBusStop(CurrentStop);
@@ -269,7 +279,7 @@ namespace AaronMeaney.BusStop.Core
                 }
                 else if (isNextStop)
                 {
-                    currentTimeSlot = NextTimeSlot;
+                    CurrentTimeSlot = NextTimeSlot;
                 }
 
                 // Go the next destination
@@ -287,16 +297,10 @@ namespace AaronMeaney.BusStop.Core
 
             Status = BusStatus.Driving;
 
-            // Service the next time slot
-            currentTimeSlot = NextTimeSlot;
-
             isStopping = false;
 
-            // If this is the final stop, make sure the bus stops there
-            if (CurrentRoute.BusStops.IndexOf(CurrentStop) == CurrentRoute.BusStops.Count - 1)
-            {
-                isStopping = true;
-            }
+            // Service the next time slot
+            CurrentTimeSlot = NextTimeSlot;
         }
 
         /// <summary>

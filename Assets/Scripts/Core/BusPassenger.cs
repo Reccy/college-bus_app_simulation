@@ -6,7 +6,7 @@ namespace AaronMeaney.BusStop.Core
     /// <summary>
     /// Represents a bus passenger
     /// </summary>
-    public class BusPassenger : MonoBehaviour
+    public class BusPassenger
     {
         private string firstName;
         /// <summary>
@@ -26,15 +26,53 @@ namespace AaronMeaney.BusStop.Core
             get { return lastName; }
         }
 
-        private BusStop destinationBusStop = null;
-        public BusStop DestinationBusStop
-        { get { return destinationBusStop; } }
-
-        private void Awake()
+        /// <summary>
+        /// The passenger's full name
+        /// </summary>
+        public string FullName
         {
-            firstName = RandomNameGenerator.GetFirstName();
-            lastName = RandomNameGenerator.GetLastName();
-            gameObject.name = "Passenger (" + firstName + " " + lastName + ")";
+            get { return (firstName + " " + lastName); }
+        }
+
+        private BusStop originBusStop = null;
+        /// <summary>
+        /// The <see cref="BusStop"/> that the passenger started waiting at.
+        /// </summary>
+        public BusStop OriginBusStop { get { return originBusStop; } }
+
+        private BusStop destinationBusStop = null;
+        /// <summary>
+        /// The <see cref="BusStop"/> that the passenger wants to go to.
+        /// </summary>
+        public BusStop DestinationBusStop { get { return destinationBusStop; } }
+
+        private Bus boardedBus = null;
+
+        public BusPassenger(BusStop originBusStop, BusStop destinationBusStop)
+        {
+            this.firstName = RandomNameGenerator.GetFirstName();
+            this.lastName = RandomNameGenerator.GetLastName();
+
+            this.originBusStop = originBusStop;
+            this.destinationBusStop = destinationBusStop;
+        }
+
+        /// <summary>
+        /// Has the <see cref="BusPassenger"/> board the <see cref="Bus"/>.
+        /// </summary>
+        public void BoardBus(Bus bus)
+        {
+            boardedBus = bus;
+
+            boardedBus.OnNearStop += (stop) =>
+            {
+                Debug.Log("OnNearStop called for " + stop.BusStopIdInternal);
+                if (stop == destinationBusStop && boardedBus.IsStopping == false)
+                {
+                    Debug.Log(FullName + " pressed the stop button on " + boardedBus.RegistrationNumber);
+                    boardedBus.PrepareToStop();
+                }
+            };
         }
     }
 }

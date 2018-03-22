@@ -900,7 +900,7 @@ Prefab:
     - target: {fileID: 114867456524390420, guid: 0edfd68289409bc409a92c0296e50719,
         type: 2}
       propertyPath: gizmoEnabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0edfd68289409bc409a92c0296e50719, type: 2}
@@ -4195,6 +4195,11 @@ Prefab:
         type: 2}
       propertyPath: gizmoColor.b
       value: 0.30222753
+      objectReference: {fileID: 0}
+    - target: {fileID: 114867456524390420, guid: 0edfd68289409bc409a92c0296e50719,
+        type: 2}
+      propertyPath: gizmoEnabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0edfd68289409bc409a92c0296e50719, type: 2}
@@ -20096,6 +20101,11 @@ Prefab:
     - target: {fileID: 4760384610737866, guid: 38983f424eff3d944bb10e5004dc0d1f, type: 2}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114252378888094790, guid: 38983f424eff3d944bb10e5004dc0d1f,
+        type: 2}
+      propertyPath: maximumCapacity
+      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 0}

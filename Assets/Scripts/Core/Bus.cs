@@ -4,6 +4,7 @@ using Mapbox.Unity.Location;
 using Mapbox.Unity.Map;
 using System;
 using System.Collections.Generic;
+using AaronMeaney.BusStop.Scheduling;
 
 namespace AaronMeaney.BusStop.Core
 {
@@ -19,6 +20,11 @@ namespace AaronMeaney.BusStop.Core
         /// Called when the <see cref="BusPassenger"/>s finish disembarking this <see cref="Bus"/> at a <see cref="BusStop"/>.
         /// </summary>
         public Action OnPassengersUnboarded;
+
+        /// <summary>
+        /// Called when the <see cref="Bus"/> is just about to reach a <see cref="BusStop"/>.
+        /// </summary>
+        public Action<BusStop> OnNearStop;
 
         // Miscellaneous Information
         [SerializeField]
@@ -65,6 +71,18 @@ namespace AaronMeaney.BusStop.Core
                     map = FindObjectOfType<AbstractMap>();
 
                 return map;
+            }
+        }
+
+        private ScheduleTaskRunner taskRunner = null;
+        public ScheduleTaskRunner TaskRunner
+        {
+            get
+            {
+                if (taskRunner == null)
+                    taskRunner = FindObjectOfType<ScheduleTaskRunner>();
+
+                return taskRunner;
             }
         }
 
@@ -247,6 +265,7 @@ namespace AaronMeaney.BusStop.Core
                 return;
             }
 
+            busPassenger.BoardBus(this);
             Passengers.Add(busPassenger);
         }
 
@@ -287,6 +306,8 @@ namespace AaronMeaney.BusStop.Core
         /// </summary>
         public void EndService()
         {
+            Debug.Log(RegistrationNumber + " has ended service on " + CurrentRoute.RouteIdInternal);
+
             if (!Company.BussesInDepot.Contains(this))
             {
                 Company.BussesInDepot.Add(this);
@@ -323,7 +344,7 @@ namespace AaronMeaney.BusStop.Core
 
             // Drive towards the destination
             transform.LookAt(destinationPosition);
-            transform.position = Vector3.MoveTowards(transform.position, destinationPosition, 15 * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, destinationPosition, 30 * Time.deltaTime);
 
             // Logic for when the bus reaches the destination
             if (destinationDistance < 0.1f)
@@ -339,6 +360,14 @@ namespace AaronMeaney.BusStop.Core
                 {
                     CurrentTimeSlot = NextTimeSlot;
                 }
+                
+                if (OnNearStop != null)
+                {
+                    if (CurrentRoute.PathWaypoints[currentPathWaypointIndex + 1] == CurrentRoute.GetCoordinateLocationFromBusStop(CurrentStop))
+                    {
+                        OnNearStop(CurrentStop);
+                    }
+                }
 
                 // Go the next destination
                 currentPathWaypointIndex += 1;
@@ -351,6 +380,8 @@ namespace AaronMeaney.BusStop.Core
         /// </summary>
         public void UnboardPassenger(BusStop busStop)
         {
+            Debug.Log(RegistrationNumber + " is unboarding at " + busStop.BusStopIdInternal);
+
             BusPassenger leavingPassenger = null;
             foreach (BusPassenger passenger in Passengers)
             {
@@ -363,12 +394,16 @@ namespace AaronMeaney.BusStop.Core
 
             if (leavingPassenger == null)
             {
+                Debug.Log(RegistrationNumber + " is finished unboarding at " + busStop.BusStopIdInternal);
                 OnPassengersUnboarded();
                 return;
             }
-            
+
+            Debug.Log(RegistrationNumber + " is unboarding passenger " + leavingPassenger.FullName);
             Passengers.Remove(leavingPassenger);
-            Destroy(leavingPassenger);
+
+            DateTime nextUnboardTime = DateTime.Now.AddSeconds(1);
+            TaskRunner.AddTask(new ScheduledTask(() => { UnboardPassenger(busStop); }, nextUnboardTime));
         }
 
         /// <summary>
@@ -376,7 +411,7 @@ namespace AaronMeaney.BusStop.Core
         /// </summary>
         public void FinishWaitingAtStop()
         {
-            Debug.Log("Finished waiting at " + CurrentStop);
+            Debug.Log(RegistrationNumber + " finished waiting at " + CurrentStop);
 
             Status = BusStatus.Driving;
 

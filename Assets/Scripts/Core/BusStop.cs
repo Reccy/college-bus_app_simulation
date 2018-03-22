@@ -85,6 +85,26 @@ namespace AaronMeaney.BusStop.Core
         {
             bus.Status = Bus.BusStatus.WaitingAtStop;
 
+            // Add random number of passengers if this is not the last stop
+            if (bus.CurrentRoute.BusStops.IndexOf(this) < bus.CurrentRoute.BusStops.Count - 1)
+            {
+                Queue<BusPassenger> busQueue = busQueues[bus.CurrentRoute] = new Queue<BusPassenger>();
+
+                System.Random rng = new System.Random();
+                int currentStopIndex = bus.CurrentRoute.BusStops.IndexOf(this);
+                int maxStopIndex = bus.CurrentRoute.BusStops.Count - 1;
+
+                for (int i = 1; i < 10; i++)
+                {
+                    int destinationStopIndex = rng.Next(currentStopIndex + 1, maxStopIndex);
+                    BusStop destinationStop = bus.CurrentRoute.BusStops[destinationStopIndex];
+
+                    busQueue.Enqueue(new BusPassenger(this, destinationStop));
+                }
+
+                Debug.Log("Passengers at " + BusStopIdInternal + ": " + busQueue.Count);
+            }
+
             // Board passengers once the passengers on the bus finish unboarding
             bus.OnPassengersUnboarded = () => { BoardFrontPassenger(bus); };
 
@@ -98,8 +118,12 @@ namespace AaronMeaney.BusStop.Core
         /// <param name="bus">The <see cref="Bus"/> the passengers are getting onto.</param>
         private void BoardFrontPassenger(Bus bus)
         {
+            Debug.Log(bus.RegistrationNumber + " is being boarded by " + BusStopIdInternal);
+
             if (BusCanBeBoarded(bus) == false)
             {
+                Debug.Log(bus.RegistrationNumber + " is finished being boarded by " + BusStopIdInternal);
+
                 if (bus.CurrentRoute.IsFinalStop(bus.CurrentStop))
                 {
                     bus.EndService();
@@ -113,11 +137,13 @@ namespace AaronMeaney.BusStop.Core
             }
 
             Queue<BusPassenger> busQueue = busQueues[bus.CurrentRoute];
-            
+
+            Debug.Log(busQueue.Peek().FullName + " is boarding " + bus.RegistrationNumber + ". Destination: " + busQueue.Peek().DestinationBusStop.BusStopIdInternal);
+
             bus.BoardPassenger(busQueue.Dequeue());
 
             // Wait for the next passenger to board
-            DateTime nextBoardTime = DateTime.Now.AddSeconds(5);
+            DateTime nextBoardTime = DateTime.Now.AddSeconds(1);
             TaskRunner.AddTask(new ScheduledTask(() => { BoardFrontPassenger(bus); }, nextBoardTime));
         }
 

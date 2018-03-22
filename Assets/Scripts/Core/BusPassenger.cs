@@ -26,6 +26,10 @@ namespace AaronMeaney.BusStop.Core
             get { return lastName; }
         }
 
+        private BusStop destinationBusStop = null;
+        public BusStop DestinationBusStop
+        { get { return destinationBusStop; } }
+
         private void Awake()
         {
             firstName = RandomNameGenerator.GetFirstName();

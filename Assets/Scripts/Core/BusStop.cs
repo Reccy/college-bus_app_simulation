@@ -1,5 +1,6 @@
 ﻿using AaronMeaney.BusStop.Scheduling;
 using System;
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
@@ -33,14 +34,41 @@ namespace AaronMeaney.BusStop.Core
             get { return GetComponentInParent<RouteWaypoint>(); }
         }
 
-        private PlaceAtCoordinates busStopPlacer;
+        /// <summary>
+        /// The different bus queues for each <see cref="BusRoute"/>.
+        /// </summary>
+        private Dictionary<BusRoute, Queue<BusPassenger>> busQueues;
+
+        private PlaceAtCoordinates busStopPlacer = null;
+        private PlaceAtCoordinates BusStopPlacer
+        {
+            get
+            {
+                if (busStopPlacer == null)
+                    busStopPlacer = GetComponent<PlaceAtCoordinates>();
+
+                return busStopPlacer;
+            }
+        }
+
+        private ScheduleTaskRunner taskRunner = null;
+        private ScheduleTaskRunner TaskRunner
+        {
+            get
+            {
+                if (taskRunner == null)
+                    taskRunner = FindObjectOfType<ScheduleTaskRunner>();
+
+                return taskRunner;
+            }
+        }
 
         private void Awake()
         {
-            busStopPlacer = GetComponent<PlaceAtCoordinates>();
+            busQueues = new Dictionary<BusRoute, Queue<BusPassenger>>();
 
             // Rotate towards the waypoint once the coordinates are set
-            busStopPlacer.OnPlacementFinished += () =>
+            BusStopPlacer.OnPlacementFinished += () =>
             {
                 RotateTowardsWaypoint();
             };
@@ -50,24 +78,67 @@ namespace AaronMeaney.BusStop.Core
         }
         
         /// <summary>
-        /// Allows passengers to embark/disembark the <see cref="Bus"/> that is servicing this stop.
+        /// Allows passengers to board/unboard the <see cref="Bus"/> that is servicing this stop.
         /// </summary>
         /// <param name="bus">The <see cref="Bus"/> that is waiting at / servicing this stop.</param>
         public void ServiceStop(Bus bus)
         {
             bus.Status = Bus.BusStatus.WaitingAtStop;
 
-            // Temp wait a minute at each bus stop
-            DateTime t = DateTime.Now.AddSeconds(10);
+            // Board passengers once the passengers on the bus finish unboarding
+            bus.OnPassengersUnboarded = () => { BoardFrontPassenger(bus); };
 
-            if (bus.CurrentRoute.IsFinalStop(bus.CurrentStop))
+            bus.UnboardPassenger(this);
+        }
+        
+        /// <summary>
+        /// Recursive call to board the passenger at the front of the <see cref="busQueues"/>.
+        /// Returns once the queue for this <see cref="Bus"/>' <see cref="BusRoute"/> is empty.
+        /// </summary>
+        /// <param name="bus">The <see cref="Bus"/> the passengers are getting onto.</param>
+        private void BoardFrontPassenger(Bus bus)
+        {
+            if (BusCanBeBoarded(bus) == false)
             {
-                FindObjectOfType<ScheduleTaskRunner>().AddTask(new ScheduledTask(bus.EndService, t));
+                if (bus.CurrentRoute.IsFinalStop(bus.CurrentStop))
+                {
+                    bus.EndService();
+                    return;
+                }
+                else
+                {
+                    bus.FinishWaitingAtStop();
+                    return;
+                }
             }
-            else
-            {
-                FindObjectOfType<ScheduleTaskRunner>().AddTask(new ScheduledTask(bus.FinishWaitingAtStop, t));
-            }
+
+            Queue<BusPassenger> busQueue = busQueues[bus.CurrentRoute];
+            
+            bus.BoardPassenger(busQueue.Dequeue());
+
+            // Wait for the next passenger to board
+            DateTime nextBoardTime = DateTime.Now.AddSeconds(5);
+            TaskRunner.AddTask(new ScheduledTask(() => { BoardFrontPassenger(bus); }, nextBoardTime));
+        }
+
+        /// <summary>
+        /// Returns if the <see cref="Bus"/> can be boarded.
+        /// </summary>
+        private bool BusCanBeBoarded(Bus bus)
+        {
+            // Bus Queue doesn't exist
+            if (busQueues.ContainsKey(bus.CurrentRoute) == false)
+                return false;
+
+            // Bus Queue is empty
+            if (busQueues[bus.CurrentRoute].Count == 0)
+                return false;
+
+            // The bus is full
+            if (bus.IsFull)
+                return false;
+
+            return true;
         }
 
         /// <summary>
@@ -80,13 +151,13 @@ namespace AaronMeaney.BusStop.Core
 
             if (busWaypointPlacer.FinishedPlacement)
             {
-                busStopPlacer.Execute();
+                BusStopPlacer.Execute();
             }
             else
             {
                 busWaypointPlacer.OnPlacementFinished += () =>
                 {
-                    busStopPlacer.Execute();
+                    BusStopPlacer.Execute();
                 };
             }
         }

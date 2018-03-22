@@ -2,6 +2,8 @@
 using UnityEditor;
 using Mapbox.Unity.Location;
 using Mapbox.Unity.Map;
+using System;
+using System.Collections.Generic;
 
 namespace AaronMeaney.BusStop.Core
 {
@@ -13,6 +15,11 @@ namespace AaronMeaney.BusStop.Core
     [RequireComponent(typeof(TransformLocationProvider))]
     public class Bus : MonoBehaviour
     {
+        /// <summary>
+        /// Called when the <see cref="BusPassenger"/>s finish disembarking this <see cref="Bus"/> at a <see cref="BusStop"/>.
+        /// </summary>
+        public Action OnPassengersUnboarded;
+
         // Miscellaneous Information
         [SerializeField]
         private string registrationNumber;
@@ -109,6 +116,9 @@ namespace AaronMeaney.BusStop.Core
             }
         }
 
+        /// <summary>
+        /// The Next Time Slot after the <see cref="CurrentTimeSlot"/>.
+        /// </summary>
         public BusTimeSlot NextTimeSlot
         {
             get
@@ -190,6 +200,54 @@ namespace AaronMeaney.BusStop.Core
         public double Longitude
         {
             get { return GetComponent<TransformLocationProvider>().Location.y; }
+        }
+
+        [SerializeField]
+        private int maximumCapacity;
+        /// <summary>
+        /// The maximum amount of <see cref="BusPassenger"/>s allowed to be on the bus.
+        /// </summary>
+        public int MaximumCapacity { get { return maximumCapacity; } }
+
+        /// <summary>
+        /// If the <see cref="Bus"/> is at <see cref="MaximumCapacity"/>.
+        /// </summary>
+        public bool IsFull
+        {
+            get
+            {
+                return Passengers.Count >= MaximumCapacity;
+            }
+        }
+
+        private List<BusPassenger> passengers = null;
+        /// <summary>
+        /// The <see cref="BusPassenger"/>s riding the bus.
+        /// </summary>
+        private List<BusPassenger> Passengers
+        {
+            get
+            {
+                if (passengers == null)
+                    passengers = new List<BusPassenger>();
+
+                return passengers;
+            }
+        }
+
+        /// <summary>
+        /// Boards a <see cref="BusPassenger"/> onto this bus.
+        /// </summary>
+        /// <param name="busPassenger"></param>
+        public void BoardPassenger(BusPassenger busPassenger)
+        {
+            if (IsFull)
+            {
+                Debug.LogError("Can't add any more passengers to bus " + RegistrationNumber + " , it's full!", this);
+                return;
+            }
+
+            Passengers.Add(busPassenger);
         }
 
         /// <summary>
@@ -289,6 +347,31 @@ namespace AaronMeaney.BusStop.Core
         }
 
         /// <summary>
+        /// Recursive method to unboard all of the <see cref="BusPassenger"/>s intending to get off at this <see cref="BusStop"/>.
+        /// </summary>
+        public void UnboardPassenger(BusStop busStop)
+        {
+            BusPassenger leavingPassenger = null;
+            foreach (BusPassenger passenger in Passengers)
+            {
+                if (passenger.DestinationBusStop == busStop)
+                {
+                    leavingPassenger = passenger;
+                    break;
+                }
+            }
+
+            if (leavingPassenger == null)
+            {
+                OnPassengersUnboarded();
+                return;
+            }
+            
+            Passengers.Remove(leavingPassenger);
+            Destroy(leavingPassenger);
+        }
+
+        /// <summary>
         /// Called by the <see cref="BusStop"/> when the passengers have finished embarking and disembarking.
         /// </summary>
         public void FinishWaitingAtStop()
@@ -298,9 +381,6 @@ namespace AaronMeaney.BusStop.Core
             Status = BusStatus.Driving;
 
             isStopping = false;
-
-            // Service the next time slot
-            CurrentTimeSlot = NextTimeSlot;
         }
 
         /// <summary>

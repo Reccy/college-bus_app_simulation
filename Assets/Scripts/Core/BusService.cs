@@ -83,6 +83,25 @@ namespace AaronMeaney.BusStop.Core
             this.busTimetable = busTimetable;
         }
 
+        /// <summary>
+        /// Create a copy of a <see cref="BusService"/>
+        /// </summary>
+        public BusService(BusService source)
+        {
+            // Copy timetable
+            busTimetable = source.busTimetable;
+
+            // Copy bus route
+            servicedBusRoute = source.servicedBusRoute;
+
+            // Copy time slots
+            foreach (BusTimeSlot sourceSlot in source.TimeSlots)
+            {
+                BusTimeSlot newTime = new BusTimeSlot(sourceSlot);
+                TimeSlots.Add(newTime);
+            }
+        }
+
         private BusTimeSlot scheduledTimeSlot = null;
         /// <summary>
         /// The <see cref="BusTimeSlot"/> that should be in service at the current time.

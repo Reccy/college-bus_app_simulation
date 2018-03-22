@@ -297,7 +297,7 @@ namespace AaronMeaney.BusStop.Core
     {
         #region Configuration
         private BusTimetable timetable = null;
-        private enum BusTimetableConfigMode { NORMAL, EDIT, REMOVE }
+        private enum BusTimetableConfigMode { NORMAL, EDIT, REMOVE, COPY }
         private BusTimetableConfigMode ConfigMode = BusTimetableConfigMode.NORMAL;
         
         [MenuItem("Window/Bus Stop Timetable Editor")]
@@ -430,6 +430,7 @@ namespace AaronMeaney.BusStop.Core
 
                 // Render each Bus Service
                 BusService busServiceToDelete = null;
+                BusService busServiceToCopy = null;
                 int[] swapService = { -1, -1 };
                 int serviceIndex = -1;
                 foreach (BusService service in companyServices)
@@ -484,6 +485,16 @@ namespace AaronMeaney.BusStop.Core
                             {
                                 // Schedule this service for deletion
                                 busServiceToDelete = service;
+                            }
+                        }
+
+                        // Copy Mode Button
+                        if (ConfigMode == BusTimetableConfigMode.COPY)
+                        {
+                            if (GUILayout.Button("↔ " + companyRoutesAsStrings[selectedBusRouteIndex], GUILayout.Width(60)))
+                            {
+                                // Schedule this service to be copied
+                                busServiceToCopy = service;
                             }
                         }
 
@@ -618,6 +629,15 @@ namespace AaronMeaney.BusStop.Core
                     MarkTimetableAsDirty();
                 }
 
+                // Copy Service if scheduled
+                if (busServiceToCopy != null)
+                {
+                    BusService newService = new BusService(busServiceToCopy);
+                    companyServices.Add(newService);
+
+                    MarkTimetableAsDirty();
+                }
+
                 EditorGUILayout.BeginVertical();
 
                 if (ConfigMode == BusTimetableConfigMode.NORMAL)
@@ -635,6 +655,12 @@ namespace AaronMeaney.BusStop.Core
                     if (GUILayout.Button("Edit Mode", GUILayout.Width(100)))
                     {
                         ConfigMode = BusTimetableConfigMode.EDIT;
+                    }
+
+                    // Render "Copy Mode" button
+                    if (GUILayout.Button("Copy Mode", GUILayout.Width(100)))
+                    {
+                        ConfigMode = BusTimetableConfigMode.COPY;
                     }
 
                     // Render "Remove Mode" button

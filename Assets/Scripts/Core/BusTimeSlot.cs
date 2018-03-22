@@ -71,6 +71,19 @@ namespace AaronMeaney.BusStop.Core
                 scheduledMinute = value;
             }
         }
+        
+        public BusTimeSlot() { }
+
+        /// <summary>
+        /// Copy Constructor
+        /// </summary>
+        public BusTimeSlot(BusTimeSlot sourceTimeSlot)
+        {
+            service = sourceTimeSlot.service;
+            scheduledBusStop = sourceTimeSlot.scheduledBusStop;
+            scheduledHour = sourceTimeSlot.scheduledHour;
+            scheduledMinute = sourceTimeSlot.scheduledMinute;
+        }
 
         /// <summary>
         /// Sets up references for this <see cref="BusTimeSlot"/>.

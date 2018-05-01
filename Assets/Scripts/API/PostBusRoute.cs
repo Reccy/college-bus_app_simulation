@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using AaronMeaney.BusStop.Core;
 
-namespace AaronMeaney.BusStop.API.Action
+namespace AaronMeaney.BusStop.API
 {
     /// <summary>
     /// Pushes the Bus Route data to the REST API. Has to be called manually.

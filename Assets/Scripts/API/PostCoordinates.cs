@@ -5,7 +5,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace AaronMeaney.BusStop.API.Action
+namespace AaronMeaney.BusStop.API
 {
     /// <summary>
     /// Posts the coordinates to a REST API at a scheduled interval

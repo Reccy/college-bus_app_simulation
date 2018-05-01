@@ -198,7 +198,12 @@ namespace AaronMeaney.BusStop.Core
 
         private void OnDrawGizmos()
         {
-            Handles.Label(transform.position, name);
+            // Display name of bus stop (Frustum culling source: https://forum.unity.com/threads/handles-label-fail-when-point-behind-camera.79217/ - Barry Northern)
+            Plane[] frustum = GeometryUtility.CalculateFrustumPlanes(SceneView.currentDrawingSceneView.camera);
+            if (GeometryUtility.TestPlanesAABB(frustum, new Bounds(transform.position, Vector3.one)))
+            {
+                Handles.Label(transform.position, name);
+            }
         }
 
         private void OnValidate()

@@ -1,0 +1,228 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<root>
+<SettingsList FormatVersion = "1" ProductVersion = "3.0.4">
+<Entries>
+<e IsBuiltin = "true" Id = "0" Title = "Error" IsEnabled = "true" IsCustomIcon = "true" IsConsumeEnabled = "true" IsSharing = "false" SharingMode = "ToolbarAndRowIcon" IdSharing = "0" IsHideIfEmpty = "false" HasNavButton = "true" OpenWith = "\0" Theme = "Danger" SizeAdjust = "10" ColorizeRowFor = "Disabled" BgFlashFor = "AllLogsInTab" BgFlashDuration = "OneSecond">
+<BgColorFlash ProSkin = "FF1400A0" FreeSkin = "FF1400AF" />
+<TextColor ProSkin = "B4B4B4FF" FreeSkin = "000000FF" />
+<BgColorEven ProSkin = "FF14002A" FreeSkin = "FF1E0041" />
+<BgColorOdd ProSkin = "FF140018" FreeSkin = "FF1E0037" />
+<IconMain>
+<Layers>
+<e Size = "24" OutlineThickness = "0.428571403026581" OutlineShape = "Round" IconText = "" IconShape = "None" OffsetX = "0" OffsetY = "0" IsItalic = "false">
+<ColorIconCore ProSkin = "723434FF" FreeSkin = "E8C8C8FF" />
+<ColorIconOutline ProSkin = "592B2BFF" FreeSkin = "BB9090FF" />
+</e>
+<e Size = "27" OutlineThickness = "0.600000023841858" OutlineShape = "Round" IconText = "☠" IconShape = "None" OffsetX = "0" OffsetY = "0" IsItalic = "false">
+<ColorIconCore ProSkin = "6C0000FF" FreeSkin = "AA2E2EFF" />
+<ColorIconOutline ProSkin = "FF9999A0" FreeSkin = "FFB2B2FF" />
+</e>
+</Layers>
+</IconMain>
+<IconToolbar>
+<Layers>
+<e Size = "24" OutlineThickness = "0.428571403026581" OutlineShape = "Round" IconText = "" IconShape = "None" OffsetX = "0" OffsetY = "0" IsItalic = "false">
+<ColorIconCore ProSkin = "6E2121FF" FreeSkin = "E8C8C8FF" />
+<ColorIconOutline ProSkin = "231111AF" FreeSkin = "BB9090FF" />
+</e>
+<e Size = "27" OutlineThickness = "0.600000023841858" OutlineShape = "Round" IconText = "☠" IconShape = "None" OffsetX = "0" OffsetY = "0" IsItalic = "false">
+<ColorIconCore ProSkin = "7D0000FF" FreeSkin = "AA2E2EFF" />
+<ColorIconOutline ProSkin = "FF9B9B80" FreeSkin = "FFB2B2FF" />
+</e>
+</Layers>
+</IconToolbar>
+<IconToolbarGrey>
+<Layers>
+<e Size = "24" OutlineThickness = "0.428571403026581" OutlineShape = "Round" IconText = "" IconShape = "None" OffsetX = "0" OffsetY = "0" IsItalic = "false">
+<ColorIconCore ProSkin = "A5A5A5B2" FreeSkin = "7F7F7FB2" />
+<ColorIconOutline ProSkin = "3F3F3F28" FreeSkin = "7F7F7F28" />
+</e>
+<e Size = "27" OutlineThickness = "0.600000023841858" OutlineShape = "Round" IconText = "☠" IconShape = "None" OffsetX = "0" OffsetY = "0" IsItalic = "false">
+<ColorIconCore ProSkin = "A5A5A5B2" FreeSkin = "7F7F7FB2" />
+<ColorIconOutline ProSkin = "3F3F3F28" FreeSkin = "7F7F7F28" />
+</e>
+</Layers>
+</IconToolbarGrey>
+</e>
+<e IsBuiltin = "false" Id = "3" Title = "Error, Compiler" IsEnabled = "true" IsCustomIcon = "false" IsConsumeEnabled = "true" IsSharing = "true" SharingMode = "ToolbarAndRowIcon" IdSharing = "0" IsHideIfEmpty = "false" HasNavButton = "false" OpenWith = "\0" Theme = "Unity" SizeAdjust = "0" ColorizeRowFor = "AllLogsInTab" BgFlashFor = "AllLogsInTab" BgFlashDuration = "OneSecond">
+<BgColorFlash ProSkin = "FF1400A0" FreeSkin = "FF1400AF" />
+<TextColor ProSkin = "B4B4B4FF" FreeSkin = "000000FF" />
+<BgColorEven ProSkin = "FF14002A" FreeSkin = "FF1E0041" />
+<BgColorOdd ProSkin = "FF140018" FreeSkin = "FF1E0037" />
+<IconMain>
+<Layers>
+<e Size = "20" OutlineThickness = "0" OutlineShape = "Round" IconText = "" IconShape = "None" OffsetX = "0" OffsetY = "0" IsItalic = "false">
+<ColorIconCore ProSkin = "5B3232FF" FreeSkin = "DDA7A7FF" />
+<ColorIconOutline ProSkin = "291111B1" FreeSkin = "6C414171" />
+</e>
+<e Size = "20" OutlineThickness = "0" OutlineShape = "Round" IconText = "C#" IconShape = "None" OffsetX = "1" OffsetY = "0" IsItalic = "false">
+<ColorIconCore ProSkin = "794343FF" FreeSkin = "DD9F9FFF" />
+<ColorIconOutline ProSkin = "341717CA" FreeSkin = "A66464FF" />
+</e>
+</Layers>
+</IconMain>
+<IconToolbar>
+<Layers>
+<e Size = "20" OutlineThickness = "0" OutlineShape = "Round" IconText = "" IconShape = "None" OffsetX = "0" OffsetY = "0" IsItalic = "false">
+<ColorIconCore ProSkin = "5B3232FF" FreeSkin = "DDA7A7FF" />
+<ColorIconOutline ProSkin = "291111B1" FreeSkin = "6C414171" />
+</e>
+<e Size = "20" OutlineThickness = "0" OutlineShape = "Round" IconText = "C#" IconShape = "None" OffsetX = "1" OffsetY = "0" IsItalic = "false">
+<ColorIconCore ProSkin = "955252FF" FreeSkin = "DD9F9FFF" />
+<ColorIconOutline ProSkin = "341717CA" FreeSkin = "A66464FF" />
+</e>
+</Layers>
+</IconToolbar>
+<IconToolbarGrey>
+<Layers>
+<e Size = "20" OutlineThickness = "0" OutlineShape = "Round" IconText = "" IconShape = "None" OffsetX = "0" OffsetY = "0" IsItalic = "false">
+<ColorIconCore ProSkin = "A5A5A5B2" FreeSkin = "7F7F7FB2" />
+<ColorIconOutline ProSkin = "3F3F3F28" FreeSkin = "7F7F7F28" />
+</e>
+<e Size = "20" OutlineThickness = "0" OutlineShape = "Round" IconText = "C#" IconShape = "None" OffsetX = "1" OffsetY = "0" IsItalic = "false">
+<ColorIconCore ProSkin = "B9B9B9B2" FreeSkin = "7F7F7FB2" />
+<ColorIconOutline ProSkin = "3F3F3F28" FreeSkin = "7F7F7F28" />
+</e>
+</Layers>
+</IconToolbarGrey>
+<Keywords>
+<s v = "): error CS" />
+<s v = "): UCE" />
+<s v = "): BCE" />
+<s v = "Shader error in" />
+</Keywords>
+</e>
+<e IsBuiltin = "true" Id = "1" Title = "Warning" IsEnabled = "true" IsCustomIcon = "true" IsConsumeEnabled = "true" IsSharing = "false" SharingMode = "ToolbarAndRowIcon" IdSharing = "0" IsHideIfEmpty = "false" HasNavButton = "false" OpenWith = "\0" Theme = "Danger" SizeAdjust = "10" ColorizeRowFor = "Disabled" BgFlashFor = "AllLogsInTab" BgFlashDuration = "OneSecond">
+<BgColorFlash ProSkin = "C9B90064" FreeSkin = "C9B900AF" />
+<TextColor ProSkin = "B4B4B4FF" FreeSkin = "000000FF" />
+<BgColorEven ProSkin = "C9B9001C" FreeSkin = "C9B90037" />
+<BgColorOdd ProSkin = "C9B90014" FreeSkin = "C9B90028" />
+<IconMain>
+<Layers>
+<e Size = "24" OutlineThickness = "0.428571403026581" OutlineShape = "Round" IconText = "" IconShape = "None" OffsetX = "0" OffsetY = "0" IsItalic = "false">
+<ColorIconCore ProSkin = "6D7400FF" FreeSkin = "A0AA05FF" />
+<ColorIconOutline ProSkin = "858585C8" FreeSkin = "90833BFF" />
+</e>
+<e Size = "31" OutlineThickness = "0.428571403026581" OutlineShape = "Block" IconText = "☢" IconShape = "None" OffsetX = "0" OffsetY = "0" IsItalic = "false">
+<ColorIconCore ProSkin = "4A4A34FF" FreeSkin = "A38B58FF" />
+<ColorIconOutline ProSkin = "818181FF" FreeSkin = "D5CD92A6" />
+</e>
+</Layers>
+</IconMain>
+<IconToolbar>
+<Layers>
+<e Size = "24" OutlineThickness = "0.428571403026581" OutlineShape = "Round" IconText = "" IconShape = "None" OffsetX = "0" OffsetY = "0" IsItalic = "false">
+<ColorIconCore ProSkin = "6D7400FF" FreeSkin = "A0AA05FF" />
+<ColorIconOutline ProSkin = "858585C8" FreeSkin = "90833BFF" />
+</e>
+<e Size = "31" OutlineThickness = "0.428571403026581" OutlineShape = "Block" IconText = "☢" IconShape = "None" OffsetX = "0" OffsetY = "0" IsItalic = "false">
+<ColorIconCore ProSkin = "4A4A34FF" FreeSkin = "A38B58FF" />
+<ColorIconOutline ProSkin = "818181FF" FreeSkin = "D5CD92A6" />
+</e>
+</Layers>
+</IconToolbar>
+<IconToolbarGrey>
+<Layers>
+<e Size = "24" OutlineThickness = "0.428571403026581" OutlineShape = "Round" IconText = "" IconShape = "None" OffsetX = "0" OffsetY = "0" IsItalic = "false">
+<ColorIconCore ProSkin = "A5A5A5B2" FreeSkin = "7F7F7FB2" />
+<ColorIconOutline ProSkin = "3F3F3F28" FreeSkin = "7F7F7F28" />
+</e>
+<e Size = "31" OutlineThickness = "0.428571403026581" OutlineShape = "Block" IconText = "☢" IconShape = "None" OffsetX = "0" OffsetY = "0" IsItalic = "false">
+<ColorIconCore ProSkin = "A5A5A5B2" FreeSkin = "7F7F7FB2" />
+<ColorIconOutline ProSkin = "3F3F3F28" FreeSkin = "7F7F7F28" />
+</e>
+</Layers>
+</IconToolbarGrey>
+</e>
+<e IsBuiltin = "false" Id = "4" Title = "Warning, Compiler" IsEnabled = "true" IsCustomIcon = "false" IsConsumeEnabled = "true" IsSharing = "true" SharingMode = "ToolbarAndRowIcon" IdSharing = "1" IsHideIfEmpty = "false" HasNavButton = "false" OpenWith = "\0" Theme = "Unity" SizeAdjust = "0" ColorizeRowFor = "AllLogsInTab" BgFlashFor = "AllLogsInTab" BgFlashDuration = "OneSecond">
+<BgColorFlash ProSkin = "C9B90064" FreeSkin = "C9B900AF" />
+<TextColor ProSkin = "B4B4B4FF" FreeSkin = "000000FF" />
+<BgColorEven ProSkin = "C9B9001C" FreeSkin = "C9B90037" />
+<BgColorOdd ProSkin = "C9B90014" FreeSkin = "C9B90028" />
+<IconMain>
+<Layers>
+<e Size = "20" OutlineThickness = "0" OutlineShape = "Round" IconText = "" IconShape = "None" OffsetX = "0" OffsetY = "0" IsItalic = "false">
+<ColorIconCore ProSkin = "565221FF" FreeSkin = "CCC18EFF" />
+<ColorIconOutline ProSkin = "2B2200C4" FreeSkin = "382E006B" />
+</e>
+<e Size = "20" OutlineThickness = "0" OutlineShape = "Round" IconText = "C#" IconShape = "None" OffsetX = "1" OffsetY = "0" IsItalic = "false">
+<ColorIconCore ProSkin = "797840E4" FreeSkin = "F7F384D5" />
+<ColorIconOutline ProSkin = "2B300BCA" FreeSkin = "6A6624D5" />
+</e>
+</Layers>
+</IconMain>
+<IconToolbar>
+<Layers>
+<e Size = "20" OutlineThickness = "0" OutlineShape = "Round" IconText = "" IconShape = "None" OffsetX = "0" OffsetY = "0" IsItalic = "false">
+<ColorIconCore ProSkin = "565221FF" FreeSkin = "CCC18EFF" />
+<ColorIconOutline ProSkin = "2B2200C4" FreeSkin = "382E006B" />
+</e>
+<e Size = "20" OutlineThickness = "0" OutlineShape = "Round" IconText = "C#" IconShape = "None" OffsetX = "1" OffsetY = "0" IsItalic = "false">
+<ColorIconCore ProSkin = "908F4CE4" FreeSkin = "F7F384D5" />
+<ColorIconOutline ProSkin = "2B300BCA" FreeSkin = "6A6624D5" />
+</e>
+</Layers>
+</IconToolbar>
+<IconToolbarGrey>
+<Layers>
+<e Size = "20" OutlineThickness = "0" OutlineShape = "Round" IconText = "" IconShape = "None" OffsetX = "0" OffsetY = "0" IsItalic = "false">
+<ColorIconCore ProSkin = "A5A5A5B2" FreeSkin = "7F7F7FB2" />
+<ColorIconOutline ProSkin = "3F3F3F28" FreeSkin = "7F7F7F28" />
+</e>
+<e Size = "20" OutlineThickness = "0" OutlineShape = "Round" IconText = "C#" IconShape = "None" OffsetX = "1" OffsetY = "0" IsItalic = "false">
+<ColorIconCore ProSkin = "B9B9B9B2" FreeSkin = "7F7F7FB2" />
+<ColorIconOutline ProSkin = "3F3F3F28" FreeSkin = "7F7F7F28" />
+</e>
+</Layers>
+</IconToolbarGrey>
+<Keywords>
+<s v = "): warning CS" />
+<s v = "): UCW" />
+<s v = "): BCW" />
+</Keywords>
+</e>
+<e IsBuiltin = "true" Id = "2" Title = "Info" IsEnabled = "true" IsCustomIcon = "true" IsConsumeEnabled = "true" IsSharing = "false" SharingMode = "ToolbarAndRowIcon" IdSharing = "0" IsHideIfEmpty = "false" HasNavButton = "false" OpenWith = "\0" Theme = "Danger" SizeAdjust = "10" ColorizeRowFor = "Disabled" BgFlashFor = "Disabled" BgFlashDuration = "OneSecond">
+<BgColorFlash ProSkin = "7F00007F" FreeSkin = "FF000080" />
+<TextColor ProSkin = "B4B4B4FF" FreeSkin = "000000FF" />
+<BgColorEven ProSkin = "373737FF" FreeSkin = "DEDEDEFF" />
+<BgColorOdd ProSkin = "3C3C3CFF" FreeSkin = "D8D8D8FF" />
+<IconMain>
+<Layers>
+<e Size = "24" OutlineThickness = "0.200000002980232" OutlineShape = "Round" IconText = "" IconShape = "CircleVerySmall" OffsetX = "0" OffsetY = "0" IsItalic = "false">
+<ColorIconCore ProSkin = "3B3B49FF" FreeSkin = "CDCDD2FF" />
+<ColorIconOutline ProSkin = "949492DB" FreeSkin = "616161DB" />
+</e>
+<e Size = "12" OutlineThickness = "0.200000002980232" OutlineShape = "Block" IconText = "i" IconShape = "None" OffsetX = "0" OffsetY = "0" IsItalic = "false">
+<ColorIconCore ProSkin = "7B7B7BFF" FreeSkin = "8E8E8EE8" />
+<ColorIconOutline ProSkin = "38383B9E" FreeSkin = "C3BABAC4" />
+</e>
+</Layers>
+</IconMain>
+<IconToolbar>
+<Layers>
+<e Size = "24" OutlineThickness = "0.200000002980232" OutlineShape = "Round" IconText = "" IconShape = "CircleVerySmall" OffsetX = "0" OffsetY = "1.5" IsItalic = "false">
+<ColorIconCore ProSkin = "3B3B49FF" FreeSkin = "CDCDD2FF" />
+<ColorIconOutline ProSkin = "949492DB" FreeSkin = "616161DB" />
+</e>
+<e Size = "12" OutlineThickness = "0.200000002980232" OutlineShape = "Block" IconText = "i" IconShape = "None" OffsetX = "0" OffsetY = "0" IsItalic = "false">
+<ColorIconCore ProSkin = "7B7B7BFF" FreeSkin = "8E8E8EE8" />
+<ColorIconOutline ProSkin = "38383B9E" FreeSkin = "C3BABAC4" />
+</e>
+</Layers>
+</IconToolbar>
+<IconToolbarGrey>
+<Layers>
+<e Size = "24" OutlineThickness = "0.200000002980232" OutlineShape = "Round" IconText = "" IconShape = "CircleVerySmall" OffsetX = "0" OffsetY = "1.5" IsItalic = "false">
+<ColorIconCore ProSkin = "7F7F7FB2" FreeSkin = "E5E5E5B2" />
+<ColorIconOutline ProSkin = "3F3F3FCC" FreeSkin = "7F7F7FCC" />
+</e>
+<e Size = "12" OutlineThickness = "0.200000002980232" OutlineShape = "Block" IconText = "i" IconShape = "None" OffsetX = "0" OffsetY = "0" IsItalic = "false">
+<ColorIconCore ProSkin = "7F7F7FB2" FreeSkin = "E5E5E5B2" />
+<ColorIconOutline ProSkin = "3F3F3FCC" FreeSkin = "7F7F7FCC" />
+</e>
+</Layers>
+</IconToolbarGrey>
+</e>
+</Entries>
+</SettingsList>
+</root>

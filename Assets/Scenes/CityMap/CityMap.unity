@@ -12710,6 +12710,10 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1953854151932788, guid: 38983f424eff3d944bb10e5004dc0d1f, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 38983f424eff3d944bb10e5004dc0d1f, type: 2}
   m_IsPrefabParent: 0
@@ -28966,6 +28970,10 @@ Prefab:
         type: 2}
       propertyPath: maximumCapacity
       value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 1953854151932788, guid: 38983f424eff3d944bb10e5004dc0d1f, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 0}

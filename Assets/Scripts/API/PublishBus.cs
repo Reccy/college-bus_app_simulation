@@ -26,8 +26,8 @@ namespace AaronMeaney.BusStop.API
             busStopAPI.OnAPIInitialized += () =>
             {
                 bus.OnStartService += () => PublishStartService();
+                bus.OnStartService += () => PublishBusState();
                 bus.OnEndService += () => PublishEndService();
-                PublishBusState();
             };
         }
         
@@ -47,13 +47,16 @@ namespace AaronMeaney.BusStop.API
 
         private void PublishBusState()
         {
+            if (!bus.gameObject.activeInHierarchy)
+                return;
+
             Dictionary<string, object> publishDict = new Dictionary<string, object>();
             publishDict.Add("bus_name", bus.name);
             publishDict.Add("latitude", bus.Latitude);
             publishDict.Add("longitude", bus.Longitude);
             busStopAPI.PublishMessage("bus_data", publishDict);
 
-            scheduleTaskRunner.AddTask(new ScheduledTask(() => PublishBusState(), DateTime.Now.AddSeconds(30)));
+            scheduleTaskRunner.AddTask(new ScheduledTask(() => PublishBusState(), DateTime.Now.AddSeconds(2)));
         }
     }
 }

@@ -4,6 +4,7 @@ using PubNubAPI;
 using System.Collections.Generic;
 using System;
 using AaronMeaney.BusStop.Utilities;
+using UnityEditor;
 
 namespace AaronMeaney.BusStop.API
 {
@@ -16,6 +17,11 @@ namespace AaronMeaney.BusStop.API
         /// Called when the API is initialized.
         /// </summary>
         public Action OnAPIInitialized;
+
+        /// <summary>
+        /// Called when the API receives a message.
+        /// </summary>
+        public Action<Dictionary<string, object>> OnMessageReceived;
 
         /// <summary>
         /// The <see cref="PubNub"/> instance.
@@ -53,18 +59,18 @@ namespace AaronMeaney.BusStop.API
                 }
             };
         }
-
+         
         /// <summary>
         /// Initializes the PubNub API.
         /// </summary>
-        private void InitializePubNub()
+        internal void InitializePubNub()
         {
             // Setup and configure PubNub
             PNConfiguration pnConfiguration = new PNConfiguration();
             pnConfiguration.SubscribeKey = "sub-c-136ca9c4-4d58-11e8-9987-d26dac8959c0";
             pnConfiguration.PublishKey = "pub-c-c6e95d6d-cdba-4d5c-8c5d-29064d99fd0e";
             pnConfiguration.SecretKey = "sec-c-NWVkNmQwOWYtMDY5ZC00ZGZkLWI0NjYtMmNkZjMwMGEzZDIw";
-            pnConfiguration.LogVerbosity = PNLogVerbosity.BODY;
+            pnConfiguration.LogVerbosity = PNLogVerbosity.NONE;
             pnConfiguration.UUID = "UnityClient";
 
             pubnub = new PubNub(pnConfiguration);
@@ -84,8 +90,14 @@ namespace AaronMeaney.BusStop.API
                                 Debug.Log("[PubNub] Successfully initialized PubNub!");
                                 initialized = true;
 
-                                if (OnAPIInitialized != null)
-                                    OnAPIInitialized();
+                                try
+                                {
+                                    if (OnAPIInitialized != null)
+                                        OnAPIInitialized();
+                                } catch (Exception exception)
+                                {
+                                    Debug.LogException(exception);
+                                }
                             }
                             else
                             {
@@ -97,11 +109,21 @@ namespace AaronMeaney.BusStop.API
                 }
                 if (mea.MessageResult != null)
                 {
-                    Debug.Log("[PubNub] Message Result: " + mea.MessageResult.Channel + mea.MessageResult.Payload);
+                    Debug.Log("[PubNub] Message Callback: " + mea.MessageResult.Payload);
+
+                    try
+                    {
+                        if (mea.MessageResult.Payload != null)
+                            HandleMessage((Dictionary<string, object>)mea.MessageResult.Payload);
+                    }
+                    catch (Exception exception)
+                    {
+                        Debug.LogException(exception);
+                    }
                 }
                 if (mea.PresenceEventResult != null)
                 {
-                    Debug.Log("[PubNub[ Presence Callback: " + mea.PresenceEventResult.Channel + mea.PresenceEventResult.Occupancy + mea.PresenceEventResult.Event);
+                    Debug.Log("[PubNub] Presence Callback: " + mea.PresenceEventResult.Channel.ToString() + mea.PresenceEventResult.Occupancy.ToString() + mea.PresenceEventResult.Event.ToString());
                 }
             };
 
@@ -114,7 +136,29 @@ namespace AaronMeaney.BusStop.API
                 .Channels(channelsList)
                 .Execute();
         }
+        
+        /*
+         * Message Dispatch
+         */
+        private void HandleMessage(Dictionary<string, object> payload)
+        {
+            string payloadString = "[PubNub Message Result] {\n";
+            
+            foreach (KeyValuePair<string, object> entry in payload)
+            {
+                payloadString = payloadString + entry.Key + " : " + entry.Value + "\n";
+            }
 
+            payloadString = payloadString + "}";
+            Debug.Log(payloadString);
+
+            if (OnMessageReceived != null)
+                OnMessageReceived(payload);
+        }
+
+        /*
+         * Message Publishing
+         */
         /// <summary>
         /// Sends a message to <see cref="PubNub"/>.
         /// Appends metadata to message.
@@ -183,6 +227,21 @@ namespace AaronMeaney.BusStop.API
                 .Channel(PubNubChannel)
                 .Message(payload)
                 .Async((result, status) => callback(result, status));
+        }
+    }
+
+    [CustomEditor(typeof(BusStopAPI))]
+    public class BusStopAPIEditor : Editor
+    {
+        public override void OnInspectorGUI()
+        {
+            DrawDefaultInspector();
+
+            // Debug button to force PubNub to initialize
+            if (Application.isPlaying && GUILayout.Button("Force Init"))
+            {
+                ((BusStopAPI)target).InitializePubNub();
+            }
         }
     }
 }

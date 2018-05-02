@@ -27,16 +27,16 @@ namespace AaronMeaney.BusStop.API
         /// The <see cref="PubNub"/> instance.
         /// </summary>
         private PubNub pubnub;
-        
+
         /// <summary>
         /// If the API is initialized.
         /// Set to true when the client can send a message to <see cref="PubNub"/>.
         /// </summary>
+        private bool initialized = false;
         public bool Initialized
         {
             get { return initialized; }
         }
-        private bool initialized = false;
 
         /// <summary>
         /// The channel that the client is connecting to.
@@ -83,7 +83,7 @@ namespace AaronMeaney.BusStop.API
                 {
                     if (mea.Status.Category.Equals(PNStatusCategory.PNConnectedCategory))
                     {
-                        PublishMessage("unity connection test", (result, status) => 
+                        PublishMessage("unity_connection_test", "This is just a connection test!", (result, status) => 
                         {
                             if (!status.Error)
                             {
@@ -163,13 +163,13 @@ namespace AaronMeaney.BusStop.API
         /// Sends a message to <see cref="PubNub"/>.
         /// Appends metadata to message.
         /// </summary>
-        /// <param name="payload"><see cref="string"/> representing the message to send.</param>
-        public void PublishMessage(string payload)
+        /// <param name="payload"><see cref="object"/> representing the message to send.</param>
+        public void PublishMessage(string topic, object payload)
         {
-            Dictionary<string, string> payloadDict = new Dictionary<string, string>();
+            Dictionary<string, object> payloadDict = new Dictionary<string, object>();
             payloadDict.Add("message", payload);
 
-            PublishMessage(payloadDict);
+            PublishMessage(topic, payloadDict);
         }
 
         /// <summary>
@@ -177,24 +177,25 @@ namespace AaronMeaney.BusStop.API
         /// Appends metadata to message.
         /// Runs action when <see cref="PubNub"/> responds.
         /// </summary>
-        /// <param name="payload"><see cref="string"/> representing the message to send.</param>
+        /// <param name="payload"><see cref="object"/> representing the message to send.</param>
         /// <param name="callback"><see cref="Action{PNPublishResult, PNStatus}"/> to run when <see cref="PubNub"/> responds.</param>
-        public void PublishMessage(string payload, Action<PNPublishResult, PNStatus> callback)
+        public void PublishMessage(string topic, object payload, Action<PNPublishResult, PNStatus> callback)
         {
-            Dictionary<string, string> payloadDict = new Dictionary<string, string>();
+            Dictionary<string, object> payloadDict = new Dictionary<string, object>();
             payloadDict.Add("message", payload);
 
-            PublishMessage(payloadDict, callback);
+            PublishMessage(topic, payloadDict, callback);
         }
 
         /// <summary>
         /// Sends a message to <see cref="PubNub"/>.
         /// Appends metadata to message.
         /// </summary>
-        /// <param name="payload"><see cref="Dictionary{string, string}"/> representing JSON to be sent to <see cref="PubNub"/></param>
-        public void PublishMessage(Dictionary<string, string> payload)
+        /// <param name="payload"><see cref="Dictionary{string, object}"/> representing JSON to be sent to <see cref="PubNub"/></param>
+        public void PublishMessage(string topic, Dictionary<string, object> payload)
         {
             payload.Add("from", "unity_client");
+            payload.Add("topic", topic);
             payload.Add("sent_at", DateTime.UtcNow.UnixTime().ToString());
 
             pubnub.Publish()
@@ -217,10 +218,11 @@ namespace AaronMeaney.BusStop.API
         /// Sends a message to <see cref="PubNub"/>.
         /// Appends metadata to message.
         /// </summary>
-        /// <param name="payload"><see cref="Dictionary{string, string}"/> representing JSON to be sent to <see cref="PubNub"/></param>
-        public void PublishMessage(Dictionary<string, string> payload, Action<PNPublishResult, PNStatus> callback)
+        /// <param name="payload"><see cref="Dictionary{string, object}"/> representing JSON to be sent to <see cref="PubNub"/></param>
+        public void PublishMessage(string topic, Dictionary<string, object> payload, Action<PNPublishResult, PNStatus> callback)
         {
             payload.Add("from", "unity_client");
+            payload.Add("topic", topic);
             payload.Add("sent_at", DateTime.UtcNow.UnixTime().ToString());
 
             pubnub.Publish()
@@ -233,14 +235,36 @@ namespace AaronMeaney.BusStop.API
     [CustomEditor(typeof(BusStopAPI))]
     public class BusStopAPIEditor : Editor
     {
+        string topic = "Test topic.";
+        string msg = "Test message from Unity.";
+        
         public override void OnInspectorGUI()
         {
             DrawDefaultInspector();
+            BusStopAPI api = (BusStopAPI)target;
 
+            // Repaint the Editor when the api is ready
+            api.OnAPIInitialized += () => Repaint();
+            
             // Debug button to force PubNub to initialize
-            if (Application.isPlaying && GUILayout.Button("Force Init"))
+            if (Application.isPlaying)
             {
-                ((BusStopAPI)target).InitializePubNub();
+                if (!api.Initialized)
+                {
+                    if (GUILayout.Button("Force Init"))
+                        api.InitializePubNub();
+                }
+                else
+                {
+                    EditorGUILayout.LabelField("Topic");
+                    topic = EditorGUILayout.TextArea(topic);
+
+                    EditorGUILayout.LabelField("Message");
+                    msg = EditorGUILayout.TextArea(msg, GUILayout.MinHeight(75));
+
+                    if (GUILayout.Button("Send Message"))
+                        api.PublishMessage(topic, msg);
+                }
             }
         }
     }

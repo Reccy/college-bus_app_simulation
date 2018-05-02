@@ -25,7 +25,10 @@ namespace AaronMeaney.BusStop.Scheduling
         /// </summary>
         public void ExecuteTask()
         {
-            callback();
+            if (callback != null)
+                callback();
+            else
+                Debug.LogError("ScheduledTask Callback was null!");
         }
 
         public ScheduledTask(Action callback, DateTime scheduledDateTime)

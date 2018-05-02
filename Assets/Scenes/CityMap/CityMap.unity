@@ -9312,6 +9312,10 @@ Prefab:
       propertyPath: busServices.Array.data[6].timeSlots.Array.data[27].scheduledMinute
       value: 28
       objectReference: {fileID: 0}
+    - target: {fileID: 1373116097719274, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7, type: 2}
   m_IsPrefabParent: 0
@@ -28537,7 +28541,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1373116097719274, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7, type: 2}
@@ -43060,7 +43064,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1373116097719274, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7, type: 2}
@@ -56692,7 +56696,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1373116097719274, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7, type: 2}
@@ -69854,7 +69858,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1373116097719274, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7, type: 2}

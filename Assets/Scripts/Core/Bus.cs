@@ -26,6 +26,16 @@ namespace AaronMeaney.BusStop.Core
         /// </summary>
         public Action<BusStop> OnNearStop;
 
+        /// <summary>
+        /// Called when the <see cref="Bus"/> enters service.
+        /// </summary>
+        public Action OnStartService;
+
+        /// <summary>
+        /// Called when the <see cref="Bus"/> exits service.
+        /// </summary>
+        public Action OnEndService;
+
         // Miscellaneous Information
         [SerializeField]
         private string registrationNumber;
@@ -299,6 +309,9 @@ namespace AaronMeaney.BusStop.Core
             gameObject.SetActive(true);
 
             Debug.Log(RegistrationNumber + " entered service for route " + CurrentRoute.RouteIdInternal);
+
+            if (OnStartService != null)
+                OnStartService();
         }
 
         /// <summary>
@@ -319,6 +332,9 @@ namespace AaronMeaney.BusStop.Core
             gameObject.SetActive(false);
 
             Status = BusStatus.OffService;
+
+            if (OnEndService != null)
+                OnEndService();
         }
 
         private void Update()

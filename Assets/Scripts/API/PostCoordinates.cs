@@ -75,7 +75,7 @@ namespace AaronMeaney.BusStop.API
 
                 string coordsJSON = "{\"latitude\":\"" + latitude + "\",\"longitude\":\"" + longitude + "\"}";
 
-                UnityWebRequest request = UnityWebRequest.Post(url, coordsJSON);
+                UnityWebRequest request = UnityWebRequest.Post("https://bus-stop-api.herokuapp.com/bus_stops", coordsJSON);
                 request.SetRequestHeader("Content-Type", "application/json");
                 yield return request.SendWebRequest();
 

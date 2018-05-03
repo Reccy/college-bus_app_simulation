@@ -29,6 +29,16 @@ namespace AaronMeaney.BusStop.Core
             set { coordinateLocation = value; }
         }
 
+        /// <summary>
+        /// The Latitude of the <see cref="CoordinateLocation"/>
+        /// </summary>
+        public double Latitude { get { return CoordinateLocation.Latitude; } }
+
+        /// <summary>
+        /// The Longitude of the <see cref="CoordinateLocation"/>
+        /// </summary>
+        public double Longitude { get { return CoordinateLocation.Longitude; } }
+
         [SerializeField]
         public bool executeOnAwake;
 

@@ -44144,6 +44144,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 2047505593}
+  - component: {fileID: 2047505594}
   m_Layer: 0
   m_Name: RouteWaypointContainer
   m_TagString: Untagged
@@ -44247,6 +44248,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2047505594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2047505592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e3e0014210667741b9992d105094636, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2091510120
 Prefab:
   m_ObjectHideFlags: 0

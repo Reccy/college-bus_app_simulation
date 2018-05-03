@@ -5,6 +5,10 @@ using System.Collections.Generic;
 using System;
 using AaronMeaney.BusStop.Utilities;
 using UnityEditor;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using UnityEngine.Networking;
+using System.Collections;
 
 namespace AaronMeaney.BusStop.API
 {
@@ -44,6 +48,14 @@ namespace AaronMeaney.BusStop.API
         public string PubNubChannel
         {
             get { return "bus_stop"; }
+        }
+
+        /// <summary>
+        /// The base URL for the BusStopAPI.
+        /// </summary>
+        public string ApiBaseUrl
+        {
+            get { return "https://bus-stop-api.herokuapp.com/"; }
         }
         
         /// <summary>
@@ -229,6 +241,60 @@ namespace AaronMeaney.BusStop.API
                 .Channel(PubNubChannel)
                 .Message(payload)
                 .Async((result, status) => callback(result, status));
+        }
+
+        /// <summary>
+        /// Updates all of the <see cref="Core.BusStop"/>s stored on the API.
+        /// </summary>
+        /// <param name="busStops">The <see cref="List"/> of <see cref="Core.BusStop"/>s to be stored on the server.</param>
+        public void UpdateBusStops(List<Core.BusStop> busStops)
+        {
+            JArray busStopsJson = new JArray();
+
+            foreach (Core.BusStop busStop in busStops)
+            {
+                JObject busStopJson = new JObject();
+                busStopJson.Add("id", busStop.BusStopId);
+                busStopJson.Add("internal_id", busStop.BusStopIdInternal);
+                busStopJson.Add("latitude", busStop.GetComponent<Core.PlaceAtCoordinates>().Latitude);
+                busStopJson.Add("longitude", busStop.GetComponent<Core.PlaceAtCoordinates>().Longitude);
+
+                busStopsJson.Add(busStopJson);
+            }
+
+            StartCoroutine(SendPostToServer("bus_stops", busStopsJson.ToString()));
+        }
+
+        /// <summary>
+        /// Sends a POST to the Bus Stop API.
+        /// </summary>
+        /// <param name="endpoint">The endpoint of the API method.</param>
+        /// <param name="payload">The payload to send to the API.</param>
+        /// /// <param name="callback">The code to run after the request completes.</param>
+        /// <returns></returns>
+        private IEnumerator SendPostToServer(string endpoint, string payload, Action<UnityWebRequest> callback = null)
+        {
+            string url = ApiBaseUrl + endpoint;
+            Debug.Log("Sending request to " + url + " with payload " + payload);
+
+            UnityWebRequest request = UnityWebRequest.Post(url, payload);
+            request.timeout = 60;
+            request.SetRequestHeader("Content-Type", "application/json");
+            yield return request.SendWebRequest();
+            
+            if (request.isNetworkError || request.isHttpError)
+            {
+                Debug.Log("[Bus Stop API] Post error: " + request.error);
+            }
+            else
+            {
+                Debug.Log("[Bus Stop API] Post success:" + request.responseCode + "\nPayload: " + payload);
+            }
+
+            if (callback != null)
+            {
+                callback(request);
+            }
         }
     }
 

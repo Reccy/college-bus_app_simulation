@@ -9,6 +9,7 @@ namespace AaronMeaney.BusStop.Core
     /// <summary>
     /// Represents a <see cref="BusStop"/> on the side of the road
     /// </summary>
+    [System.Serializable]
     [RequireComponent(typeof(PlaceAtCoordinates))]
     public class BusStop : MonoBehaviour
     {

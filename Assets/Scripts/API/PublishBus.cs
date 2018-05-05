@@ -54,6 +54,13 @@ namespace AaronMeaney.BusStop.API
             publishDict.Add("bus_name", bus.name);
             publishDict.Add("latitude", bus.Latitude);
             publishDict.Add("longitude", bus.Longitude);
+            publishDict.Add("registration_number", bus.RegistrationNumber);
+            publishDict.Add("model", bus.BusModel);
+            publishDict.Add("company", bus.Company.CompanyName);
+            publishDict.Add("route_id_internal", bus.CurrentRoute.RouteIdInternal);
+            publishDict.Add("current_stop_id_internal", bus.CurrentStop.BusStopIdInternal);
+            publishDict.Add("current_capacity", bus.CurrentCapacity);
+            publishDict.Add("maximum_capacity", bus.MaximumCapacity);
             busStopAPI.PublishMessage("bus_data", publishDict);
 
             scheduleTaskRunner.AddTask(new ScheduledTask(() => PublishBusState(), DateTime.Now.AddSeconds(2)));

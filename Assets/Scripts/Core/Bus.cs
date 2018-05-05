@@ -238,6 +238,11 @@ namespace AaronMeaney.BusStop.Core
         public int MaximumCapacity { get { return maximumCapacity; } }
 
         /// <summary>
+        /// The current amount of <see cref="BusPassenger"/>s on the bus.
+        /// </summary>
+        public int CurrentCapacity { get { return Passengers.Count; } }
+
+        /// <summary>
         /// If the <see cref="Bus"/> is at <see cref="MaximumCapacity"/>.
         /// </summary>
         public bool IsFull

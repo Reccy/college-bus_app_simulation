@@ -77,6 +77,8 @@ namespace AaronMeaney.BusStop.API
         /// </summary>
         internal void InitializePubNub()
         {
+            Debug.Log("[PubNub] Initializing PubNub.");
+
             // Setup and configure PubNub
             PNConfiguration pnConfiguration = new PNConfiguration();
             pnConfiguration.SubscribeKey = "sub-c-136ca9c4-4d58-11e8-9987-d26dac8959c0";
@@ -95,6 +97,8 @@ namespace AaronMeaney.BusStop.API
                 {
                     if (mea.Status.Category.Equals(PNStatusCategory.PNConnectedCategory))
                     {
+                        Debug.Log("[PubNub] Subscribe Successful. Sending test message.");
+
                         PublishMessage("unity_connection_test", "This is just a connection test!", (result, status) => 
                         {
                             if (!status.Error)

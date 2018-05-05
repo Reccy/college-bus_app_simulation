@@ -270,6 +270,38 @@ namespace AaronMeaney.BusStop.API
         }
 
         /// <summary>
+        /// Updates all of the <see cref="Core.BusRoute"/>s stored on the API.
+        /// </summary>
+        /// <param name="busRoutes">The <see cref="List"/> of <see cref="Core.BusRoute"/>s to be stores on the server.</param>
+        public void UpdateBusRoutes(List<Core.BusRoute> busRoutes)
+        {
+            JArray busRoutesJson = new JArray();
+
+            foreach (Core.BusRoute busRoute in busRoutes)
+            {
+                JObject busRouteJson = new JObject();
+                busRouteJson.Add("id", busRoute.RouteId);
+                busRouteJson.Add("internal_id", busRoute.RouteIdInternal);
+
+                JArray busStops = new JArray();
+
+                foreach (Core.RouteWaypoint routeWaypoint in busRoute.RouteWaypoints)
+                {
+                    if (routeWaypoint.LinkedBusStop)
+                    {
+                        busStops.Add(routeWaypoint.LinkedBusStop.BusStopIdInternal);
+                    }
+                }
+
+                busRouteJson.Add("bus_stops", busStops);
+
+                busRoutesJson.Add(busRouteJson);
+            }
+
+            StartCoroutine(SendPostToServer("bus_routes", busRoutesJson.ToString()));
+        }
+
+        /// <summary>
         /// Sends a POST to the Bus Stop API.
         /// </summary>
         /// <param name="endpoint">The endpoint of the API method.</param>

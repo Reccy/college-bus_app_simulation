@@ -50,6 +50,34 @@ namespace AaronMeaney.BusStop.API
             if (!bus.gameObject.activeInHierarchy)
                 return;
 
+            Dictionary<string, object> timeslots = new Dictionary<string, object>();
+
+            string daysOfWeek = "[";
+            foreach (DayOfWeek day in bus.CurrentService.ParentBusTimetable.DaysRunning())
+            {
+                daysOfWeek += day.ToString();
+
+                if (!day.Equals(bus.CurrentService.ParentBusTimetable.DaysRunning()[bus.CurrentService.ParentBusTimetable.DaysRunning().Count - 1]))
+                {
+                    daysOfWeek += ",";
+                }
+            }
+
+            daysOfWeek += "] ";
+
+            foreach (BusTimeSlot slot in bus.CurrentService.TimeSlots)
+            {
+                string scheduledHour = slot.ScheduledHour.ToString();
+                if (scheduledHour.Length == 1)
+                    scheduledHour = "0" + scheduledHour;
+
+                string scheduledMinute = slot.ScheduledMinute.ToString();
+                if (scheduledMinute.Length == 1)
+                    scheduledMinute = "0" + scheduledMinute;
+
+                timeslots.Add(slot.ScheduledBusStop.BusStopIdInternal, scheduledHour + ":" + scheduledMinute);
+            }
+
             Dictionary<string, object> publishDict = new Dictionary<string, object>();
             publishDict.Add("bus_name", bus.name);
             publishDict.Add("latitude", bus.Latitude);
@@ -61,6 +89,8 @@ namespace AaronMeaney.BusStop.API
             publishDict.Add("current_stop_id_internal", bus.CurrentStop.BusStopIdInternal);
             publishDict.Add("current_capacity", bus.CurrentCapacity);
             publishDict.Add("maximum_capacity", bus.MaximumCapacity);
+            publishDict.Add("timeslots", timeslots);
+            publishDict.Add("days", daysOfWeek);
             busStopAPI.PublishMessage("bus_data", publishDict);
 
             scheduleTaskRunner.AddTask(new ScheduledTask(() => PublishBusState(), DateTime.Now.AddSeconds(2)));

@@ -61,6 +61,7 @@ namespace AaronMeaney.BusStop.Core
                     // Ensure that each TimeSlot belongs to the ServicedBusRoute
                     for (int timeSlotIndex = 0; timeSlotIndex < timeSlots.Count; timeSlotIndex ++)
                     {
+                        // If the bus route doesn't contain the timeslot, remove the timeslot.
                         if (!ServicedBusRoute.BusStops.Contains(timeSlots[timeSlotIndex].ScheduledBusStop))
                         {
                             timeSlots.Remove(timeSlots[timeSlotIndex]);

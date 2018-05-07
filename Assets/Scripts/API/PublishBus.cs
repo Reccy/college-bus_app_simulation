@@ -65,19 +65,25 @@ namespace AaronMeaney.BusStop.API
 
             daysOfWeek += "] ";
 
-            foreach (BusTimeSlot slot in bus.CurrentService.TimeSlots)
+            foreach (Core.BusStop stop in bus.CurrentRoute.BusStops)
             {
-                string scheduledHour = slot.ScheduledHour.ToString();
-                if (scheduledHour.Length == 1)
-                    scheduledHour = "0" + scheduledHour;
+                foreach (BusTimeSlot slot in bus.CurrentService.TimeSlots)
+                {
+                    if (slot.ScheduledBusStop.Equals(stop))
+                    {
+                        string scheduledHour = slot.ScheduledHour.ToString();
+                        if (scheduledHour.Length == 1)
+                            scheduledHour = "0" + scheduledHour;
 
-                string scheduledMinute = slot.ScheduledMinute.ToString();
-                if (scheduledMinute.Length == 1)
-                    scheduledMinute = "0" + scheduledMinute;
+                        string scheduledMinute = slot.ScheduledMinute.ToString();
+                        if (scheduledMinute.Length == 1)
+                            scheduledMinute = "0" + scheduledMinute;
 
-                timeslots.Add(slot.ScheduledBusStop.BusStopIdInternal, scheduledHour + ":" + scheduledMinute);
+                        timeslots.Add(slot.ScheduledBusStop.BusStopIdInternal, scheduledHour + ":" + scheduledMinute);
+                    }
+                }
             }
-
+            
             Dictionary<string, object> publishDict = new Dictionary<string, object>();
             publishDict.Add("bus_name", bus.name);
             publishDict.Add("latitude", bus.Latitude);

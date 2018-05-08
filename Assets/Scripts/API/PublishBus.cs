@@ -27,11 +27,18 @@ namespace AaronMeaney.BusStop.API
             busStopAPI.OnAPIInitialized += () =>
             {
                 bus.OnStartService += () => PublishStartService();
-                bus.OnStartService += () => PublishBusState();
+                bus.OnBusHailed += (stop) => PublishBusState();
+                bus.OnStartService += () => PublishBusStateRecursively();
                 bus.OnEndService += () => PublishEndService();
             };
         }
         
+        private void PublishBusStateRecursively()
+        {
+            if (PublishBusState())
+                scheduleTaskRunner.AddTask(new ScheduledTask(() => PublishBusStateRecursively(), DateTime.Now.AddSeconds(2)));
+        }
+
         private void PublishStartService()
         {
             Dictionary<string, object> publishDict = new Dictionary<string, object>();
@@ -46,10 +53,14 @@ namespace AaronMeaney.BusStop.API
             busStopAPI.PublishMessage("bus_end_service", publishDict);
         }
 
-        private void PublishBusState()
+        /// <summary>
+        /// Publishes the <see cref="Bus"/>'s state.
+        /// Returns true if successful. False otherwise.
+        /// <returns></returns>
+        private bool PublishBusState()
         {
             if (!bus.gameObject.activeInHierarchy)
-                return;
+                return false;
 
             Dictionary<string, object> timeslots = new Dictionary<string, object>();
 
@@ -79,6 +90,15 @@ namespace AaronMeaney.BusStop.API
                     }
                 }
             }
+
+            List<Dictionary<string, object>> waypoints = new List<Dictionary<string, object>>();
+            foreach (RouteWaypoint waypoint in bus.CurrentRoute.RouteWaypoints)
+            {
+                Dictionary<string, object> latlng = new Dictionary<string, object>();
+                latlng.Add("latitude", waypoint.Latitude);
+                latlng.Add("longitude", waypoint.Longitude);
+                waypoints.Add(latlng);
+            }
             
             Dictionary<string, object> publishDict = new Dictionary<string, object>();
             publishDict.Add("bus_name", bus.name);
@@ -93,10 +113,12 @@ namespace AaronMeaney.BusStop.API
             publishDict.Add("maximum_capacity", bus.MaximumCapacity);
             publishDict.Add("hailed_stops", hailedBusStops);
             publishDict.Add("timeslots", timeslots);
+            publishDict.Add("waypoints", waypoints);
             publishDict.Add("days", daysOfWeek);
+            
             busStopAPI.PublishMessage("bus_data", publishDict);
 
-            scheduleTaskRunner.AddTask(new ScheduledTask(() => PublishBusState(), DateTime.Now.AddSeconds(2)));
+            return true;
         }
     }
 }

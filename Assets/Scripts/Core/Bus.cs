@@ -36,6 +36,11 @@ namespace AaronMeaney.BusStop.Core
         /// </summary>
         public Action OnEndService;
 
+        /// <summary>
+        /// Called when the <see cref="Bus"/> is hailed.
+        /// </summary>
+        public Action<BusStop> OnBusHailed;
+
         // Miscellaneous Information
         [SerializeField]
         private string registrationNumber;
@@ -367,6 +372,9 @@ namespace AaronMeaney.BusStop.Core
             if (!HailedStops.Contains(hailedStop))
             {
                 HailedStops.Add(hailedStop);
+
+                if (OnBusHailed != null)
+                    OnBusHailed(hailedStop);
             }
         }
 

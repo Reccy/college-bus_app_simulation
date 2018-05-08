@@ -230,7 +230,6 @@ namespace AaronMeaney.BusStop.API
                     }
                     else
                     {
-                        Debug.Log(status.Error);
                         Debug.Log(status.ErrorData.Info);
                     }
                 });

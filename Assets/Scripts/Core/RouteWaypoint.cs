@@ -17,6 +17,9 @@ namespace AaronMeaney.BusStop.Core
 
         private PlaceAtCoordinates placeAtCoordinates;
         public PlaceAtCoordinates PlactAtCoordinates { get { return placeAtCoordinates; } }
+
+        public double Latitude { get { return placeAtCoordinates.Latitude; } }
+        public double Longitude { get { return placeAtCoordinates.Longitude; } }
         
         public GameObject busStopPrefab = null;
 

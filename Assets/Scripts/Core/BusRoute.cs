@@ -158,7 +158,6 @@ namespace AaronMeaney.BusStop.Core
         /// <summary>
         /// Handles logic after the <see cref="BusPathfinder"/> has generated the <see cref="PathWaypoints"/>
         /// </summary>
-        /// <param name="pathfinder"></param>
         public void OnPathWaypointsPopulated(BusPathfinder pathfinder)
         {
             pathWaypoints.Clear();

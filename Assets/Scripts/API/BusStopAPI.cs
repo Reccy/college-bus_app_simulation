@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System;
 using AaronMeaney.BusStop.Utilities;
 using UnityEditor;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using UnityEngine.Networking;
 using System.Collections;
@@ -59,7 +58,7 @@ namespace AaronMeaney.BusStop.API
         }
         
         /// <summary>
-        /// Initializes the PubNub API when the .
+        /// Initializes the PubNub API when the CityMap loads.
         /// </summary>
         private void Awake()
         {
@@ -158,18 +157,25 @@ namespace AaronMeaney.BusStop.API
          */
         private void HandleMessage(Dictionary<string, object> payload)
         {
-            string payloadString = "[PubNub Message Result] {\n";
-            
-            foreach (KeyValuePair<string, object> entry in payload)
+            try
             {
-                payloadString = payloadString + entry.Key + " : " + entry.Value + "\n";
+                string payloadString = "[PubNub Message Result] {\n";
+                
+                foreach (KeyValuePair<string, object> entry in payload)
+                {
+                    payloadString = payloadString + entry.Key + " : " + entry.Value + "\n";
+                }
+
+                payloadString = payloadString + "}";
+                Debug.Log(payloadString);
+
+                if (OnMessageReceived != null)
+                    OnMessageReceived(payload);
             }
-
-            payloadString = payloadString + "}";
-            Debug.Log(payloadString);
-
-            if (OnMessageReceived != null)
-                OnMessageReceived(payload);
+            catch (Exception exception)
+            {
+                Debug.LogException(exception);
+            }
         }
 
         /*

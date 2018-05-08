@@ -124,6 +124,7 @@ GameObject:
   - component: {fileID: 114252378888094790}
   - component: {fileID: 114983907589990156}
   - component: {fileID: 114856862279128424}
+  - component: {fileID: 114046304563463978}
   m_Layer: 2
   m_Name: Bus
   m_TagString: Untagged
@@ -189,14 +190,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1953854151932788}
-  m_LocalRotation: {x: 0, y: 0.73182964, z: 0, w: 0.6814877}
-  m_LocalPosition: {x: 303.82687, y: 1.3, z: -35.35608}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4775426733754808}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 94.08, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4775426733754808
 Transform:
   m_ObjectHideFlags: 1
@@ -433,6 +434,17 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1920695780059732}
   m_Mesh: {fileID: 4300004, guid: 7f4f24cb528cb884a874e5266f87c831, type: 3}
+--- !u!114 &114046304563463978
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1953854151932788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3403566163feaee49be4648287b12622, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114252378888094790
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -444,10 +456,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61de2402434fd2a47a6ff34c1d584838, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  registrationNumber: 
-  busModel: 
+  registrationNumber: 12-D-2000
+  busModel: Scania K114 Irizar Century
   Status: 0
-  maximumCapacity: 0
+  maximumCapacity: 50
 --- !u!114 &114377855431887174
 MonoBehaviour:
   m_ObjectHideFlags: 1

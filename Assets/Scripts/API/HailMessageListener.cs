@@ -8,6 +8,7 @@ namespace AaronMeaney.BusStop.API
     /// Listens for a hail message from the <see cref="BusStopAPI"/>.
     /// Hails the bus once a hail message is received.
     /// </summary>
+    [RequireComponent(typeof(Bus))]
     public class HailMessageListener : MonoBehaviour
     {
         private Bus bus;
@@ -39,9 +40,15 @@ namespace AaronMeaney.BusStop.API
             // Ensure bus registration is correct
             if (!busRegistration.Equals(bus.RegistrationNumber))
                 return;
-
-            Debug.Log("Stopping bus with reg: " + bus.RegistrationNumber);
-            bus.PrepareToStop();
+            
+            foreach (Core.BusStop stop in bus.CurrentRoute.BusStops)
+            {
+                if (stop.BusStopIdInternal.Equals(busStopInternalId))
+                {
+                    bus.Hail(stop);
+                    return;
+                }
+            }
         }
     }
 }

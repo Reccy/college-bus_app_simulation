@@ -11,6 +11,7 @@ namespace AaronMeaney.BusStop.API
     /// <summary>
     /// Responsible for pushing the <see cref="Bus"/> current state to <see cref="PubNubAPI"/>
     /// </summary>
+    [RequireComponent(typeof(Bus))]
     public class PublishBus : MonoBehaviour
     {
         private ScheduleTaskRunner scheduleTaskRunner;
@@ -52,19 +53,14 @@ namespace AaronMeaney.BusStop.API
 
             Dictionary<string, object> timeslots = new Dictionary<string, object>();
 
-            string daysOfWeek = "[";
-            foreach (DayOfWeek day in bus.CurrentService.ParentBusTimetable.DaysRunning())
+            List<DayOfWeek> daysOfWeek = bus.CurrentService.ParentBusTimetable.DaysRunning();
+
+            List<string> hailedBusStops = new List<string>();
+            foreach (Core.BusStop stop in bus.HailedStops)
             {
-                daysOfWeek += day.ToString();
-
-                if (!day.Equals(bus.CurrentService.ParentBusTimetable.DaysRunning()[bus.CurrentService.ParentBusTimetable.DaysRunning().Count - 1]))
-                {
-                    daysOfWeek += ",";
-                }
+                hailedBusStops.Add(stop.BusStopIdInternal);
             }
-
-            daysOfWeek += "] ";
-
+            
             foreach (Core.BusStop stop in bus.CurrentRoute.BusStops)
             {
                 foreach (BusTimeSlot slot in bus.CurrentService.TimeSlots)
@@ -95,6 +91,7 @@ namespace AaronMeaney.BusStop.API
             publishDict.Add("current_stop_id_internal", bus.CurrentStop.BusStopIdInternal);
             publishDict.Add("current_capacity", bus.CurrentCapacity);
             publishDict.Add("maximum_capacity", bus.MaximumCapacity);
+            publishDict.Add("hailed_stops", hailedBusStops);
             publishDict.Add("timeslots", timeslots);
             publishDict.Add("days", daysOfWeek);
             busStopAPI.PublishMessage("bus_data", publishDict);

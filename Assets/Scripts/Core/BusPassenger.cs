@@ -69,8 +69,8 @@ namespace AaronMeaney.BusStop.Core
                 Debug.Log("OnNearStop called for " + stop.BusStopIdInternal);
                 if (stop == destinationBusStop && boardedBus.IsStopping == false)
                 {
-                    Debug.Log(FullName + " pressed the stop button on " + boardedBus.RegistrationNumber);
-                    boardedBus.PrepareToStop();
+                    Debug.Log(FullName + " pressed hailed the bus " + boardedBus.RegistrationNumber);
+                    boardedBus.Hail(stop);
                 }
             };
         }

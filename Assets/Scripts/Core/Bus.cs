@@ -125,6 +125,21 @@ namespace AaronMeaney.BusStop.Core
             }
         }
 
+        private List<BusStop> hailedStops = null;
+        /// <summary>
+        /// The list of <see cref="BusStop"/>s that the <see cref="Bus"/> has been hailed to
+        /// </summary>
+        public List<BusStop> HailedStops
+        {
+            get
+            {
+                if (hailedStops == null)
+                    hailedStops = new List<BusStop>();
+
+                return hailedStops;
+            }
+        }
+
         private BusTimeSlot currentTimeSlot = null;
         /// <summary>
         /// The current <see cref="BusTimeSlot"/> that the <see cref="Bus"/> is servicing
@@ -205,7 +220,7 @@ namespace AaronMeaney.BusStop.Core
         /// <summary>
         /// Stops the <see cref="Bus"/> at the <see cref="CurrentStop"/>
         /// </summary>
-        public void PrepareToStop()
+        private void PrepareToStop()
         {
             if (Status == BusStatus.Driving)
             {
@@ -342,6 +357,19 @@ namespace AaronMeaney.BusStop.Core
                 OnEndService();
         }
 
+        /// <summary>
+        /// Hails the <see cref="Bus"/> to the desired <see cref="BusStop"/>.
+        /// The bus will then stop once it reaches that <see cref="BusStop"/>.
+        /// </summary>
+        /// <param name="hailedStop"></param>
+        public void Hail(BusStop hailedStop)
+        {
+            if (!HailedStops.Contains(hailedStop))
+            {
+                HailedStops.Add(hailedStop);
+            }
+        }
+
         private void Update()
         {
             switch (Status)
@@ -367,10 +395,27 @@ namespace AaronMeaney.BusStop.Core
             transform.LookAt(destinationPosition);
             transform.position = Vector3.MoveTowards(transform.position, destinationPosition, 30 * Time.deltaTime);
 
+            // Logic for when the bus is close to their stop
+            if (destinationDistance < 30f)
+            {
+                if (OnNearStop != null)
+                {
+                    if (CurrentRoute.PathWaypoints[currentPathWaypointIndex + 1] == CurrentRoute.GetCoordinateLocationFromBusStop(CurrentStop))
+                    {
+                        OnNearStop(CurrentStop);
+                    }
+                }
+            }
+            
             // Logic for when the bus reaches the destination
             if (destinationDistance < 0.1f)
             {
                 bool isNextStop = currentDestination == CurrentRoute.GetCoordinateLocationFromBusStop(CurrentStop);
+
+                if (isStopping == false && HailedStops.Contains(CurrentStop))
+                {
+                    PrepareToStop();
+                }
                 
                 if (isNextStop && isStopping)
                 {
@@ -382,14 +427,6 @@ namespace AaronMeaney.BusStop.Core
                     CurrentTimeSlot = NextTimeSlot;
                 }
                 
-                if (OnNearStop != null)
-                {
-                    if (CurrentRoute.PathWaypoints[currentPathWaypointIndex + 1] == CurrentRoute.GetCoordinateLocationFromBusStop(CurrentStop))
-                    {
-                        OnNearStop(CurrentStop);
-                    }
-                }
-
                 // Go the next destination
                 currentPathWaypointIndex += 1;
                 currentDestination = CurrentRoute.PathWaypoints[currentPathWaypointIndex];
@@ -433,6 +470,8 @@ namespace AaronMeaney.BusStop.Core
         public void FinishWaitingAtStop()
         {
             Debug.Log(RegistrationNumber + " finished waiting at " + CurrentStop);
+
+            HailedStops.Remove(CurrentStop);
 
             Status = BusStatus.Driving;
 
@@ -485,7 +524,7 @@ namespace AaronMeaney.BusStop.Core
 
                 if (GUILayout.Button("Hail Bus"))
                 {
-                    bus.PrepareToStop();
+                    bus.Hail(bus.CurrentStop);
                 }
 
                 EditorGUI.EndDisabledGroup();

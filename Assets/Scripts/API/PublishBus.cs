@@ -26,7 +26,11 @@ namespace AaronMeaney.BusStop.API
 
             busStopAPI.OnAPIInitialized += () =>
             {
-                bus.OnStartService += () => PublishStartService();
+                bus.OnStartService += () =>
+                {
+                    busStopAPI.UpdateRouteWaypoints(bus.CurrentRoute);
+                    PublishStartService();
+                };
                 bus.OnBusHailed += (stop) => PublishBusState();
                 bus.OnStartService += () => PublishBusStateRecursively();
                 bus.OnEndService += () => PublishEndService();

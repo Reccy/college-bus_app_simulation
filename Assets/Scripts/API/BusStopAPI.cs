@@ -303,10 +303,29 @@ namespace AaronMeaney.BusStop.API
 
                 busRoutesJson.Add(busRouteJson);
             }
-
-            Debug.Log("Routes being sent: " + busRoutesJson.Count);
-
+            
             StartCoroutine(SendPostToServer("bus_routes", busRoutesJson.ToString()));
+        }
+
+        /// <summary>
+        /// Updates the <see cref="BusRoute"/>'s list of <see cref="Core.RouteWaypoint"/>s.
+        /// </summary>
+        public void UpdateRouteWaypoints(Core.BusRoute route)
+        {
+            JObject waypointsObject = new JObject();
+            waypointsObject.Add("internal_id", route.RouteIdInternal);
+
+            JArray waypointsArray = new JArray();
+            foreach (Core.CoordinateLocation waypoint in route.PathWaypoints)
+            {
+                JObject waypointObject = new JObject();
+                waypointObject.Add("lat", waypoint.Latitude);
+                waypointObject.Add("lon", waypoint.Longitude);
+                waypointsArray.Add(waypointObject);
+            }
+            waypointsObject.Add("waypoints", waypointsArray);
+
+            StartCoroutine(SendPostToServer("route_waypoints", waypointsObject.ToString()));
         }
 
         /// <summary>
@@ -321,22 +340,27 @@ namespace AaronMeaney.BusStop.API
             string url = ApiBaseUrl + endpoint;
             Debug.Log("[Bus Stop API] Sending request to " + url + " with payload " + payload);
 
-            UnityWebRequest request = UnityWebRequest.Post(url, payload);
-            request.SetRequestHeader("Content-Type", "application/json");
-            yield return request.SendWebRequest();
-            
-            if (request.isNetworkError || request.isHttpError)
+            using (UnityWebRequest request = UnityWebRequest.Post(url, payload))
             {
-                Debug.Log("[Bus Stop API] Post error: " + request.error + ", => " + request.downloadHandler.text + ", => " + Encoding.UTF8.GetString(request.uploadHandler.data));
-            }
-            else
-            {
-                Debug.Log("[Bus Stop API] Post success:" + request.responseCode + "\nPayload: " + Encoding.UTF8.GetString(request.uploadHandler.data));
-            }
+                request.SetRequestHeader("Content-Type", "application/json");
+                request.chunkedTransfer = false;
+                request.timeout = 30;
 
-            if (callback != null)
-            {
-                callback(request);
+                yield return request.SendWebRequest();
+
+                if (request.isNetworkError || request.isHttpError)
+                {
+                    Debug.Log("[Bus Stop API] Post error: " + request.error + ", => " + request.downloadHandler.text);
+                }
+                else
+                {
+                    Debug.Log("[Bus Stop API] Post success:" + request.responseCode + "\nPayload: " + payload);
+                }
+
+                if (callback != null)
+                {
+                    callback(request);
+                }
             }
         }
     }

@@ -310,13 +310,13 @@ namespace AaronMeaney.BusStop.API
         /// <summary>
         /// Updates the <see cref="BusRoute"/>'s list of <see cref="Core.RouteWaypoint"/>s.
         /// </summary>
-        public void UpdateRouteWaypoints(Core.BusRoute route)
+        public void UpdateRouteWaypoints(string routeInternalId, List<Core.CoordinateLocation> waypoints)
         {
             JObject waypointsObject = new JObject();
-            waypointsObject.Add("internal_id", route.RouteIdInternal);
+            waypointsObject.Add("internal_id", routeInternalId);
 
             JArray waypointsArray = new JArray();
-            foreach (Core.CoordinateLocation waypoint in route.PathWaypoints)
+            foreach (Core.CoordinateLocation waypoint in waypoints)
             {
                 JObject waypointObject = new JObject();
                 waypointObject.Add("lat", waypoint.Latitude);

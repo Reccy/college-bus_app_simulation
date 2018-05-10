@@ -132,6 +132,28 @@ namespace AaronMeaney.BusStop.Core
             map = FindObjectOfType<AbstractMap>();
         }
 
+        public void GetPathWaypointsDebug(Action<List<CoordinateLocation>> callback)
+        {
+            BusPathfinder pathfinder = new BusPathfinder();
+            pathfinder.onBusPathPopulated += (pf) => 
+            {
+                callback(pf.CoordinateLocations);
+            };
+
+            List<Vector2d> positionList = new List<Vector2d>();
+
+            // Convert each Route Waypoint into a Vector2d position for Mapbox
+            foreach (RouteWaypoint waypoint in RouteWaypoints)
+            {
+                Vector2d waypointAsVector = waypoint.transform.position.GetGeoPosition(map.CenterMercator, map.WorldRelativeScale);
+                positionList.Add(waypointAsVector);
+            }
+
+            Vector2d[] positions = positionList.ToArray();
+
+            pathfinder.SetDirectionsToPosition(map, positions);
+        }
+
         /// <summary>
         /// Gets a <see cref="BusPathfinder"/> for each <see cref="RouteWaypoint"/> pair and appends the <see cref="CoordinateLocation"/>s to <see cref="PathWaypoints"/>.
         /// Logic is finished in <see cref="OnPathWaypointsPopulated(BusPathfinder)"/>

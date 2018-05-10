@@ -8,6 +8,7 @@ using UnityEditor;
 using Newtonsoft.Json.Linq;
 using UnityEngine.Networking;
 using System.Collections;
+using System.Text;
 
 namespace AaronMeaney.BusStop.API
 {
@@ -303,6 +304,8 @@ namespace AaronMeaney.BusStop.API
                 busRoutesJson.Add(busRouteJson);
             }
 
+            Debug.Log("Routes being sent: " + busRoutesJson.Count);
+
             StartCoroutine(SendPostToServer("bus_routes", busRoutesJson.ToString()));
         }
 
@@ -316,20 +319,19 @@ namespace AaronMeaney.BusStop.API
         private IEnumerator SendPostToServer(string endpoint, string payload, Action<UnityWebRequest> callback = null)
         {
             string url = ApiBaseUrl + endpoint;
-            Debug.Log("Sending request to " + url + " with payload " + payload);
+            Debug.Log("[Bus Stop API] Sending request to " + url + " with payload " + payload);
 
             UnityWebRequest request = UnityWebRequest.Post(url, payload);
-            request.timeout = 60;
             request.SetRequestHeader("Content-Type", "application/json");
             yield return request.SendWebRequest();
             
             if (request.isNetworkError || request.isHttpError)
             {
-                Debug.Log("[Bus Stop API] Post error: " + request.error);
+                Debug.Log("[Bus Stop API] Post error: " + request.error + ", => " + request.downloadHandler.text + ", => " + Encoding.UTF8.GetString(request.uploadHandler.data));
             }
             else
             {
-                Debug.Log("[Bus Stop API] Post success:" + request.responseCode + "\nPayload: " + payload);
+                Debug.Log("[Bus Stop API] Post success:" + request.responseCode + "\nPayload: " + Encoding.UTF8.GetString(request.uploadHandler.data));
             }
 
             if (callback != null)

@@ -90,15 +90,6 @@ namespace AaronMeaney.BusStop.API
                     }
                 }
             }
-
-            List<Dictionary<string, object>> waypoints = new List<Dictionary<string, object>>();
-            foreach (RouteWaypoint waypoint in bus.CurrentRoute.RouteWaypoints)
-            {
-                Dictionary<string, object> latlng = new Dictionary<string, object>();
-                latlng.Add("latitude", waypoint.Latitude);
-                latlng.Add("longitude", waypoint.Longitude);
-                waypoints.Add(latlng);
-            }
             
             Dictionary<string, object> publishDict = new Dictionary<string, object>();
             publishDict.Add("bus_name", bus.name);
@@ -113,7 +104,6 @@ namespace AaronMeaney.BusStop.API
             publishDict.Add("maximum_capacity", bus.MaximumCapacity);
             publishDict.Add("hailed_stops", hailedBusStops);
             publishDict.Add("timeslots", timeslots);
-            publishDict.Add("waypoints", waypoints);
             publishDict.Add("days", daysOfWeek);
             
             busStopAPI.PublishMessage("bus_data", publishDict);

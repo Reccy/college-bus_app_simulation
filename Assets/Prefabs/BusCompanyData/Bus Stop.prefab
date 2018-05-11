@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 114222259136696880}
   - component: {fileID: 114351341064563772}
   m_Layer: 2
-  m_Name: Bus Stop
+  m_Name: _BusStop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

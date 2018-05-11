@@ -34,7 +34,7 @@ namespace AaronMeaney.BusStop.Core
         {
             get { return GetComponentInParent<RouteWaypoint>(); }
         }
-
+        
         /// <summary>
         /// The different bus queues for each <see cref="BusRoute"/>.
         /// </summary>

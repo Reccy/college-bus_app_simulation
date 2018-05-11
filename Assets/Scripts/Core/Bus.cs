@@ -17,6 +17,11 @@ namespace AaronMeaney.BusStop.Core
     public class Bus : MonoBehaviour
     {
         /// <summary>
+        /// The constant speed of the bus as it's driving
+        /// </summary>
+        private float speed = 30;
+
+        /// <summary>
         /// Called when the <see cref="BusPassenger"/>s finish disembarking this <see cref="Bus"/> at a <see cref="BusStop"/>.
         /// </summary>
         public Action OnPassengersUnboarded;
@@ -401,7 +406,7 @@ namespace AaronMeaney.BusStop.Core
 
             // Drive towards the destination
             transform.LookAt(destinationPosition);
-            transform.position = Vector3.MoveTowards(transform.position, destinationPosition, 30 * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, destinationPosition, speed * Time.deltaTime);
 
             // Logic for when the bus is close to their stop
             if (destinationDistance < 30f)

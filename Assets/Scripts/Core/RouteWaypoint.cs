@@ -245,7 +245,7 @@ namespace AaronMeaney.BusStop.Core
 
                             if (!originBusStopsNames.Contains(passenger.OriginBusStop.BusStopIdInternal))
                             {
-                                originBusStopsNames.Add(passenger.OriginBusStop.BusStopId);
+                                originBusStopsNames.Add(passenger.OriginBusStop.BusStopIdInternal);
                             }
                         }
                     }
@@ -268,7 +268,7 @@ namespace AaronMeaney.BusStop.Core
                     foreach (BusPassenger passenger in routeWaypoint.LinkedBusStop.BusQueue)
                     {
                         if (!destinationStopsNames.Contains(passenger.DestinationBusStop.BusStopIdInternal))
-                            destinationStopsNames.Add(passenger.DestinationBusStop.BusStopId);
+                            destinationStopsNames.Add(passenger.DestinationBusStop.BusStopIdInternal);
                     }
 
                     string destinationStopsDisplayed = "";

@@ -127,7 +127,7 @@ namespace AaronMeaney.BusStop.Core
         /// Populates this <see cref="BusStop"/> with passengers who are going to <see cref="BusStop"/>s
         /// downstream of the routes that contain this <see cref="BusStop"/>.
         /// </summary>
-        private void PopulateBusStop()
+        public void PopulateBusStop()
         {
             List<BusRoute> routes = new List<BusRoute>(FindObjectsOfType<BusRoute>());
 

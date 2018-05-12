@@ -19,7 +19,7 @@ namespace AaronMeaney.BusStop.Core
         /// <summary>
         /// The constant speed of the bus as it's driving
         /// </summary>
-        private float speed = 30;
+        private float speed = 15;
 
         /// <summary>
         /// Called when the <see cref="BusPassenger"/>s finish disembarking this <see cref="Bus"/> at a <see cref="BusStop"/>.
@@ -408,9 +408,12 @@ namespace AaronMeaney.BusStop.Core
             transform.LookAt(destinationPosition);
             transform.position = Vector3.MoveTowards(transform.position, destinationPosition, speed * Time.deltaTime);
 
-            // Logic for when the bus is close to their stop
-            if (destinationDistance < 30f)
+            // Logic for when the bus is close to its stop
+            if (Vector3.Distance(transform.position, CurrentStop.LinkedRouteWaypoint.transform.position) < 15)
             {
+                if (CurrentStop.OnBusApproach != null)
+                    CurrentStop.OnBusApproach(this);
+
                 if (OnNearStop != null)
                 {
                     if (CurrentRoute.PathWaypoints[currentPathWaypointIndex + 1] == CurrentRoute.GetCoordinateLocationFromBusStop(CurrentStop))

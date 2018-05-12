@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using AaronMeaney.BusStop.Utilities;
+using System;
 
 namespace AaronMeaney.BusStop.Core
 {
@@ -55,6 +56,23 @@ namespace AaronMeaney.BusStop.Core
 
             this.originBusStop = originBusStop;
             this.destinationBusStop = destinationBusStop;
+
+            // Hail the bus once it approaches and it is going to the passenger's destination
+            originBusStop.OnBusApproach += HailBus;
+        }
+
+        /// <summary>
+        /// The passenger will try to hail the bus.
+        /// </summary>
+        private void HailBus(Bus bus)
+        {
+            Debug.Log("OnBusApproach called for " + bus.RegistrationNumber);
+            if (bus.CurrentRoute.BusStops.Contains(destinationBusStop) && !bus.HailedStops.Contains(originBusStop))
+            {
+                Debug.Log(FullName + " hailed " + bus.RegistrationNumber + " to " + originBusStop.BusStopIdInternal + " because it is going to " + destinationBusStop.BusStopIdInternal);
+                bus.Hail(originBusStop);
+                originBusStop.OnBusApproach -= HailBus;
+            }
         }
 
         /// <summary>
@@ -62,6 +80,8 @@ namespace AaronMeaney.BusStop.Core
         /// </summary>
         public void BoardBus(Bus bus)
         {
+            originBusStop.OnBusApproach -= HailBus;
+
             boardedBus = bus;
 
             boardedBus.OnNearStop += (stop) =>
@@ -69,7 +89,7 @@ namespace AaronMeaney.BusStop.Core
                 Debug.Log("OnNearStop called for " + stop.BusStopIdInternal);
                 if (stop == destinationBusStop && boardedBus.IsStopping == false)
                 {
-                    Debug.Log(FullName + " pressed hailed the bus " + boardedBus.RegistrationNumber);
+                    Debug.Log(FullName + " pressed hail for the bus " + boardedBus.RegistrationNumber + " because they are getting off at " + stop.BusStopIdInternal);
                     boardedBus.Hail(stop);
                 }
             };

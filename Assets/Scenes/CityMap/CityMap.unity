@@ -2570,12 +2570,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0edfd68289409bc409a92c0296e50719, type: 2}
   m_IsPrefabParent: 0
---- !u!114 &281297138 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114867456524390420, guid: 0edfd68289409bc409a92c0296e50719,
-    type: 2}
-  m_PrefabInternal: {fileID: 281297137}
-  m_Script: {fileID: 11500000, guid: 3c2fc4aa7dd1fe045807161b9c50ae38, type: 3}
 --- !u!1001 &289249266
 Prefab:
   m_ObjectHideFlags: 0
@@ -12160,6 +12154,12 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: be7c083f6c332d44e8025bf973291bee, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &1070688283 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114222259136696880, guid: be7c083f6c332d44e8025bf973291bee,
+    type: 2}
+  m_PrefabInternal: {fileID: 1070688282}
+  m_Script: {fileID: 11500000, guid: aec2306c18093fa4ea103945cc03ad7c, type: 3}
 --- !u!1001 &1087893218
 Prefab:
   m_ObjectHideFlags: 0
@@ -14498,6 +14498,12 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: be7c083f6c332d44e8025bf973291bee, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &1400361916 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114222259136696880, guid: be7c083f6c332d44e8025bf973291bee,
+    type: 2}
+  m_PrefabInternal: {fileID: 1400361915}
+  m_Script: {fileID: 11500000, guid: aec2306c18093fa4ea103945cc03ad7c, type: 3}
 --- !u!1001 &1416953933
 Prefab:
   m_ObjectHideFlags: 0
@@ -16481,7 +16487,7 @@ Prefab:
     - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
         type: 2}
       propertyPath: busServices.Array.data[8].timeSlots.Array.size
-      value: 20
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
         type: 2}
@@ -21633,87 +21639,87 @@ Prefab:
         type: 2}
       propertyPath: busServices.Array.data[8].servicedBusRoute
       value: 
-      objectReference: {fileID: 281297138}
+      objectReference: {fileID: 0}
     - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
         type: 2}
       propertyPath: busServices.Array.data[8].timeSlots.Array.data[0].scheduledBusStop
       value: 
-      objectReference: {fileID: 945748518}
+      objectReference: {fileID: 1345056766}
     - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
         type: 2}
       propertyPath: busServices.Array.data[8].timeSlots.Array.data[1].scheduledBusStop
       value: 
-      objectReference: {fileID: 204253279}
+      objectReference: {fileID: 141450718}
     - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
         type: 2}
       propertyPath: busServices.Array.data[8].timeSlots.Array.data[2].scheduledBusStop
       value: 
-      objectReference: {fileID: 359778364}
+      objectReference: {fileID: 1174522246}
     - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
         type: 2}
       propertyPath: busServices.Array.data[8].timeSlots.Array.data[3].scheduledBusStop
       value: 
-      objectReference: {fileID: 1483592421}
+      objectReference: {fileID: 1893255639}
     - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
         type: 2}
       propertyPath: busServices.Array.data[8].timeSlots.Array.data[4].scheduledBusStop
       value: 
-      objectReference: {fileID: 1180979544}
+      objectReference: {fileID: 1941240354}
     - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
         type: 2}
       propertyPath: busServices.Array.data[8].timeSlots.Array.data[5].scheduledBusStop
       value: 
-      objectReference: {fileID: 1423660855}
+      objectReference: {fileID: 998824063}
     - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
         type: 2}
       propertyPath: busServices.Array.data[8].timeSlots.Array.data[6].scheduledBusStop
       value: 
-      objectReference: {fileID: 596213836}
+      objectReference: {fileID: 1546240493}
     - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
         type: 2}
       propertyPath: busServices.Array.data[8].timeSlots.Array.data[7].scheduledBusStop
       value: 
-      objectReference: {fileID: 1974757246}
+      objectReference: {fileID: 1202304255}
     - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
         type: 2}
       propertyPath: busServices.Array.data[8].timeSlots.Array.data[8].scheduledBusStop
       value: 
-      objectReference: {fileID: 1643732279}
+      objectReference: {fileID: 1441732868}
     - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
         type: 2}
       propertyPath: busServices.Array.data[8].timeSlots.Array.data[9].scheduledBusStop
       value: 
-      objectReference: {fileID: 1941240354}
+      objectReference: {fileID: 1040986575}
     - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
         type: 2}
       propertyPath: busServices.Array.data[8].timeSlots.Array.data[10].scheduledBusStop
       value: 
-      objectReference: {fileID: 998824063}
+      objectReference: {fileID: 221048942}
     - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
         type: 2}
       propertyPath: busServices.Array.data[8].timeSlots.Array.data[11].scheduledBusStop
       value: 
-      objectReference: {fileID: 1546240493}
+      objectReference: {fileID: 15127056}
     - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
         type: 2}
       propertyPath: busServices.Array.data[8].timeSlots.Array.data[12].scheduledBusStop
       value: 
-      objectReference: {fileID: 1202304255}
+      objectReference: {fileID: 1939980176}
     - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
         type: 2}
       propertyPath: busServices.Array.data[8].timeSlots.Array.data[13].scheduledBusStop
       value: 
-      objectReference: {fileID: 1441732868}
+      objectReference: {fileID: 1656282579}
     - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
         type: 2}
       propertyPath: busServices.Array.data[8].timeSlots.Array.data[14].scheduledBusStop
       value: 
-      objectReference: {fileID: 1040986575}
+      objectReference: {fileID: 1400361916}
     - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
         type: 2}
       propertyPath: busServices.Array.data[8].timeSlots.Array.data[15].scheduledBusStop
       value: 
-      objectReference: {fileID: 221048942}
+      objectReference: {fileID: 1070688283}
     - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
         type: 2}
       propertyPath: busServices.Array.data[8].timeSlots.Array.data[16].scheduledBusStop
@@ -22052,12 +22058,12 @@ Prefab:
     - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
         type: 2}
       propertyPath: busServices.Array.data[8].timeSlots.Array.data[0].scheduledHour
-      value: 9
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
         type: 2}
       propertyPath: busServices.Array.data[8].timeSlots.Array.data[0].scheduledMinute
-      value: 9
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114865560709309926, guid: cd1cb8fa93f35ba4dbdcb19717a9bec7,
         type: 2}
@@ -30155,6 +30161,12 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: be7c083f6c332d44e8025bf973291bee, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &1656282579 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114222259136696880, guid: be7c083f6c332d44e8025bf973291bee,
+    type: 2}
+  m_PrefabInternal: {fileID: 1656282578}
+  m_Script: {fileID: 11500000, guid: aec2306c18093fa4ea103945cc03ad7c, type: 3}
 --- !u!1001 &1664471333
 Prefab:
   m_ObjectHideFlags: 0
@@ -44485,6 +44497,12 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: be7c083f6c332d44e8025bf973291bee, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &1939980176 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114222259136696880, guid: be7c083f6c332d44e8025bf973291bee,
+    type: 2}
+  m_PrefabInternal: {fileID: 1939980175}
+  m_Script: {fileID: 11500000, guid: aec2306c18093fa4ea103945cc03ad7c, type: 3}
 --- !u!1001 &1941240353
 Prefab:
   m_ObjectHideFlags: 0

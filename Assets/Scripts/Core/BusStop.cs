@@ -13,6 +13,11 @@ namespace AaronMeaney.BusStop.Core
     [RequireComponent(typeof(PlaceAtCoordinates))]
     public class BusStop : MonoBehaviour
     {
+        /// <summary>
+        /// Called when a <see cref="Bus"/> approaches the <see cref="BusStop"/>
+        /// </summary>
+        public Action<Bus> OnBusApproach;
+
         [SerializeField]
         private string busStopId;
         /// <summary>
@@ -38,7 +43,32 @@ namespace AaronMeaney.BusStop.Core
         /// <summary>
         /// The different bus queues for each <see cref="BusRoute"/>.
         /// </summary>
-        private Dictionary<BusRoute, Queue<BusPassenger>> busQueues;
+        private Queue<BusPassenger> busQueue = null;
+        public Queue<BusPassenger> BusQueue
+        {
+            get
+            {
+                if (busQueue == null)
+                    busQueue = new Queue<BusPassenger>();
+
+                return busQueue;
+            }
+        }
+
+        /// <summary>
+        /// <see cref="HashSet"/> of <see cref="BusStop"/>s that are downstream to this <see cref="BusStop"/>
+        /// </summary>
+        private List<BusStop> downstreamStops = null;
+        public List<BusStop> DownstreamStops
+        {
+            get
+            {
+                if (downstreamStops == null)
+                    downstreamStops = new List<BusStop>();
+
+                return downstreamStops;
+            }
+        }
 
         private PlaceAtCoordinates busStopPlacer = null;
         private PlaceAtCoordinates BusStopPlacer
@@ -66,8 +96,9 @@ namespace AaronMeaney.BusStop.Core
 
         private void Awake()
         {
-            busQueues = new Dictionary<BusRoute, Queue<BusPassenger>>();
-
+            // Start making passengers queue here
+            PopulateBusStop();
+            
             // Rotate towards the waypoint once the coordinates are set
             BusStopPlacer.OnPlacementFinished += () =>
             {
@@ -77,6 +108,60 @@ namespace AaronMeaney.BusStop.Core
             // Set the coordinates
             SetCoordinatePositionWhenReady();
         }
+
+        /// <summary>
+        /// Populates this <see cref="BusStop"/> with passengers who are going to <see cref="BusStop"/>s
+        /// downstream of the routes that contain this <see cref="BusStop"/>.
+        /// </summary>
+        private void PopulateBusStop()
+        {
+            List<BusRoute> routes = new List<BusRoute>(FindObjectsOfType<BusRoute>());
+
+            // Get a list of all the bus routes that are after this one
+            foreach (BusRoute route in routes)
+            {
+                if (route.BusStops.Contains(this))
+                {
+                    int startIndex = route.BusStops.IndexOf(this) + 1;
+
+                    for (int busStopIndex = startIndex; busStopIndex < route.BusStops.Count; busStopIndex++)
+                    {
+                        BusStop newBusStop = route.BusStops[busStopIndex];
+
+                        if (!DownstreamStops.Contains(newBusStop))
+                            DownstreamStops.Add(newBusStop);
+                    }
+                }
+            }
+
+            // Don't add passengers to the bus stop if this is the last stop for all routes
+            if (DownstreamStops.Count == 0)
+                return;
+
+            // Create random passengers
+            for (int i = 1; i < 3; i++)
+            {
+                System.Random r = new System.Random();
+                int busStopIndex = r.Next(0, DownstreamStops.Count);
+                BusStop destinationStop = DownstreamStops[busStopIndex];
+
+                AddPassengerToQueue(new BusPassenger(this, destinationStop));
+            }
+        }
+
+        /// <summary>
+        /// Adds a <see cref="BusPassenger"/> to the <see cref="BusQueue"/>
+        /// </summary>
+        private void AddPassengerToQueue(BusPassenger fellowPassenger)
+        {
+            BusQueue.Enqueue(fellowPassenger);
+
+            Debug.Log(fellowPassenger.FullName
+                + " joined the queue at "
+                + fellowPassenger.OriginBusStop.busStopIdInternal
+                + " to go to "
+                + fellowPassenger.DestinationBusStop.busStopIdInternal);
+        }
         
         /// <summary>
         /// Allows passengers to board/unboard the <see cref="Bus"/> that is servicing this stop.
@@ -85,27 +170,7 @@ namespace AaronMeaney.BusStop.Core
         public void ServiceStop(Bus bus)
         {
             bus.Status = Bus.BusStatus.WaitingAtStop;
-
-            // Add random number of passengers if this is not the last stop
-            if (bus.CurrentRoute.BusStops.IndexOf(this) < bus.CurrentRoute.BusStops.Count - 1)
-            {
-                Queue<BusPassenger> busQueue = busQueues[bus.CurrentRoute] = new Queue<BusPassenger>();
-
-                System.Random rng = new System.Random();
-                int currentStopIndex = bus.CurrentRoute.BusStops.IndexOf(this);
-                int maxStopIndex = bus.CurrentRoute.BusStops.Count - 1;
-
-                for (int i = 1; i < 10; i++)
-                {
-                    int destinationStopIndex = rng.Next(currentStopIndex + 1, maxStopIndex);
-                    BusStop destinationStop = bus.CurrentRoute.BusStops[destinationStopIndex];
-
-                    busQueue.Enqueue(new BusPassenger(this, destinationStop));
-                }
-
-                Debug.Log("Passengers at " + BusStopIdInternal + ": " + busQueue.Count);
-            }
-
+            
             // Board passengers once the passengers on the bus finish unboarding
             bus.OnPassengersUnboarded = () => { BoardFrontPassenger(bus); };
 
@@ -113,7 +178,7 @@ namespace AaronMeaney.BusStop.Core
         }
         
         /// <summary>
-        /// Recursive call to board the passenger at the front of the <see cref="busQueues"/>.
+        /// Recursive call to board the passenger at the front of the <see cref="BusQueues"/>.
         /// Returns once the queue for this <see cref="Bus"/>' <see cref="BusRoute"/> is empty.
         /// </summary>
         /// <param name="bus">The <see cref="Bus"/> the passengers are getting onto.</param>
@@ -136,12 +201,10 @@ namespace AaronMeaney.BusStop.Core
                     return;
                 }
             }
+            
+            Debug.Log(BusQueue.Peek().FullName + " is boarding " + bus.RegistrationNumber + ". Destination: " + BusQueue.Peek().DestinationBusStop.BusStopIdInternal);
 
-            Queue<BusPassenger> busQueue = busQueues[bus.CurrentRoute];
-
-            Debug.Log(busQueue.Peek().FullName + " is boarding " + bus.RegistrationNumber + ". Destination: " + busQueue.Peek().DestinationBusStop.BusStopIdInternal);
-
-            bus.BoardPassenger(busQueue.Dequeue());
+            bus.BoardPassenger(BusQueue.Dequeue());
 
             // Wait for the next passenger to board
             DateTime nextBoardTime = DateTime.Now.AddSeconds(1);
@@ -153,12 +216,8 @@ namespace AaronMeaney.BusStop.Core
         /// </summary>
         private bool BusCanBeBoarded(Bus bus)
         {
-            // Bus Queue doesn't exist
-            if (busQueues.ContainsKey(bus.CurrentRoute) == false)
-                return false;
-
             // Bus Queue is empty
-            if (busQueues[bus.CurrentRoute].Count == 0)
+            if (BusQueue.Count == 0)
                 return false;
 
             // The bus is full

@@ -1,5 +1,6 @@
 ﻿using Mapbox.Unity.Map;
 using System.Collections.Generic;
+using Rotorz.ReorderableList;
 using UnityEditor;
 using UnityEngine;
 
@@ -208,8 +209,88 @@ namespace AaronMeaney.BusStop.Core
             if (routeWaypoint.LinkedBusStop)
             {
                 EditorGUI.BeginDisabledGroup(true);
+
                 EditorGUILayout.TextField("Linked Bus Stop", routeWaypoint.LinkedBusStop.BusStopIdInternal);
+
+                if (Application.isPlaying)
+                {
+                    // Get list of all bus passengers
+                    List<BusPassenger> busPassengers = new List<BusPassenger>();
+                    foreach (Bus bus in FindObjectsOfType<Bus>())
+                    {
+                        foreach (BusPassenger passenger in bus.Passengers)
+                        {
+                            if (!busPassengers.Contains(passenger))
+                                busPassengers.Add(passenger);
+                        }
+                    }
+
+                    foreach (BusStop stop in FindObjectsOfType<BusStop>())
+                    {
+                        foreach (BusPassenger passenger in stop.BusQueue)
+                        {
+                            if (!busPassengers.Contains(passenger))
+                                busPassengers.Add(passenger);
+                        }
+                    }
+                    
+                    // Origin Bus Stops
+                    List<string> originBusStopsNames = new List<string>();
+                    List<BusPassenger> originPassengers = new List<BusPassenger>();
+                    foreach (BusPassenger passenger in busPassengers)
+                    {
+                        if (passenger.DestinationBusStop.Equals(routeWaypoint.LinkedBusStop))
+                        {
+                            originPassengers.Add(passenger);
+
+                            if (!originBusStopsNames.Contains(passenger.OriginBusStop.BusStopIdInternal))
+                            {
+                                originBusStopsNames.Add(passenger.OriginBusStop.BusStopId);
+                            }
+                        }
+                    }
+
+                    string originStopsDisplayed = "";
+                    foreach (string originStop in originBusStopsNames)
+                    {
+                        if (originBusStopsNames.IndexOf(originStop) < originBusStopsNames.Count - 1)
+                            originStopsDisplayed += originStop + ",\n";
+                        else
+                            originStopsDisplayed += originStop;
+                    }
+
+                    EditorGUILayout.Space();
+                    EditorGUILayout.LabelField("Origin Stops");
+                    EditorGUILayout.TextArea(originStopsDisplayed);
+
+                    // Destination Bus Stops
+                    List<string> destinationStopsNames = new List<string>();
+                    foreach (BusPassenger passenger in routeWaypoint.LinkedBusStop.BusQueue)
+                    {
+                        if (!destinationStopsNames.Contains(passenger.DestinationBusStop.BusStopIdInternal))
+                            destinationStopsNames.Add(passenger.DestinationBusStop.BusStopId);
+                    }
+
+                    string destinationStopsDisplayed = "";
+                    foreach (string destinationStop in destinationStopsNames)
+                    {
+                        if (destinationStopsNames.IndexOf(destinationStop) < destinationStopsNames.Count - 1)
+                            destinationStopsDisplayed += destinationStop + ",\n";
+                        else
+                            destinationStopsDisplayed += destinationStop;
+                    }
+
+                    EditorGUILayout.Space();
+                    EditorGUILayout.LabelField("Destination Stops");
+                    EditorGUILayout.TextArea(destinationStopsDisplayed);
+                }   
+                
                 EditorGUI.EndDisabledGroup();
+
+                if (GUILayout.Button("Clear Passenger Queue"))
+                {
+                    routeWaypoint.LinkedBusStop.BusQueue.Clear();
+                }
 
                 if (GUILayout.Button("Select Bus Stop"))
                 {

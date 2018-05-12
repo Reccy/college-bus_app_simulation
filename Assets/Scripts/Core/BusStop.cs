@@ -138,10 +138,10 @@ namespace AaronMeaney.BusStop.Core
             if (DownstreamStops.Count == 0)
                 return;
 
-            // Create random passengers
-            for (int i = 1; i < 3; i++)
+            // Create 3 random passengers
+            System.Random r = new System.Random();
+            for (int i = 1; i <= 3; i++)
             {
-                System.Random r = new System.Random();
                 int busStopIndex = r.Next(0, DownstreamStops.Count);
                 BusStop destinationStop = DownstreamStops[busStopIndex];
 

@@ -282,7 +282,7 @@ namespace AaronMeaney.BusStop.Core
         /// <summary>
         /// The <see cref="BusPassenger"/>s riding the bus.
         /// </summary>
-        private List<BusPassenger> Passengers
+        public List<BusPassenger> Passengers
         {
             get
             {

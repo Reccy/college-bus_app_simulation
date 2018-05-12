@@ -23,7 +23,7 @@ namespace AaronMeaney.BusStop.Core
         public double Longitude { get { return placeAtCoordinates.Longitude; } }
         
         public GameObject busStopPrefab = null;
-
+        
         /// <summary>
         /// The <see cref="BusStop"/> belonging to this <see cref="RouteWaypoint"/>
         /// </summary>

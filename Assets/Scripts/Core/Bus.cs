@@ -476,7 +476,8 @@ namespace AaronMeaney.BusStop.Core
             Debug.Log(RegistrationNumber + " is unboarding passenger " + leavingPassenger.FullName);
             Passengers.Remove(leavingPassenger);
 
-            DateTime nextUnboardTime = DateTime.Now.AddSeconds(1);
+            System.Random r = new System.Random();
+            DateTime nextUnboardTime = DateTime.Now.AddSeconds(r.Next(3, 5));
             TaskRunner.AddTask(new ScheduledTask(() => { UnboardPassenger(busStop); }, nextUnboardTime));
         }
 

@@ -70,6 +70,20 @@ namespace AaronMeaney.BusStop.Core
             }
         }
 
+        /// <summary>
+        /// If this <see cref="BusStop"/> should be populated or not.
+        /// </summary>
+        [SerializeField]
+        private bool debugEmptyStop = false;
+        public bool DebugEmptyStop {
+            get { return debugEmptyStop; }
+        }
+
+        /// <summary>
+        /// How many <see cref="BusStop"/>s there are in the scene.
+        /// </summary>
+        public static int BusStopCount { get { return FindObjectsOfType<BusStop>().Length; } }
+
         private PlaceAtCoordinates busStopPlacer = null;
         private PlaceAtCoordinates BusStopPlacer
         {
@@ -127,15 +141,22 @@ namespace AaronMeaney.BusStop.Core
                     for (int busStopIndex = startIndex; busStopIndex < route.BusStops.Count; busStopIndex++)
                     {
                         BusStop newBusStop = route.BusStops[busStopIndex];
-
-                        if (!DownstreamStops.Contains(newBusStop))
-                            DownstreamStops.Add(newBusStop);
+                        
+                        if (newBusStop.DebugEmptyStop == false)
+                        {
+                            if (!DownstreamStops.Contains(newBusStop))
+                                DownstreamStops.Add(newBusStop);
+                        }
                     }
                 }
             }
 
             // Don't add passengers to the bus stop if this is the last stop for all routes
             if (DownstreamStops.Count == 0)
+                return;
+
+            // Don't add passengers to the bus stop if this stop was marked to be empty
+            if (DebugEmptyStop == true)
                 return;
 
             // Create 3 random passengers
@@ -170,6 +191,17 @@ namespace AaronMeaney.BusStop.Core
         public void ServiceStop(Bus bus)
         {
             bus.Status = Bus.BusStatus.WaitingAtStop;
+
+            // Create a passenger if the queue is empty so that if the bus was hailed
+            // to an empty stop with no origin or destination stops, the bus will
+            // still be able to service it.
+            if (BusQueue.Count == 0 && DownstreamStops.Count > 0)
+            {
+                System.Random r = new System.Random();
+                int busStopIndex = r.Next(0, DownstreamStops.Count);
+                BusStop destinationStop = DownstreamStops[busStopIndex];
+                AddPassengerToQueue(new BusPassenger(this, destinationStop));
+            }
             
             // Board passengers once the passengers on the bus finish unboarding
             bus.OnPassengersUnboarded = () => { BoardFrontPassenger(bus); };
@@ -207,7 +239,8 @@ namespace AaronMeaney.BusStop.Core
             bus.BoardPassenger(BusQueue.Dequeue());
 
             // Wait for the next passenger to board
-            DateTime nextBoardTime = DateTime.Now.AddSeconds(1);
+            System.Random r = new System.Random();
+            DateTime nextBoardTime = DateTime.Now.AddSeconds(r.Next(3,5));
             TaskRunner.AddTask(new ScheduledTask(() => { BoardFrontPassenger(bus); }, nextBoardTime));
         }
 

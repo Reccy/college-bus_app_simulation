@@ -11559,6 +11559,11 @@ Prefab:
       propertyPath: busStopIdInternal
       value: s_Convention Center
       objectReference: {fileID: 0}
+    - target: {fileID: 114222259136696880, guid: be7c083f6c332d44e8025bf973291bee,
+        type: 2}
+      propertyPath: debugEmptyStop
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114351341064563772, guid: be7c083f6c332d44e8025bf973291bee, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: be7c083f6c332d44e8025bf973291bee, type: 2}
@@ -13154,6 +13159,11 @@ Prefab:
         type: 2}
       propertyPath: busStopIdInternal
       value: s_M1 Drinan
+      objectReference: {fileID: 0}
+    - target: {fileID: 114222259136696880, guid: be7c083f6c332d44e8025bf973291bee,
+        type: 2}
+      propertyPath: debugEmptyStop
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114351341064563772, guid: be7c083f6c332d44e8025bf973291bee, type: 2}
@@ -44839,6 +44849,11 @@ Prefab:
         type: 2}
       propertyPath: busStopIdInternal
       value: s_Pavilions Shopping Centre
+      objectReference: {fileID: 0}
+    - target: {fileID: 114222259136696880, guid: be7c083f6c332d44e8025bf973291bee,
+        type: 2}
+      propertyPath: debugEmptyStop
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114351341064563772, guid: be7c083f6c332d44e8025bf973291bee, type: 2}

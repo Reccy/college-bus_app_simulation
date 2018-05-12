@@ -139,6 +139,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   busStopId: 
   busStopIdInternal: 
+  debugEmptyStop: 0
 --- !u!114 &114351341064563772
 MonoBehaviour:
   m_ObjectHideFlags: 1
